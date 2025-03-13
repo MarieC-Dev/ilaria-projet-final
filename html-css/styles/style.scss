@@ -1,0 +1,19 @@
+// UTILS
+@use './utils/variables';
+@use './utils/fonts';
+
+// BASE
+@use './base/base';
+
+// LAYOUT
+@use './layout/recipesSection';
+@use './layout/header';
+@use './layout/footer';
+
+// COMPONENTS
+@use './components/buttons';
+@use './components/topHomePage';
+@use './components/recipe';
+@use './components/navHomePage';
+
+// PAGES

@@ -1,0 +1,41 @@
+.recipesSection nav {  
+    width: 200px;
+    padding: 0 2rem;
+    border: 1px solid red;
+
+    h2 {
+        margin-bottom: 2.5rem;
+    }
+
+    .navFilters {
+        & > li:first-child {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            div {
+                height: 14px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                //border: 1px solid red;
+
+                hr {
+                    width: 14px;
+                    border: 1px solid black;
+                }
+
+                hr.vertical {
+                    transform: rotate(90deg) translateX(-2px);
+                }   
+            }
+        }
+
+        & > li:last-child {
+            ul li {
+                margin: 1.5rem 0;
+            }
+        }
+    }
+}

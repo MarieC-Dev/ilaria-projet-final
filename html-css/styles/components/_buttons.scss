@@ -1,0 +1,16 @@
+@use '../utils/variables' as *;
+
+.btn-bold {
+    font-weight: 600;
+}
+
+.btn-bg-red {
+    padding: 1rem 2.5rem;
+    background-color: $firstColor;
+    color: white;
+    border-radius: 3rem;
+}
+
+button, a {
+    cursor: pointer;
+}

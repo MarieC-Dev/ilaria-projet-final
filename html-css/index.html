@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cook It</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+
+<body>
+    <header>
+        <ul class="navigationLeft">
+            <li class="navigationItem active">Home</li>
+            <li class="navigationItem">Recipe</li>
+            <li class="navigationItem">Search</li>
+            <li class="navigationItem">Contact</li>
+        </ul>
+
+        <div class="navigationRight">
+            <img src="./assets/search.svg" alt="search icon">
+            <button class="btn-transparent" type="button">Sign In</button>
+            <button class="btn-bg btn-bg-red" type="button">Sign Up</button>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <div class="topHomePage">
+                <h1>Choose from thousands of recipes</h1>
+                <p>Appropriately integrate technically sound value with scalable infomediaries negotiate sustainable strategic theme areas</p>
+                <button type="button" class="btn-transparent btn-bold btn-white">
+                    Sign up today
+                    <img src="./assets/arrow-right.svg" alt="arrow right">
+                </button>
+            </div>
+        </section>
+
+        <section class="recipesSection">
+            <nav>
+                <h2>Recipes</h2>
+
+                <ul class="navFilters">
+                    <li>
+                        <h3>Dish Type</h3>
+                        <div>
+                            <hr>
+                            <hr class="vertical">
+                        </div>
+                    </li>
+                    <li>
+                        <ul>
+                            <li>
+                                <button type="button">Appetizers & Snacks</button>
+                            </li>
+                            <li>
+                                <button type="button">Bread Recipes</button>
+                            </li>
+                            <li>
+                                <button type="button">Cake Recipes</button>
+                            </li>
+                            <li>
+                                <button type="button">Candy and Fudge</button>
+                            </li>
+                            <li>
+                                <button type="button">Casserole Recipes</button>
+                            </li>
+                            <li>
+                                <button type="button">Christmas Cookies</button>
+                            </li>
+                            <li>
+                                <button type="button">Cocktail Recipes</button>
+                            </li>
+                            <li>
+                                <button type="button">Main Dishes</button>
+                            </li>
+                            <li>
+                                <button type="button">Pasta Recipes</button>
+                            </li>
+
+
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="recipesContainer">
+                <div class="recipesHeader">
+                    <form>
+                        <label for="recipesSearch">
+                            <img src="./assets/search.svg" alt="search icon">
+                            <input type="text" name="recipesSearch" id="recipesSearch" placeholder="Search for recipes...">
+                        </label>
+                    </form>
+                    <form>
+                        <select name="sortBy" id="sortBy">
+                            <option value="latest">Latest</option>
+                            <option value="latest">Older</option>
+                        </select>
+                    </form>
+                </div>
+
+                <div class="recipesList">
+                    <a href="/recipe" class="recipe">
+                        <div>
+                            <img src="./assets/salade.jpg" alt="salade">
+                            <img src="./assets/heart.svg" alt="heart icon">
+                        </div>
+
+                        <h4>Brown Sugar Meatloaf</h4>
+
+                        <ul>
+                            <li>
+                                <img src="./assets/star.svg" alt="">
+                                <p>3.6(73)</p>
+                            </li>
+                            <li>
+                                by Danial Caleem
+                            </li>
+                        </ul>
+                    </a>
+                    <!-- <a href="/recipe" class="recipe">
+                        <div>
+                            <img src="./assets/salade.jpg" alt="salade">
+                            <img src="./assets/heart.svg" alt="heart icon">
+                        </div>
+
+                        <h4>Brown Sugar Meatloaf</h4>
+
+                        <ul>
+                            <li>
+                                <img src="./assets/star.svg" alt="">
+                                <p>3.6(73)</p>
+                            </li>
+                            <li>
+                                by Danial Caleem
+                            </li>
+                        </ul>
+                    </a>
+                    <a href="/recipe" class="recipe">
+                        <div>
+                            <img src="./assets/salade.jpg" alt="salade">
+                            <img src="./assets/heart.svg" alt="heart icon">
+                        </div>
+
+                        <h4>Brown Sugar Meatloaf</h4>
+
+                        <ul>
+                            <li>
+                                <img src="./assets/star.svg" alt="">
+                                <p>3.6(73)</p>
+                            </li>
+                            <li>
+                                by Danial Caleem
+                            </li>
+                        </ul>
+                    </a>
+                    <a href="/recipe" class="recipe">
+                        <div>
+                            <img src="./assets/salade.jpg" alt="salade">
+                            <img src="./assets/heart.svg" alt="heart icon">
+                        </div>
+
+                        <h4>Brown Sugar Meatloaf</h4>
+
+                        <ul>
+                            <li>
+                                <img src="./assets/star.svg" alt="">
+                                <p>3.6(73)</p>
+                            </li>
+                            <li>
+                                by Danial Caleem
+                            </li>
+                        </ul>
+                    </a>
+                    <a href="/recipe" class="recipe">
+                        <div>
+                            <img src="./assets/salade.jpg" alt="salade">
+                            <img src="./assets/heart.svg" alt="heart icon">
+                        </div>
+
+                        <h4>Brown Sugar Meatloaf</h4>
+
+                        <ul>
+                            <li>
+                                <img src="./assets/star.svg" alt="">
+                                <p>3.6(73)</p>
+                            </li>
+                            <li>
+                                by Danial Caleem
+                            </li>
+                        </ul>
+                    </a>
+                    <a href="/recipe" class="recipe">
+                        <div>
+                            <img src="./assets/salade.jpg" alt="salade">
+                            <img src="./assets/heart.svg" alt="heart icon">
+                        </div>
+
+                        <h4>Brown Sugar Meatloaf</h4>
+
+                        <ul>
+                            <li>
+                                <img src="./assets/star.svg" alt="">
+                                <p>3.6(73)</p>
+                            </li>
+                            <li>
+                                by Danial Caleem
+                            </li>
+                        </ul>
+                    </a>
+                    <a href="/recipe" class="recipe">
+                        <div>
+                            <img src="./assets/salade.jpg" alt="salade">
+                            <img src="./assets/heart.svg" alt="heart icon">
+                        </div>
+
+                        <h4>Brown Sugar Meatloaf</h4>
+
+                        <ul>
+                            <li>
+                                <img src="./assets/star.svg" alt="">
+                                <p>3.6(73)</p>
+                            </li>
+                            <li>
+                                by Danial Caleem
+                            </li>
+                        </ul>
+                    </a>
+                    <a href="/recipe" class="recipe">
+                        <div>
+                            <img src="./assets/salade.jpg" alt="salade">
+                            <img src="./assets/heart.svg" alt="heart icon">
+                        </div>
+
+                        <h4>Brown Sugar Meatloaf</h4>
+
+                        <ul>
+                            <li>
+                                <img src="./assets/star.svg" alt="">
+                                <p>3.6(73)</p>
+                            </li>
+                            <li>
+                                by Danial Caleem
+                            </li>
+                        </ul>
+                    </a> -->
+                </div>
+
+                <!-- <div class="sliderNumber">
+                    <ul>
+                        <li>
+                            <img src="./assets/chevron-left.svg" alt=" chevron left">
+                        </li>
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>
+                            <img src="./assets/chevron-right.svg" alt=" chevron right">
+                        </li>
+                    </ul>
+                </div> -->
+            </div>
+
+       </section>
+    </main>
+
+    <footer></footer>
+</body>
+</html>

@@ -1,0 +1,198 @@
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 60px;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+* {
+  font-family: "Montserrat", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: white;
+  color: #010101;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input, textarea, button {
+  outline: none;
+}
+
+ul, ul li {
+  list-style: none;
+}
+
+button {
+  font-size: 16px;
+  background-color: transparent;
+  border: 0;
+}
+
+.recipesSection {
+  display: flex;
+}
+.recipesSection .recipesContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 5rem;
+}
+header .navigationLeft {
+  display: flex;
+}
+header .navigationLeft li {
+  margin-right: 2rem;
+}
+header .navigationRight {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header .navigationRight img {
+  width: auto;
+  height: 24px;
+}
+header .navigationRight button {
+  margin-left: 2.5rem;
+}
+
+footer {
+  padding: 2rem 0;
+  background-color: #010101;
+}
+
+.btn-bold {
+  font-weight: 600;
+}
+
+.btn-bg-red {
+  padding: 1rem 2.5rem;
+  background-color: #EB4A37;
+  color: white;
+  border-radius: 3rem;
+}
+
+button, a {
+  cursor: pointer;
+}
+
+.topHomePage {
+  width: 100%;
+  height: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem;
+  margin: 0 3rem;
+  background-image: url("../../assets/header-image.jpg");
+  background-size: cover;
+  background-position: top -30px left 0;
+  background-repeat: no-repeat;
+  color: white;
+  border-radius: 1.5rem;
+}
+.topHomePage h1 {
+  width: 408px;
+}
+.topHomePage p {
+  width: 538px;
+  font-size: 20px;
+  line-height: 1.7;
+  margin: 2rem 0;
+}
+.topHomePage button {
+  display: flex;
+  align-items: flex-end;
+  color: white;
+  font-size: 18px;
+}
+.topHomePage button img {
+  height: 16px;
+  margin-left: 1rem;
+}
+
+.recipe {
+  width: 250px;
+}
+.recipe div {
+  width: 250px;
+  height: 120px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+.recipe div img:first-child {
+  width: 250px;
+}
+.recipe div img:last-child {
+  height: 20px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 5;
+}
+.recipe ul {
+  display: flex;
+}
+.recipe ul li {
+  display: flex;
+}
+.recipe ul li img {
+  height: 24px;
+}
+
+.recipesSection nav {
+  width: 200px;
+  padding: 0 2rem;
+  border: 1px solid red;
+}
+.recipesSection nav h2 {
+  margin-bottom: 2.5rem;
+}
+.recipesSection nav .navFilters > li:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.recipesSection nav .navFilters > li:first-child div {
+  height: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.recipesSection nav .navFilters > li:first-child div hr {
+  width: 14px;
+  border: 1px solid black;
+}
+.recipesSection nav .navFilters > li:first-child div hr.vertical {
+  transform: rotate(90deg) translateX(-2px);
+}
+.recipesSection nav .navFilters > li:last-child ul li {
+  margin: 1.5rem 0;
+}
+
+/*# sourceMappingURL=style.css.map */

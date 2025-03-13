@@ -23,7 +23,6 @@ h3 {
 body {
   background-color: white;
   color: #010101;
-  border: 5px solid red;
 }
 
 main section:not(main section:first-child) {
@@ -52,7 +51,6 @@ button {
 
 .recipesSection {
   display: flex;
-  margin-top: 3rem !important;
 }
 .recipesSection .recipesContainer {
   width: 100%;
@@ -111,7 +109,6 @@ button {
 }
 
 header {
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -156,14 +153,16 @@ button, a {
   cursor: pointer;
 }
 
-.topHomePage {
-  width: 100%;
+.subHeader {
+  padding: 0 3rem;
+  margin-bottom: 5rem;
+}
+.subHeader .topHomePage {
   height: 520px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 3rem;
-  margin: 0 3rem;
   background-image: url("../../assets/header-image.jpg");
   background-size: cover;
   background-position: top -30px left 0;
@@ -171,22 +170,22 @@ button, a {
   color: white;
   border-radius: 1.5rem;
 }
-.topHomePage h1 {
+.subHeader .topHomePage h1 {
   width: 408px;
 }
-.topHomePage p {
+.subHeader .topHomePage p {
   width: 538px;
   font-size: 20px;
   line-height: 1.7;
   margin: 2rem 0;
 }
-.topHomePage button {
+.subHeader .topHomePage button {
   display: flex;
   align-items: flex-end;
   color: white;
   font-size: 18px;
 }
-.topHomePage button img {
+.subHeader .topHomePage button img {
   height: 16px;
   margin-left: 1rem;
 }

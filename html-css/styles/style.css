@@ -23,6 +23,12 @@ h3 {
 body {
   background-color: white;
   color: #010101;
+  border: 5px solid red;
+}
+
+main section:not(main section:first-child) {
+  padding: 0 3rem;
+  margin: 0 auto;
 }
 
 a {
@@ -46,10 +52,62 @@ button {
 
 .recipesSection {
   display: flex;
+  margin-top: 3rem !important;
 }
 .recipesSection .recipesContainer {
+  width: 100%;
   display: flex;
   flex-direction: column;
+}
+.recipesSection .recipesContainer .recipesHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.recipesSection .recipesContainer .recipesHeader label {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  background-color: #FAF4F4;
+  border-radius: 0.5rem;
+}
+.recipesSection .recipesContainer .recipesHeader label img {
+  width: auto;
+  height: 20px;
+}
+.recipesSection .recipesContainer .recipesHeader label input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background-color: transparent;
+  border: 0;
+}
+.recipesSection .recipesContainer .recipesHeader select {
+  width: 180px;
+  height: 40px;
+  display: flex;
+  padding: 0 1.5rem;
+  background-color: #EB4A37;
+  color: white;
+  border: 0;
+  border-radius: 3rem;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, white 50%), linear-gradient(135deg, white 50%, transparent 50%), linear-gradient(45deg, transparent 50%, transparent 50%), linear-gradient(135deg, transparent 50%, white 50%), linear-gradient(225deg, transparent 50%, white 50%);
+  background-position: calc(100% - 20px) 23px, calc(100% - 15px) 23px, calc(100% - 2.5em) 0.5em, calc(100% - 20px) 15px, calc(100% - 15px) 15px, calc(100% - 2.5em) 0.5em;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+.recipesSection .recipesContainer .recipesList {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-auto-rows: 1fr;
+  gap: 2rem;
 }
 
 header {
@@ -134,40 +192,55 @@ button, a {
 }
 
 .recipe {
-  width: 250px;
+  width: auto;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
 }
-.recipe div {
-  width: 250px;
-  height: 120px;
-  border-radius: 0.5rem;
-  overflow: hidden;
+.recipe > div {
+  width: 100%;
+  height: 70%;
   position: relative;
   z-index: 1;
 }
-.recipe div img:first-child {
-  width: 250px;
+.recipe > div .wrapperImg {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: 0.5rem;
+  overflow: hidden;
 }
-.recipe div img:last-child {
+.recipe > div .wrapperImg img {
+  width: 100%;
+  position: relative;
+}
+.recipe > div .favoriteIcon {
   height: 20px;
   position: absolute;
   top: 20px;
   right: 20px;
   z-index: 5;
 }
+.recipe h4 {
+  margin: 1.5rem 0 0.5rem 0;
+}
 .recipe ul {
   display: flex;
+  justify-content: space-between;
 }
 .recipe ul li {
   display: flex;
+  align-items: center;
 }
 .recipe ul li img {
-  height: 24px;
+  height: 20px;
+  margin-right: 0.5rem;
 }
 
 .recipesSection nav {
-  width: 200px;
-  padding: 0 2rem;
-  border: 1px solid red;
+  width: 260px;
+  padding: 0 2rem 0 0;
 }
 .recipesSection nav h2 {
   margin-bottom: 2.5rem;

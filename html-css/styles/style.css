@@ -198,13 +198,13 @@ button, a {
 }
 .recipe > div {
   width: 100%;
-  height: 70%;
   position: relative;
   z-index: 1;
 }
 .recipe > div .wrapperImg {
   width: 100%;
   height: 100%;
+  max-height: 280px;
   display: flex;
   align-items: center;
   border-radius: 0.5rem;
@@ -235,6 +235,10 @@ button, a {
 .recipe ul li img {
   height: 20px;
   margin-right: 0.5rem;
+}
+.recipe ul li:last-child {
+  margin-left: 1rem;
+  text-align: right;
 }
 
 .recipesSection nav {

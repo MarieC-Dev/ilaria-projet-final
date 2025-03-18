@@ -1,0 +1,43 @@
+@use '../utils/variables' as *;
+
+.newsletterSection {
+    width: 1216px;
+    padding: 3rem;
+    margin: 0 auto 6rem auto;
+    background-color: $firstColor;
+    color: white;
+    border-radius: 2rem;
+
+    h2 {
+        width: 70%;
+        margin: 0 auto 2rem auto;
+        text-align: center;
+    }
+
+    form {
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 auto;
+
+        input {
+            width: 77%;
+            padding: 1rem;
+            font-size: 16px;
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            border-radius: 3rem;
+
+            &::placeholder {
+                color: white;
+            }
+        }
+
+        button {
+            padding: 1rem 2.5rem;
+            background-color: $thirdColor;
+            border-radius: 3rem;
+        }
+    }
+}

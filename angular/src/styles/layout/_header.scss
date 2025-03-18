@@ -1,0 +1,29 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 5rem;
+
+    .navigationLeft {      
+        display: flex;      
+
+        li {
+            margin-right: 2rem;
+        }
+    }
+
+    .navigationRight {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        img {
+            width: auto;
+            height: 24px;
+        }
+
+        button {
+            margin-left: 2.5rem;
+        }
+    }
+}

@@ -1,0 +1,24 @@
+// UTILS
+@use './utils/variables';
+@use './utils/fonts';
+@use './utils/mixins';
+
+// BASE
+@use './base/base';
+
+// LAYOUT
+@use './layout/header';
+@use './layout/footer';
+@use './layout/recipesSection';
+@use './layout/videosSection';
+@use './layout/newsletterSection';
+
+// COMPONENTS
+@use './components/buttons';
+@use './components/select';
+@use './components/topHomePage';
+@use './components/recipe';
+@use './components/navHomePage';
+@use './components/sliderNumberReceipes';
+
+// PAGES

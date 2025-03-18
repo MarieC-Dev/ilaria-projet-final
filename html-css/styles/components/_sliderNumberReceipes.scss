@@ -1,0 +1,22 @@
+@use '../utils/variables' as *;
+
+.sliderNumber {
+    display: flex;
+    margin: 3rem auto 0 auto;
+    color: $mediumGrey;
+
+    img {
+        width: auto;
+        height: 18px;
+    }
+
+    li {
+        margin: 0 1rem;
+        font-size: 18px;
+
+        &.active {
+            font-weight: 700;
+            color: $darGrey;
+        }
+    }
+}

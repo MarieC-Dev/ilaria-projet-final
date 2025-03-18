@@ -341,25 +341,102 @@
                     </a>
                 </div>
 
-                <div class="sliderNumber">
-                    <ul>
-                        <li>
-                            <img src="./assets/chevron-left.svg" alt=" chevron left">
-                        </li>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>            
-                        <li>4</li>
-                        <li>
-                            <img src="./assets/chevron-right.svg" alt=" chevron right">
-                        </li>
-                    </ul>
-                </div>
+                <ul class="sliderNumber">
+                    <li>
+                        <img src="./assets/chevron-left.svg" alt=" chevron left">
+                    </li>
+                    <li class="active">1</li>
+                    <li>2</li>
+                    <li>3</li>            
+                    <li>4</li>
+                    <li>
+                        <img src="./assets/chevron-right.svg" alt=" chevron right">
+                    </li>
+                </ul>
             </div>
 
-       </section>
+        </section>
+
+        <section class="videosSection">
+            <h2>Videos</h2>
+
+            <select name="sortVideos" id="sortVideos">
+                <option value="features">En vedette</option>
+                <option value="newest">+ récente</option>
+                <option value="oldest">- récente</option>
+            </select>
+
+            <div>
+                <iframe src="https://youtube.com/embed/U3dWg3A7IcA?si=SF3svYv6tfWMldYm">
+                </iframe>
+                <iframe src="https://youtube.com/embed/Fm3iH1PPgMw?si=ZOwWoOUGllt4Ryt6">
+                </iframe>
+                <iframe src="https://youtube.com/embed/Uwm72U1zGUU?si=fT5iK20yC8ETHx0C">
+                </iframe>
+                <iframe  src="https://youtube.com/embed/-8t0qYTovKM?si=HfKMGpUNjFFEki2J">
+                </iframe>
+            </div>
+        </section>
+
+        <section class="newsletterSection">
+            <h2>Be the first to know about the latest deals, receive new trending recipes & more</h2>
+
+            <form method="post">
+                <input type="text" name="newsletterEmail" email="newsletterEmail" placeholder="Email Address">
+                <button type="submit">Subscribe</button>
+            </form>
+        </section>
     </main>
 
-    <footer></footer>
+    <footer>
+        <div class="linksFooter">
+            <ul>
+                <li>
+                    <a href="">Presentations</a>
+                </li>
+                <li>
+                    <a href="">Professionals</a>
+                </li>
+                <li>
+                    <a href="">Stores</a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <a href="">Webinars</a>
+                </li>
+                <li>
+                    <a href="">Workshops</a>
+                </li>
+                <li>
+                    <a href="">Local Meetups</a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <a href="">Our Initiatives</a>
+                </li>
+                <li>
+                    <a href="">Giving Back</a>
+                </li>
+                <li>
+                    <a href="">Communities</a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <a href="">Contact Form</a>
+                </li>
+                <li>
+                    <a href="">Work With Us</a>
+                </li>
+                <li>
+                    <a href="">Visit Us</a>
+                </li>
+            </ul>
+        </div>
+
+        <p>Made by in Guatemala City.</p>
+    </footer>
 </body>
 </html>

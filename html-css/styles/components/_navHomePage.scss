@@ -1,5 +1,5 @@
 .recipesSection nav {  
-    width: 260px;
+    width: 280px;
     padding: 0 2rem 0 0;
 
     h2 {
@@ -11,6 +11,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 1rem;
 
             div {
                 height: 14px;
@@ -32,8 +33,9 @@
         }
 
         & > li:last-child {
+            margin-left: 1rem;
             ul li {
-                margin: 1.5rem 0;
+                padding: 1rem 0;
             }
         }
     }

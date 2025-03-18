@@ -1,6 +1,29 @@
 @use '../utils/variables' as *;
 
 footer {
-    padding: 2rem 0;
-    background-color: $black;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 5rem;
+    background-color: white;
+
+    .linksFooter {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            li {
+                margin: .5rem 0;
+                font-weight: 500;
+            }
+        }
+    }
+
+    p {
+        margin-top: 2rem;
+    }
 }

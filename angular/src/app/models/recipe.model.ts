@@ -1,0 +1,49 @@
+import { User } from "./user.model";
+
+export interface Ingredient {
+    id: number,
+    quantity: number | string,
+    unit: string,
+    name: string
+}
+
+export interface RecipeStep {
+    id: number,
+    description: string
+}
+
+export interface RecipeTag {
+    id: number,
+    name: string
+}
+
+export interface RecipeComment {
+    id: number,
+    author: User,
+    starScore: number, // 1 - 5 stars
+    description: string,
+    created: Date,
+}
+
+export interface Recipe {
+    id: number,
+    image: string,
+    title: string,
+    description: string,
+    activeTime?: number,
+    totalTime: number,
+    yieldServes: number,
+
+    average?: number,
+    numberOfVotes?: number,
+    author: User,
+
+    ingredientsList: Ingredient[],
+    steps: RecipeStep[],
+    tags: RecipeTag[],
+    opinion?: RecipeComment[],
+
+    created: Date,
+}
+
+export type RecipeList = Recipe[];

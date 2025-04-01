@@ -5,7 +5,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   selector: 'app-main-layout',
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './main-layout.component.html',
-  styleUrl: '../../../styles/style.scss'
+  styleUrl: '../../../styles.scss'
 })
 export class MainLayoutComponent {
 

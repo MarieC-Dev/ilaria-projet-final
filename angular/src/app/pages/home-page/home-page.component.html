@@ -1,1 +1,315 @@
-<p>home-page works!</p>
+<div class="homePage">
+    <section class="subHeader">
+        <div class="topHomePage">
+            <h1>Choose from thousands of recipes</h1>
+            <p>Appropriately integrate technically sound value with scalable infomediaries negotiate sustainable strategic theme areas</p>
+            <button type="button" class="btn-transparent btn-bold btn-white">
+                Sign up today
+                <img src="arrow-right.svg" alt="arrow right">
+            </button>
+        </div>
+    </section>
+
+    <section class="recipesSection">
+
+        <app-recipes-filter />
+
+        <div class="recipesContainer">
+            <form class="recipesHeader">
+                <label for="recipesSearch">
+                    <img src="search.svg" alt="search icon">
+                    <input type="text" name="recipesSearch" id="recipesSearch" placeholder="Search for recipes...">
+                </label>
+                <select name="sortBy" id="sortBy">
+                    <option value="latest">Sort by: Latest</option>
+                    <option value="latest">Sort by: Older</option>
+                </select>
+            </form>
+
+            <div class="recipesList">
+                @for (recipe of recipesList(); track recipe.id;) {
+                    <app-recipe-item
+                        [picture]="recipe.image" 
+                        [name]="recipe.title" 
+                        [average]="getRecipeAverage(recipe.id)" 
+                        [numberOfVotes]="recipe.opinion?.length"
+                        [authorName]="recipe.author.username"
+                    />
+                }
+                <!-- <a href="/recipe" class="recipe">
+                    <div>
+                        <div class="wrapperImg">
+                            <img src="salade.jpg" alt="salade">
+                        </div>
+                        <img class="favoriteIcon" src="heart.svg" alt="heart icon">
+                    </div>
+
+                    <h4>Brown Sugar Meatloaf</h4>
+
+                    <ul>
+                        <li>
+                            <img src="star.svg" alt="icon star">
+                            <p>3.6(73)</p>
+                        </li>
+                        <li>
+                            by Danial Caleem
+                        </li>
+                    </ul>
+                </a>
+                <a href="/recipe" class="recipe">
+                    <div>
+                        <div class="wrapperImg">
+                            <img src="salade.jpg" alt="salade">
+                        </div>
+                        <img class="favoriteIcon" src="heart.svg" alt="heart icon">
+                    </div>
+
+                    <h4>Brown Sugar Meatloaf</h4>
+
+                    <ul>
+                        <li>
+                            <img src="star.svg" alt="icon star">
+                            <p>3.6(73)</p>
+                        </li>
+                        <li>
+                            by Danial Caleem
+                        </li>
+                    </ul>
+                </a>
+                <a href="/recipe" class="recipe">
+                    <div>
+                        <div class="wrapperImg">
+                            <img src="salade.jpg" alt="salade">
+                        </div>
+                        <img class="favoriteIcon" src="heart.svg" alt="heart icon">
+                    </div>
+
+                    <h4>Brown Sugar Meatloaf</h4>
+
+                    <ul>
+                        <li>
+                            <img src="star.svg" alt="icon star">
+                            <p>3.6(73)</p>
+                        </li>
+                        <li>
+                            by Danial Caleem
+                        </li>
+                    </ul>
+                </a>
+                <a href="/recipe" class="recipe">
+                    <div>
+                        <div class="wrapperImg">
+                            <img src="salade.jpg" alt="salade">
+                        </div>
+                        <img class="favoriteIcon" src="heart.svg" alt="heart icon">
+                    </div>
+
+                    <h4>Brown Sugar Meatloaf</h4>
+
+                    <ul>
+                        <li>
+                            <img src="star.svg" alt="icon star">
+                            <p>3.6(73)</p>
+                        </li>
+                        <li>
+                            by Danial Caleem
+                        </li>
+                    </ul>
+                </a>
+                <a href="/recipe" class="recipe">
+                    <div>
+                        <div class="wrapperImg">
+                            <img src="salade.jpg" alt="salade">
+                        </div>
+                        <img class="favoriteIcon" src="heart.svg" alt="heart icon">
+                    </div>
+
+                    <h4>Brown Sugar Meatloaf</h4>
+
+                    <ul>
+                        <li>
+                            <img src="star.svg" alt="icon star">
+                            <p>3.6(73)</p>
+                        </li>
+                        <li>
+                            by Danial Caleem
+                        </li>
+                    </ul>
+                </a>
+                <a href="/recipe" class="recipe">
+                    <div>
+                        <div class="wrapperImg">
+                            <img src="salade.jpg" alt="salade">
+                        </div>
+                        <img class="favoriteIcon" src="heart.svg" alt="heart icon">
+                    </div>
+
+                    <h4>Brown Sugar Meatloaf</h4>
+
+                    <ul>
+                        <li>
+                            <img src="star.svg" alt="icon star">
+                            <p>3.6(73)</p>
+                        </li>
+                        <li>
+                            by Danial Caleem
+                        </li>
+                    </ul>
+                </a>
+                <a href="/recipe" class="recipe">
+                    <div>
+                        <div class="wrapperImg">
+                            <img src="salade.jpg" alt="salade">
+                        </div>
+                        <img class="favoriteIcon" src="heart.svg" alt="heart icon">
+                    </div>
+
+                    <h4>Brown Sugar Meatloaf</h4>
+
+                    <ul>
+                        <li>
+                            <img src="star.svg" alt="icon star">
+                            <p>3.6(73)</p>
+                        </li>
+                        <li>
+                            by Danial Caleem
+                        </li>
+                    </ul>
+                </a>
+                <a href="/recipe" class="recipe">
+                    <div>
+                        <div class="wrapperImg">
+                            <img src="salade.jpg" alt="salade">
+                        </div>
+                        <img class="favoriteIcon" src="heart.svg" alt="heart icon">
+                    </div>
+
+                    <h4>Brown Sugar Meatloaf</h4>
+
+                    <ul>
+                        <li>
+                            <img src="star.svg" alt="icon star">
+                            <p>3.6(73)</p>
+                        </li>
+                        <li>
+                            by Danial Caleem
+                        </li>
+                    </ul>
+                </a>
+                <a href="/recipe" class="recipe">
+                    <div>
+                        <div class="wrapperImg">
+                            <img src="salade.jpg" alt="salade">
+                        </div>
+                        <img class="favoriteIcon" src="heart.svg" alt="heart icon">
+                    </div>
+
+                    <h4>Brown Sugar Meatloaf</h4>
+
+                    <ul>
+                        <li>
+                            <img src="star.svg" alt="icon star">
+                            <p>3.6(73)</p>
+                        </li>
+                        <li>
+                            by Danial Caleem
+                        </li>
+                    </ul>
+                </a>
+                <a href="/recipe" class="recipe">
+                    <div>
+                        <div class="wrapperImg">
+                            <img src="salade.jpg" alt="salade">
+                        </div>
+                        <img class="favoriteIcon" src="heart.svg" alt="heart icon">
+                    </div>
+
+                    <h4>Brown Sugar Meatloaf</h4>
+
+                    <ul>
+                        <li>
+                            <img src="star.svg" alt="icon star">
+                            <p>3.6(73)</p>
+                        </li>
+                        <li>
+                            by Danial Caleem
+                        </li>
+                    </ul>
+                </a>
+                <a href="/recipe" class="recipe">
+                    <div>
+                        <div class="wrapperImg">
+                            <img src="salade.jpg" alt="salade">
+                        </div>
+                        <img class="favoriteIcon" src="heart.svg" alt="heart icon">
+                    </div>
+
+                    <h4>Brown Sugar Meatloaf</h4>
+
+                    <ul>
+                        <li>
+                            <img src="star.svg" alt="icon star">
+                            <p>3.6(73)</p>
+                        </li>
+                        <li>
+                            by Danial Caleem
+                        </li>
+                    </ul>
+                </a>
+                <a href="/recipe" class="recipe">
+                    <div>
+                        <div class="wrapperImg">
+                            <img src="salade.jpg" alt="salade">
+                        </div>
+                        <img class="favoriteIcon" src="heart.svg" alt="heart icon">
+                    </div>
+
+                    <h4>Brown Sugar Meatloaf</h4>
+
+                    <ul>
+                        <li>
+                            <img src="star.svg" alt="icon star">
+                            <p>3.6(73)</p>
+                        </li>
+                        <li>
+                            by Danial Caleem
+                        </li>
+                    </ul>
+                </a> -->
+            </div>
+
+            <app-page-slider />
+        </div>
+
+    </section>
+
+    <section class="videosSection">
+        <h2>Videos</h2>
+
+        <select name="sortVideos" id="sortVideos">
+            <option value="features">En vedette</option>
+            <option value="newest">+ récente</option>
+            <option value="oldest">- récente</option>
+        </select>
+
+        <!-- <div>
+            <iframe src="https://youtube.com/embed/U3dWg3A7IcA?si=SF3svYv6tfWMldYm">
+            </iframe>
+            <iframe src="https://youtube.com/embed/Fm3iH1PPgMw?si=ZOwWoOUGllt4Ryt6">
+            </iframe>
+            <iframe src="https://youtube.com/embed/Uwm72U1zGUU?si=fT5iK20yC8ETHx0C">
+            </iframe>
+            <iframe  src="https://youtube.com/embed/-8t0qYTovKM?si=HfKMGpUNjFFEki2J">
+            </iframe>
+        </div> -->
+    </section>
+
+    <section class="newsletterSection">
+        <h2>Be the first to know about the latest deals, receive new trending recipes & more</h2>
+
+        <form method="post">
+            <input type="text" name="newsletterEmail" email="newsletterEmail" placeholder="Email Address">
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+</div>

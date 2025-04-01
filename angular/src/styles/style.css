@@ -239,7 +239,7 @@ select {
   flex-direction: column;
   justify-content: center;
   padding: 3rem;
-  background-image: url("../../assets/header-image.jpg");
+  background-image: url("../../../public/header-image.jpg");
   background-size: cover;
   background-position: top -30px left 0;
   background-repeat: no-repeat;

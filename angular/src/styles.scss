@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+// UTILS
+@use './styles/utils/variables';
+@use './styles/utils/fonts';
+@use './styles/utils/mixins';
+
+// BASE
+@use './styles/base/base';
+
+// LAYOUT
+@use './styles/layout/header';
+@use './styles/layout/footer';
+@use './styles/layout/recipesSection';
+@use './styles/layout/videosSection';
+@use './styles/layout/newsletterSection';
+
+// COMPONENTS
+@use './styles/components/buttons';
+@use './styles/components/select';
+@use './styles/components/topHomePage';
+@use './styles/components/recipe';
+@use './styles/components/navHomePage';
+@use './styles/components/sliderNumberReceipes';
+
+// PAGES

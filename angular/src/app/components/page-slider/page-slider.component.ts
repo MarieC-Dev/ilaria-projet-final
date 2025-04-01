@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-page-slider',
   imports: [],
   templateUrl: './page-slider.component.html',
-  styleUrl: '../../../styles/style.scss'
+  styleUrl: '../../../styles.scss'
   
 })
 export class PageSliderComponent {

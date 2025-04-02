@@ -1,0 +1,39 @@
+@use '../utils/variables' as *;
+
+$widthImg: 32px;
+$marginTitle: 1rem;
+$marginText: calc($widthImg + $marginTitle);
+
+.stepsContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    
+    .headerStep {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        color: $firstColor;
+
+        img {
+            width: $widthImg;
+            height: auto;
+        }
+
+        h4 {
+            width: max-content;
+            margin: 0 $marginTitle;
+            white-space: nowrap;
+        }
+
+        hr {
+            width: 100%;
+            border: 1px solid $lightGrey;
+        }
+    }
+
+    p {
+        margin-left: $marginText;
+    }
+}

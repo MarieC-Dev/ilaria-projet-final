@@ -4,7 +4,7 @@ $widthImg: 32px;
 $marginTitle: 1rem;
 $marginText: calc($widthImg + $marginTitle);
 
-.stepsContainer {
+.recipeStepComponent {
     display: flex;
     flex-direction: column;
     margin-bottom: 2rem;

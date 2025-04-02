@@ -3,12 +3,10 @@ import { PageSliderComponent } from '../../components/page-slider/page-slider.co
 import { RecipesFilterComponent } from '../../components/layout-elements/recipes-filter/recipes-filter.component';
 import { RECIPE_LIST } from '../../lists/recipe-list.fake';
 import { RecipeItemComponent } from '../../components/recipe-item/recipe-item.component';
-import { JsonPipe } from '@angular/common';
-import { reduce } from 'rxjs';
 
 @Component({
   selector: 'app-home-page',
-  imports: [PageSliderComponent, RecipesFilterComponent, RecipeItemComponent, JsonPipe],
+  imports: [PageSliderComponent, RecipesFilterComponent, RecipeItemComponent],
   templateUrl: './home-page.component.html',
   styleUrl: '../../../styles.scss'
 })

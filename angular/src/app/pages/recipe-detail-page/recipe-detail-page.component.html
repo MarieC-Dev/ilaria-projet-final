@@ -1,1 +1,70 @@
-<p>recipe-detail-page works!</p>
+<!-- <p>{{ recipe | json}}</p> -->
+
+<div class="recipePage">
+    <section class="recipePresentation">
+        <div class="wrapperImage">
+            <img [src]="recipe.image" alt="recipe picture">
+        </div>
+
+        <div class="recipeDescription">
+            <h2>{{ recipe.title }}</h2>
+
+            <p>{{ recipe.description }}</p>
+
+            <div class="recipeTime">
+                <app-recipe-item-time
+                    icon="clock-regular.svg"
+                    title="Temps de prépapration"
+                    [text]="recipe.activeTime"
+                    unit="min" />
+
+                <hr class="verticalBorder" />
+
+                <app-recipe-item-time
+                    icon="total-time.svg"
+                    title="Temps total"
+                    [text]="recipe.totalTime"
+                    unit="min" />
+
+                <hr class="verticalBorder" />
+
+                <app-recipe-item-time
+                    icon="users.svg"
+                    title="Parts"
+                    [text]="recipe.yieldServes"
+                    unit="personnes" />
+            </div>
+
+            <hr class="horizontalBorder" />
+
+            <div class="recipeDescriptionEnd">
+                <ul>
+                    <li>
+                        <p>Créé par <span>{{ recipe.author.username }}</span></p>
+                    </li>
+                    <li>
+                        <p>{{ recipe.author.numberOfRecipes }} recettes</p>
+                    </li>
+                </ul>
+
+                <ul>
+                    <li>
+                        <img src="plus-solid.svg" alt="add recipe">
+                    </li>
+                    <li>
+                        <img src="print-solid.svg" alt="print recipe">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section class="recipeSteps">
+
+    </section>
+    <section class="recipeComments">
+
+    </section>
+    <section class="otherRecipes">
+
+    </section>
+</div>

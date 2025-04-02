@@ -1,1 +1,56 @@
-.recipeComment {}
+@use '../utils/variables' as *;
+
+$imgSize: 72px;
+
+.recipeComment {
+    margin-bottom: 3rem;
+
+    .headerComment {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+
+        #wrapperUserPicture {
+            width: $imgSize;
+            height: $imgSize;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 2rem;
+            border-radius: 3rem;
+            overflow: hidden;
+    
+            #userPicture {
+                height: $imgSize;
+            }
+        }
+
+        ul {
+            display: flex;
+            flex-direction: column;
+
+            li {
+                h4 {
+                    font-size: 18px;
+                }
+
+                p {
+                    margin: 4px 0 8px 0;
+                    color: $mediumGrey;
+                }
+                
+                img {
+                    height: 18px;
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+
+    p {
+        color: $darkGrey;
+        line-height: 1.5;
+    }
+
+    
+}

@@ -17,11 +17,19 @@ export interface RecipeTag {
     name: string
 }
 
+export interface RecipeCommentResponse {
+    id: number,
+    author: User,
+    text: string,
+    created: Date,
+}
+
 export interface RecipeComment {
     id: number,
     author: User,
     starScore: number, // 1 - 5 stars
-    description: string,
+    text: string,
+    response: RecipeCommentResponse[],
     created: Date,
 }
 

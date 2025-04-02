@@ -1,0 +1,18 @@
+@use '../utils/variables' as *;
+
+.recipeItemTime {
+    padding: 1rem;
+    text-align: center;
+
+    img {
+        height: 32px;
+    }
+
+    h4 {
+        margin: .5rem 0;
+    }
+
+    p {
+        color: $mediumGrey;
+    }
+}

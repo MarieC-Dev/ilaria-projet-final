@@ -13,6 +13,9 @@
 @use './styles/layout/videosSection';
 @use './styles/layout/newsletterSection';
 
+// LAYOUT - SECTIONS
+@use './styles/layout/sections/recipeDetail';
+
 // COMPONENTS
 @use './styles/components/buttons';
 @use './styles/components/select';
@@ -20,5 +23,6 @@
 @use './styles/components/recipe';
 @use './styles/components/navHomePage';
 @use './styles/components/sliderNumberReceipes';
+@use './styles/components/recipeItemTime';
 
 // PAGES

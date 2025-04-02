@@ -1,3 +1,5 @@
+@use '../utils/variables' as *;
+
 header {
     display: flex;
     justify-content: space-between;
@@ -9,6 +11,10 @@ header {
 
         li {
             margin-right: 2rem;
+
+            .active {
+                color: $firstColor;
+            }
         }
     }
 
@@ -22,7 +28,7 @@ header {
             height: 24px;
         }
 
-        button {
+        a {
             margin-left: 2.5rem;
         }
     }

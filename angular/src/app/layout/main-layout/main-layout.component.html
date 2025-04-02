@@ -1,16 +1,43 @@
 <div class="mainLayout">
     <header>
         <ul class="navigationLeft">
-            <li class="navigationItem active">Home</li>
-            <li class="navigationItem">Recipe</li>
-            <li class="navigationItem">Search</li>
-            <li class="navigationItem">Contact</li>
+            <li class="navigationItem">
+                <a 
+                    routerLink="/home" 
+                    routerLinkActive="active" 
+                    ariaCurrentWhenActive="page">Home</a>
+            </li>
+            <li class="navigationItem">
+                <a 
+                    routerLink="/recipe" 
+                    routerLinkActive="active" 
+                    ariaCurrentWhenActive="page">Recipe</a>
+            </li>
+            <li class="navigationItem">
+                <a 
+                    routerLink="/search" 
+                    routerLinkActive="active" 
+                    ariaCurrentWhenActive="page">Search</a>
+            </li>
+            <li class="navigationItem">
+                <a 
+                    routerLink="/contact" 
+                    routerLinkActive="active" 
+                    ariaCurrentWhenActive="page">Contact</a>
+            </li>
         </ul>
 
         <div class="navigationRight">
             <img src="search.svg" alt="search icon">
-            <button class="btn-transparent" type="button">Sign In</button>
-            <button class="btn-bg btn-bg-red" type="button">Sign Up</button>
+
+            <a 
+                class="btn-transparent"
+                routerLink="/connection" 
+                ariaCurrentWhenActive="page">Sign In</a>
+            <a 
+                class="btn-bg btn-bg-red"
+                routerLink="/connection"
+                ariaCurrentWhenActive="page">Sign Up</a>
         </div>
     </header>
 

@@ -8,6 +8,7 @@ import { ContactPageComponent } from './pages/contact-page/contact-page.componen
 export const routes: Routes = [
     /* { path: '/recipe/:id', component: RecipeDetailPageComponent }, */
     { path: 'home', component: HomePageComponent },
+    { path: 'recipe', component: RecipeDetailPageComponent },
     { path: 'connection', component: ConnectionPageComponent },
     { path: 'contact', component: ContactPageComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full' },

@@ -3,11 +3,12 @@ import { RECIPE_LIST } from '../../lists/recipe-list.fake';
 import { JsonPipe } from '@angular/common';
 import { RecipeItemTimeComponent } from '../../components/recipe-item-time/recipe-item-time.component';
 import { RecipeStepComponent } from '../../components/recipe-step/recipe-step.component';
+import { RecipeCommentComponent } from '../../components/recipe-comment/recipe-comment.component';
 
 
 @Component({
   selector: 'app-recipe-detail-page',
-  imports: [RecipeItemTimeComponent, RecipeStepComponent, JsonPipe],
+  imports: [RecipeItemTimeComponent, RecipeStepComponent, RecipeCommentComponent, JsonPipe],
   templateUrl: './recipe-detail-page.component.html',
   styleUrl: './recipe-detail-page.component.scss'
 })

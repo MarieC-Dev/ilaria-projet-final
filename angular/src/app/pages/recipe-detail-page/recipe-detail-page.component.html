@@ -1,4 +1,5 @@
 <div class="recipePage">
+    <!-- SECTION : Recipe presentation -->
     <section class="recipePresentation">
         <div class="wrapperImage">
             <img [src]="recipe.image" alt="recipe picture">
@@ -56,21 +57,46 @@
             </div>
         </div>
     </section>
+    <!-- ########## -->
 
-    <section class="recipeStepsIngredients">
-        <div class="recipeSteps">
-            <h3>Étape de préparation</h3>
+    <!-- SECTION : Recipe details -->
+    <section class="recipeDetails">
+        <!-- CONTAINER : Recipe steps and comments -->
+        <div class="recipeStepsComments">
+            <!-- Recipe steps -->
+            <div class="recipeSteps">
+                <h3>Étape de préparation</h3>
+    
+                <div class="stepsContainer">
+                    @for (step of recipe.steps; track step.id) {
+                        <app-recipe-step 
+                            [nbStep]="getNumberStep(step.id)"
+                            [description]="step.description" />
+                    }
+                </div>
+            </div>
 
-            <div class="stepsContainer">
-                @for (step of recipe.steps; track step.id) {
-                    <app-recipe-step 
-                        [nbStep]="getNumberStep(step.id)"
-                        [description]="step.description" />
-                }
+            <!-- Recipe comments -->
+            <div class="recipeComments">
+                <h3>Commentaires</h3>
+    
+                <div class="commentsContainer">
+                    @for (item of recipe.opinion; track item.id) {
+                        <app-recipe-comment
+                            [picture]="item.author.picture"
+                            [username]="item.author.username"
+                            [date]="item.created"
+                            [note]="item.starScore"
+                            [text]="item.text" />
+                    }
+                </div>
             </div>
         </div>
+        <!-- END -->
 
-        <div class="recipeIngredientsTags">
+        <!-- CONTAINER : Recipe ingredients and share icons -->
+        <nav class="recipeIngredientsTagsShare">
+            <!-- Recipe ingredients -->
             <div class="recipeIngredients">
                 <h3>Ingrédients</h3>
 
@@ -81,17 +107,20 @@
                 </ul>
             </div>
 
+            <!-- Recipe tags -->
             <div class="recipeTags">
                 <h3>Tags</h3>
 
                 <ul class="tagList">
                     @for (tag of recipe.tags; track tag.id) {
-                        <li class="tag">{{ tag.name }}</li>
+                        <li class="tag"> {{ tag.name }}</li>
                     }
                 </ul>
             </div>
-        </div>
+        </nav>
+        <!-- END -->
     </section>
+    <!-- ########## -->
 
     <section class="recipeComments">
 

@@ -56,6 +56,9 @@ header .navigationLeft {
 header .navigationLeft li {
   margin-right: 2rem;
 }
+header .navigationLeft li .active {
+  color: #EB4A37;
+}
 header .navigationRight {
   display: flex;
   justify-content: space-between;
@@ -65,7 +68,7 @@ header .navigationRight img {
   width: auto;
   height: 24px;
 }
-header .navigationRight button {
+header .navigationRight a {
   margin-left: 2.5rem;
 }
 
@@ -192,6 +195,47 @@ footer p {
   padding: 1rem 2.5rem;
   background-color: #F1CB36;
   border-radius: 3rem;
+}
+
+.recipePresentation {
+  width: 1216px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  border: 1px solid red;
+}
+.recipePresentation .wrapperImage {
+  width: 50%;
+  height: 550px;
+  display: flex;
+  justify-content: center;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+.recipePresentation .wrapperImage img {
+  width: auto;
+  height: 550px;
+}
+.recipePresentation .recipeDescription {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+}
+.recipePresentation .recipeDescription > p {
+  color: #5A5A5A;
+}
+.recipePresentation .recipeDescription .recipeTime {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid red;
+}
+.recipePresentation .recipeDescription .recipeTime .verticalBorder {
+  border: 1px solid #F4F4F4;
+}
+.recipePresentation .recipeDescriptionEnd img {
+  width: 32px;
 }
 
 .btn-bold {
@@ -367,6 +411,20 @@ select {
 .sliderNumber li.active {
   font-weight: 700;
   color: #5A5A5A;
+}
+
+.recipeItemTime {
+  padding: 1rem;
+  text-align: center;
+}
+.recipeItemTime img {
+  height: 32px;
+}
+.recipeItemTime h4 {
+  margin: 0.5rem 0;
+}
+.recipeItemTime p {
+  color: #848484;
 }
 
 /*# sourceMappingURL=style.css.map */

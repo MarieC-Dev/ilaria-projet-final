@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { RECIPE_LIST } from '../../lists/recipe-list.fake';
 import { JsonPipe } from '@angular/common';
-import { RecipeItemTimeComponent } from '../../components/layout-elements/recipe-item-time/recipe-item-time.component';
+import { RecipeItemTimeComponent } from '../../components/recipe-item-time/recipe-item-time.component';
 
 
 @Component({

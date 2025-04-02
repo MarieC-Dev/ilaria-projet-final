@@ -104,7 +104,7 @@ $sizeImg: 500px;
     
 }
 
-.recipeStepsIngredients {
+.recipeDetails {
     display: flex;
     justify-content: space-between;
 
@@ -112,10 +112,11 @@ $sizeImg: 500px;
         margin-bottom: 2rem;
     }
 
-    .recipeSteps {
+    .recipeStepsComments {
         width: 68%;
     }
-    .recipeIngredientsTags {
+    
+    .recipeIngredientsTagsShare {
         min-width: 27%;
 
         .recipeIngredients {

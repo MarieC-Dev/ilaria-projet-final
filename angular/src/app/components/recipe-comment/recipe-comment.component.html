@@ -1,1 +1,20 @@
-<p>recipe-comment works!</p>
+<div class="recipeComment">
+    <div class="headerComment">
+        <div id="wrapperUserPicture">
+            <img id="userPicture" [src]="picture()" alt="user profile image">
+        </div>
+        <ul>
+            <li>
+                <h4>{{ username() }}</h4>
+            </li>
+            <li>
+                <p>{{ date() }}</p>
+            </li>
+            <li> 
+                <img *ngFor="let i of getStars(true)" src="star.svg" alt="star icon">
+                <img *ngFor="let i of getStars(false)" src="star-border.svg" alt="star icon">
+            </li>
+        </ul>
+    </div>
+    <p>{{ text() }}</p>
+</div>

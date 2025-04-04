@@ -298,16 +298,19 @@ footer p {
   min-width: 27%;
 }
 .recipeDetails .recipeIngredientsTagsShare .recipeIngredients {
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 .recipeDetails .recipeIngredientsTagsShare .recipeIngredients ul li {
-  padding: 1rem;
+  padding: 0 1rem;
 }
 .recipeDetails .recipeIngredientsTagsShare .recipeIngredients ul li:not(li:last-child) {
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
   border-bottom: 2px solid #F4F4F4;
 }
 .recipeDetails .recipeIngredientsTagsShare .recipeTags {
   max-width: 330px;
+  margin-bottom: 3rem;
 }
 .recipeDetails .recipeIngredientsTagsShare .recipeTags ul {
   display: flex;

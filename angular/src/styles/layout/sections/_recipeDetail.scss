@@ -125,19 +125,22 @@ $sizeImg: 500px;
         min-width: 27%;
 
         .recipeIngredients {
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
 
             ul li {
-                padding: 1rem;
+                padding: 0 1rem;
             }
     
             ul li:not(li:last-child) {
+                padding-bottom: 1rem;
+                margin-bottom: 1rem;
                 border-bottom: 2px solid $lightGrey;
             }
         }
 
         .recipeTags {
             max-width: 330px;
+            margin-bottom: 3rem;
 
             ul {
                 display: flex;

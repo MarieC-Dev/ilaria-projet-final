@@ -290,6 +290,10 @@ footer p {
 .recipeDetails .recipeStepsComments {
   width: 68%;
 }
+.recipeDetails .recipeStepsComments .dividingStepsComments {
+  margin: 3rem 0;
+  border: 1px solid #F4F4F4;
+}
 .recipeDetails .recipeIngredientsTagsShare {
   min-width: 27%;
 }

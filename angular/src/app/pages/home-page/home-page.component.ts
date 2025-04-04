@@ -20,7 +20,7 @@ export class HomePageComponent {
     
     const recipe: any =  this.recipesList().filter(rcp => rcp.id === id);
     const average = recipe.map((item: any) => {
-      const sum = item.opinion.map((elm: any) => elm.starScore).reduce(averageFn) / item.opinion.length;
+      const sum = item.opinions.map((elm: any) => elm.starScore).reduce(averageFn) / item.opinions.length;
       const round = Math.round(sum * 10) / 10;
       return round;
     });

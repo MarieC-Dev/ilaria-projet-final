@@ -1,6 +1,7 @@
 @use '../../utils/variables' as *;
 
-$sizeImg: 500px;
+$sizeImgRecipe: 500px;
+$sizeShareIcons: 40px;
 
 .recipePage section {
     width: 1216px;
@@ -13,7 +14,7 @@ $sizeImg: 500px;
 
     .wrapperImage {
         width: 45%;
-        height: $sizeImg;
+        height: $sizeImgRecipe;
         display: flex;
         justify-content: center;
         border-radius: 1rem;
@@ -21,7 +22,7 @@ $sizeImg: 500px;
 
         img {
             width: auto;
-            height: $sizeImg;
+            height: $sizeImgRecipe;
         }
     }
 
@@ -156,6 +157,39 @@ $sizeImg: 500px;
                     font-weight: 700;
                     text-transform: uppercase;
                     border-radius: .5rem;
+                }
+            }
+        }
+
+        .recipeShare {
+            ul {
+                display: flex;
+
+                li, li a {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                li {
+                    width: $sizeShareIcons;
+                    height: $sizeShareIcons;
+                    margin-right: 1.5rem;
+                    border-radius: 3rem;
+
+                    img {
+                        height: 22px;
+                    }
+                }
+
+                li:nth-child(1) {
+                    border: 2px solid $facebook;
+                }
+                li:nth-child(2) {
+                    border: 2px solid $linkedin;
+                }
+                li:nth-child(3) {
+                    border: 2px solid $x-twitter;
                 }
             }
         }

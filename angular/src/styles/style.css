@@ -327,6 +327,32 @@ footer p {
   text-transform: uppercase;
   border-radius: 0.5rem;
 }
+.recipeDetails .recipeIngredientsTagsShare .recipeShare ul {
+  display: flex;
+}
+.recipeDetails .recipeIngredientsTagsShare .recipeShare ul li, .recipeDetails .recipeIngredientsTagsShare .recipeShare ul li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.recipeDetails .recipeIngredientsTagsShare .recipeShare ul li {
+  width: 40px;
+  height: 40px;
+  margin-right: 1.5rem;
+  border-radius: 3rem;
+}
+.recipeDetails .recipeIngredientsTagsShare .recipeShare ul li img {
+  height: 22px;
+}
+.recipeDetails .recipeIngredientsTagsShare .recipeShare ul li:nth-child(1) {
+  border: 2px solid #0866ff;
+}
+.recipeDetails .recipeIngredientsTagsShare .recipeShare ul li:nth-child(2) {
+  border: 2px solid #0a66c2;
+}
+.recipeDetails .recipeIngredientsTagsShare .recipeShare ul li:nth-child(3) {
+  border: 2px solid black;
+}
 
 .btn-bold {
   font-weight: 600;

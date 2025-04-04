@@ -580,4 +580,24 @@ select {
   line-height: 1.5;
 }
 
+.answersList {
+  margin-bottom: 3rem;
+}
+.answersList .recipeComment {
+  padding: 2rem;
+  margin: 0 0 0 5rem;
+  /* &:nth-child(n+1) {
+      &:not(.recipeComment.isAnswer.userAnswer) {
+          border: 1px solid red;
+      }
+  } */
+}
+.answersList .isAnswer.userAnswer {
+  background-color: #F9F6F5;
+  border-bottom: 2px solid white;
+}
+.answersList .authorAnswer#commentAnswerId0 {
+  padding-top: 0;
+}
+
 /*# sourceMappingURL=style.css.map */

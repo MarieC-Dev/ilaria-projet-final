@@ -54,3 +54,30 @@ $imgSize: 72px;
 
     
 }
+
+.answersList {
+    margin-bottom: 3rem;
+
+    .recipeComment {
+        padding: 2rem;
+        margin: 0 0 0 5rem;
+
+        /* &:nth-child(n+1) {
+            &:not(.recipeComment.isAnswer.userAnswer) {
+                border: 1px solid red;
+            }
+        } */
+    }
+
+    .isAnswer.userAnswer {
+        background-color: $lightBrown;
+        border-bottom: 2px solid white;
+    }
+
+    .authorAnswer#commentAnswerId0 {
+        padding-top: 0;
+        //border: 1px solid red;
+    }
+}
+
+//'recipeComment isAnswer userAnswer'

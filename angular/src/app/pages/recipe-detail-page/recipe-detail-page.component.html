@@ -81,13 +81,30 @@
                 <h3>Commentaires</h3>
     
                 <div class="commentsContainer">
-                    @for (item of recipe.opinion; track item.id) {
+                    @for (opinion of recipe.opinions; track opinion.id) {
                         <app-recipe-comment
-                            [picture]="item.author.picture"
-                            [username]="item.author.username"
-                            [date]="item.created"
-                            [note]="item.starScore"
-                            [text]="item.text" />
+                            [classes]="getClassComment(recipe.author.username)"
+                            [ids]="'commentId' + opinion.id"
+                            [picture]="opinion.author.picture"
+                            [username]="opinion.author.username"
+                            [date]="opinion.created"
+                            [note]="opinion.starScore"
+                            [text]="opinion.text" />
+
+
+                        @if(opinion.answers.length > 0) {
+                            <div class="answersList">
+                                @for (answer of opinion.answers; track answer.id) {
+                                    <app-recipe-comment
+                                        [classes]="getClassComment(recipe.author.username, answer.author.username)"
+                                        [ids]="'commentAnswerId' + answer.id"
+                                        [picture]="answer.author.picture"
+                                        [username]="answer.author.username"
+                                        [date]="answer.created"
+                                        [text]="answer.text" />
+                                }
+                            </div>
+                        }
                     }
                 </div>
             </div>

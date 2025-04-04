@@ -32,7 +32,7 @@
                         [picture]="recipe.image" 
                         [name]="recipe.title" 
                         [average]="getRecipeAverage(recipe.id)" 
-                        [numberOfVotes]="recipe.opinion?.length"
+                        [numberOfVotes]="recipe.opinions?.length"
                         [authorName]="recipe.author.username"
                     />
                 }

@@ -30,4 +30,21 @@ export class RecipeDetailPageComponent {
       return filterById[0].quantity;
     }
   }
+
+  getClassComment(recipeAuthorName: string, answerAuthorName?: string) {
+    if(answerAuthorName) { // [answer] existe -> ANSWER
+      if(recipeAuthorName !== answerAuthorName) { // ANSWER user
+        return 'recipeComment isAnswer userAnswer';
+      } else { // ANSWER author
+        return 'recipeComment isAnswer authorAnswer';
+      }
+    } else { // COMMENT
+      return 'recipeComment';
+    }
+  }
+
+  /* Ajouter une classe si la 1er réponse est de l'auteur
+
+    recipe.opinions.answer
+  */
 }

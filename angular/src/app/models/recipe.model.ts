@@ -29,7 +29,7 @@ export interface RecipeComment {
     author: User,
     starScore: number, // 1 - 5 stars
     text: string,
-    response: RecipeCommentResponse[],
+    answers: RecipeCommentResponse[],
     created: Date,
 }
 
@@ -49,7 +49,7 @@ export interface Recipe {
     ingredientsList: Ingredient[],
     steps: RecipeStep[],
     tags: RecipeTag[],
-    opinion?: RecipeComment[],
+    opinions?: RecipeComment[],
 
     created: Date,
 }

@@ -1,4 +1,4 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, computed, input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,6 +8,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './recipe-comment.component.scss'
 })
 export class RecipeCommentComponent {
+  classes = input<string>('');
+  ids = input<string>('');
   picture = input<string>('');
   username = input<string>('');
   date = input<Date>();
@@ -34,12 +36,4 @@ export class RecipeCommentComponent {
       return;
     }
   }
-
-  /*
-    Si la note est entre 1 et 5 -> 
-      - nb x <img src="star.svg" alt="star icon">
-      - reste avec <img src="star-border.svg" alt="star icon">
-    (switch ?)
-    Sinon -> ...
-  */
 }

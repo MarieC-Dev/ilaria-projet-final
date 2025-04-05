@@ -1,4 +1,4 @@
-<div [class]="classes()" [id]="ids()">
+<div [class]="showAnswers() ? classes() + ' show' : classes()" [id]="ids()">
     <div class="headerComment">
         <div id="wrapperUserPicture">
             <img id="userPicture" [src]="picture()" alt="user profile image">
@@ -17,4 +17,15 @@
         </ul>
     </div>
     <p>{{ text() }}</p>
+
+    @if(answersArray() > 0) {
+        <button [id]="ids()" [class]="showAnswers() ? 'showAnswersBtn show' : 'showAnswersBtn'" (click)="setShowAnswers()">
+            <p>Afficher les réponses ({{answersArray()}})</p>
+            <img src="chevron-down.svg" alt="chevron icon">
+        </button>
+
+        <!-- <div [class]="showAnswers() ? 'answersList show' : 'answersList'">
+            <ng-content />
+        </div> -->
+    }
 </div>

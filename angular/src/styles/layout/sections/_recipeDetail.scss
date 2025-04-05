@@ -116,6 +116,18 @@ $sizeShareIcons: 40px;
     .recipeStepsComments {
         width: 68%;
 
+        .commentsContainer {
+            display: flex;
+            flex-direction: column;
+
+            .commentAndAnswers {
+                overflow: hidden;
+
+                position: relative;
+                border: 1px solid red;
+            }
+        }
+
         .dividingStepsComments {
             margin: 3rem 0;
             border: 1px solid $lightGrey;

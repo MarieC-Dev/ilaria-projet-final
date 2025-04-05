@@ -84,31 +84,65 @@
     
                 <div class="commentsContainer">
                     @for (opinion of recipe.opinions; track opinion.id) {
-                        <app-recipe-comment
-                            [classes]="getClassComment(recipe.author.username)"
-                            [ids]="'commentId' + opinion.id"
-                            [picture]="opinion.author.picture"
-                            [username]="opinion.author.username"
-                            [date]="opinion.created"
-                            [note]="opinion.starScore"
-                            [text]="opinion.text" />
-
-
-                        @if(opinion.answers.length > 0) {
-                            <div class="answersList">
-                                @for (answer of opinion.answers; track answer.id) {
-                                    <app-recipe-comment
-                                        [classes]="getClassComment(recipe.author.username, answer.author.username)"
-                                        [ids]="'commentAnswerId' + answer.id"
-                                        [picture]="answer.author.picture"
-                                        [username]="answer.author.username"
-                                        [date]="answer.created"
-                                        [text]="answer.text" />
-                                }
+                        <div class="commentAndAnswers">
+                            <div #commentRef>
+                                <app-recipe-comment
+                                [classes]="getClassComment(recipe.author.username)"
+                                [ids]="'commentId' + opinion.id"
+                                [picture]="opinion.author.picture"
+                                [username]="opinion.author.username"
+                                [date]="opinion.created"
+                                [note]="opinion.starScore"
+                                [text]="opinion.text"
+                                [answersArray]="opinion.answers.length" />
                             </div>
-                        }
+    
+                            @if(opinion.answers.length > 0) {
+                                <div class="answersList" [id]="'answersList' + opinion.id" [appShowCommentAnswers]="'answersList' + opinion.id">
+                                    @for (answer of opinion.answers; track answer.id) {
+                                        <app-recipe-comment
+                                            [classes]="getClassComment(recipe.author.username, answer.author.username)"
+                                            [ids]="'answerId' + answer.id"
+                                            [picture]="answer.author.picture"
+                                            [username]="answer.author.username"
+                                            [date]="answer.created"
+                                            [text]="answer.text" />
+                                    }
+                                </div>
+                            }
+                        </div>
                     }
                 </div>
+                <!-- <div class="commentsContainer">
+                    @for (opinion of recipe.opinions; track opinion.id) {
+                        <div class="commentAndAnswers">
+                            <app-recipe-comment
+                                [classes]="getClassComment(recipe.author.username)"
+                                [ids]="'commentId' + opinion.id"
+                                [picture]="opinion.author.picture"
+                                [username]="opinion.author.username"
+                                [date]="opinion.created"
+                                [note]="opinion.starScore"
+                                [text]="opinion.text"
+                                [showAnswers]="opinion.answers.length" />
+    
+    
+                            @if(opinion.answers.length > 0) {
+                                <div class="answersList">
+                                    @for (answer of opinion.answers; track answer.id) {
+                                        <app-recipe-comment
+                                            [classes]="getClassComment(recipe.author.username, answer.author.username)"
+                                            [ids]="'commentAnswerId' + answer.id"
+                                            [picture]="answer.author.picture"
+                                            [username]="answer.author.username"
+                                            [date]="answer.created"
+                                            [text]="answer.text" />
+                                    }
+                                </div>
+                            }
+                        </div>
+                    }
+                </div> -->
             </div>
         </div>
         <!-- END -->

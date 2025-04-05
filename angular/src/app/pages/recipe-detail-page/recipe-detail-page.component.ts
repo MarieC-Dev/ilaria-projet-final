@@ -1,20 +1,38 @@
-import { Component, signal } from '@angular/core';
+import { Component, ElementRef, signal, ViewChild } from '@angular/core';
 import { RECIPE_LIST } from '../../lists/recipe-list.fake';
-import { JsonPipe } from '@angular/common';
+import { CommonModule, JsonPipe } from '@angular/common';
 import { RecipeItemTimeComponent } from '../../components/recipe-item-time/recipe-item-time.component';
 import { RecipeStepComponent } from '../../components/recipe-step/recipe-step.component';
 import { RecipeCommentComponent } from '../../components/recipe-comment/recipe-comment.component';
+import { ShowCommentAnswersDirective } from '../../directives/show-comment-answers.directive';
 
 
 @Component({
   selector: 'app-recipe-detail-page',
-  imports: [RecipeItemTimeComponent, RecipeStepComponent, RecipeCommentComponent, JsonPipe],
+  imports: [
+    RecipeItemTimeComponent, 
+    RecipeStepComponent, 
+    RecipeCommentComponent, 
+    ShowCommentAnswersDirective,
+    CommonModule
+  ],
   templateUrl: './recipe-detail-page.component.html',
   styleUrl: './recipe-detail-page.component.scss'
 })
 export class RecipeDetailPageComponent {
   recipeList = signal(RECIPE_LIST);
   recipe = this.recipeList()[0];
+
+  @ViewChild(ShowCommentAnswersDirective) showCommentAnswersDirective!: ShowCommentAnswersDirective;
+  @ViewChild('commentAnswersRef') commentAnswersRef!: ElementRef<HTMLDivElement>;
+  @ViewChild('commentRef') commentRef!: ElementRef<HTMLDivElement>;
+
+  ngAfterViewInit() {
+    console.log('---> Component ngAfterViewInit');
+    
+    this.showCommentAnswersDirective.getHeight();
+    this.showCommentAnswersDirective.setHeight();
+  }
 
   getNumberStep(id: number) {
     const filterById = this.recipe.steps.filter((step) => step.id === id);

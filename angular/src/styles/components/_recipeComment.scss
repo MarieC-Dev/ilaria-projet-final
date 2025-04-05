@@ -2,8 +2,14 @@
 
 $imgSize: 72px;
 
+/* .recipeComment:not(.answersList .recipeComment) {
+    clip-path: rect(auto auto 0 auto);
+} */
+
 .recipeComment {
     margin-bottom: 3rem;
+    background-color: white;
+    overflow: hidden;
 
     .headerComment {
         display: flex;
@@ -47,37 +53,53 @@ $imgSize: 72px;
         }
     }
 
-    p {
+    & > p {
         color: $darkGrey;
         line-height: 1.5;
     }
 
+    button.showAnswersBtn {
+        display: flex;
+        align-items: center;
+        margin-top: 1rem;
+        color: $firstColor;
+        border: 1px solid black;
+
+        &.show img {
+            transform: rotate(180deg);
+            transition: transform .2s ease-in-out;
+        }
+
+        img {
+            height: 12px;
+            margin-left: 1rem;
+            transform: rotate(0deg);
+            transition: transform .2s ease-in-out;
+        }
+    }
     
 }
 
 .answersList {
-    margin-bottom: 3rem;
+    max-height: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0 3rem 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
 
     .recipeComment {
         padding: 2rem;
         margin: 0 0 0 5rem;
 
-        /* &:nth-child(n+1) {
-            &:not(.recipeComment.isAnswer.userAnswer) {
-                border: 1px solid red;
-            }
-        } */
-    }
-
-    .isAnswer.userAnswer {
-        background-color: $lightBrown;
-        border-bottom: 2px solid white;
-    }
-
-    .authorAnswer#commentAnswerId0 {
-        padding-top: 0;
-        //border: 1px solid red;
+        &.isAnswer.userAnswer {
+            background-color: $lightBrown;
+            border-bottom: 2px solid white;
+        }
+    
+        &.authorAnswer#commentAnswerId0 {
+            padding-top: 0;
+        }
     }
 }
 
-//'recipeComment isAnswer userAnswer'

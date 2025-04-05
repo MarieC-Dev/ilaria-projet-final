@@ -1,4 +1,4 @@
-import { Component, computed, input, signal } from '@angular/core';
+import { Component, input, model} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -15,6 +15,13 @@ export class RecipeCommentComponent {
   date = input<Date>();
   note = input<number>();
   text = input<string>('');
+  answersArray = input<number>(0);
+  showAnswers = model(false); // input + output for change value
+  onClickMethod = input<any>();
+
+  setShowAnswers() {
+    this.showAnswers.update((bool) => bool = !bool);
+  }
 
   getStars(solid: boolean) {
     const lastChar: string = String(this.note).charAt(String(this.note).length - 2);

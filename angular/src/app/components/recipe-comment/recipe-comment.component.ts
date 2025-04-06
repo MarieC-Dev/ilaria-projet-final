@@ -1,9 +1,10 @@
-import { Component, input, model} from '@angular/core';
+import { Component, input, model, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ShowCommentAnswersDirective } from '../../directives/show-comment-answers.directive';
 
 @Component({
   selector: 'app-recipe-comment',
-  imports: [CommonModule],
+  imports: [CommonModule, ShowCommentAnswersDirective],
   templateUrl: './recipe-comment.component.html',
   styleUrl: './recipe-comment.component.scss'
 })
@@ -17,11 +18,6 @@ export class RecipeCommentComponent {
   text = input<string>('');
   answersArray = input<number>(0);
   showAnswers = model(false); // input + output for change value
-  onClickMethod = input<any>();
-
-  setShowAnswers() {
-    this.showAnswers.update((bool) => bool = !bool);
-  }
 
   getStars(solid: boolean) {
     const lastChar: string = String(this.note).charAt(String(this.note).length - 2);
@@ -42,5 +38,9 @@ export class RecipeCommentComponent {
     } else {
       return;
     }
+  }
+
+  setShowAnswers() {
+    this.showAnswers.update((bool) => bool = !bool);    
   }
 }

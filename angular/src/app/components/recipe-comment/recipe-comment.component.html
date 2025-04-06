@@ -19,7 +19,14 @@
     <p>{{ text() }}</p>
 
     @if(answersArray() > 0) {
-        <button [id]="ids()" [class]="showAnswers() ? 'showAnswersBtn show' : 'showAnswersBtn'" (click)="setShowAnswers()">
+        <button 
+            [id]="ids()" 
+            [class]="showAnswers() ? 'showAnswersBtn show' : 'showAnswersBtn'" 
+            (click)="setShowAnswers()" 
+            [appShowCommentAnswers]="{
+                targetId: this.ids().replace('commentId', 'answersList'),
+                checkBool: this.showAnswers()
+              }">
             <p>Afficher les réponses ({{answersArray()}})</p>
             <img src="chevron-down.svg" alt="chevron icon">
         </button>

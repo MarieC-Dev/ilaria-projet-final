@@ -123,8 +123,9 @@ $sizeShareIcons: 40px;
             .commentAndAnswers {
                 overflow: hidden;
 
-                position: relative;
-                border: 1px solid red;
+                &:not(.commentAndAnswers:last-child) {
+                    margin-bottom: 3rem;
+                }
             }
         }
 

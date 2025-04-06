@@ -98,7 +98,7 @@
                             </div>
     
                             @if(opinion.answers.length > 0) {
-                                <div class="answersList" [id]="'answersList' + opinion.id" [appShowCommentAnswers]="'answersList' + opinion.id">
+                                <div class="answersList" [id]="'answersList' + opinion.id"> <!-- [appShowCommentAnswers]="'answersList' + opinion.id" -->
                                     @for (answer of opinion.answers; track answer.id) {
                                         <app-recipe-comment
                                             [classes]="getClassComment(recipe.author.username, answer.author.username)"

@@ -1,36 +1,52 @@
 import { DOCUMENT } from '@angular/common';
-import { Directive, ElementRef, Renderer2, Input, Inject } from '@angular/core';
+import { Directive, ElementRef, Renderer2, Input, Inject, HostListener } from '@angular/core';
+
+interface ShowCommentAnswersConfig {
+  targetId: string;
+  checkBool: boolean;
+}
 
 @Directive({
   selector: '[appShowCommentAnswers]'
 })
 export class ShowCommentAnswersDirective {
-  @Input('appShowCommentAnswers') targetId!: string;
+  /* @Input('appShowCommentAnswers') targetId!: string;
+  @Input('appShowCommentAnswers') checkBool!: boolean; */
+  @Input('appShowCommentAnswers') 
+  set config(value: ShowCommentAnswersConfig) {
+    if (value) {
+      this.targetId = value.targetId;
+      this.checkBool = value.checkBool;
+    }
+  }
+
+  private targetId!: string;
+  private checkBool!: boolean;
 
   constructor(
     private elm: ElementRef, 
     private renderer: Renderer2,
     @Inject(DOCUMENT) private document: Document
-  ) { 
-    const target = this.document.getElementById(this.targetId);
-    console.log('Constructor :', target);
-    
-    //this.renderer.setStyle(this.elm.nativeElement, 'max-height', '0');
+  ) {}
+
+  @HostListener('click') onClick() {
+    this.setHeight(this.targetId, this.checkBool);
   }
 
-  getHeight(): any {
-    //console.log('scrollHeight : ', this.elm.nativeElement.scrollHeight);
-
-    const target = this.document.getElementById(this.targetId);
-    console.log('target :', target);
-  }
-
-  setHeight(target: string) {
-    const scrollHeight = this.elm.nativeElement.scrollHeight;
-    //const target = this.document.getElementById(this.targetId);
+  setHeight(id: string, bool: boolean) {
+    const target = this.document.getElementById(id);
     
-    this.renderer.setStyle(target, 'max-height', scrollHeight + 'px');
-    this.renderer.setStyle(target, 'border', '1px solid blue');
-    
+    if(target) {
+      const scrollHeight = target.scrollHeight;
+      const lenghtTarget = target.childNodes.length
+      
+      if(!bool) {
+        this.renderer.setStyle(target, 'max-height', scrollHeight + 'px');
+        this.renderer.setStyle(target, 'transition', `max-height ${0.15 * lenghtTarget}s ease-in-out`);
+      } else {
+        this.renderer.setStyle(target, 'max-height', '0');
+        this.renderer.setStyle(target, 'transition', `max-height ${0.15 * lenghtTarget}s ease-in-out`);
+      }
+    }
   }
 }

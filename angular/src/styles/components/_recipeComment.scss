@@ -7,7 +7,6 @@ $imgSize: 72px;
 } */
 
 .recipeComment {
-    margin-bottom: 3rem;
     background-color: white;
     overflow: hidden;
 
@@ -63,7 +62,6 @@ $imgSize: 72px;
         align-items: center;
         margin-top: 1rem;
         color: $firstColor;
-        border: 1px solid black;
 
         &.show img {
             transform: rotate(180deg);
@@ -84,9 +82,8 @@ $imgSize: 72px;
     max-height: 0;
     display: flex;
     flex-direction: column;
-    margin: 2rem 0 3rem 0;
+    //margin: 2rem 0 3rem 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
 
     .recipeComment {
         padding: 2rem;
@@ -96,10 +93,14 @@ $imgSize: 72px;
             background-color: $lightBrown;
             border-bottom: 2px solid white;
         }
-    
-        &.authorAnswer#commentAnswerId0 {
-            padding-top: 0;
-        }
+    }
+}
+
+app-recipe-comment:first-child {
+    margin-top: 2rem;
+
+    .authorAnswer {
+        padding-top: 0;
     }
 }
 

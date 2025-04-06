@@ -23,16 +23,12 @@ export class RecipeDetailPageComponent {
   recipeList = signal(RECIPE_LIST);
   recipe = this.recipeList()[0];
 
-  @ViewChild(ShowCommentAnswersDirective) showCommentAnswersDirective!: ShowCommentAnswersDirective;
-  @ViewChild('commentAnswersRef') commentAnswersRef!: ElementRef<HTMLDivElement>;
-  @ViewChild('commentRef') commentRef!: ElementRef<HTMLDivElement>;
-
-  ngAfterViewInit() {
+  /* ngAfterViewInit() {
     console.log('---> Component ngAfterViewInit');
     
     this.showCommentAnswersDirective.getHeight();
     this.showCommentAnswersDirective.setHeight();
-  }
+  } */
 
   getNumberStep(id: number) {
     const filterById = this.recipe.steps.filter((step) => step.id === id);

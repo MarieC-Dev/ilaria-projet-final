@@ -1,10 +1,18 @@
 @use '../utils/variables' as *;
+@use '../utils/mixins' as *;
 
 footer {
     display: flex;
     flex-direction: column;
     padding: 5rem;
     background-color: white;
+
+    @include socialNetworks(
+        flex-end, // justify-content
+        0 auto, // margin ul
+        0 0 2rem 1.5rem, // margin li
+        $linkedin, // border color second social icon
+    );
 
     .socialNetworks {
         width: $sectionWidth;

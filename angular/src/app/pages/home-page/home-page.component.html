@@ -29,6 +29,7 @@
             <div class="recipesList">
                 @for (recipe of recipesList(); track recipe.id;) {
                     <app-recipe-item
+                        [id]="recipe.id"
                         [picture]="recipe.image" 
                         [name]="recipe.title" 
                         [average]="getRecipeAverage(recipe.id)" 

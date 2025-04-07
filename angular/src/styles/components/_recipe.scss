@@ -1,3 +1,5 @@
+@use '../utils/variables' as *;
+
 .recipe {
     width: auto;
     height: max-content;
@@ -45,6 +47,7 @@
         li {
             display: flex;
             align-items: center;
+            color: $mediumGrey;
 
             img {
                 height: 20px;

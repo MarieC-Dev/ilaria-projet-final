@@ -197,11 +197,20 @@
     </section>
     <!-- ########## -->
 
-    <section class="recipeComments">
-
-    </section>
-
     <section class="otherRecipes">
+        <h3>Autres recettes que vous pourriez aimer</h3>
 
+        <div class="otherRecipesList">
+            @for (recipe of getOtherRecipesList(); track recipe.id;) {
+                <app-recipe-item
+                    [id]="recipe.id"
+                    [picture]="recipe.image" 
+                    [name]="recipe.title" 
+                    [average]="getAverage(recipe.id)" 
+                    [numberOfVotes]="recipe.opinions?.length"
+                    [authorName]="recipe.author.username"
+                />
+            }
+        </div>
     </section>
 </div>

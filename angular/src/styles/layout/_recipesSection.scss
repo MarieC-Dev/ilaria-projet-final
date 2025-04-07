@@ -39,8 +39,7 @@
         }
 
         .recipesList {
-            @include gridRecipes();
-
+            @include gridRecipes(1fr 1fr 1fr);
         }
     }
 }

@@ -1,36 +1,33 @@
-import { Component, ElementRef, signal, ViewChild } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { RECIPE_LIST } from '../../lists/recipe-list.fake';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { RecipeItemTimeComponent } from '../../components/recipe-item-time/recipe-item-time.component';
 import { RecipeStepComponent } from '../../components/recipe-step/recipe-step.component';
 import { RecipeCommentComponent } from '../../components/recipe-comment/recipe-comment.component';
-import { ShowCommentAnswersDirective } from '../../directives/show-comment-answers.directive';
-
+import { RecipeItemComponent } from '../../components/recipe-item/recipe-item.component';
+import { RecipeAverageService } from '../../services/recipe-average.service';
+import { Recipe, RecipeList } from '../../models/recipe.model';
 
 @Component({
   selector: 'app-recipe-detail-page',
   imports: [
     RecipeItemTimeComponent, 
     RecipeStepComponent, 
-    RecipeCommentComponent, 
-    ShowCommentAnswersDirective,
+    RecipeCommentComponent,
+    RecipeItemComponent,
     CommonModule
   ],
   templateUrl: './recipe-detail-page.component.html',
   styleUrl: './recipe-detail-page.component.scss'
 })
 export class RecipeDetailPageComponent {
-  recipeList = signal(RECIPE_LIST);
-  recipe = this.recipeList()[0];
+  recipesList = signal(RECIPE_LIST);
+  recipe = this.recipesList()[0];
+  othersRecipes = this.recipesList();
+  recipeAverage = inject(RecipeAverageService);
+  // [average]="getRecipeAverage(recipe.id)" 
 
-  /* ngAfterViewInit() {
-    console.log('---> Component ngAfterViewInit');
-    
-    this.showCommentAnswersDirective.getHeight();
-    this.showCommentAnswersDirective.setHeight();
-  } */
-
-  getNumberStep(id: number) {
+  getNumberStep(id: number) {   
     const filterById = this.recipe.steps.filter((step) => step.id === id);
     return filterById[0].id + 1;
   }
@@ -57,8 +54,19 @@ export class RecipeDetailPageComponent {
     }
   }
 
-  /* Ajouter une classe si la 1er réponse est de l'auteur
+  getAverage(id: number) {
+    this.recipeAverage.getRecipeAverage(id, this.recipesList());
+  }
 
-    recipe.opinions.answer
-  */
+  getOtherRecipesList() {   
+    const array = [];
+
+    for (let i = 0; i <= 8; i++) {
+      const element = this.othersRecipes[i];
+      array.push(element);
+    }
+    
+    array.splice(this.recipe.id, 1);
+    return array;
+  }
 }

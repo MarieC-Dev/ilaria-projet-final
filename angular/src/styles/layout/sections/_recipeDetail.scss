@@ -1,9 +1,10 @@
 @use '../../utils/variables' as *;
+@use '../../utils/mixins' as *;
 
 $sizeImgRecipe: 500px;
 $sizeShareIcons: 40px;
 
-.recipePage section {
+.recipePage section:not(.otherRecipes) {
     width: 1216px;
     margin: 0 auto 5rem auto;
 }
@@ -205,6 +206,26 @@ $sizeShareIcons: 40px;
                     border: 2px solid $x-twitter;
                 }
             }
+        }
+    }
+}
+
+.otherRecipes {
+    padding: 6rem 4rem;
+    background-color: $lightBrown;
+
+    h3 {
+        max-width: 1216px;
+        margin: 0 auto 2rem auto;
+    }
+
+    .otherRecipesList {
+        max-width: 1216px;
+        @include gridRecipes(1fr 1fr 1fr 1fr);
+        margin: 0 auto;
+
+        a {
+            max-width: max-content;
         }
     }
 }

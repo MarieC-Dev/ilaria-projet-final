@@ -1,7 +1,8 @@
-@mixin gridRecipes() {
+@mixin gridRecipes($columns) {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: $columns;
     grid-template-rows: 1fr;
+    grid-auto-columns: 1fr;
     grid-auto-rows: 1fr;
     gap: 2rem;
     //grid-auto-flow: row | column | row dense | column dense;

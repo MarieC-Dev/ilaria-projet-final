@@ -11,7 +11,9 @@ footer {
         flex-end, // justify-content
         0 auto, // margin ul
         0 0 2rem 1.5rem, // margin li
-        $linkedin, // border color second social icon
+        $facebook, // border color second social icon ...
+        $linkedin,
+        $x-twitter
     );
 
     .socialNetworks {

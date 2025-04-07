@@ -13,8 +13,10 @@
 @mixin socialNetworks(
     $justify, 
     $marginUl, 
-    $marginLi, 
+    $marginLi,
+    $color1,
     $color2,
+    $color3
 ) {
     $sizeShareIcons: 40px;
 
@@ -41,14 +43,14 @@
             }
         }
     
-        li:nth-child(1) {
-            border: 2px solid $facebook;
+        app-social-networks:nth-child(1) li {
+            border: 2px solid $color1;
         }
-        li:nth-child(2) {
+        app-social-networks:nth-child(2) li {
             border: 2px solid $color2;
         }
-        li:nth-child(3) {
-            border: 2px solid $x-twitter;
+        app-social-networks:nth-child(3) li {
+            border: 2px solid $color3;
         }
     }
 }

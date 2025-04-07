@@ -1,0 +1,13 @@
+@use '../../utils/variables' as *;
+@use '../../utils/mixins' as *;
+
+.signInSection {
+    @include socialNetworks(
+        flex-end, // justify-content
+        0 auto, // margin ul
+        0 0 2rem 1.5rem, // margin li
+        $facebook, // border color second social icon ...
+        $google,
+        $linkedin
+    );
+}

@@ -7,6 +7,8 @@ import { RecipeCommentComponent } from '../../components/recipe-comment/recipe-c
 import { RecipeItemComponent } from '../../components/recipe-item/recipe-item.component';
 import { RecipeAverageService } from '../../services/recipe-average.service';
 import { Recipe, RecipeList } from '../../models/recipe.model';
+import { SocialNetworksComponent } from '../../components/social-networks/social-networks.component';
+import { commonSocial } from '../../lists/social-networks-list';
 
 @Component({
   selector: 'app-recipe-detail-page',
@@ -15,6 +17,7 @@ import { Recipe, RecipeList } from '../../models/recipe.model';
     RecipeStepComponent, 
     RecipeCommentComponent,
     RecipeItemComponent,
+    SocialNetworksComponent,
     CommonModule
   ],
   templateUrl: './recipe-detail-page.component.html',
@@ -25,15 +28,16 @@ export class RecipeDetailPageComponent {
   recipe = this.recipesList()[0];
   othersRecipes = this.recipesList();
   recipeAverage = inject(RecipeAverageService);
+  socialNetworksList = signal(commonSocial);
   // [average]="getRecipeAverage(recipe.id)" 
 
   getNumberStep(id: number) {   
-    const filterById = this.recipe.steps.filter((step) => step.id === id);
+    const filterById = this.recipe.steps.filter((step: any) => step.id === id);
     return filterById[0].id + 1;
   }
 
   getQuantityIngredient(id: number) {
-    const filterById = this.recipe.ingredientsList.filter((ingr) => ingr.id === id);
+    const filterById = this.recipe.ingredientsList.filter((ingr: any) => ingr.id === id);
 
     if(filterById[0].quantity === 0 || '') {
       return;

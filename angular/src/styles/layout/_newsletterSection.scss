@@ -1,7 +1,7 @@
 @use '../utils/variables' as *;
 
 .newsletterSection {
-    width: 1216px;
+    width: $sectionWidth;
     padding: 3rem;
     margin: 0 auto 6rem auto;
     background-color: $firstColor;

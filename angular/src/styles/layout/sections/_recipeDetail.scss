@@ -2,10 +2,9 @@
 @use '../../utils/mixins' as *;
 
 $sizeImgRecipe: 500px;
-$sizeShareIcons: 40px;
 
 .recipePage section:not(.otherRecipes) {
-    width: 1216px;
+    width: $sectionWidth;
     margin: 0 auto 5rem auto;
 }
 
@@ -174,39 +173,6 @@ $sizeShareIcons: 40px;
                 }
             }
         }
-
-        .recipeShare {
-            ul {
-                display: flex;
-
-                li, li a {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                }
-
-                li {
-                    width: $sizeShareIcons;
-                    height: $sizeShareIcons;
-                    margin-right: 1.5rem;
-                    border-radius: 3rem;
-
-                    img {
-                        height: 22px;
-                    }
-                }
-
-                li:nth-child(1) {
-                    border: 2px solid $facebook;
-                }
-                li:nth-child(2) {
-                    border: 2px solid $linkedin;
-                }
-                li:nth-child(3) {
-                    border: 2px solid $x-twitter;
-                }
-            }
-        }
     }
 }
 
@@ -215,12 +181,12 @@ $sizeShareIcons: 40px;
     background-color: $lightBrown;
 
     h3 {
-        max-width: 1216px;
+        max-width: $sectionWidth;
         margin: 0 auto 2rem auto;
     }
 
     .otherRecipesList {
-        max-width: 1216px;
+        max-width: $sectionWidth;
         @include gridRecipes(1fr 1fr 1fr 1fr);
         margin: 0 auto;
 

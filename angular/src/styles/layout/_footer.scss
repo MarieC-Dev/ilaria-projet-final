@@ -3,13 +3,24 @@
 footer {
     display: flex;
     flex-direction: column;
-    padding: 2rem 5rem;
+    padding: 5rem;
     background-color: white;
 
+    .socialNetworks {
+        width: $sectionWidth;
+        justify-content: flex-end;
+        margin: 0 auto;
+
+        li {
+            margin: 0 0 2rem 1.5rem;
+        }
+    }
+
     .linksFooter {
-        width: 100%;
+        width: $sectionWidth;
         display: flex;
         justify-content: space-between;
+        margin: 0 auto;
 
         ul {
             display: flex;
@@ -24,6 +35,9 @@ footer {
     }
 
     p {
-        margin-top: 2rem;
+        width: $sectionWidth;
+        margin: 2rem auto 0 auto;
+        font-weight: 500;
+        color: $mediumGrey;
     }
 }

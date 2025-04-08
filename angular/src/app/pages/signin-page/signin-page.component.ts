@@ -3,11 +3,10 @@ import { SocialNetworksComponent } from '../../components/social-networks/social
 import { connectionSocial } from '../../lists/social-networks-list';
 import { SIGNIN } from '../../lists/signin-signup-list';
 import { FormInputComponent } from '../../components/form-input/form-input.component';
-import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-signin-page',
-  imports: [SocialNetworksComponent, FormInputComponent, JsonPipe],
+  imports: [SocialNetworksComponent, FormInputComponent],
   templateUrl: './signin-page.component.html',
   styleUrl: './signin-page.component.scss'
 })

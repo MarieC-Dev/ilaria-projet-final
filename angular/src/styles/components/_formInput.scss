@@ -6,7 +6,7 @@
     align-items: center;
     margin-bottom: 1.5rem;
 
-    input {
+    input:not(input[type="file"]) {
         width: 100%;
         padding: 1rem 2rem;
         margin-top: .5rem;

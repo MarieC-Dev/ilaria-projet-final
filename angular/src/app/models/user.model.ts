@@ -1,11 +1,10 @@
 export interface User {
     id: number,
     picture: string,
-    firstname?: string,
-    lastname?: string,
     username: string,
-    numberOfRecipes?: number,
+    email?: string,
     password?: string,
+    numberOfRecipes?: number,
     created?: Date
 }
 

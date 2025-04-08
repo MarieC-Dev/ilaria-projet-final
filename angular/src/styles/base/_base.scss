@@ -1,5 +1,12 @@
 @use '../utils/variables' as *;
 
+:root { 
+    box-sizing: border-box;
+}
+*, *::before, *::after, *::marker { 
+    box-sizing: inherit; 
+}
+
 * {
     font-family: "Montserrat", sans-serif;
     padding: 0;

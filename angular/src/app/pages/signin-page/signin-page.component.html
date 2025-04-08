@@ -2,30 +2,41 @@
     <div class="leftContainer">
         <h2>Connexion</h2>
 
-        <app-social-networks 
-            link="https://google.com"
-            pathImg="google.svg"
-            altImg="google icon" />
+        <ul class="socialNetworks">
+            @for (social of socialNetworksList(); track $index) {
+                <app-social-networks 
+                    [link]="social.href"
+                    [pathImg]="social.path"
+                    [altImg]="social.altImg" />
+            }
+        </ul>
+
+        <p>Ou utilisez votre adresse mail :</p>
+
+        <form method="post">
+            @for (input of formInputConnection(); track input.id) {
+                <app-form-input
+                    [id]="input.id"
+                    [type]="input.type"
+                    [label]="input.label"
+                    [inputId]="input.inputId"
+                    [required]="input.required" />
+            }
+
+            <a href="">Mot de passe oublié ?</a>
+
+            <button type="submit" class="btn-bg btn-bg-red">
+                Connexion
+            </button>
+        </form>
 
 
-            <!-- <ul class="socialNetworks">
-                <li>
-                    <a href="https://facebook.com" target="_blank">
-                        <img src="facebook.svg" alt="facebook icon">
-                    </a>
-                </li>
-                <li>
-                    <a href="https://linkedin.com" target="_blank">
-                        <img src="linkedin-in.svg" alt="linkedin icon">
-                    </a>
-                </li>
-                <li>
-                    <a href="https://x.com" target="_blank">
-                        <img src="x-twitter.svg" alt="x twitter icon">
-                    </a>
-                </li>
-            </ul> -->
-    
-
+    </div>
+    <div class="rightContainer">
+        <div class="imgRightContainer">
+            <h2>Pas de compte ? Rejoignez-nous !</h2>
+            <p>Entrez vos informations personnelles <br> et rejoignez la communauté culinaire</p>
+            <button type="button" class="btn-bg btn-bg-white">S'inscrire</button>
+        </div>
     </div>
 </section>

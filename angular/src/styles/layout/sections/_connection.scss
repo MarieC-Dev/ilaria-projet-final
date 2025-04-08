@@ -1,13 +1,75 @@
 @use '../../utils/variables' as *;
 @use '../../utils/mixins' as *;
 
+$mg: 1.5rem;
+
 .signInSection {
-    @include socialNetworks(
-        flex-end, // justify-content
-        0 auto, // margin ul
-        0 0 2rem 1.5rem, // margin li
-        $facebook, // border color second social icon ...
-        $google,
-        $linkedin
-    );
+    width: $sectionWidth;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    
+    .leftContainer {
+        width: 45%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 5rem 0;
+        @include socialNetworks(
+            center, // justify-content
+            $mg auto, // margin ul
+            0 .75rem, // margin li
+            $facebook, // border color second social icon ...
+            $google,
+            $linkedin
+        );
+
+        form {
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            margin-top: $mg;
+
+            a {
+                text-align: center;
+                margin-bottom: $mg;
+            }
+
+            button {
+                margin: 0 auto;
+            }
+        }
+    }
+
+    .rightContainer {
+        width: 45%;
+        border-radius: 1.5rem;
+        background-image: url('../../../../public/signin-image.jpg');
+        background-size: cover;
+        background-position: top left 42%;
+        overflow: hidden;
+
+        .imgRightContainer {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.35);
+            color: white;
+
+            h2 {
+                line-height: 1.4;
+            }
+
+            p {
+                margin: 2rem 0;
+                font-size: 18px;
+                line-height: 1.5;
+            }
+        }
+    }
 }

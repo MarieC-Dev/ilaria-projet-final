@@ -11,10 +11,6 @@ header {
 
         li {
             margin-right: 2rem;
-
-            .active {
-                color: $firstColor;
-            }
         }
     }
 
@@ -31,5 +27,21 @@ header {
         a {
             margin-left: 2.5rem;
         }
+    }
+
+    li:hover, div > a:not(.btn-bg-red):hover {
+        text-decoration: underline;
+    }
+
+    .active {
+        color: $firstColor;
+    }
+
+    .active:hover {
+        text-decoration-color: $firstColor;
+    }
+
+    a.btn-bg-red.active {
+        background-color: white;
     }
 }

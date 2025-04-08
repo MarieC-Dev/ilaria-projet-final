@@ -8,14 +8,26 @@
     padding: 1rem 2.5rem;
     background-color: $firstColor;
     color: white;
+    border: 2px solid $firstColor;
     border-radius: 3rem;
+
+    &:hover {
+        background-color: $secondColor;
+        border: 2px solid $secondColor;
+    }
 }
 
 .btn-bg-white {
     padding: 1rem 2.5rem;
     background-color: white;
     color: $darkGrey;
+    border: 2px solid white;
     border-radius: 3rem;
+
+    &:hover {
+        background-color: $darkGrey;
+        border: 2px solid $darkGrey;
+    }
 }
 
 button, a {

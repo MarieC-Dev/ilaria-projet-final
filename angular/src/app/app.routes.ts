@@ -8,10 +8,10 @@ import { ContactPageComponent } from './pages/contact-page/contact-page.componen
 
 export const routes: Routes = [
     /* { path: '/recipe/:id', component: RecipeDetailPageComponent }, */
-    { path: 'home', component: HomePageComponent },
-    { path: 'recipe', component: RecipeDetailPageComponent },
-    { path: 'connection', component: SigninPageComponent },
-    { path: 'signup', component: SignupPageComponent },
+    { path: 'accueil', component: HomePageComponent },
+    { path: 'recettes', component: RecipeDetailPageComponent },
+    { path: 'connexion', component: SigninPageComponent },
+    { path: 'inscription', component: SignupPageComponent },
     { path: 'contact', component: ContactPageComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: '**', component: NotFoundPageComponent },

@@ -1,4 +1,4 @@
-.recipesSection nav {  
+.recipesSection nav.recipesFilter {  
     width: 280px;
     padding: 0 2rem 0 0;
 
@@ -19,24 +19,24 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                //border: 1px solid red;
 
                 hr {
-                    width: 14px;
-                    border: 1px solid black;
+                    width: 16px;
+                    border-bottom: 1px solid black;
                 }
 
-                hr.vertical {
+                hr.verticalLine {
                     transform: rotate(90deg) translateX(-2px);
-                }   
+                }
             }
         }
 
         & > li:last-child {
             margin-left: 1rem;
+
             ul li {
                 padding: 1rem 0;
-            }
+            } 
         }
     }
 }

@@ -2,8 +2,8 @@ import { User } from "./user.model";
 
 export interface Ingredient {
     id: number,
-    quantity: number | string,
-    unit: string,
+    quantity?: number,
+    unit?: string,
     name: string
 }
 
@@ -33,14 +33,29 @@ export interface RecipeComment {
     created: Date,
 }
 
+export interface Time {
+    hours?: number,
+    minutes?: number
+}
+
+export interface ServingNumber {
+    number: number,
+    unit: string
+}
+
 export interface Recipe {
     id: number,
     image: string,
     title: string,
     description: string,
-    activeTime?: number,
-    totalTime: number,
-    yieldServes: number,
+    cookingType: string,
+
+    makingTime: Time, // in minutes
+    cookingTime?: Time,
+    pauseTime?: Time,
+    totalTime: Time,
+
+    servingNumber: ServingNumber,
 
     average?: number,
     numberOfVotes?: number,

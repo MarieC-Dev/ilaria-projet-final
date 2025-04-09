@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { PageSliderComponent } from '../../components/page-slider/page-slider.component';
-import { RecipesFilterComponent } from '../../components/layout-elements/recipes-filter/recipes-filter.component';
+import { RecipesFilterComponent } from '../../components/recipes-filter/recipes-filter.component';
 import { RECIPE_LIST } from '../../lists/recipe-list.fake';
 import { RecipeItemComponent } from '../../components/recipe-item/recipe-item.component';
 import { RecipeAverageService } from '../../services/recipe-average.service';

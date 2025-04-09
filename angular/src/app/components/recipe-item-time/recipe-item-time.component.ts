@@ -30,22 +30,46 @@ export class RecipeItemTimeComponent {
   }
 
   getTotalTime() {
-    const additionHours: number = this.preparationHours() + this.cookingHours() + this.pauseHours();
-    const additionMinutes: number = this.preparationMinutes() + this.cookingMinutes() + this.pauseMinutes();
+    function addition(total: number, nb: number) {
+      return total + nb;
+    }
 
-    if(additionMinutes > 59) {
-      const divideadditionMinutes = additionMinutes / 60;
-      const integerMin: number = Math.floor(additionMinutes / 60);
-      const decimalMin: number = divideadditionMinutes - integerMin;
+    const additionHours: Array<number> = [this.preparationHours(), this.cookingHours(), this.pauseHours()];
+    const additionMinutes: Array<number> = [this.preparationMinutes(), this.cookingMinutes(), this.pauseMinutes()];
 
-      const sumHours: number = additionHours + integerMin;
-      const sumMinutes: number = decimalMin * 60;
+    const sumMinutes: number = additionMinutes.reduce(addition);
 
-      const totalTime = `${sumHours} h ${sumMinutes} min`;
+    function getMinutesTime(): any {
+      if(sumMinutes > 0) {
+        if(sumMinutes > 59) {
+          const integerMin: number = Math.floor(sumMinutes / 60);
+          const decimalMin: number = (sumMinutes / 60) - integerMin;
 
-      return totalTime;
+          additionHours.push(integerMin);
+  
+          return decimalMin !== 0 ? decimalMin * 60 + ' min' : '';
+        } 
+        else return `${sumMinutes} min`;
+      } 
+      else return;
+    }
+
+    function getHoursTime(): any {
+      if(additionHours.length > 0) {
+        const sumHours = additionHours.reduce(addition);
+
+        if(sumHours > 0) {
+          return `${sumHours} h `;
+        } else return;
+      } else return;
+    }
+
+    if(getHoursTime() && getMinutesTime()) {
+      return getHoursTime() + getMinutesTime();
     } else {
-      return additionMinutes;
-    }    
+      if(getHoursTime() === undefined) return getMinutesTime();
+
+      if(getMinutesTime() === undefined) return getHoursTime();
+    }
   }
 }

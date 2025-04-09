@@ -1,0 +1,48 @@
+<section class="recipePresentation">
+    <div class="wrapperImage">
+        <img [src]="image()" alt="recipe picture">
+    </div>
+
+    <div class="recipeDescription">
+        <h2>{{ title() }}</h2>
+
+        <p>{{ description() }}</p>
+
+        <div class="recipeTime">
+            <ng-content />
+            <!-- <app-recipe-item-time
+                [preparationHours]="2"
+                [preparationMinutes]="30"
+                [cookingTime]="true"
+                [cookingHours]="1"
+                [cookingMinutes]="45"
+                [pauseTime]="true"
+                [pauseHours]="0"
+                [pauseMinutes]="15"
+                [servingNumber]="4"
+                servingUnit="personnes" /> -->
+        </div>
+
+        <hr class="horizontalBorder" />
+
+        <div class="recipeDescriptionEnd">
+            <ul>
+                <li>
+                    <p>Créé par <span>{{ authorName() }}</span></p>
+                </li>
+                <li>
+                    <p>{{ authorRecipesNumber() }} recettes</p>
+                </li>
+            </ul>
+
+            <ul>
+                <li>
+                    <img src="plus-solid.svg" alt="add recipe">
+                </li>
+                <li>
+                    <img src="print-solid.svg" alt="print recipe">
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

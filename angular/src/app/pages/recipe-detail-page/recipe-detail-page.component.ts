@@ -8,10 +8,12 @@ import { RecipeItemComponent } from '../../components/recipe-item/recipe-item.co
 import { RecipeAverageService } from '../../services/recipe-average.service';
 import { SocialNetworksComponent } from '../../components/social-networks/social-networks.component';
 import { commonSocial } from '../../lists/social-networks-list';
+import { RecipePresentationComponent } from '../../components/sections/recipe-presentation/recipe-presentation.component';
 
 @Component({
   selector: 'app-recipe-detail-page',
   imports: [
+    RecipePresentationComponent,
     RecipeItemTimeComponent, 
     RecipeStepComponent, 
     RecipeCommentComponent,

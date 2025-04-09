@@ -1,18 +1,46 @@
 @use '../utils/variables' as *;
 
-.recipeItemTime {
-    padding: 1rem;
-    text-align: center;
+ul.recipeItemTimeList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 
-    img {
-        height: 32px;
+    li.recipeItemTime {
+        width: 49%;
+        padding: 1rem 2rem;
+        text-align: center;
+    
+        img {
+            height: 32px;
+        }
+    
+        h4 {
+            margin: .5rem 0;
+        }
+    
+        p {
+            color: $mediumGrey;
+        }
     }
 
-    h4 {
-        margin: .5rem 0;
+    li.servingNumber {
+        width: 100%;
     }
 
-    p {
-        color: $mediumGrey;
+    li.recipeLineTime {
+        width: 1%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem 0;
+
+        hr.recipeItemVerticalBorder{
+            height: 100%;
+            margin: 0;
+        }
+    }
+    
+    hr.recipeItemHorizontalBorder {
+        width: 100%;
     }
 }

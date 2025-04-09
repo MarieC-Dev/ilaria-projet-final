@@ -1,5 +1,55 @@
-<div class="recipeItemTime">
-    <img [src]="icon()" alt="Icon">
-    <h4>{{ title() }}</h4>
-    <p>{{ text() }} {{ unit() }}</p>
-</div>
+<ul class="recipeItemTimeList">
+    <li class="recipeItemTime">
+        <img src="clock-regular.svg" alt="Icon">
+        <h4>Temps de préparation</h4>
+        <p>{{ getHours(preparationHours()) }} {{ getMinutes(preparationMinutes()) }}</p>
+    </li>
+    <li class="recipeLineTime">
+        <hr class="recipeItemVerticalBorder" />
+    </li>
+
+    @if (cookingTime()) {
+        <li class="recipeItemTime">
+            <img src="cooking-time.svg" alt="Icon">
+            <h4>Temps de cuisson</h4>
+            <p>{{ getHours(cookingHours()) }} {{ getMinutes(cookingMinutes()) }}</p>
+        </li>
+    } @else {
+        <li class="recipeItemTime">
+            <img src="not-solid.svg" alt="Icon">
+            <h4>Pas de cuisson</h4>
+        </li>
+    }
+
+    <hr class="recipeItemHorizontalBorder">
+
+    @if (pauseTime()) {
+        <li class="recipeItemTime">
+            <img src="pause-time.svg" alt="Icon">
+            <h4>Temps de repos</h4>
+            <p>{{ getHours(pauseHours()) }} {{ getMinutes(pauseMinutes()) }}</p>
+        </li>
+        <li class="recipeLineTime">
+            <hr class="recipeItemVerticalBorder" />
+        </li>
+    } @else {
+        <li class="recipeItemTime">
+            <img src="not-solid.svg" alt="Icon">
+            <h4>Pas de repos</h4>
+        </li>
+    }
+    
+    <li class="recipeItemTime">
+        <img src="total-time.svg" alt="Icon">
+        <h4>Temps total</h4>
+        <p>{{ getTotalTime() }}</p>
+    </li>
+
+    <hr class="recipeItemHorizontalBorder">
+
+    <li class="recipeItemTime servingNumber">
+        <img src="users.svg" alt="Icon">
+        <h4>Portions</h4>
+        <p>{{ servingNumber() }} {{ servingUnit() }}</p>
+    </li>
+</ul>

@@ -11,27 +11,17 @@
             <p>{{ recipe.description }}</p>
 
             <div class="recipeTime">
+                <!-- TODO : Ternary condition -> if ...Time && <component /> -->
                 <app-recipe-item-time
-                    icon="clock-regular.svg"
-                    title="Temps de prépapration"
-                    [text]="recipe.activeTime"
-                    unit="min" />
+                    [preparationHours]="2"
+                    [preparationMinutes]="30"
+                    
+                    [pauseTime]="true"
+                    [pauseHours]="0"
+                    [pauseMinutes]="15"
+                    [servingNumber]="4"
+                    servingUnit="personnes" />
 
-                <hr class="verticalBorder" />
-
-                <app-recipe-item-time
-                    icon="total-time.svg"
-                    title="Temps total"
-                    [text]="recipe.totalTime"
-                    unit="min" />
-
-                <hr class="verticalBorder" />
-
-                <app-recipe-item-time
-                    icon="users.svg"
-                    title="Parts"
-                    [text]="recipe.yieldServes"
-                    unit="personnes" />
             </div>
 
             <hr class="horizontalBorder" />
@@ -160,8 +150,8 @@
 
     <section class="otherRecipes">
         <h3>Autres recettes que vous pourriez aimer</h3>
-
-        <div class="otherRecipesList">
+        <!-- TODO : PB others recipes (recipe detail) -->
+        <!-- <div class="otherRecipesList">
             @for (recipe of getOtherRecipesList(); track recipe.id;) {
                 <app-recipe-item
                     [id]="recipe.id"
@@ -172,6 +162,6 @@
                     [authorName]="recipe.author.username"
                 />
             }
-        </div>
+        </div> -->
     </section>
 </div>

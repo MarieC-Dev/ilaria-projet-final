@@ -6,7 +6,6 @@ import { RecipeStepComponent } from '../../components/recipe-step/recipe-step.co
 import { RecipeCommentComponent } from '../../components/recipe-comment/recipe-comment.component';
 import { RecipeItemComponent } from '../../components/recipe-item/recipe-item.component';
 import { RecipeAverageService } from '../../services/recipe-average.service';
-import { Recipe, RecipeList } from '../../models/recipe.model';
 import { SocialNetworksComponent } from '../../components/social-networks/social-networks.component';
 import { commonSocial } from '../../lists/social-networks-list';
 
@@ -29,7 +28,6 @@ export class RecipeDetailPageComponent {
   othersRecipes = this.recipesList();
   recipeAverage = inject(RecipeAverageService);
   socialNetworksList = signal(commonSocial);
-  // [average]="getRecipeAverage(recipe.id)" 
 
   getNumberStep(id: number) {   
     const filterById = this.recipe.steps.filter((step: any) => step.id === id);

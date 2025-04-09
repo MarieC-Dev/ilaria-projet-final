@@ -11,17 +11,17 @@
             <p>{{ recipe.description }}</p>
 
             <div class="recipeTime">
-                <!-- TODO : Ternary condition -> if ...Time && <component /> -->
                 <app-recipe-item-time
                     [preparationHours]="2"
                     [preparationMinutes]="30"
-                    
+                    [cookingTime]="true"
+                    [cookingHours]="1"
+                    [cookingMinutes]="45"
                     [pauseTime]="true"
                     [pauseHours]="0"
                     [pauseMinutes]="15"
                     [servingNumber]="4"
                     servingUnit="personnes" />
-
             </div>
 
             <hr class="horizontalBorder" />

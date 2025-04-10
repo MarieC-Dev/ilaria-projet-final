@@ -3,6 +3,10 @@
 
 $sizeImgRecipe: 500px;
 
+.recipePage {
+    padding-top: 3rem;
+}
+
 .recipePage section:not(.otherRecipes) {
     width: $sectionWidth;
     margin: 0 auto 5rem auto;
@@ -12,50 +16,30 @@ $sizeImgRecipe: 500px;
     display: flex;
     justify-content: space-between;
 
-    .wrapperImage {
+    .recipePresentationLeft {
         width: 45%;
-        height: $sizeImgRecipe;
-        display: flex;
-        justify-content: center;
-        border-radius: 1rem;
-        overflow: hidden;
-
-        img {
-            width: auto;
-            height: $sizeImgRecipe;
-        }
-    }
-
-    .recipeDescription {
-        width: 50%;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-between;
 
-        & > p {
-            margin: 2rem 0 1rem 0;
-            color: $darkGrey;
-            line-height: 1.5;
-        }
-
-        .recipeTime {
+        .wrapperImage {
             width: 100%;
+            height: $sizeImgRecipe;
             display: flex;
-            justify-content: space-between;
-            margin-bottom: .5rem;
-
-            hr {
-                margin: 1rem 0;
+            justify-content: center;
+            border-radius: 1rem;
+            overflow: hidden;
+    
+            img {
+                width: auto;
+                height: $sizeImgRecipe;
             }
         }
 
-        hr {
-            border: 1px solid $lightGrey;
-        }
-
-        .recipeDescriptionEnd {
+        .recipeAuthor {
             display: flex;
             justify-content: space-between;
+            padding: 1.5rem 0;
             margin-top: 2rem;
     
             ul:first-child {
@@ -101,8 +85,38 @@ $sizeImgRecipe: 500px;
         }
     }
 
-    
-    
+    .recipeDescription {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        & > p {
+            margin: 2rem 0 1rem 0;
+            color: $darkGrey;
+            line-height: 1.5;
+        }
+
+        .recipeTime {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: .5rem;
+
+            hr {
+                margin: 1rem 0;
+            }
+        }
+
+        hr {
+            border: 1px solid $lightGrey;
+        }
+    }
+}
+
+.recipePresentationBorder {
+    margin: -1.5rem auto 5rem auto;
+    border: 1px solid $lightGrey;
 }
 
 .recipeDetails {
@@ -130,7 +144,7 @@ $sizeImgRecipe: 500px;
         }
 
         .dividingStepsComments {
-            margin: 3rem 0;
+            margin: 5rem 0;
             border: 1px solid $lightGrey;
         }
     }
@@ -138,9 +152,11 @@ $sizeImgRecipe: 500px;
     .recipeIngredientsTagsShare {
         min-width: 27%;
 
-        .recipeIngredients {
-            margin-bottom: 3rem;
+        .recipeIngredients, .recipeTags {
+            margin-bottom: 5rem;
+        }
 
+        .recipeIngredients {
             ul li {
                 padding: 0 1rem;
             }
@@ -154,7 +170,6 @@ $sizeImgRecipe: 500px;
 
         .recipeTags {
             max-width: 330px;
-            margin-bottom: 3rem;
 
             ul {
                 display: flex;

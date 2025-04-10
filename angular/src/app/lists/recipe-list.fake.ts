@@ -196,7 +196,7 @@ export const RECIPE_LIST: RecipeList = [
         id: index++,
         image: 'salade.jpg',
         title: 'Salade César',
-        description: "La salade César (en anglais : Caesar salad - en espagnol : ensalada César - en italien : Caesar salad) est une recette de cuisine de salade composée de la cuisine américaine, traditionnellement préparée en salle à côté de la table, à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
+        description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: '',
 
         makingTime: {
@@ -229,7 +229,7 @@ export const RECIPE_LIST: RecipeList = [
         id: index++,
         image: 'salade.jpg',
         title: 'Salade César',
-        description: "La salade César (en anglais : Caesar salad - en espagnol : ensalada César - en italien : Caesar salad) est une recette de cuisine de salade composée de la cuisine américaine, traditionnellement préparée en salle à côté de la table, à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
+        description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: '',
 
         makingTime: {
@@ -262,7 +262,7 @@ export const RECIPE_LIST: RecipeList = [
         id: index++,
         image: 'salade.jpg',
         title: 'Salade César',
-        description: "La salade César (en anglais : Caesar salad - en espagnol : ensalada César - en italien : Caesar salad) est une recette de cuisine de salade composée de la cuisine américaine, traditionnellement préparée en salle à côté de la table, à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
+        description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: '',
 
         makingTime: {
@@ -295,7 +295,7 @@ export const RECIPE_LIST: RecipeList = [
         id: index++,
         image: 'salade.jpg',
         title: 'Salade César',
-        description: "La salade César (en anglais : Caesar salad - en espagnol : ensalada César - en italien : Caesar salad) est une recette de cuisine de salade composée de la cuisine américaine, traditionnellement préparée en salle à côté de la table, à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
+        description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: '',
 
         makingTime: {
@@ -328,7 +328,7 @@ export const RECIPE_LIST: RecipeList = [
         id: index++,
         image: 'salade.jpg',
         title: 'Salade César',
-        description: "La salade César (en anglais : Caesar salad - en espagnol : ensalada César - en italien : Caesar salad) est une recette de cuisine de salade composée de la cuisine américaine, traditionnellement préparée en salle à côté de la table, à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
+        description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: '',
 
         makingTime: {
@@ -361,7 +361,7 @@ export const RECIPE_LIST: RecipeList = [
         id: index++,
         image: 'salade.jpg',
         title: 'Salade César',
-        description: "La salade César (en anglais : Caesar salad - en espagnol : ensalada César - en italien : Caesar salad) est une recette de cuisine de salade composée de la cuisine américaine, traditionnellement préparée en salle à côté de la table, à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
+        description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: '',
 
         makingTime: {
@@ -394,7 +394,7 @@ export const RECIPE_LIST: RecipeList = [
         id: index++,
         image: 'salade.jpg',
         title: 'Salade César',
-        description: "La salade César (en anglais : Caesar salad - en espagnol : ensalada César - en italien : Caesar salad) est une recette de cuisine de salade composée de la cuisine américaine, traditionnellement préparée en salle à côté de la table, à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
+        description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: '',
 
         makingTime: {
@@ -427,7 +427,7 @@ export const RECIPE_LIST: RecipeList = [
         id: index++,
         image: 'salade.jpg',
         title: 'Salade César',
-        description: "La salade César (en anglais : Caesar salad - en espagnol : ensalada César - en italien : Caesar salad) est une recette de cuisine de salade composée de la cuisine américaine, traditionnellement préparée en salle à côté de la table, à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
+        description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: '',
 
         makingTime: {
@@ -460,7 +460,7 @@ export const RECIPE_LIST: RecipeList = [
         id: index++,
         image: 'salade.jpg',
         title: 'Salade César',
-        description: "La salade César (en anglais : Caesar salad - en espagnol : ensalada César - en italien : Caesar salad) est une recette de cuisine de salade composée de la cuisine américaine, traditionnellement préparée en salle à côté de la table, à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
+        description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: '',
 
         makingTime: {
@@ -493,7 +493,7 @@ export const RECIPE_LIST: RecipeList = [
         id: index++,
         image: 'salade.jpg',
         title: 'Salade César',
-        description: "La salade César (en anglais : Caesar salad - en espagnol : ensalada César - en italien : Caesar salad) est une recette de cuisine de salade composée de la cuisine américaine, traditionnellement préparée en salle à côté de la table, à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
+        description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: '',
 
         makingTime: {
@@ -526,7 +526,7 @@ export const RECIPE_LIST: RecipeList = [
         id: index++,
         image: 'salade.jpg',
         title: 'Salade César',
-        description: "La salade César (en anglais : Caesar salad - en espagnol : ensalada César - en italien : Caesar salad) est une recette de cuisine de salade composée de la cuisine américaine, traditionnellement préparée en salle à côté de la table, à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
+        description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: '',
 
         makingTime: {
@@ -559,7 +559,7 @@ export const RECIPE_LIST: RecipeList = [
         id: index++,
         image: 'salade.jpg',
         title: 'Salade César',
-        description: "La salade César (en anglais : Caesar salad - en espagnol : ensalada César - en italien : Caesar salad) est une recette de cuisine de salade composée de la cuisine américaine, traditionnellement préparée en salle à côté de la table, à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
+        description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: '',
 
         makingTime: {
@@ -592,7 +592,7 @@ export const RECIPE_LIST: RecipeList = [
         id: index++,
         image: 'salade.jpg',
         title: 'Salade César',
-        description: "La salade César (en anglais : Caesar salad - en espagnol : ensalada César - en italien : Caesar salad) est une recette de cuisine de salade composée de la cuisine américaine, traditionnellement préparée en salle à côté de la table, à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
+        description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: '',
 
         makingTime: {
@@ -625,7 +625,7 @@ export const RECIPE_LIST: RecipeList = [
         id: index++,
         image: 'salade.jpg',
         title: 'Salade César',
-        description: "La salade César (en anglais : Caesar salad - en espagnol : ensalada César - en italien : Caesar salad) est une recette de cuisine de salade composée de la cuisine américaine, traditionnellement préparée en salle à côté de la table, à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
+        description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: '',
 
         makingTime: {

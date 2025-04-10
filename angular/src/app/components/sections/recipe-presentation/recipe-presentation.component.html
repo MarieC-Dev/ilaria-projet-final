@@ -1,20 +1,10 @@
 <section class="recipePresentation">
-    <div class="wrapperImage">
-        <img [src]="image()" alt="recipe picture">
-    </div>
-
-    <div class="recipeDescription">
-        <h2>{{ title() }}</h2>
-
-        <p>{{ description() }}</p>
-
-        <div class="recipeTime">
-            <ng-content />
+    <div class="recipePresentationLeft">
+        <div class="wrapperImage">
+            <img [src]="image()" alt="recipe picture">
         </div>
-
-        <hr class="horizontalBorder" />
-
-        <div class="recipeDescriptionEnd">
+    
+        <div class="recipeAuthor">
             <ul>
                 <li>
                     <p>Créé par <span>{{ authorName() }}</span></p>
@@ -23,7 +13,7 @@
                     <p>{{ authorRecipesNumber() }} recettes</p>
                 </li>
             </ul>
-
+    
             <ul>
                 <li>
                     <img src="plus-solid.svg" alt="add recipe">
@@ -34,4 +24,18 @@
             </ul>
         </div>
     </div>
+
+    <div class="recipeDescription">
+        <h2>{{ title() }}</h2>
+
+        <p>{{ description() }}</p>
+
+        <div class="recipeTime">
+            <ng-content />
+        </div>
+    </div>
+</section>
+
+<section>
+    <hr class="recipePresentationBorder" />
 </section>

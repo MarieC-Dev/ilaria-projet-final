@@ -6,13 +6,17 @@
     align-items: center;
     margin-bottom: 1.5rem;
 
-    input:not(input[type="file"]) {
+    input:not(input[type="file"]), textarea {
         width: 100%;
         padding: 1rem 2rem;
         margin-top: .5rem;
         text-align: center;
         border: 2px solid $mediumGrey;
         border-radius: 5rem;
+    }
+
+    textarea {
+        border-radius: 1rem;
     }
 
     label, input, button {

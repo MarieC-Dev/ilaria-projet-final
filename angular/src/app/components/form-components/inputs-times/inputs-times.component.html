@@ -1,0 +1,29 @@
+@for (time of times; track time.id) {
+    <app-multiple-inputs
+        [labelTitle]="time.title"
+        inputId="makingTimeInput"
+        [required]="true">
+        <ul>
+            <li>
+                <label [for]="time.hours.inputId">
+                    <input [type]="time.hours.type" 
+                        [id]="time.hours.inputId" 
+                        [name]="time.hours.inputId" 
+                        [placeholder]="time.hours.placeholder"
+                        [required]="time.hours.required" />
+                </label>
+            </li>
+            <li>
+                <label [for]="time.minutes.inputId">
+                    <input [type]="time.minutes.type" 
+                        [id]="time.minutes.inputId" 
+                        [name]="time.minutes.inputId" 
+                        [placeholder]="time.minutes.placeholder"
+                        [required]="time.minutes.required" />
+                </label>
+            </li>
+        </ul>
+    </app-multiple-inputs>
+}
+
+<h3>Temps total :</h3>

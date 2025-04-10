@@ -17,6 +17,40 @@
             inputId="createRecipeDescription"
             [required]="false" />
 
+        <!-- Temps de préparation, cuisson, pause -->
+       <app-inputs-times />
+
+        <!-- Nombre de portions -->
+        <app-multiple-inputs
+            labelTitle="Nombre de portions :"
+            inputId="servingNumberInputs"
+            [required]="true">
+            <ul>
+                <li>
+                    <label for="servingNumber">
+                        <input type="number" 
+                            id="servingNumber" 
+                            name="servingNumber" 
+                            placeholder="Ex. : 4"
+                            required />
+                    </label>
+                </li>
+                <li>
+                    <label for="servingName">
+                        <select name="servingName" id="servingName">
+                            <option value="">Type de portion</option>
+                            <option value="person">Personne(s)</option>
+                            <option value="piece">Parts(s)</option>
+                            <option value="liter">Litre(s)</option>
+                            <option value="cylinders">Vérine(s)</option>
+                        </select>
+                    </label>
+                </li>
+            </ul>
+        </app-multiple-inputs>
+
+        <app-steps-ingredients-inputs />
+
 
 
 
@@ -25,12 +59,12 @@
 
         <!-- END -->
         <!-- Add image -->
-        <app-form-input
+        <!-- <app-form-input
             id="createRecipeImg"
             type="file"
             label="Ajouter une image"
             inputId="createRecipeImg"
-            [required]="true" />
+            [required]="true" /> -->
             
     </form>
 </section>

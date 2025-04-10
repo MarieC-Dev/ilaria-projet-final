@@ -1,0 +1,71 @@
+<!-- Liste Ingrédients -->
+<app-multiple-inputs
+    labelTitle="Liste des ingrédients :"
+    inputId="ingredientInputs"
+    [required]="true">
+    <ul>
+        <li>
+            <label for="ingredientNumber">
+                <input type="number" 
+                    id="numberIngredient" 
+                    name="numberIngredient" 
+                    placeholder="Ex. : 10"
+                    required />
+            </label>
+        </li>
+        <li>
+            <label for="ingredientUnity">
+                <select name="ingredientUnity" id="ingredientUnity">
+                    <option value="">Unités</option>
+                    <option value="tablespoon">Cuillère à soupe</option>
+                    <option value="gram">Grammes</option>
+                    <option value="milligram">Milligramme(g)</option>
+                    <option value="liter">Litre(s)</option>
+                    <option value="milliliter">Millilitre(s)</option>
+                    <option value="pot">Pot(s)</option>
+                </select>
+            </label>
+        </li>
+        <li>
+            <label for="ingredientName">
+                <input type="text" 
+                    id="ingredientName" 
+                    name="ingredientName" 
+                    placeholder="Ex. : Chocolat en poudre"
+                    required />
+            </label>
+        </li>
+    </ul>
+
+    <button type="button" class="btn-bg-red">Ajouter</button>
+</app-multiple-inputs>
+
+<!-- Liste Étape -->
+<app-multiple-inputs
+    labelTitle="Étapes de la recette :"
+    inputId="stepsInputs"
+    [required]="true">
+    <ul>
+        <li>
+            <label for="stepIndex">
+                <input type="number" 
+                    id="numberIngredient" 
+                    name="numberIngredient" 
+                    placeholder="Ex. : 10"
+                    required />
+            </label>
+        </li>
+        <li>
+            <label for="stepDescription">
+                <input type="text" 
+                    id="stepDescription" 
+                    name="stepDescription" 
+                    placeholder="Ex. : Ajouter le beurre fondue à la préparation"
+                    required />
+            </label>
+        </li>
+    </ul>
+    <button type="button" class="btn-bg-red">Ajouter</button>
+</app-multiple-inputs>
+
+<!-- TODO : Gérer les required -> il doit y avoir au moins 2 étapes -->

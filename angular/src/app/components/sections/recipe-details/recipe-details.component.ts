@@ -17,6 +17,7 @@ import { commonSocial } from '../../../lists/social-networks-list';
 export class RecipeDetailsComponent {
   recipeAverage = inject(RecipeAverageService);
   recipesList = signal(RECIPE_LIST);
+  recipe = this.recipesList()[0];
   
   recipeSteps = input.required<RecipeStep[]>();
 
@@ -30,7 +31,6 @@ export class RecipeDetailsComponent {
   socialNetworksList = signal(commonSocial);
 
   getNumberStep(id: number, steps: RecipeStep[]) {
-
     const filterById = steps.filter((step: any) => step.id === id);
     return filterById[0].id + 1;
   }
@@ -45,11 +45,9 @@ export class RecipeDetailsComponent {
     }
   }
 
-  getClassComment(recipeAuthorName: InputSignal<string>, answerAuthorName?: string) {
-    const authorName: string = recipeAuthorName.toString();
-
+  getClassComment(recipeAuthorName: string, answerAuthorName?: string) {
     if(answerAuthorName) { // [answer] existe -> ANSWER
-      if(authorName !== answerAuthorName) { // ANSWER user
+      if(recipeAuthorName !== answerAuthorName) { // ANSWER user
         return 'recipeComment isAnswer userAnswer';
       } else { // ANSWER author
         return 'recipeComment isAnswer authorAnswer';

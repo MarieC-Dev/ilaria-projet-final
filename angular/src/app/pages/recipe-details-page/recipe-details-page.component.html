@@ -31,20 +31,7 @@
         [recipeTags]="recipe.tags" />
     <!-- ########## -->
 
-    <section class="otherRecipes">
-        <h3>Autres recettes que vous pourriez aimer</h3>
-        <!-- TODO : PB others recipes (recipe detail) -->
-        <!-- <div class="otherRecipesList">
-            @for (recipe of getOtherRecipesList(); track recipe.id;) {
-                <app-recipe-item
-                    [id]="recipe.id"
-                    [picture]="recipe.image" 
-                    [name]="recipe.title" 
-                    [average]="getAverage(recipe.id)" 
-                    [numberOfVotes]="recipe.opinions?.length"
-                    [authorName]="recipe.author.username"
-                />
-            }
-        </div> -->
-    </section>
+    <!-- SECTION : "Other recipes you may like" -->
+    <app-other-recipes [recipe]="recipe" [recipeId]="recipe.id" />
+    <!-- ########## -->
 </div>

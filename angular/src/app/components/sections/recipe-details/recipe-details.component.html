@@ -23,7 +23,7 @@
                     <div class="commentAndAnswers">
                         <div>
                             <app-recipe-comment
-                                [classes]="getClassComment(recipeAuthorName)"
+                                [classes]="getClassComment(recipe.author.username)"
                                 [ids]="'commentId' + opinion.id"
                                 [picture]="opinion.author.picture"
                                 [username]="opinion.author.username"
@@ -37,7 +37,7 @@
                             <div class="answersList" [id]="'answersList' + opinion.id"> 
                                 @for (answer of opinion.answers; track answer.id) {
                                     <app-recipe-comment
-                                        [classes]="getClassComment(recipeAuthorName, answer.author.username)"
+                                        [classes]="getClassComment(recipe.author.username, answer.author.username)"
                                         [ids]="'answerId' + answer.id"
                                         [picture]="answer.author.picture"
                                         [username]="answer.author.username"

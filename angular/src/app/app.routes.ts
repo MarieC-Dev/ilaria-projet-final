@@ -5,9 +5,11 @@ import { RecipeDetailsPage } from './pages/recipe-details-page/recipe-details-pa
 import { SigninPageComponent } from './pages/signin-page/signin-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { ContactPageComponent } from './pages/contact-page/contact-page.component';
+import { CreateRecipesComponent } from './pages/create-recipes/create-recipes.component';
 
 export const routes: Routes = [
     /* { path: '/recipe/:id', component: RecipeDetailsPage }, */
+    { path: 'profil/creer-une-recette', component: CreateRecipesComponent },
     { path: 'accueil', component: HomePageComponent },
     { path: 'recettes', component: RecipeDetailsPage },
     { path: 'connexion', component: SigninPageComponent },

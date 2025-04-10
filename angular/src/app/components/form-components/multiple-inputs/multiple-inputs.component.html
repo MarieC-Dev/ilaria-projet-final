@@ -1,21 +1,9 @@
-<p>multiple-inputs works!</p>
 <div class="formInputDiv formMultipleInputDiv" [id]="inputId()">
     <label [for]="inputId()">
-        {{ labelTitle() }} <span *ngIf="required()">*</span>
+        <h3>{{ labelTitle() }} <span *ngIf="required()">*</span></h3>
     </label>
 
     <div class="multipleInputs">
-        <!-- @for (item of items; track item.id) {} -->
-        <label for="">
-            <input [type]="type()" 
-                [id]="inputId()" 
-                [name]="inputId()" 
-                [placeholder]="placeholder()"
-                [required]="required()" />
-        </label>
+        <ng-content />
     </div>
-
-    
-    
-    <!-- Envelopper input-1 + label > input dans une div -->
 </div>

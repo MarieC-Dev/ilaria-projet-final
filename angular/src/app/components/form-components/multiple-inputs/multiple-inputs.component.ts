@@ -8,18 +8,7 @@ import { Component, input } from '@angular/core';
   styleUrl: './multiple-inputs.component.scss'
 })
 export class MultipleInputsComponent {
-  numberOfInput = input.required<number>();
+  inputId = input.required<string>();
   labelTitle = input.required<string>();
-
-  inputId = input.required<Array<string>>();
-  type = input.required<Array<string>>();
-  placeholder = input.required<Array<string>>();
-  required = input.required<Array<boolean>>();
-
-  /*
-    - [inputId, inputId, ...] : string
-    - [type, type, ...] : string
-    - [placeholder, placeholder, ...] : string
-    - [required, required, ...] : boolean
-  */
+  required = input.required<boolean>();
 }

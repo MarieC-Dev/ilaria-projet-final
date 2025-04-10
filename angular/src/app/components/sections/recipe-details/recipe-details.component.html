@@ -4,15 +4,13 @@
         <div class="recipeSteps">
             <h3>Étape de préparation</h3>
 
-            <ng-content select=".stepsContainer" />
-
-            <!-- <div class="stepsContainer">
-                @for (step of recipe.steps; track step.id) {
+            <div class="stepsContainer">
+                @for (step of recipeSteps(); track step.id) {
                     <app-recipe-step 
-                        [nbStep]="getNumberStep(step.id)"
+                        [nbStep]="getNumberStep(step.id, recipeSteps())"
                         [description]="step.description" />
                 }
-            </div> -->
+            </div>
         </div>
 
         <hr class="dividingStepsComments">
@@ -20,28 +18,26 @@
         <div class="recipeComments">
             <h3>Commentaires</h3>
 
-            <ng-content select=".commentsContainer" />
-
-            <!-- <div class="commentsContainer">
-                @for (opinion of recipe.opinions; track opinion.id) {
+            <div class="commentsContainer">
+                @for (opinion of recipeOpinions(); track opinion.id) {
                     <div class="commentAndAnswers">
                         <div>
                             <app-recipe-comment
-                            [classes]="getClassComment(recipe.author.username)"
-                            [ids]="'commentId' + opinion.id"
-                            [picture]="opinion.author.picture"
-                            [username]="opinion.author.username"
-                            [date]="opinion.created"
-                            [note]="opinion.starScore"
-                            [text]="opinion.text"
-                            [answersArray]="opinion.answers.length" />
+                                [classes]="getClassComment(recipeAuthorName)"
+                                [ids]="'commentId' + opinion.id"
+                                [picture]="opinion.author.picture"
+                                [username]="opinion.author.username"
+                                [date]="opinion.created"
+                                [note]="opinion.starScore"
+                                [text]="opinion.text"
+                                [answersArray]="opinion.answers.length" />
                         </div>
 
                         @if(opinion.answers.length > 0) {
                             <div class="answersList" [id]="'answersList' + opinion.id"> 
                                 @for (answer of opinion.answers; track answer.id) {
                                     <app-recipe-comment
-                                        [classes]="getClassComment(recipe.author.username, answer.author.username)"
+                                        [classes]="getClassComment(recipeAuthorName, answer.author.username)"
                                         [ids]="'answerId' + answer.id"
                                         [picture]="answer.author.picture"
                                         [username]="answer.author.username"
@@ -52,7 +48,7 @@
                         }
                     </div>
                 }
-            </div> -->
+            </div>
         </div>
     </div>
     <!-- END -->
@@ -62,40 +58,34 @@
         <div class="recipeIngredients">
             <h3>Ingrédients</h3>
 
-            <ng-content select=".ingredientList" />
-
-            <!-- <ul class="ingredientList">
-                @for (ingredient of recipe.ingredientsList; track ingredient.id) {
-                    <li class="ingredient">{{ getQuantityIngredient(ingredient.id) }} {{ ingredient.unit }} {{ ingredient.name }}</li>
+            <ul class="ingredientList">
+                @for (ingredient of recipeIngredientsList(); track ingredient.id) {
+                    <li class="ingredient">{{ getQuantityIngredient(ingredient.id, recipeIngredientsList()) }} {{ ingredient.unit }} {{ ingredient.name }}</li>
                 }
-            </ul> -->
+            </ul>
         </div>
 
         <div class="recipeTags">
             <h3>Tags</h3>
 
-            <ng-content select=".tagList" />
-
-            <!-- <ul class="tagList">
-                @for (tag of recipe.tags; track tag.id) {
+            <ul class="tagList">
+                @for (tag of recipeTags(); track tag.id) {
                     <li class="tag"> {{ tag.name }}</li>
                 }
-            </ul> -->
+            </ul>
         </div>
 
         <div class="recipeShare">
             <h3>Partager la recette</h3>
 
-            <ng-content select=".socialNetworks" />
-
-            <!-- <ul class="socialNetworks">
+            <ul class="socialNetworks">
                 @for (social of socialNetworksList(); track $index) {
                     <app-social-networks 
                         [link]="social.href"
                         [pathImg]="social.path"
                         [altImg]="social.altImg" />
                 }
-            </ul> -->
+            </ul>
         </div>
     </nav>
     <!-- END -->

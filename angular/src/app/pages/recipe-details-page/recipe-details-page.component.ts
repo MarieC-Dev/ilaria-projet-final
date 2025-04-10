@@ -33,37 +33,6 @@ export class RecipeDetailsPage {
   recipeAverage = inject(RecipeAverageService);
   socialNetworksList = signal(commonSocial);
 
-  getNumberStep(id: number) {   
-    const filterById = this.recipe.steps.filter((step: any) => step.id === id);
-    return filterById[0].id + 1;
-  }
-
-  getQuantityIngredient(id: number) {
-    const filterById = this.recipe.ingredientsList.filter((ingr: any) => ingr.id === id);
-
-    if(filterById[0].quantity === 0 || '') {
-      return;
-    } else {
-      return filterById[0].quantity;
-    }
-  }
-
-  getClassComment(recipeAuthorName: string, answerAuthorName?: string) {
-    if(answerAuthorName) { // [answer] existe -> ANSWER
-      if(recipeAuthorName !== answerAuthorName) { // ANSWER user
-        return 'recipeComment isAnswer userAnswer';
-      } else { // ANSWER author
-        return 'recipeComment isAnswer authorAnswer';
-      }
-    } else { // COMMENT
-      return 'recipeComment';
-    }
-  }
-
-  getAverage(id: number) {
-    this.recipeAverage.getRecipeAverage(id, this.recipesList());
-  }
-
   getOtherRecipesList() {   
     const array = [];
 

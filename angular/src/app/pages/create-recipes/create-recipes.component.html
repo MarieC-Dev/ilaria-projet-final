@@ -1,1 +1,36 @@
-<p>create-recipes works!</p>
+<section class="createRecipe">
+    <h2>Créer votre recette</h2>
+
+    <form method="post" class="createRecipeForm">
+        <!-- Title -->
+        <app-form-input
+            id="createRecipeTitle"
+            type="text"
+            label="Titre de la recette"
+            inputId="createRecipeTitle"
+            [required]="true" />
+
+        <!-- Description -->
+        <app-form-input
+            id="createRecipeDescription"
+            label="Description"
+            inputId="createRecipeDescription"
+            [required]="false" />
+
+
+
+
+
+
+
+        <!-- END -->
+        <!-- Add image -->
+        <app-form-input
+            id="createRecipeImg"
+            type="file"
+            label="Ajouter une image"
+            inputId="createRecipeImg"
+            [required]="true" />
+            
+    </form>
+</section>

@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { SIGNUP } from '../../lists/signin-signup-list';
-import { FormInputComponent } from '../../components/form-input/form-input.component';
+import { FormInputComponent } from '../../components/form-components/form-input/form-input.component';
 
 @Component({
   selector: 'app-signup-page',

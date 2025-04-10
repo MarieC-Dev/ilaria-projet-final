@@ -9,11 +9,13 @@ import { RecipeAverageService } from '../../services/recipe-average.service';
 import { SocialNetworksComponent } from '../../components/social-networks/social-networks.component';
 import { commonSocial } from '../../lists/social-networks-list';
 import { RecipePresentationComponent } from '../../components/sections/recipe-presentation/recipe-presentation.component';
+import { RecipeDetailsComponent } from '../../components/sections/recipe-details/recipe-details.component';
 
 @Component({
-  selector: 'app-recipe-detail-page',
+  selector: 'app-recipe-details-page',
   imports: [
     RecipePresentationComponent,
+    RecipeDetailsComponent,
     RecipeItemTimeComponent, 
     RecipeStepComponent, 
     RecipeCommentComponent,
@@ -21,10 +23,10 @@ import { RecipePresentationComponent } from '../../components/sections/recipe-pr
     SocialNetworksComponent,
     CommonModule
   ],
-  templateUrl: './recipe-detail-page.component.html',
-  styleUrl: './recipe-detail-page.component.scss'
+  templateUrl: './recipe-details-page.component.html',
+  styleUrl: './recipe-details-page.component.scss'
 })
-export class RecipeDetailPageComponent {
+export class RecipeDetailsPage {
   recipesList = signal(RECIPE_LIST);
   recipe = this.recipesList()[0];
   othersRecipes = this.recipesList();

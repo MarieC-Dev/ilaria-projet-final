@@ -1,3 +1,5 @@
+@use '../../utils/variables' as *;
+
 $sizeCheckbox: 120px;
 
 #cookingTypeInputs {
@@ -12,7 +14,8 @@ $sizeCheckbox: 120px;
             justify-content: center;
             align-items: center;
             margin: 0 1rem;
-            border: 1px solid red;
+            border: 2px solid $darkGrey;
+            border-radius: 1rem;
 
             label {
                 width: $sizeCheckbox;
@@ -20,7 +23,6 @@ $sizeCheckbox: 120px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                //border: 1px solid blue;
 
                 div {
                     width: $sizeCheckbox;
@@ -30,7 +32,7 @@ $sizeCheckbox: 120px;
                     justify-content: center;
                     align-items: center;
                     position: relative;
-                    z-index: -1;
+                    z-index: 1;
     
                     img {
                         height: 48px;
@@ -45,10 +47,15 @@ $sizeCheckbox: 120px;
                     height: $sizeCheckbox;
                     margin: 0;
                     position: absolute;
-                    z-index: 1;
-                    opacity: 30%;
+                    z-index: 2;
+                    opacity: 0%;
                 }
             }
+        }
+
+        li.liTypeCooking.selectedType {
+            background-color: $lightGrey;
+            border-color: $firstColor;
         }
     }
 }

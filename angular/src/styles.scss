@@ -17,6 +17,7 @@
 @use './styles/components/recipeStep';
 @use './styles/components/recipeComment';
 @use './styles/components/formInput';
+@use './styles/components/formMultipleInput';
 
 // COMPONENTS - SECTIONS
 @use './styles/components/sections/recipeDetail';
@@ -31,3 +32,4 @@
 @use './styles/layout/newsletterSection';
 
 // PAGES
+@use './styles/pages/createRecipe';

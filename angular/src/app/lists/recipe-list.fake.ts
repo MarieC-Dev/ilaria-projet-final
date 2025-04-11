@@ -1,4 +1,5 @@
 import { RecipeList } from "../models/recipe.model";
+import { COOKING_TYPE_LIST } from "./cooking-type-list";
 
 let index = 0;
 const ingredientsList = [
@@ -197,7 +198,7 @@ export const RECIPE_LIST: RecipeList = [
         image: 'salade.jpg',
         title: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
-        cookingType: '',
+        cookingType: COOKING_TYPE_LIST,
 
         makingTime: {
             hours: 0,
@@ -230,7 +231,7 @@ export const RECIPE_LIST: RecipeList = [
         image: 'salade.jpg',
         title: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
-        cookingType: '',
+        cookingType: COOKING_TYPE_LIST,
 
         makingTime: {
             hours: 0,
@@ -263,7 +264,7 @@ export const RECIPE_LIST: RecipeList = [
         image: 'salade.jpg',
         title: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
-        cookingType: '',
+        cookingType: COOKING_TYPE_LIST,
 
         makingTime: {
             hours: 0,
@@ -296,7 +297,7 @@ export const RECIPE_LIST: RecipeList = [
         image: 'salade.jpg',
         title: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
-        cookingType: '',
+        cookingType: COOKING_TYPE_LIST,
 
         makingTime: {
             hours: 0,
@@ -329,7 +330,7 @@ export const RECIPE_LIST: RecipeList = [
         image: 'salade.jpg',
         title: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
-        cookingType: '',
+        cookingType: COOKING_TYPE_LIST,
 
         makingTime: {
             hours: 0,
@@ -362,7 +363,7 @@ export const RECIPE_LIST: RecipeList = [
         image: 'salade.jpg',
         title: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
-        cookingType: '',
+        cookingType: COOKING_TYPE_LIST,
 
         makingTime: {
             hours: 0,
@@ -395,7 +396,7 @@ export const RECIPE_LIST: RecipeList = [
         image: 'salade.jpg',
         title: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
-        cookingType: '',
+        cookingType: COOKING_TYPE_LIST,
 
         makingTime: {
             hours: 0,
@@ -428,7 +429,7 @@ export const RECIPE_LIST: RecipeList = [
         image: 'salade.jpg',
         title: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
-        cookingType: '',
+        cookingType: COOKING_TYPE_LIST,
 
         makingTime: {
             hours: 0,
@@ -461,7 +462,7 @@ export const RECIPE_LIST: RecipeList = [
         image: 'salade.jpg',
         title: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
-        cookingType: '',
+        cookingType: COOKING_TYPE_LIST,
 
         makingTime: {
             hours: 0,
@@ -494,7 +495,7 @@ export const RECIPE_LIST: RecipeList = [
         image: 'salade.jpg',
         title: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
-        cookingType: '',
+        cookingType: COOKING_TYPE_LIST,
 
         makingTime: {
             hours: 0,
@@ -527,7 +528,7 @@ export const RECIPE_LIST: RecipeList = [
         image: 'salade.jpg',
         title: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
-        cookingType: '',
+        cookingType: COOKING_TYPE_LIST,
 
         makingTime: {
             hours: 0,
@@ -560,7 +561,7 @@ export const RECIPE_LIST: RecipeList = [
         image: 'salade.jpg',
         title: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
-        cookingType: '',
+        cookingType: COOKING_TYPE_LIST,
 
         makingTime: {
             hours: 0,
@@ -593,7 +594,7 @@ export const RECIPE_LIST: RecipeList = [
         image: 'salade.jpg',
         title: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
-        cookingType: '',
+        cookingType: COOKING_TYPE_LIST,
 
         makingTime: {
             hours: 0,
@@ -626,7 +627,7 @@ export const RECIPE_LIST: RecipeList = [
         image: 'salade.jpg',
         title: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
-        cookingType: '',
+        cookingType: COOKING_TYPE_LIST,
 
         makingTime: {
             hours: 0,

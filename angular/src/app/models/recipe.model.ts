@@ -1,3 +1,4 @@
+import { CookingTypeList } from "./cooking-type.model";
 import { User } from "./user.model";
 
 export interface Ingredient {
@@ -48,7 +49,7 @@ export interface Recipe {
     image: string,
     title: string,
     description: string,
-    cookingType: string,
+    cookingType: CookingTypeList,
 
     makingTime: Time, // in minutes
     cookingTime?: Time,

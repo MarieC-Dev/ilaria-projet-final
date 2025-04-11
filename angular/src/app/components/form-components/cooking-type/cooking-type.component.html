@@ -1,0 +1,25 @@
+<app-multiple-inputs
+    labelTitle="Type de cuisson :"
+    inputId="cookingTypeInputs"
+    [required]="true">
+    <ul class="cookingTypeInputs">
+        @for (type of cookingTypeList(); track type.id) {
+            <li [class]="type.checked ? 'liTypeCooking selectedType' : 'liTypeCooking'">
+                <label [for]="type.inputId">
+                    <div>
+                        <img [src]="type.image" [alt]="type.altImage">
+                        <p>{{ type.title }}</p>
+                    </div>
+                    <input type="checkbox" 
+                        [id]="type.inputId"
+                        [name]="type.inputId"
+                        [(ngModel)]="type.checked"
+                        (ngModelChange)="onCheckboxChange(type)"
+                        [required]="type.required" />
+                </label>
+            </li>
+        }
+
+        <!-- TODO : Si check -> unChecked le reste -->
+    </ul>
+</app-multiple-inputs>

@@ -1,0 +1,23 @@
+@use '../utils/variables' as *;
+
+.createRecipe {
+    width: $sectionWidth;
+    margin: 3rem auto 0 auto;
+    border: 1px solid red;
+
+    h2 {
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    app-form-input div.formInputDiv {
+        label {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        input, textarea {
+            width: 80%;
+            max-height: 100px;
+        }
+    }
+}

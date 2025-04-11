@@ -6,17 +6,6 @@
 // BASE
 @use './base/base';
 
-// LAYOUT
-@use './layout/header';
-@use './layout/footer';
-@use './layout/recipesSection';
-@use './layout/videosSection';
-@use './layout/newsletterSection';
-
-// LAYOUT - SECTIONS
-@use './components/sections/recipeDetail';
-@use './components/sections/connection';
-
 // COMPONENTS
 @use './components/buttons';
 @use './components/select';
@@ -28,5 +17,17 @@
 @use './components/recipeStep';
 @use './components/recipeComment';
 @use './components/formInput';
+
+// COMPONENTS - SECTIONS
+@use './components/sections/recipeDetail';
+@use './components/sections/connection';
+@use './components/sections/cookingTypeInputs';
+
+// LAYOUT
+@use './layout/header';
+@use './layout/footer';
+@use './layout/recipesSection';
+@use './layout/videosSection';
+@use './layout/newsletterSection';
 
 // PAGES

@@ -1,0 +1,54 @@
+$sizeCheckbox: 120px;
+
+#cookingTypeInputs {
+    ul {
+        display: flex;
+
+        li.liTypeCooking {
+            width: calc($sizeCheckbox + 2rem);
+            height: calc($sizeCheckbox + 2rem);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 1rem;
+            border: 1px solid red;
+
+            label {
+                width: $sizeCheckbox;
+                height: $sizeCheckbox;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                //border: 1px solid blue;
+
+                div {
+                    width: $sizeCheckbox;
+                    height: $sizeCheckbox;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+                    z-index: -1;
+    
+                    img {
+                        height: 48px;
+                        margin-bottom: 1rem;
+                    }
+
+                    p { text-align: center; }
+                }
+
+                input[type=checkbox] {
+                    width: $sizeCheckbox;
+                    height: $sizeCheckbox;
+                    margin: 0;
+                    position: absolute;
+                    z-index: 1;
+                    opacity: 30%;
+                }
+            }
+        }
+    }
+}

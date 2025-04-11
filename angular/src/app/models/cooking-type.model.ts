@@ -5,6 +5,7 @@ export interface CookingType {
     altImage: string,
     title: string,
     checked: boolean,
+    value: string,
     required: boolean,
 }
 

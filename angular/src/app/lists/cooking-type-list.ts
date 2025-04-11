@@ -10,6 +10,7 @@ export const COOKING_TYPE_LIST: CookingTypeList = [
       altImage: 'hot plate',
       title: 'Plaque chauffante',
       checked: false,
+      value: 'hot plate',
       required: false,
     }, {
         id: index++,
@@ -18,6 +19,7 @@ export const COOKING_TYPE_LIST: CookingTypeList = [
         altImage: 'stove',
         title: 'Four',
         checked: false,
+        value: 'stove',
         required: false,
     }, {
         id: index++,
@@ -26,6 +28,7 @@ export const COOKING_TYPE_LIST: CookingTypeList = [
         altImage: 'air fryer',
         title: 'Air fryer',
         checked: false,
+        value: 'air fryer',
         required: false,
     }, {
         id: index++,
@@ -34,6 +37,7 @@ export const COOKING_TYPE_LIST: CookingTypeList = [
         altImage: 'barbecue',
         title: 'Barbecue',
         checked: false,
+        value: 'barbecue',
         required: false,
     }, {
         id: index++,
@@ -42,6 +46,7 @@ export const COOKING_TYPE_LIST: CookingTypeList = [
         altImage: 'no cooking',
         title: 'Sans cuisson',
         checked: false,
+        value: 'no cooking',
         required: false,
     }
 ];

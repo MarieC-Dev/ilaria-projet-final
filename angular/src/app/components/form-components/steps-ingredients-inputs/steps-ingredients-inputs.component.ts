@@ -9,6 +9,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './steps-ingredients-inputs.component.scss'
 })
 export class StepsIngredientsInputsComponent {
-  readonly ingredients = []
-  readonly steps = []
+  
 }

@@ -5,6 +5,7 @@ $sizeCheckbox: 120px;
 #cookingTypeInputs {
     ul {
         display: flex;
+        margin-top: .5rem;
 
         li.liTypeCooking {
             width: calc($sizeCheckbox + 2rem);

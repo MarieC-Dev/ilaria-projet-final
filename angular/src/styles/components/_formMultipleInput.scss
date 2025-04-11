@@ -2,7 +2,14 @@
 @use '../utils/mixins' as *;
 
 .formMultipleInputDiv {
+    margin-bottom: 0;
+
     .multipleInputs {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 3rem;
+
         ul {
             display: flex;
             align-items: center;
@@ -32,6 +39,18 @@
                     @include arrowsSelectStyle($darkGrey)
                 }
             }
+        }
+
+        button {
+            margin: 1.5rem auto 0 auto;
+        }
+
+        .stepsIngredientsList {
+            max-width: max-content;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 1.5rem;
         }
     }
 }

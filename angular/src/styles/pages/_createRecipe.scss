@@ -1,9 +1,16 @@
 @use '../utils/variables' as *;
 
+.wrapperCreateRecipe {
+    padding: 5rem 0;
+    background-color: $lightGrey;
+}
+
 .createRecipe {
     width: $sectionWidth;
-    margin: 3rem auto 0 auto;
-    border: 1px solid red;
+    padding: 5rem;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 1rem;
 
     h2 {
         margin-bottom: 2rem;
@@ -11,6 +18,8 @@
     }
 
     app-form-input div.formInputDiv {
+        margin-bottom: 3rem;
+
         label {
             font-size: 20px;
             font-weight: 700;

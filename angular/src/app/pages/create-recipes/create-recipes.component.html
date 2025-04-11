@@ -1,71 +1,70 @@
-<section class="createRecipe createRecipe__firstSection">
-    <h2>Créer votre recette</h2>
-
-    <form method="post" class="createRecipeForm">
-        <!-- Title -->
-        <app-form-input
-            id="createRecipeTitle"
-            type="text"
-            label="Titre de la recette"
-            inputId="createRecipeTitle"
-            [required]="true" />
-
-        <!-- Description -->
-        <app-form-input
-            id="createRecipeDescription"
-            label="Description"
-            inputId="createRecipeDescription"
-            [required]="false" />
-
-        <!-- Temps de préparation, cuisson, pause -->
-       <app-inputs-times />
-
-        <!-- Nombre de portions -->
-        <app-multiple-inputs
-            labelTitle="Nombre de portions :"
-            inputId="servingNumberInputs"
-            [required]="true">
-            <ul>
-                <li>
-                    <label for="servingNumber">
-                        <input type="number" 
-                            id="servingNumber" 
-                            name="servingNumber" 
-                            placeholder="Ex. : 4"
-                            required />
-                    </label>
-                </li>
-                <li>
-                    <label for="servingName">
-                        <select name="servingName" id="servingName">
-                            <option value="">Type de portion</option>
-                            <option value="person">Personne(s)</option>
-                            <option value="piece">Parts(s)</option>
-                            <option value="liter">Litre(s)</option>
-                            <option value="cylinders">Vérine(s)</option>
-                        </select>
-                    </label>
-                </li>
-            </ul>
-        </app-multiple-inputs>
-
-        <app-steps-ingredients-inputs />
-
-        <app-cooking-type />
-
-
-
-
-
-
-        <!-- END -->
-        <!-- Add image -->
-        <!-- <app-form-input
-            id="createRecipeImg"
-            type="file"
-            label="Ajouter une image"
-            inputId="createRecipeImg"
-            [required]="true" /> -->
+<div class="wrapperCreateRecipe">
+    <section class="createRecipe createRecipe__firstSection">
+        <h2>Créer votre recette</h2>
+    
+        <form method="post" class="createRecipeForm">
+            <!-- Title -->
+            <app-form-input
+                id="createRecipeTitle"
+                type="text"
+                label="Titre de la recette"
+                inputId="createRecipeTitle"
+                [required]="true" />
+    
+            <!-- Description -->
+            <app-form-input
+                id="createRecipeDescription"
+                label="Description"
+                inputId="createRecipeDescription"
+                [required]="false" />
+    
+            <!-- Temps de préparation, cuisson, pause -->
+           <app-inputs-times />
+    
+            <!-- Nombre de portions -->
+            <app-multiple-inputs
+                labelTitle="Nombre de portions :"
+                inputId="servingNumberInputs"
+                [required]="true">
+                <ul>
+                    <li>
+                        <label for="servingNumber">
+                            <input type="number" 
+                                id="servingNumber" 
+                                name="servingNumber" 
+                                placeholder="Ex. : 4"
+                                required />
+                        </label>
+                    </li>
+                    <li>
+                        <label for="servingName">
+                            <select name="servingName" id="servingName">
+                                <option value="">Type de portion</option>
+                                <option value="person">Personne(s)</option>
+                                <option value="piece">Parts(s)</option>
+                                <option value="liter">Litre(s)</option>
+                                <option value="cylinders">Vérine(s)</option>
+                            </select>
+                        </label>
+                    </li>
+                </ul>
+            </app-multiple-inputs>
+    
+            <app-steps-ingredients-inputs />
+    
+            <app-cooking-type />
+    
             
-    </form>
-</section>
+    
+            <!-- END -->
+            <!-- Add image -->
+            <!-- <app-form-input
+                id="createRecipeImg"
+                type="file"
+                label="Ajouter une image"
+                inputId="createRecipeImg"
+                [required]="true" /> -->
+                
+        </form>
+    </section>
+</div>

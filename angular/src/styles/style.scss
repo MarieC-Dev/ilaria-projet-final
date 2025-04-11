@@ -14,8 +14,8 @@
 @use './layout/newsletterSection';
 
 // LAYOUT - SECTIONS
-@use './layout/sections/recipeDetail';
-@use './layout/sections/connection';
+@use './components/sections/recipeDetail';
+@use './components/sections/connection';
 
 // COMPONENTS
 @use './components/buttons';

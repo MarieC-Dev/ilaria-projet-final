@@ -28,7 +28,6 @@ export class CookingTypeComponent implements OnInit {
     } else {
       const findNoCooking: CookingType | any = this.cookingTypeList().find(elm => elm.inputId === 'no-cooking');
       findNoCooking.checked = false;
-      console.log(findNoCooking?.checked);
     }
   }
 

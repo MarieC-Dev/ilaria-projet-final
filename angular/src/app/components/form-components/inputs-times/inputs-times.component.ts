@@ -1,60 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { MultipleInputsComponent } from '../multiple-inputs/multiple-inputs.component';
+import { INPUTS_TIMES } from '../../../lists/inputs-times.list';
+import { CommonModule, JsonPipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-inputs-times',
-  imports: [MultipleInputsComponent],
+  imports: [MultipleInputsComponent, CommonModule, FormsModule, JsonPipe],
   templateUrl: './inputs-times.component.html',
   styleUrl: './inputs-times.component.scss'
 })
 export class InputsTimesComponent {
   index: number = 0;
-  readonly times = [
-    {
-      id: this.index++,
-      title: "Temps de préparation :",
-      hours: {
-        type: 'number',
-        inputId: 'makingTimeHours',
-        placeholder: 'Heures',
-        required: false
-      },
-      minutes: {
-        type: 'number',
-        inputId: 'makingTimeMinutes',
-        placeholder: 'Minutes',
-        required: true
-      },
-    }, {
-      id: this.index++,
-      title: "Temps de cuisson :",
-      hours: {
-        type: 'number',
-        inputId: 'cookingTimeHours',
-        placeholder: 'Heures',
-        required: false
-      },
-      minutes: {
-        type: 'number',
-        inputId: 'cookingTimeMinutes',
-        placeholder: 'Minutes',
-        required: true
-      },
-    }, {
-      id: this.index++,
-      title: "Temps de pause :",
-      hours: {
-        type: 'number',
-        inputId: 'pauseTimeHours',
-        placeholder: 'Heures',
-        required: false
-      },
-      minutes: {
-        type: 'number',
-        inputId: 'pauseTimeMinutes',
-        placeholder: 'Minutes',
-        required: true
-      },
-    }, 
-  ]
+  times = signal(INPUTS_TIMES);
+
+  setYesCondition(time: any) {
+    console.log(time.id);
+
+    time.condition.yes.checked = false;
+    time.condition.no.checked = true;
+  }
+
+  setNoCondition(time: any) {
+    console.log(time.id);
+
+    time.condition.no.checked = false;
+    time.condition.yes.checked = true;
+  }
+
 }

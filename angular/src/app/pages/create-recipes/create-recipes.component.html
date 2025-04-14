@@ -18,6 +18,14 @@
                 inputId="createRecipeDescription"
                 [required]="false" />
 
+            <!-- Ajouter une image -->
+            <app-form-input
+                id="createRecipeImgDiv"
+                type="file"
+                label="Ajouter une image"
+                inputId="createRecipeImg"
+                [required]="true" />
+
             <hr class="createRecipeLine">
     
             <!-- Temps de préparation, cuisson, pause -->
@@ -58,22 +66,13 @@
             <!-- Étapes et ingrédients -->
             <app-steps-ingredients-inputs />
 
+            <hr class="createRecipeLine">
+
             <!-- Types de cuisson -->
              <app-cooking-type />
     
             <!-- Difficulté -->
             <app-difficulty />
-
-
-    
-            <!-- END -->
-            <!-- Add image -->
-            <!-- <app-form-input
-                id="createRecipeImg"
-                type="file"
-                label="Ajouter une image"
-                inputId="createRecipeImg"
-                [required]="true" /> -->
                 
         </form>
     </section>

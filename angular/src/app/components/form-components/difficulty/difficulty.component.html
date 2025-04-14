@@ -1,0 +1,18 @@
+<app-multiple-inputs
+    labelTitle="Difficulté :"
+    inputId="difficultyInputs"
+    [required]="true">
+    <label for="difficulties">
+        <input type="range" 
+            id="difficulties"
+            name="difficulties"
+            min="0"
+            [max]="difficulties.length"
+            step="1"
+            [(ngModel)]="difficultyValue"
+            [value]="difficultyValue()"
+            [required]="true" style="padding:0;">
+    </label>
+
+    <p>{{ getDifficulty() }}</p>
+</app-multiple-inputs>

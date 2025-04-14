@@ -55,7 +55,7 @@
     }
 }
 
-@mixin arrowsSelectStyle($color) {
+@mixin arrowsSelectStyle($color, $isTall: false) {
     select {
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
@@ -69,13 +69,23 @@
             linear-gradient(45deg, transparent 50%, transparent 50% ),
             linear-gradient(135deg, transparent 50%, $color 50% ),
             linear-gradient(225deg, transparent 50%, $color 50%);
-        background-position:
-            calc(100% - 20px) calc(15px + 8px),
-            calc(100% - 15px) calc(15px + 8px),
-            calc(100% - 2.5em) 16px,
-            calc(100% - 20px) calc(17px + -2px),
-            calc(100% - 15px) calc(17px + -2px),
-            calc(100% - 2.5em) 16px;
+        @if $isTall {
+            background-position:
+                calc(100% - 20px) calc(18px + 8px),
+                calc(100% - 15px) calc(18px + 8px),
+                calc(100% - 40px) 16px,
+                calc(100% - 20px) calc(20px + -2px),
+                calc(100% - 15px) calc(20px + -2px),
+                calc(100% - 40px) 16px;
+        } @else {
+            background-position:
+                calc(100% - 20px) calc(15px + 8px),
+                calc(100% - 15px) calc(15px + 8px),
+                calc(100% - 2.5em) 16px,
+                calc(100% - 20px) calc(17px + -2px),
+                calc(100% - 15px) calc(17px + -2px),
+                calc(100% - 2.5em) 16px;
+        }
         background-size:
             5px 5px,
             5px 5px;

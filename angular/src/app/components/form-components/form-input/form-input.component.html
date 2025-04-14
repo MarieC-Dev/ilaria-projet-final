@@ -1,6 +1,6 @@
 <div class="formInputDiv" [id]="id()">
     <label [for]="inputId()">
-        {{ label() }} : <span *ngIf="required()">*</span>
+        {{ label() }} : <span *ngIf="required()" style="color: #EB4137">*</span>
     </label>
 
     @if(type()) {

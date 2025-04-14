@@ -1,4 +1,5 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
+import { TotalTimeService } from '../../services/total-time.service';
 
 @Component({
   selector: 'app-recipe-item-time',
@@ -7,8 +8,10 @@ import { Component, input } from '@angular/core';
   styleUrl: './recipe-item-time.component.scss'
 })
 export class RecipeItemTimeComponent {
-  preparationHours = input<number>(0);
-  preparationMinutes = input<number>(0);
+  totalTime = inject(TotalTimeService);
+
+  makingHours = input<number>(0);
+  makingMinutes = input<number>(0);
 
   cookingTime = input<boolean>(false);
   cookingHours = input<number>(0);
@@ -29,47 +32,14 @@ export class RecipeItemTimeComponent {
     return minutes > 0 ? minutes + ' min' : '';
   }
 
-  getTotalTime() {
-    function addition(total: number, nb: number) {
-      return total + nb;
-    }
-
-    const additionHours: Array<number> = [this.preparationHours(), this.cookingHours(), this.pauseHours()];
-    const additionMinutes: Array<number> = [this.preparationMinutes(), this.cookingMinutes(), this.pauseMinutes()];
-
-    const sumMinutes: number = additionMinutes.reduce(addition);
-
-    function getMinutesTime(): any {
-      if(sumMinutes > 0) {
-        if(sumMinutes > 59) {
-          const integerMin: number = Math.floor(sumMinutes / 60);
-          const decimalMin: number = (sumMinutes / 60) - integerMin;
-
-          additionHours.push(integerMin);
-  
-          return decimalMin !== 0 ? decimalMin * 60 + ' min' : '';
-        } 
-        else return `${sumMinutes} min`;
-      } 
-      else return;
-    }
-
-    function getHoursTime(): any {
-      if(additionHours.length > 0) {
-        const sumHours = additionHours.reduce(addition);
-
-        if(sumHours > 0) {
-          return `${sumHours} h `;
-        } else return;
-      } else return;
-    }
-
-    if(getHoursTime() && getMinutesTime()) {
-      return getHoursTime() + getMinutesTime();
-    } else {
-      if(getHoursTime() === undefined) return getMinutesTime();
-
-      if(getMinutesTime() === undefined) return getHoursTime();
-    }
+  getTotalTime() {   
+    return this.totalTime.getTotalTimeService(
+      this.makingHours(),
+      this.makingMinutes(),
+      this.cookingHours(),
+      this.cookingMinutes(),
+      this.pauseHours(),
+      this.pauseMinutes()
+    )
   }
 }

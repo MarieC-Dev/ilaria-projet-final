@@ -1,9 +1,14 @@
+@use '../../utils/mixins' as *;
+@use '../../utils/variables' as *;
+
 .videosSection {
     width: 1216px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     margin: 0 auto 6rem auto;
+
+    @include arrowsSelectStyle(white);
     
     h2 {
         margin-bottom: 2.5rem;

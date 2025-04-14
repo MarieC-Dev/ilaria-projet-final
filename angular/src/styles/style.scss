@@ -23,13 +23,14 @@
 @use './components/sections/recipeDetail';
 @use './components/sections/connection';
 @use './components/sections/cookingTypeInputs';
+@use './components/sections/homeRecipesSection';
+@use './components/sections/videosSection';
+@use './components/sections/newsletterSection';
 
 // LAYOUT
 @use './layout/header';
 @use './layout/footer';
-@use './layout/recipesSection';
-@use './layout/videosSection';
-@use './layout/newsletterSection';
+
 
 // PAGES
 @use './pages/createRecipe';

@@ -35,9 +35,8 @@
                     background-color: white;
                     color: $darkGrey;
                     border: 2px solid $darkGrey;
-
-                    @include arrowsSelectStyle($darkGrey)
                 }
+                @include arrowsSelectStyle($darkGrey)
             }
         }
 

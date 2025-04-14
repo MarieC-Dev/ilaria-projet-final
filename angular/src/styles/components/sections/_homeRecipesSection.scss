@@ -1,9 +1,12 @@
-@use '../utils/mixins' as *;
+@use '../../utils/mixins' as *;
+@use '../../utils/variables' as *;
 
-.recipesSection {
+.homeRecipesSection {
     display: flex;
     padding: 0 3rem;
     margin-bottom: 6rem;
+
+    @include arrowsSelectStyle(white);
     
     .recipesContainer {
         width: 100%;

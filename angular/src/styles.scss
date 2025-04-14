@@ -23,13 +23,13 @@
 @use './styles/components/sections/recipeDetail';
 @use './styles/components/sections/connection';
 @use './styles/components/sections/cookingTypeInputs';
+@use './styles/components/sections/homeRecipesSection';
+@use './styles/components/sections/videosSection';
+@use './styles/components/sections/newsletterSection';
 
 // LAYOUT
 @use './styles/layout/header';
 @use './styles/layout/footer';
-@use './styles/layout/recipesSection';
-@use './styles/layout/videosSection';
-@use './styles/layout/newsletterSection';
 
 // PAGES
 @use './styles/pages/createRecipe';

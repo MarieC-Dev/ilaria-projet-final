@@ -7,44 +7,33 @@ export class TotalTimeService {
 
   constructor() { }
 
-  getTotalTimeService(
-    hoursArray: Array<number>,
-    minutesArray: Array<number>
-  ) {
-    function addition(total: number, nb: number) {
-      return total + nb;
-    }
+  addition(total: number, nb: number) {
+    return total + nb;
+  }
 
+  getTotalTimeService(hoursArray: Array<number>, minutesArray: Array<number>) {
     const additionHours: Array<number> = hoursArray;
     const additionMinutes: Array<number> = minutesArray;
 
-    const sumMinutes: number = additionMinutes.reduce(addition);    
+    let sumMinutes: number = additionMinutes.reduce(this.addition);
+    let sumHours: number = additionHours.reduce(this.addition);
 
-    function getMinutesTime(): any {
-      if(sumMinutes > 0) {
-        if(sumMinutes > 59) {
-          const integerMin: number = Math.floor(sumMinutes / 60);
-          const decimalMin: number = (sumMinutes / 60) - integerMin;
+    if(sumMinutes > 59) {
+      const integerMin: number = Math.floor(sumMinutes / 60);
+      const decimalMin: number = (sumMinutes / 60) - integerMin;
 
-          additionHours.push(integerMin);
-  
-          return decimalMin !== 0 ? decimalMin * 60 + ' min' : '';
-        } 
-        else return `${sumMinutes} min`;
-      } 
-      else return '00min';
+      sumHours += integerMin;
+
+      let totalMinutes = decimalMin !== 0 ? decimalMin * 60 + ' min' : '';
+      let totalHours = sumHours !== 0 ? sumHours + ' h ' : '';
+
+      return totalHours + totalMinutes;
+    } 
+    else {
+      let totalMinutes = sumMinutes !== 0 ? sumMinutes + ' min' : '00 min';
+      let totalHours = sumHours !== 0 ? sumHours + ' h ' : '0 h ';
+
+      return totalHours + totalMinutes;
     }
-
-    function getHoursTime(): any {
-      if(additionHours.length > 0) {
-        const sumHours = additionHours.reduce(addition);
-
-        if(sumHours > 0) {
-          return `${sumHours} h `;
-        } else return '';
-      } else return '';
-    }
-
-    return getHoursTime() + getMinutesTime();
   }
 }

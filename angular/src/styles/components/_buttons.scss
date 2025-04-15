@@ -13,7 +13,7 @@
 
     &:hover {
         background-color: $secondColor;
-        border: 2px solid $secondColor;
+        border-color: $secondColor;
     }
 }
 
@@ -26,7 +26,20 @@
 
     &:hover {
         background-color: $darkGrey;
-        border: 2px solid $darkGrey;
+        border-color: $darkGrey;
+    }
+}
+
+.btn-bg-yellow {
+    padding: 1rem 2.5rem;
+    background-color: $secondColor;
+    color: black;
+    border: 2px solid white;
+    border-radius: 3rem;
+
+    &:hover {
+        background-color: white;
+        border-color: $secondColor;
     }
 }
 

@@ -11,7 +11,7 @@
     border: 2px solid $firstColor;
     border-radius: 3rem;
 
-    &:hover {
+    &:hover:not(.btn-disabled) {
         background-color: $secondColor;
         border-color: $secondColor;
     }
@@ -24,7 +24,7 @@
     border: 2px solid white;
     border-radius: 3rem;
 
-    &:hover {
+    &:hover:not(.btn-disabled) {
         background-color: $darkGrey;
         border-color: $darkGrey;
     }
@@ -37,10 +37,14 @@
     border: 2px solid $thirdColor;
     border-radius: 3rem;
 
-    &:hover {
+    &:hover:not(.btn-disabled) {
         background-color: white;
         border-color: white;
     }
+}
+
+button.btn-disabled {
+    opacity: .5;
 }
 
 button, a {

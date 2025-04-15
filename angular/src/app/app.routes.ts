@@ -15,6 +15,6 @@ export const routes: Routes = [
     { path: 'connexion', component: SigninPageComponent },
     { path: 'inscription', component: SignupPageComponent },
     { path: 'contact', component: ContactPageComponent },
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: '', redirectTo: 'accueil', pathMatch: 'full' },
     { path: '**', component: NotFoundPageComponent },
 ];

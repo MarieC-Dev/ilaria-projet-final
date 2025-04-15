@@ -1,1 +1,33 @@
-<p>contact-page works!</p>
+<div class="contactPage">
+    <section class="leftContact">
+        <h1>Une question ? <br> Contactez-nous !</h1>
+
+        <p>Vous avez une question, une suggestion ou envie de rejoindre l’aventure culinaire ? Contactez-nous via le formulaire ci-dessous ou par email. On vous répondra avec plaisir, et peut-être même avec une bonne dose d’inspiration !</p>
+        
+        <button type="button" class="btn-bg-red">Planifier un appel</button>
+    </section>
+
+    <section class="rightContact">
+        <form action="" method="post">
+            <app-form-input 
+                label="Votre nom"
+                id="usernameContactInput"
+                type="text" 
+                inputId="usernameContact" 
+                [required]="true" />
+            <app-form-input 
+                label="Votre mail"
+                id="mailContactInput"
+                type="email" 
+                inputId="mailContact" 
+                [required]="true" />
+            <app-form-input 
+                label="Votre message"
+                id="messageContactInput"
+                inputId="messageContact" 
+                [required]="true" />
+
+            <button type="submit" class="btn-bg-yellow">Envoyer</button>
+        </form>
+    </section>
+</div>

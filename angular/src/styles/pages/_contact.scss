@@ -1,0 +1,60 @@
+@use '../utils/variables' as *;
+
+.contactPage {
+    width: $sectionWidth;
+    display: flex;
+    justify-content: space-between;
+    margin: 3rem auto 0 auto;
+
+    section {
+        width: 47%;
+    }
+
+    .leftContact {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        p {
+            margin: 2rem 0;
+            line-height: 1.7;
+        }
+
+        button {
+            margin: 1rem auto 0 auto;
+        }
+    }
+
+    .rightContact {
+        form {
+            padding: 2.5rem;
+            background-color: $firstColor;
+            border-radius: 1.5rem;
+
+            .formInputDiv {
+                width: 100%;
+                align-items: flex-start;
+            }
+
+            label, input, textarea {
+                color: white;
+                text-align: left;
+
+                &::placeholder { 
+                    color: white;
+                    opacity: .7;
+                }
+            }
+
+            input, textarea {
+                background-color: transparent;
+                border-color: white;
+            }
+
+            button {
+                display: flex;
+                justify-self: center;
+            }
+        }
+    }
+}

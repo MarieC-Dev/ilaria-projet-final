@@ -32,14 +32,14 @@
 
 .btn-bg-yellow {
     padding: 1rem 2.5rem;
-    background-color: $secondColor;
+    background-color: $thirdColor;
     color: black;
-    border: 2px solid white;
+    border: 2px solid $thirdColor;
     border-radius: 3rem;
 
     &:hover {
         background-color: white;
-        border-color: $secondColor;
+        border-color: white;
     }
 }
 

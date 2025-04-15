@@ -13,4 +13,5 @@ export class FormInputComponent {
   label = input.required<string>();
   inputId = input.required<string>();
   required = input.required<boolean>();
+  value = input<string>('');
 }

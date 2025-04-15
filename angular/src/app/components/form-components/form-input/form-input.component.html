@@ -8,7 +8,8 @@
             [id]="inputId()" 
             [name]="inputId()" 
             [placeholder]="label()"
-            [required]="required()" />
+            [required]="required()"
+            [value]="value()" />
     } @else {
         <textarea [name]="inputId()" 
             [id]="inputId()" 
@@ -16,6 +17,7 @@
             [placeholder]="label()"
             maxlength="250"
             [required]="required()"
+            [value]="value()"
             style="resize: none;"></textarea>
     }
 </div>

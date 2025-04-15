@@ -34,12 +34,12 @@ export class RecipeItemTimeComponent {
 
   getTotalTime() {   
     return this.totalTime.getTotalTimeService(
-      this.makingHours(),
-      this.makingMinutes(),
-      this.cookingHours(),
-      this.cookingMinutes(),
-      this.pauseHours(),
-      this.pauseMinutes()
+      [this.makingHours(),
+        this.cookingHours(),
+        this.pauseHours()],
+      [this.makingMinutes(),
+        this.cookingMinutes(),
+        this.pauseMinutes()]
     )
   }
 }

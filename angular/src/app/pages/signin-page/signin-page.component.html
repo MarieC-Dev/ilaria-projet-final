@@ -14,7 +14,8 @@
         <p>Ou utilisez votre adresse mail :</p>
 
         <form method="post">
-            @for (input of formInputConnection(); track input.id) {
+            <!-- TODO put back in its place -->
+            <!-- @for (input of formInputConnection(); track input.id) {
                 <app-form-input
                     [id]="input.id"
                     [type]="input.type"
@@ -23,10 +24,11 @@
                     [required]="input.required" />
             }
 
-            <a href="">Mot de passe oublié ?</a>
+            <a href="">Mot de passe oublié ?</a> -->
 
             <button type="submit" class="btn-bg btn-bg-red">
-                Connexion
+                <!-- TODO Connexion supprimer le a href et remettre "connexion" -->
+                 <a href="/profil">Connexion</a>
             </button>
         </form>
 

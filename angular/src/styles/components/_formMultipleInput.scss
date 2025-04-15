@@ -36,7 +36,7 @@
                     color: $darkGrey;
                     border: 2px solid $darkGrey;
                 }
-                @include arrowsSelectStyle($darkGrey, $isTall: true)
+                @include arrowsSelectStyle($darkGrey, $isTall: true);
             }
         }
 

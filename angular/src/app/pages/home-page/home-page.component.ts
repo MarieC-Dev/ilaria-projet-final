@@ -16,7 +16,7 @@ export class HomePageComponent {
   recipeAverage = inject(RecipeAverageService);
   
   getRecipeAverage(id: number) {
-    this.recipeAverage.getRecipeAverage(id, this.recipesList());
+    return this.recipeAverage.getRecipeAverage(id, this.recipesList());
   }
 
 }

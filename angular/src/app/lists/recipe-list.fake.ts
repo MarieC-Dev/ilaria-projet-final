@@ -189,6 +189,17 @@ const opinions = [
         text: "Moyen",
         answers: [],
         created: new Date(),
+    },  {
+        id: 4,
+        author: {
+            id: 41,
+            username: 'truffe',
+            picture: 'profil-2.jpg'
+        },
+        starScore: 3,
+        text: "Peu mieux faire",
+        answers: [],
+        created: new Date(),
     }, 
 ];
 

@@ -8,21 +8,17 @@ export class TotalTimeService {
   constructor() { }
 
   getTotalTimeService(
-    preparationHours: number,
-    preparationMinutes: number,
-    cookingHours: number,
-    cookingMinutes: number,
-    pauseHours: number,
-    pauseMinutes: number
+    hoursArray: Array<number>,
+    minutesArray: Array<number>
   ) {
     function addition(total: number, nb: number) {
       return total + nb;
     }
 
-    const additionHours: Array<number> = [preparationHours, cookingHours, pauseHours];
-    const additionMinutes: Array<number> = [preparationMinutes, cookingMinutes, pauseMinutes];
+    const additionHours: Array<number> = hoursArray;
+    const additionMinutes: Array<number> = minutesArray;
 
-    const sumMinutes: number = additionMinutes.reduce(addition);
+    const sumMinutes: number = additionMinutes.reduce(addition);    
 
     function getMinutesTime(): any {
       if(sumMinutes > 0) {
@@ -36,7 +32,7 @@ export class TotalTimeService {
         } 
         else return `${sumMinutes} min`;
       } 
-      else return;
+      else return '00min';
     }
 
     function getHoursTime(): any {
@@ -45,16 +41,10 @@ export class TotalTimeService {
 
         if(sumHours > 0) {
           return `${sumHours} h `;
-        } else return;
-      } else return;
+        } else return '';
+      } else return '';
     }
 
-    if(getHoursTime() && getMinutesTime()) {
-      return getHoursTime() + getMinutesTime();
-    } else {
-      if(getHoursTime() === undefined) return getMinutesTime();
-
-      if(getMinutesTime() === undefined) return getHoursTime();
-    }
+    return getHoursTime() + getMinutesTime();
   }
 }

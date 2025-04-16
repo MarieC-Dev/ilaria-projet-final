@@ -5,10 +5,12 @@ import { RecipeAverageService } from '../../../services/recipe-average.service';
 import { RecipeList } from '../../../models/recipe.model';
 import { ChevronDownIconComponent } from "../../icons/chevron-down-icon/chevron-down-icon.component";
 import { COLORS } from '../../icons/colors';
+import { ModifyIconComponent } from "../../icons/modify-icon/modify-icon.component";
+import { DeleteIconComponent } from "../../icons/delete-icon/delete-icon.component";
 
 @Component({
   selector: 'app-myfavorites-myrecipes',
-  imports: [CommonModule, RecipeItemComponent, ChevronDownIconComponent, JsonPipe],
+  imports: [CommonModule, RecipeItemComponent, ChevronDownIconComponent, JsonPipe, ModifyIconComponent, DeleteIconComponent],
   templateUrl: './myfavorites-myrecipes.component.html',
   styleUrl: './myfavorites-myrecipes.component.scss'
 })

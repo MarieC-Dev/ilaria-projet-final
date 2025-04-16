@@ -36,9 +36,10 @@
                 <th class="myrecipeName">Nom de la recette</th>
                 <th class="myrecipeCreationDate">Date de création</th>
                 <th class="myrecipeOpinion">Avis</th>
-                <!-- <th class="myrecipeDetailBtn"></th> -->
-                <th class="myrecipeButtons">
-                    <p>Modifier</p>
+                <th class="myrecipeButtons myrecipeButtons__modify">
+                    <p>Modifier</p>               
+                </th>
+                <th class="myrecipeButtons myrecipeButtons__delete">            
                     <p>Supprimer</p>
                 </th>
             </tr>
@@ -49,60 +50,40 @@
                 <td class="myrecipeCheckbox">
                     <input type="checkbox" name="" id="">
                 </td>
-                <td class="myrecipeName">Salade César façon provençale</td>
+                <td class="myrecipeName">
+                    <a href="/recettes">Salade César façon provençale</a>
+                </td>
                 <td class="myrecipeCreationDate">Créée le 16 novembre 2025</td>
                 <td class="myrecipeOpinion">3,6(125 notes)</td>
-                <!-- <td class="myrecipeDetailBtn">
-                    Détails <app-chevron-down-icon [style]="`fill: ${colorsList().darkGrey}`" />
-                </td> -->
-                <td class="myrecipeButtons">
-                    <button type="button">Modifier</button>
-                    <button type="button">Supprimer</button>
+                <td class="myrecipeButtons myrecipeButtons__modify--body">
+                    <button type="button">
+                        <app-modify-icon />
+                    </button>
+                </td>
+                <td class="myrecipeButtons myrecipeButtons__delete--body">
+                    <button type="button">
+                        <app-delete-icon />
+                    </button>
                 </td>
             </tr>
             <tr>
                 <td class="myrecipeCheckbox">
                     <input type="checkbox" name="" id="">
                 </td>
-                <td class="myrecipeName">Salade César façon provençale</td>
+                <td class="myrecipeName">
+                    <a href="/recettes">Salade César façon provençale</a>
+                </td>
                 <td class="myrecipeCreationDate">Créée le 16 novembre 2025</td>
                 <td class="myrecipeOpinion">3,6(125 notes)</td>
-                <!-- <td class="myrecipeDetailBtn">
-                    Détails <app-chevron-down-icon [style]="`fill: ${colorsList().darkGrey}`" />
-                </td> -->
-                <td class="myrecipeButtons">
-                    <button type="button">Modifier</button>
-                    <button type="button">Supprimer</button>
+                <td class="myrecipeButtons myrecipeButtons__modify--body">
+                    <button type="button">
+                        <app-modify-icon />
+                    </button>
                 </td>
-            </tr>
-            <tr>
-                <td class="myrecipeCheckbox">
-                    <input type="checkbox" name="" id="">
-                </td>
-                <td class="myrecipeName">Salade César façon provençale</td>
-                <td class="myrecipeCreationDate">Créée le 16 novembre 2025</td>
-                <td class="myrecipeOpinion">3,6(125 notes)</td>
-                <!-- <td class="myrecipeDetailBtn">
-                    Détails <app-chevron-down-icon [style]="`fill: ${colorsList().darkGrey}`" />
-                </td> -->
-                <td class="myrecipeButtons">
-                    <button type="button">Modifier</button>
-                    <button type="button">Supprimer</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="myrecipeCheckbox">
-                    <input type="checkbox" name="" id="">
-                </td>
-                <td class="myrecipeName">Salade César façon provençale</td>
-                <td class="myrecipeCreationDate">Créée le 16 novembre 2025</td>
-                <td class="myrecipeOpinion">3,6(125 notes)</td>
-                <!-- <td class="myrecipeDetailBtn">
-                    Détails <app-chevron-down-icon [style]="`fill: ${colorsList().darkGrey}`" />
-                </td> -->
-                <td class="myrecipeButtons">
-                    <button type="button">Modifier</button>
-                    <button type="button">Supprimer</button>
+                <td class="myrecipeButtons myrecipeButtons__delete--body">
+                    <button type="button">
+                        <app-delete-icon />
+                    </button>
                 </td>
             </tr>
         </tbody>

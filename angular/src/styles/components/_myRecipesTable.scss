@@ -8,26 +8,43 @@
     overflow: hidden;
 
     thead tr {
+        padding: 1rem 1.5rem;
         background-color: $mediumGrey;
         color: white;
+
+        .myrecipeCheckbox {
+            border: 1px solid $lightGrey;
+            border-radius: 3px;
+        }
     }
 
     thead tr, tbody tr {
         display: flex;
-        padding: 1rem 1.5rem;
 
         th:not(.myrecipeCheckbox), td:not(.myrecipeCheckbox) {
             display: flex;
             margin: 0 .5rem;
-
-            button, p {
-                margin-left: 1rem;
-            }
         }
 
         input {
             width: 20px;
             height: 20px;
+        }
+    }
+
+    thead tr {
+        justify-content: space-between;
+    }
+
+    tbody {
+        tr {
+            justify-content: space-between;
+            align-items: center;
+            padding: .5rem 1.5rem;
+        }
+
+        tr:nth-child(even) {
+            background-color: $lightGrey;
         }
     }
 
@@ -39,6 +56,11 @@
 
     .myrecipeName {
         width: 40%;
+
+        a:hover {
+            font-weight: 700;
+            color: $darkGrey;
+        }
     }
 
     .myrecipeCreationDate {
@@ -52,31 +74,25 @@
     }
     
     .myrecipeButtons {
-        width: 18%;
+        width: 10%;
         justify-content: flex-end;
-    }
 
-    /* th, td {
-        border: 1px solid blue;
-    } */
+        svg {
+            width: 32px;
+            height: 40px;
+            fill: $darkGrey;
+        }
 
-    thead tr {
-        justify-content: space-between;
-    }
-
-    tbody {
-        tr {
-            justify-content: space-between;
-
-            td {
-                svg {
-                    height: 12px;
-                }
+        &__modify--body {
+            button:hover svg {
+                fill: $secondColor;
             }
         }
 
-        tr:nth-child(even) {
-            background-color: $lightGrey;
+        &__delete--body {
+            button:hover svg {
+                fill: $firstColor;
+            }
         }
     }
 }

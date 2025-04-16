@@ -18,6 +18,8 @@
 @use './styles/components/recipeComment';
 @use './styles/components/formInput';
 @use './styles/components/formMultipleInput';
+@use './styles/components/myFavoritesDiv';
+@use './styles/components/myRecipesTable';
 
 // COMPONENTS - SECTIONS
 @use './styles/components/sections/recipeDetail';
@@ -26,6 +28,7 @@
 @use './styles/components/sections/homeRecipesSection';
 @use './styles/components/sections/videosSection';
 @use './styles/components/sections/newsletterSection';
+@use './styles/components/sections/myfavorites-myrecipes';
 
 // LAYOUT
 @use './styles/layout/header';

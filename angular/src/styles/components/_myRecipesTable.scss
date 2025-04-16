@@ -1,0 +1,82 @@
+@use '../utils/variables' as *;
+
+.myRecipesTable {
+    width: 100%;
+    margin-top: 2rem;
+    border-collapse: collapse;
+    border-radius: .5rem;
+    overflow: hidden;
+
+    thead tr {
+        background-color: $mediumGrey;
+        color: white;
+    }
+
+    thead tr, tbody tr {
+        display: flex;
+        padding: 1rem 1.5rem;
+
+        th:not(.myrecipeCheckbox), td:not(.myrecipeCheckbox) {
+            display: flex;
+            margin: 0 .5rem;
+
+            button, p {
+                margin-left: 1rem;
+            }
+        }
+
+        input {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    .myrecipeCheckbox {
+        width: 24px;
+        display: flex;
+        margin-right: 1rem;
+    }
+
+    .myrecipeName {
+        width: 40%;
+    }
+
+    .myrecipeCreationDate {
+        width: 25%;
+        justify-content: center;
+    }
+
+    .myrecipeOpinion {
+        width: 15%;
+        justify-content: center;
+    }
+    
+    .myrecipeButtons {
+        width: 18%;
+        justify-content: flex-end;
+    }
+
+    /* th, td {
+        border: 1px solid blue;
+    } */
+
+    thead tr {
+        justify-content: space-between;
+    }
+
+    tbody {
+        tr {
+            justify-content: space-between;
+
+            td {
+                svg {
+                    height: 12px;
+                }
+            }
+        }
+
+        tr:nth-child(even) {
+            background-color: $lightGrey;
+        }
+    }
+}

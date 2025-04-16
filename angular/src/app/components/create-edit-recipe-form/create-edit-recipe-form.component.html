@@ -1,0 +1,73 @@
+<form method="post" class="createRecipeForm">
+    <!-- Title -->
+    <app-form-input
+        id="createRecipeTitle"
+        type="text"
+        label="Titre de la recette"
+        inputId="createRecipeTitle"
+        [required]="true" />
+
+    <!-- Description -->
+    <app-form-input
+        id="createRecipeDescription"
+        label="Description"
+        inputId="createRecipeDescription"
+        [required]="false" />
+
+    <!-- Ajouter une image -->
+    <app-form-input
+        id="createRecipeImgDiv"
+        type="file"
+        label="Ajouter une image"
+        inputId="createRecipeImg"
+        [required]="true" />
+
+    <hr class="createRecipeLine">
+
+    <!-- Temps de préparation, cuisson, pause -->
+   <app-inputs-times />
+
+   <hr class="createRecipeLine">
+
+    <!-- Nombre de portions -->
+    <app-multiple-inputs
+        labelTitle="Nombre de portions :"
+        inputId="servingNumberInputs"
+        [required]="true">
+        <ul>
+            <li>
+                <label for="servingNumber">
+                    <input type="number" 
+                        id="servingNumber" 
+                        name="servingNumber" 
+                        placeholder="Ex. : 4"
+                        required />
+                </label>
+            </li>
+            <li>
+                <label for="servingName">
+                    <select name="servingName" id="servingName">
+                        <option value="">Type de portion</option>
+                        <option value="person">Personne(s)</option>
+                        <option value="piece">Parts(s)</option>
+                        <option value="liter">Litre(s)</option>
+                        <option value="cylinders">Vérine(s)</option>
+                    </select>
+                </label>
+            </li>
+        </ul>
+    </app-multiple-inputs>
+
+    
+    <!-- Étapes et ingrédients -->
+    <app-steps-ingredients-inputs />
+
+    <hr class="createRecipeLine">
+
+    <!-- Types de cuisson -->
+     <app-cooking-type />
+
+    <!-- Difficulté -->
+    <app-difficulty />
+        
+</form>

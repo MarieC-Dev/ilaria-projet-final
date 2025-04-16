@@ -7,11 +7,15 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { ContactPageComponent } from './pages/contact-page/contact-page.component';
 import { CreateRecipesComponent } from './pages/create-recipes/create-recipes.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { ProfileFavoritesPageComponent } from './pages/profile-favorites-page/profile-favorites-page.component';
+import { ProfileRecipesPageComponent } from './pages/profile-recipes-page/profile-recipes-page.component';
 
 export const routes: Routes = [
     /* { path: '/recipe/:id', component: RecipeDetailsPage }, */
     { path: 'profil/creer-une-recette', component: CreateRecipesComponent },
-    { path: 'profil', component: ProfilePageComponent },
+    { path: 'profil/mes-recettes', component: ProfileRecipesPageComponent },
+    { path: 'profil/mes-favoris', component: ProfileFavoritesPageComponent },
+    { path: 'profil/mes-infos', component: ProfilePageComponent },
     { path: 'accueil', component: HomePageComponent },
     { path: 'recettes', component: RecipeDetailsPage },
     { path: 'connexion', component: SigninPageComponent },

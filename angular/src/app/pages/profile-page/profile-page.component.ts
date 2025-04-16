@@ -3,10 +3,16 @@ import { FormInputComponent } from "../../components/form-components/form-input/
 import { RecipeItemComponent } from "../../components/recipe-item/recipe-item.component";
 import { RECIPE_LIST } from '../../lists/recipe-list.fake';
 import { RecipeAverageService } from '../../services/recipe-average.service';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-profile-page',
-  imports: [FormInputComponent, RecipeItemComponent],
+  imports: [
+    FormInputComponent, 
+    RecipeItemComponent, 
+    RouterLink, 
+    RouterLinkActive
+  ],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.scss'
 })

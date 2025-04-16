@@ -1,11 +1,26 @@
 <div class="profilePage">
     <section class="profileLinksSection">
-        <button type="button" class="btn-bg-darkGrey">
-            <a href="">Mes favoris</a>
-        </button>
-        <button type="button" class="btn-bg-darkGrey btn-bg-darkGrey__border">
-            <a href="">Mes recettes</a>
-        </button>
+        <a 
+            class="btn-bg-darkGrey"
+            routerLink="/profil/mes-infos" 
+            routerLinkActive="btn-bg-darkGrey__border" 
+            ariaCurrentWhenActive="page">
+            Mon profil
+        </a>
+        <a 
+            class="btn-bg-darkGrey"
+            routerLink="/profil/mes-favoris" 
+            routerLinkActive="btn-bg-darkGrey__border" 
+            ariaCurrentWhenActive="page">
+            Mes favoris
+        </a>
+        <a 
+            class="btn-bg-darkGrey"
+            routerLink="/profil/mes-recettes" 
+            routerLinkActive="btn-bg-darkGrey__border" 
+            ariaCurrentWhenActive="page">
+            Mes recettes
+        </a>
     </section>
 
     <section class="profileSection">

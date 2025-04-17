@@ -92,3 +92,11 @@
         background-repeat: no-repeat;
     }
 }
+
+@mixin svgStyle($size, $color) {
+    svg {
+        width: $size;
+        height: $size;
+        fill: $color;
+    }
+}

@@ -1,4 +1,5 @@
 @use '../../utils/variables' as *;
+@use '../../utils/mixins' as *;
 
 .myfavorites-myrecipes {
     h2 {
@@ -26,6 +27,8 @@
                 width: 36px;
                 height: 36px;
                 margin-left: 2rem;
+
+                @include svgStyle(32px, $firstColor);
             }
         }
     }

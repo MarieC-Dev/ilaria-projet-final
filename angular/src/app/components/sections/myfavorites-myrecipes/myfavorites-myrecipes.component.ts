@@ -7,10 +7,11 @@ import { ChevronDownIconComponent } from "../../icons/chevron-down-icon/chevron-
 import { COLORS } from '../../icons/colors';
 import { ModifyIconComponent } from "../../icons/modify-icon/modify-icon.component";
 import { DeleteIconComponent } from "../../icons/delete-icon/delete-icon.component";
+import { SearchIconComponent } from "../../icons/search-icon/search-icon.component";
 
 @Component({
   selector: 'app-myfavorites-myrecipes',
-  imports: [CommonModule, RecipeItemComponent, ChevronDownIconComponent, JsonPipe, ModifyIconComponent, DeleteIconComponent],
+  imports: [CommonModule, RecipeItemComponent, ChevronDownIconComponent, JsonPipe, ModifyIconComponent, DeleteIconComponent, SearchIconComponent],
   templateUrl: './myfavorites-myrecipes.component.html',
   styleUrl: './myfavorites-myrecipes.component.scss'
 })

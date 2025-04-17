@@ -1,4 +1,5 @@
 @use '../utils/variables' as *;
+@use '../utils/mixins' as *;
 
 header {
     display: flex;
@@ -19,10 +20,7 @@ header {
         justify-content: space-between;
         align-items: center;
 
-        img {
-            width: auto;
-            height: 24px;
-        }
+        @include svgStyle(24px, $firstColor);
 
         a {
             margin-left: 2.5rem;

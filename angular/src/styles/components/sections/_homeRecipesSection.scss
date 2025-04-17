@@ -27,10 +27,7 @@
                 background-color: #FAF4F4;
                 border-radius: .5rem;
 
-                img {
-                    width: auto;
-                    height: 20px;
-                }
+                @include svgStyle(20px, $darkGrey);
 
                 input {
                     width: 100%;

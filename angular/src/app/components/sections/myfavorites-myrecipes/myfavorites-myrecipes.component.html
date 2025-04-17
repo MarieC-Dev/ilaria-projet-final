@@ -1,7 +1,7 @@
 <section class="myfavorites-myrecipes">
     <h2>{{ title() }}</h2>
 
-    <form>
+    <form *ngIf="isFavorites()">
         <div class="searchMyfavoritesMyrecipesDiv">
             <input 
                 type="text" 
@@ -9,7 +9,7 @@
                 id="searchMyfavorites" 
                 placeholder="Rechercher parmi les favoris">
             <button type="button">
-                <img src="search.svg" alt="search icon">
+                <app-search-icon />
             </button>
         </div>
     </form>

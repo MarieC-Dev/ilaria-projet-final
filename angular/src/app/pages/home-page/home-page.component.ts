@@ -4,10 +4,11 @@ import { RecipesFilterComponent } from '../../components/recipes-filter/recipes-
 import { RECIPE_LIST } from '../../lists/recipe-list.fake';
 import { RecipeItemComponent } from '../../components/recipe-item/recipe-item.component';
 import { RecipeAverageService } from '../../services/recipe-average.service';
+import { SearchIconComponent } from "../../components/icons/search-icon/search-icon.component";
 
 @Component({
   selector: 'app-home-page',
-  imports: [PageSliderComponent, RecipesFilterComponent, RecipeItemComponent],
+  imports: [PageSliderComponent, RecipesFilterComponent, RecipeItemComponent, SearchIconComponent],
   templateUrl: './home-page.component.html',
   styleUrl: '../../../styles.scss'
 })

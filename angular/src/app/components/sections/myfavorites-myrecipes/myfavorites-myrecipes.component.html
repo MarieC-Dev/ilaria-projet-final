@@ -16,14 +16,17 @@
 
     <!-- @If FAVORITES : -->
     <div *ngIf="isFavorites()" class="myFavoritesDiv">
-        @for (fav of favoritesArray(); track fav.id) {
-            <app-recipe-item 
-                [id]="fav.id"
-                [picture]="fav.image"
-                [name]="fav.title"
-                [average]="getAverage(fav.id, favoritesArray())"
-                [numberOfVotes]="fav.opinions?.length" />
-        }
+        <div class="myFavoritesItems">
+            @for (fav of favoritesArray(); track fav.id) {
+                <app-recipe-item 
+                    [id]="fav.id"
+                    [picture]="fav.image"
+                    [name]="fav.title"
+                    [average]="getAverage(fav.id, favoritesArray())"
+                    [numberOfVotes]="fav.opinions?.length"
+                    [authorName]="fav.author.username" />
+            }
+        </div>
     </div>
 
     <!-- @If RECIPES : -->

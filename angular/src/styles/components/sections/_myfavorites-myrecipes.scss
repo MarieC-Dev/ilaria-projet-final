@@ -32,4 +32,12 @@
             }
         }
     }
+
+    .myFavoritesDiv {
+        margin-top: 3rem;
+
+        .myFavoritesItems {
+            @include gridRecipes(1fr 1fr 1fr);
+        }
+    }
 }

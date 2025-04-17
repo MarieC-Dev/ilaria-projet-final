@@ -5,17 +5,21 @@
         [title]="recipe.title"
         [description]="recipe.description"
         [authorName]="recipe.author.username"
-        [authorRecipesNumber]="recipe.author.numberOfRecipes">
+        [authorRecipesNumber]="recipe.author.numberOfRecipes"
+        [cuisineTypeId]="recipe.cuisineType.id"
+        [cuisineTypeName]="recipe.cuisineType.name"
+        [cuisineTypeSpicy]="recipe.cuisineType.isSpicy!.spicy"
+        [cuisineTypeSpicyLevel]="recipe.cuisineType.isSpicy?.level">
 
         <app-recipe-item-time
-            [makingHours]="2"
-            [makingMinutes]="30"
+            [makingHours]="recipe.makingTime.hours || 0"
+            [makingMinutes]="recipe.makingTime.minutes || 0"
             [cookingTime]="true"
-            [cookingHours]="1"
-            [cookingMinutes]="45"
+            [cookingHours]="recipe.cookingTime?.hours || 0"
+            [cookingMinutes]="recipe.cookingTime?.minutes || 0"
             [pauseTime]="true"
-            [pauseHours]="0"
-            [pauseMinutes]="15"
+            [pauseHours]="recipe.pauseTime?.hours || 0"
+            [pauseMinutes]="recipe.pauseTime?.minutes || 0"
             [servingNumber]="4"
             servingUnit="personnes" />
 

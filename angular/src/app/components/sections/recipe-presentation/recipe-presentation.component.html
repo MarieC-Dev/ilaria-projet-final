@@ -3,6 +3,18 @@
         <div class="wrapperImage">
             <img [src]="image()" alt="recipe picture">
         </div>
+
+        <div class="recipeCuisineType">
+            <p>Cuisine <span>Française</span></p>
+
+            <ul *ngIf="cuisineTypeSpicy()">
+                @for (icon of spicyLevel; track $index) {
+                    <li>
+                        <app-spicy-icon />
+                    </li>
+                }
+            </ul>
+        </div>
     
         <div class="recipeAuthor">
             <ul>

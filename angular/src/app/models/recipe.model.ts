@@ -44,12 +44,24 @@ export interface ServingNumber {
     unit: string
 }
 
+export interface CuisineType {
+    id: number,
+    name: string,
+    isSpicy?: SpicyCuisine
+}
+
+export interface SpicyCuisine {
+    spicy: boolean,
+    level?: number
+}
+
 export interface Recipe {
     id: number,
     image: string,
     title: string,
     description: string,
     cookingType: CookingTypeList,
+    cuisineType: CuisineType,
 
     makingTime: Time, // in minutes
     cookingTime?: Time,
@@ -58,8 +70,8 @@ export interface Recipe {
 
     servingNumber: ServingNumber,
 
-    average?: number,
-    numberOfVotes?: number,
+    average: number[],
+    numberOfVotes: number,
     author: User,
 
     ingredientsList: Ingredient[],

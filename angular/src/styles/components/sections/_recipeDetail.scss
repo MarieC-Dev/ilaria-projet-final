@@ -36,11 +36,25 @@ $sizeImgRecipe: 500px;
             }
         }
 
+        .recipeCuisineType {
+            display: flex;
+            margin: 1rem 0;
+            font-weight: 600;
+
+            p {
+                margin-right: 2rem;
+
+                span {
+                    color: $firstColor;
+                }
+            }
+
+            @include svgStyle(20px, $firstColor);
+        }
+
         .recipeAuthor {
             display: flex;
             justify-content: space-between;
-            padding: 1.5rem 0;
-            margin-top: 2rem;
     
             ul:first-child {
                 width: 50%;
@@ -101,7 +115,6 @@ $sizeImgRecipe: 500px;
             width: 100%;
             display: flex;
             justify-content: space-between;
-            margin-bottom: .5rem;
 
             hr {
                 margin: 1rem 0;

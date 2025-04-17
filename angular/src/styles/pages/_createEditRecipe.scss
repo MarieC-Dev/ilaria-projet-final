@@ -17,64 +17,71 @@
         text-align: center;
     }
 
-    #createRecipeImgDiv {
-        display: flex;
-        justify-content: center;
+    form {
+        #createRecipeImgDiv {
+            display: flex;
+            justify-content: center;
 
-        input {
-            margin-top: .5rem;
+            input {
+                margin-top: .5rem;
+            }
         }
-    }
 
-    hr.createRecipeLine {
-        width: 50%;
-        margin: 0 auto 3rem auto;
-        border: 1px solid $mediumGrey;
-    }
-
-    app-form-input div.formInputDiv {
-        margin-bottom: 3rem;
-
-        label {
-            font-size: 20px;
-            font-weight: 700;
+        hr.createRecipeLine {
+            width: 50%;
+            margin: 0 auto 3rem auto;
+            border: 1px solid $mediumGrey;
         }
-        input, textarea {
-            width: 80%;
-            max-height: 100px;
-        }
-    }
 
-    .inputsTimesDiv {
-        .inputsTimesCondition {
-            margin: 1rem 0;
+        app-form-input div.formInputDiv {
+            margin-bottom: 3rem;
+
             label {
-                display: flex;
-                align-items: center;
+                font-size: 20px;
+                font-weight: 700;
+            }
+            input, textarea {
+                width: 80%;
+                max-height: 100px;
+            }
+        }
 
+        .inputsTimesDiv {
+            .inputsTimesCondition {
+                margin: 1rem 0;
+                label {
+                    display: flex;
+                    align-items: center;
+
+                    input {
+                        width: 20px;
+                        height: 20px;
+                        margin: 0 .5rem 0 0;
+                    }
+                }
+            }
+
+            .inputsTime {
                 input {
-                    width: 20px;
-                    height: 20px;
-                    margin: 0 .5rem 0 0;
+                    margin-right: .5rem;
                 }
             }
         }
 
-        .inputsTime {
-            input {
-                margin-right: .5rem;
+        .totalTime {
+            margin: 0 0 3rem 0;
+            text-align: center;
+        }
+
+        #servingNumberInputs {
+            select {
+                width: 220px;
             }
         }
     }
 
-    .totalTime {
-        margin: 0 0 3rem 0;
-        text-align: center;
-    }
-
-    #servingNumberInputs {
-        select {
-            width: 220px;
-        }
+    button {
+        display: flex;
+        margin: 2rem auto 0 auto;
     }
 }

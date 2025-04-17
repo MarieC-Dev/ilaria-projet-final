@@ -1,0 +1,73 @@
+// _tableTag.scss
+@use '../utils/variables' as *;
+
+table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 1.5rem;
+    border-collapse: collapse;
+    border-radius: .5rem;
+    overflow: hidden;
+
+    thead, tbody {
+        width: 100%;
+
+        tr {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: .5rem 1.5rem;
+
+            th, td {
+                display: flex;
+                justify-content: center;
+                padding: 0 .5rem;
+                margin: 0 .5rem;
+            }
+
+            th:first-child, td:first-child,
+            th:last-child, td:last-child {
+                padding: 0;
+                margin: 0;
+            }
+
+            th:first-child, td:first-child {
+                justify-content: flex-start;
+            }
+
+            th:last-child, td:last-child {
+                justify-content: flex-end;
+            }
+
+            td {
+                button {
+                    margin: 0 !important;
+    
+                    svg {
+                        width: 32px;
+                        height: 40px;
+                        fill: $darkGrey;
+                    }
+    
+                    &:hover svg {
+                        fill: $firstColor;
+                    }
+                }
+            }
+        }
+    }
+
+    thead tr {
+        padding: 1rem 1.5rem;
+        background-color: $mediumGrey;
+        color: white;
+    }
+
+    tbody {
+        tr:nth-child(even) {
+            background-color: $lightGrey;
+        }
+    }
+}

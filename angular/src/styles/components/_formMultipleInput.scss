@@ -34,14 +34,18 @@
                     margin-top: .5rem;
                     background-color: white;
                     color: $darkGrey;
-                    border: 2px solid $darkGrey;
+                    border: 2px solid $mediumGrey;
                 }
                 @include arrowsSelectStyle($darkGrey, $isTall: true);
             }
         }
 
-        button {
-            margin: 1.5rem auto 0 auto;
+        .stepsIngredientsBtn {
+            padding: .5rem 1.5rem;
+            margin: .5rem 0 0 0;
+            font-size: 24px;
+            font-weight: 700;
+            border-radius: 1rem;
         }
     }
 }

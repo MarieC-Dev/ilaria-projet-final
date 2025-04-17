@@ -1,6 +1,7 @@
 @use '../utils/variables' as *;
+@use '../utils/mixins' as *;
 
-.recipe {
+.recipeItem {
     width: auto;
     height: max-content;
     display: flex;
@@ -25,14 +26,17 @@
                 position: relative;
             }
         }
+    }
 
-        // TODO pb svg non hover car on ne voit pas le code du ficheir
-        .favoriteIcon {
-            height: 20px;
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 5;
+    @include svgStyle(32px, white);
+    svg {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 5;
+
+        &:hover {
+            fill: $secondColor;
         }
     }
 

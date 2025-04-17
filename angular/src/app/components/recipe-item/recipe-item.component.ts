@@ -1,8 +1,9 @@
 import { Component, input } from '@angular/core';
+import { HeartIconComponent } from "../icons/heart-icon/heart-icon.component";
 
 @Component({
   selector: 'app-recipe-item',
-  imports: [],
+  imports: [HeartIconComponent],
   templateUrl: './recipe-item.component.html',
   styleUrl: '../../../styles.scss'
 })

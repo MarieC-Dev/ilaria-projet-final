@@ -266,7 +266,7 @@ select {
   margin-left: 1rem;
 }
 
-.recipe {
+.recipeItem {
   width: auto;
   height: max-content;
   display: flex;

@@ -1,20 +1,22 @@
-<a href="/recipe" class="recipe" [id]="id()">
+<div class="recipeItem" [id]="id()">
     <div>
         <div class="wrapperImg">
             <img [src]="picture()" alt="recipe picture">
         </div>
-        <img class="favoriteIcon" src="heart.svg" alt="heart icon">
+        <app-heart-icon />
     </div>
 
-    <h4>{{ name() }}</h4>
-
-    <ul>
-        <li>
-            <img src="star.svg" alt="icon star">
-            <p>{{ average() }}({{ numberOfVotes() }})</p>
-        </li>
-        <li>
-            by {{ authorName() }}
-        </li>
-    </ul>
-</a>
+    <a href="/recipe">
+        <h4>{{ name() }}</h4>
+        
+        <ul>
+            <li>
+                <img src="star.svg" alt="icon star">
+                <p>{{ average() }}({{ numberOfVotes() }})</p>
+            </li>
+            <li>
+                by {{ authorName() }}
+            </li>
+        </ul>
+    </a>
+</div>

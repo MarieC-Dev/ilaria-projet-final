@@ -1,7 +1,7 @@
 <!-- Liste Ingrédients -->
 <app-multiple-inputs
     labelTitle="Liste des ingrédients :"
-    inputId="ingredientInputs"
+    inputId="ingredientsListInputs"
     [required]="true">
     <ul>
         <li>
@@ -39,16 +39,44 @@
 
     <button type="button" class="btn-bg-red">Ajouter</button>
 
-    <ul class="stepsIngredientsList">
-        <li>1. Casser les oeufs et les ajouter dans le saladier</li>
-        <li>2. Faire fondre le beurre à feu doux</li>
-    </ul>
+    <table class="stepsIngredientsList stepsIngredientsList__ingredientsList">
+        <thead>
+            <tr>
+                <th>Quantité</th>
+                <th>Unités</th>
+                <th>Ingrédients</th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>00</td>
+                <td>Cuillère à soupe</td>
+                <td>Ingrédients</td>
+                <td>
+                    <button type="button">
+                        <app-delete-icon />
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>00</td>
+                <td>Cuillère à soupe</td>
+                <td>Ingrédients</td>
+                <td>
+                    <button type="button">
+                        <app-delete-icon />
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </app-multiple-inputs>
 
 <!-- Liste Étape -->
 <app-multiple-inputs
     labelTitle="Étapes de la recette :"
-    inputId="stepsInputs"
+    inputId="stepsListInputs"
     [required]="true">
     <ul>
         <li>
@@ -72,10 +100,35 @@
     </ul>
     <button type="button" class="btn-bg-red">Ajouter</button>
 
-    <ul class="stepsIngredientsList">
-        <li>1. Casser les oeufs et les ajouter dans le saladier</li>
-        <li>2. Faire fondre le beurre à feu doux</li>
-    </ul>
+    <table class="stepsIngredientsList stepsIngredientsList__stepsList">
+        <thead>
+            <tr>
+                <th>N°</th>
+                <th>Nom de l'étape</th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>00</td>
+                <td>Ingrédients</td>
+                <td>
+                    <button type="button">
+                        <app-delete-icon />
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>00</td>
+                <td>Ingrédients</td>
+                <td>
+                    <button type="button">
+                        <app-delete-icon />
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </app-multiple-inputs>
 
 <!-- TODO : Gérer les required -> il doit y avoir au moins 2 étapes -->

@@ -7,9 +7,7 @@
         [authorName]="recipe.author.username"
         [authorRecipesNumber]="recipe.author.numberOfRecipes"
         [cuisineTypeId]="recipe.cuisineType.id"
-        [cuisineTypeName]="recipe.cuisineType.name"
-        [cuisineTypeSpicy]="recipe.cuisineType.isSpicy!.spicy"
-        [cuisineTypeSpicyLevel]="recipe.cuisineType.isSpicy?.level">
+        [cuisineTypeName]="recipe.cuisineType.name">
 
         <app-recipe-item-time
             [makingHours]="recipe.makingTime.hours || 0"

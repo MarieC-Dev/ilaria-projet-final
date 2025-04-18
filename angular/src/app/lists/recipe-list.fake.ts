@@ -213,10 +213,6 @@ export const RECIPE_LIST: RecipeList = [
         cuisineType: {
             id: 0,
             name: 'française',
-            isSpicy: {
-                spicy: true,
-                level: 1, // if false : hide
-            },
         },
 
         makingTime: {

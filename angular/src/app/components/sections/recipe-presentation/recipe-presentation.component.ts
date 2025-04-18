@@ -17,8 +17,4 @@ export class RecipePresentationComponent {
 
   cuisineTypeId = input.required<number>();
   cuisineTypeName = input.required<string>();
-  cuisineTypeSpicy = input.required<boolean>();
-  cuisineTypeSpicyLevel = input<number>();
-  spicyLevel = Array(this.cuisineTypeSpicyLevel());
-
 }

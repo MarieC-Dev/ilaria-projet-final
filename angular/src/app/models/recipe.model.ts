@@ -47,12 +47,6 @@ export interface ServingNumber {
 export interface CuisineType {
     id: number,
     name: string,
-    isSpicy?: SpicyCuisine
-}
-
-export interface SpicyCuisine {
-    spicy: boolean,
-    level?: number
 }
 
 export interface Recipe {

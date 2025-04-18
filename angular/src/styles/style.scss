@@ -8,7 +8,6 @@
 
 // COMPONENTS
 @use './components/buttons';
-@use './components/select';
 @use './components/topHomePage';
 @use './components/recipeItem';
 @use './components/navHomePage';
@@ -22,6 +21,7 @@
 @use './components/myRecipesTable';
 @use './components/stepsIngredientsList';
 @use './components/tableTag';
+@use './components/searchForm';
 
 // COMPONENTS - SECTIONS
 @use './components/sections/recipeDetail';

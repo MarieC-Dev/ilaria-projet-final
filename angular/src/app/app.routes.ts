@@ -10,6 +10,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { ProfileFavoritesPageComponent } from './pages/profile-favorites-page/profile-favorites-page.component';
 import { ProfileRecipesPageComponent } from './pages/profile-recipes-page/profile-recipes-page.component';
 import { EditRecipePageComponent } from './pages/edit-recipe-page/edit-recipe-page.component';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
 
 export const routes: Routes = [
     /* { path: '/recipe/:id', component: RecipeDetailsPage }, */
@@ -23,6 +24,7 @@ export const routes: Routes = [
     { path: 'connexion', component: SigninPageComponent },
     { path: 'inscription', component: SignupPageComponent },
     { path: 'contact', component: ContactPageComponent },
+    { path: 'rechercher', component: SearchPageComponent },
     { path: '', redirectTo: 'accueil', pathMatch: 'full' },
     { path: '**', component: NotFoundPageComponent },
 ];

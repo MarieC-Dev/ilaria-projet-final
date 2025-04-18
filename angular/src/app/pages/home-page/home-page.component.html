@@ -15,16 +15,8 @@
         <app-recipes-filter />
 
         <div class="recipesContainer">
-            <form class="recipesHeader">
-                <label for="recipesSearch">
-                    <app-search-icon />
-                    <input type="text" name="recipesSearch" id="recipesSearch" placeholder="Search for recipes...">
-                </label>
-                <select name="sortBy" id="sortBy">
-                    <option value="latest">Sort by: Latest</option>
-                    <option value="latest">Sort by: Older</option>
-                </select>
-            </form>
+            <!-- recipesHeader -->
+            <app-search-form addClass="recipesHeader" />
 
             <div class="recipesList">
                 @for (recipe of recipesList(); track recipe.id;) {

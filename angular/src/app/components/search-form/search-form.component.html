@@ -1,0 +1,11 @@
+<form [class]="'searchFormComponent ' + addClass()">
+    <label for="recipesSearch">
+        <app-search-icon />
+        <input type="text" name="recipesSearch" id="recipesSearch" placeholder="Search for recipes...">
+    </label>
+    <select name="sortBy" id="sortBy">
+        <option value="">Trier par :</option>
+        <option value="latestToOld">Du + récent au + vieux</option>
+        <option value="oldToLastest">Du + vieux au + récent</option>
+    </select>
+</form>

@@ -6,10 +6,11 @@ import { RecipeItemComponent } from '../../components/recipe-item/recipe-item.co
 import { RecipeAverageService } from '../../services/recipe-average.service';
 import { SearchIconComponent } from "../../components/icons/search-icon/search-icon.component";
 import { SearchFormComponent } from "../../components/search-form/search-form.component";
+import { SortBySelectComponent } from "../../components/sort-by-select/sort-by-select.component";
 
 @Component({
   selector: 'app-home-page',
-  imports: [PageSliderComponent, RecipesFilterComponent, RecipeItemComponent, SearchIconComponent, SearchFormComponent],
+  imports: [PageSliderComponent, RecipesFilterComponent, RecipeItemComponent, SearchIconComponent, SearchFormComponent, SortBySelectComponent],
   templateUrl: './home-page.component.html',
   styleUrl: '../../../styles.scss'
 })

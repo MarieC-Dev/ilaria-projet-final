@@ -57,49 +57,49 @@
 
 @mixin arrowsSelectStyle($bgColor: $firstColor, $color, $isTall: false) {
     background-color: $bgColor;
-        color: $color;
-        border: 0;
-        
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        -webkit-appearance: none;
-        -moz-appearance: none;
+    color: $color;
+    border: 0;
+    
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 
-        background-image:
-            linear-gradient(45deg, transparent 50%, $color 50%),
-            linear-gradient(135deg, $color 50%, transparent 50%),
-            linear-gradient(45deg, transparent 50%, transparent 50% ),
-            linear-gradient(135deg, transparent 50%, $color 50% ),
-            linear-gradient(225deg, transparent 50%, $color 50%);
-        @if $isTall {
-            background-position:
-                calc(100% - 20px) calc(18px + 8px),
-                calc(100% - 15px) calc(18px + 8px),
-                calc(100% - 40px) 16px,
-                calc(100% - 20px) calc(20px + -2px),
-                calc(100% - 15px) calc(20px + -2px),
-                calc(100% - 40px) 16px;
-        } @else {
-            /* background-position:
-                calc(100% - 20px) calc(15px + 8px),
-                calc(100% - 15px) calc(15px + 8px),
-                calc(100% - 2.5em) 16px,
-                calc(100% - 20px) calc(17px + -2px),
-                calc(100% - 15px) calc(17px + -2px),
-                calc(100% - 2.5em) 16px; */
-            background-position: 
-                calc(100% - 20px) 28px, 
-                calc(100% - 15px) 28px, 
-                calc(100% - 2.5em) 16px, 
-                calc(100% - 20px) 19px, 
-                calc(100% - 15px) 19px, 
-                calc(100% - 2.5em) 16px !important;
-        }
-        background-size:
-            5px 5px,
-            5px 5px;
-        background-repeat: no-repeat;
+    background-image:
+        linear-gradient(45deg, transparent 50%, $color 50%),
+        linear-gradient(135deg, $color 50%, transparent 50%),
+        linear-gradient(45deg, transparent 50%, transparent 50% ),
+        linear-gradient(135deg, transparent 50%, $color 50% ),
+        linear-gradient(225deg, transparent 50%, $color 50%);
+    @if $isTall {
+        background-position:
+            calc(100% - 20px) calc(18px + 8px),
+            calc(100% - 15px) calc(18px + 8px),
+            calc(100% - 40px) 16px,
+            calc(100% - 20px) calc(20px + -2px),
+            calc(100% - 15px) calc(20px + -2px),
+            calc(100% - 40px) 16px;
+    } @else {
+        /* background-position:
+            calc(100% - 20px) calc(15px + 8px),
+            calc(100% - 15px) calc(15px + 8px),
+            calc(100% - 2.5em) 16px,
+            calc(100% - 20px) calc(17px + -2px),
+            calc(100% - 15px) calc(17px + -2px),
+            calc(100% - 2.5em) 16px; */
+        background-position: 
+            calc(100% - 20px) 28px, 
+            calc(100% - 15px) 28px, 
+            calc(100% - 2.5em) 16px, 
+            calc(100% - 20px) 19px, 
+            calc(100% - 15px) 19px, 
+            calc(100% - 2.5em) 16px !important;
+    }
+    background-size:
+        5px 5px,
+        5px 5px;
+    background-repeat: no-repeat;
 }
 
 @mixin svgStyle($size, $color) {

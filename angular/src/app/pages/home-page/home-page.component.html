@@ -16,7 +16,7 @@
 
         <div class="recipesContainer">
             <!-- recipesHeader -->
-            <app-search-form addClass="recipesHeader" />
+            <app-search-form addClass="recipesHeader" selectId="sortRecipes" />
 
             <div class="recipesList">
                 @for (recipe of recipesList(); track recipe.id;) {
@@ -39,11 +39,7 @@
     <section class="videosSection">
         <h2>Videos</h2>
 
-        <select name="sortVideos" id="sortVideos">
-            <option value="features">En vedette</option>
-            <option value="newest">+ récente</option>
-            <option value="oldest">- récente</option>
-        </select>
+        <app-sort-by-select selectId="sortVideos" />
 
         <!-- TODO home page videos is comment -->
         <!-- <div>

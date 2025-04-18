@@ -6,7 +6,9 @@
     padding: 0 3rem;
     margin-bottom: 6rem;
 
-    @include arrowsSelectStyle(white);
+    select {
+        @include arrowsSelectStyle($firstColor, white);
+    }
     
     .recipesContainer {
         width: 100%;

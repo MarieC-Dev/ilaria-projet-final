@@ -45,8 +45,8 @@
             background-color: white;
             color: $darkGrey;
             border: 2px solid $mediumGrey;
+            @include arrowsSelectStyle(white, $darkGrey, $isTall: true);
         }
-        @include arrowsSelectStyle($darkGrey, $isTall: true);
 
         .stepsIngredientsBtn {
             padding: .5rem 1.5rem;

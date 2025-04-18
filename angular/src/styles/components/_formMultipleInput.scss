@@ -5,10 +5,18 @@
     margin-bottom: 0;
 
     .multipleInputs {
+        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
         margin-bottom: 3rem;
+
+        label {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
         ul {
             display: flex;
@@ -27,18 +35,18 @@
                         margin: 0;
                     }
                 }
-
-                select {
-                    height: max-content;
-                    padding: 1rem 2rem;
-                    margin-top: .5rem;
-                    background-color: white;
-                    color: $darkGrey;
-                    border: 2px solid $mediumGrey;
-                }
-                @include arrowsSelectStyle($darkGrey, $isTall: true);
             }
         }
+
+        select {
+            height: max-content;
+            padding: 1rem 2rem;
+            margin-top: .5rem;
+            background-color: white;
+            color: $darkGrey;
+            border: 2px solid $mediumGrey;
+        }
+        @include arrowsSelectStyle($darkGrey, $isTall: true);
 
         .stepsIngredientsBtn {
             padding: .5rem 1.5rem;

@@ -33,14 +33,6 @@ $mobilePadding: .75rem 1.5rem;
     }
 }
 
-.btn-transparent {
-    padding: 1rem 2.5rem;
-
-    @media only screen and (max-width: 767px) {
-        padding: $mobilePadding;
-    }
-}
-
 .btn-bg-white {
     padding: 1rem 2.5rem;
     background-color: white;

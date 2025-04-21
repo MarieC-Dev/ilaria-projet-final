@@ -9,7 +9,6 @@ header {
 
     @media only screen and (max-width: 767px) {
         padding: 1rem 1.5rem;
-        margin-bottom: 1rem;
     }
 
     .navigationLeft {      
@@ -37,6 +36,7 @@ header {
             justify-content: flex-end;
 
             .btn-transparent {
+                padding: .75rem 1.5rem;;
                 margin: 0 2rem;
                 background-color: $firstColor;
                 color: white;
@@ -51,6 +51,10 @@ header {
             .btn-bg-red {
                 display: none;
             }
+        }
+
+        a {
+            margin-left: 2.5rem;
         }
     }
 

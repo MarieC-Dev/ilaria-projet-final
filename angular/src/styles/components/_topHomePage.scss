@@ -2,9 +2,11 @@
     padding: 0 3rem;
     margin-bottom: 5rem;
 
+    @media only screen and (max-width: 767px) {
+        padding: 2rem 1rem;
+    }
 
     .topHomePage {
-        //width: 100%;
         height: 520px;
         display: flex;
         flex-direction: column;
@@ -16,9 +18,18 @@
         background-repeat: no-repeat;
         color: white;
         border-radius: 1.5rem;
+
+        @media only screen and (max-width: 767px) {
+            padding: 2rem;
+            background-position: top 0 center;
+        }
     
         h1 {
             width: 408px;
+
+            @media only screen and (max-width: 767px) {
+                width: auto;
+            }
         }
     
         p {
@@ -26,6 +37,12 @@
             font-size: 20px;
             line-height: 1.7;
             margin: 2rem 0;
+
+            @media only screen and (max-width: 767px) {
+                width: auto;
+                margin: 1.5rem 0;
+                line-height: auto;
+            }
         }
     
         button { 

@@ -14,6 +14,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            cursor: pointer;
             //border: 1px solid blue;
 
             div {
@@ -38,9 +39,13 @@
             padding-left: 1.5rem;
             margin-top: 1rem;
 
-            ul li {
-                padding: 1rem 0;
-            } 
+            ul {
+                margin-bottom: 1rem;
+
+                li {
+                    padding: 1rem 0;
+                } 
+            }
         }
     }
 }

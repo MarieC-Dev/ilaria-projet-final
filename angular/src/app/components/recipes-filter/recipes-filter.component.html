@@ -3,8 +3,8 @@
 
     <div class="filtersList">
         @for (filter of recipesFilter(); track filter.id) {
-            <ul class="navFilters" [id]="'filter' + filter.id" [appShowRecipesFilter]="'filter' + filter.id">
-                <li>
+            <ul class="navFilters" [id]="'filter' + filter.id">
+                <li [appShowRecipesFilter]="'filter' + filter.id">
                     <h3>{{ filter.title }}</h3>
                     <div>
                         <hr>

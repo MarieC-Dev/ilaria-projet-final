@@ -10,8 +10,7 @@ interface ShowCommentAnswersConfig {
   selector: '[appShowCommentAnswers]'
 })
 export class ShowCommentAnswersDirective {
-  /* @Input('appShowCommentAnswers') targetId!: string;
-  @Input('appShowCommentAnswers') checkBool!: boolean; */
+
   @Input('appShowCommentAnswers') 
   set config(value: ShowCommentAnswersConfig) {
     if (value) {

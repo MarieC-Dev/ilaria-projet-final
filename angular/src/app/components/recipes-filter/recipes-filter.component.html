@@ -1,46 +1,29 @@
 <nav class="recipesFilter">
     <h2>Recipes</h2>
 
-    <ul class="navFilters">
-        <li>
-            <h3>Dish Type</h3>
-            <div>
-                <hr>
-                <hr class="verticalLine">
-            </div>
-        </li>
-        <li>
-            <ul>
+    <div class="filtersList">
+        @for (filter of recipesFilter(); track filter.id) {
+            <ul class="navFilters" [id]="'filter' + filter.id" [appShowRecipesFilter]="'filter' + filter.id">
                 <li>
-                    <button type="button">Appetizers & Snacks</button>
+                    <h3>{{ filter.title }}</h3>
+                    <div>
+                        <hr>
+                        <hr class="verticalLine">
+                    </div>
                 </li>
-                <li>
-                    <button type="button">Bread Recipes</button>
+                <li class="navFiltersListItem">
+                    <ul>
+                        @for (item of filter.items; track item.id) {
+                            <li [id]="'filterItem' + item.id">
+                                <label [for]="item.value">
+                                    <input type="checkbox" [name]="item.value" [id]="item.value">
+                                    {{ item.title }}
+                                </label>
+                            </li>
+                        }
+                    </ul>
                 </li>
-                <li>
-                    <button type="button">Cake Recipes</button>
-                </li>
-                <li>
-                    <button type="button">Candy and Fudge</button>
-                </li>
-                <li>
-                    <button type="button">Casserole Recipes</button>
-                </li>
-                <li>
-                    <button type="button">Christmas Cookies</button>
-                </li>
-                <li>
-                    <button type="button">Cocktail Recipes</button>
-                </li>
-                <li>
-                    <button type="button">Main Dishes</button>
-                </li>
-                <li>
-                    <button type="button">Pasta Recipes</button>
-                </li>
-
-
             </ul>
-        </li>
-    </ul>
+        }
+    </div>
 </nav>

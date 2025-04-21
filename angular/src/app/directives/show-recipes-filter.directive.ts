@@ -1,0 +1,32 @@
+import { DOCUMENT } from '@angular/common';
+import { Directive, ElementRef, HostListener, inject, Inject, Input, OnInit, Renderer2 } from '@angular/core';
+
+@Directive({
+  selector: '[appShowRecipesFilter]'
+})
+export class ShowRecipesFilterDirective implements OnInit {
+  @Input('appShowRecipesFilter') id: string = '';
+
+  constructor(
+    private el: ElementRef,
+    @Inject(DOCUMENT) private document: Document,
+    private renderer: Renderer2
+  ) { }
+
+  ngOnInit(): void {
+    const getItemList: HTMLElement = this.document.querySelector(`#${this.id} .navFiltersListItem`)!;
+    console.log(getItemList.offsetHeight);
+    
+    this.renderer.setStyle(getItemList, 'max-height', '0');
+  }
+
+  @HostListener('click') onClick() {
+    const getItemList: HTMLElement = this.document.querySelector(`#${this.id} .navFiltersListItem`)!;
+
+    if(getItemList.offsetHeight === 2) {
+      this.renderer.setStyle(getItemList, 'max-height', 'max-content');      
+    } else {
+      this.renderer.setStyle(getItemList, 'max-height', '0');     
+    }    
+  }
+}

@@ -1,17 +1,20 @@
 .homeRecipesSection nav.recipesFilter {  
     width: 280px;
     padding: 0 2rem 0 0;
+    background-color: white;
 
     h2 {
         margin-bottom: 2.5rem;
     }
 
     .navFilters {
+        overflow: hidden;
+
         & > li:first-child {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
+            //border: 1px solid blue;
 
             div {
                 height: 14px;
@@ -31,8 +34,9 @@
             }
         }
 
-        & > li:last-child {
-            margin-left: 1rem;
+        .navFiltersListItem {
+            padding-left: 1.5rem;
+            margin-top: 1rem;
 
             ul li {
                 padding: 1rem 0;

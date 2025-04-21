@@ -18,19 +18,25 @@
             //border: 1px solid blue;
 
             div {
-                height: 14px;
+                width: 16px;
+                height: 16px;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
 
-                hr {
+                span {
                     width: 16px;
-                    border-bottom: 1px solid black;
+                    height: 2px;
+                    background-color: black;
+                    border: 0;
+                    position: absolute;
+
+                    transition: transform .2s ease-in-out;
                 }
 
-                hr.verticalLine {
-                    transform: rotate(90deg) translateX(-2px);
+                span.verticalLine {
+                    transform: rotate(-90deg);
                 }
             }
         }

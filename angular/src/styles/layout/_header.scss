@@ -7,8 +7,18 @@ header {
     align-items: center;
     padding: 2rem 5rem;
 
+    @media only screen and (max-width: 767px) {
+        padding: 1rem 1.5rem;
+        margin-bottom: 1rem;
+    }
+
     .navigationLeft {      
-        display: flex;      
+        display: flex;
+        
+        @media only screen and (max-width: 767px) {
+            display: none;
+            flex-direction: column;
+        }
 
         li {
             margin-right: 2rem;
@@ -22,8 +32,25 @@ header {
 
         @include svgStyle(24px, $darkGrey);
 
-        a {
-            margin-left: 2.5rem;
+        @media only screen and (max-width: 767px) {
+            width: 100%;
+            justify-content: flex-end;
+
+            .btn-transparent {
+                margin: 0 2rem;
+                background-color: $firstColor;
+                color: white;
+                border: 2px solid $firstColor;
+                border-radius: 3rem;
+
+                &.active {
+                    background-color: white;
+                }
+            }
+
+            .btn-bg-red {
+                display: none;
+            }
         }
     }
 
@@ -39,4 +66,5 @@ header {
     a.btn-bg-red.active {
         background-color: white;
     }
+
 }

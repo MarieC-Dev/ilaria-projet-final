@@ -1,0 +1,19 @@
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+header .burgerMenu {
+    display: none;
+
+    @media only screen and (max-width: 767px) {
+        height: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        span {
+            width: 40px;
+            border: 3px solid $darkGrey;
+            border-radius: 1rem;
+        }
+    }
+}

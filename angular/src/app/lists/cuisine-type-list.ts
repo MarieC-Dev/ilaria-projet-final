@@ -4,54 +4,54 @@ export const CUISINE_TYPE = [
     {
         id: index++,
         value: 'french',
-        name: 'Française'
+        title: 'Française'
     }, {
         id: index++,
         value: 'italian',
-        name: 'Italienne'
+        title: 'Italienne'
     }, {
         id: index++,
         value: 'spanish',
-        name: 'Espagnole'
+        title: 'Espagnole'
     }, {
         id: index++,
         value: 'asiatic',
-        name: 'Asiatique'
+        title: 'Asiatique'
     }, {
         id: index++,
         value: 'indian',
-        name: 'Indienne'
+        title: 'Indienne'
     }, {
         id: index++,
         value: 'european',
-        name: 'Européenne'
+        title: 'Européenne'
     }, {
         id: index++,
         value: 'north-african',
-        name: 'Maghrébine'
+        title: 'Maghrébine'
     }, {
         id: index++,
         value: 'african',
-        name: 'Africaine'
+        title: 'Africaine'
     }, {
         id: index++,
         value: 'grecian',
-        name: 'Grecque'
+        title: 'Grecque'
     }, {
         id: index++,
         value: 'north-american',
-        name: 'Nord américaine'
+        title: 'Nord américaine'
     }, {
         id: index++,
         value: 'north-american',
-        name: 'Sud américaine'
+        title: 'Sud américaine'
     }, {
         id: index++,
         value: 'russian',
-        name: 'Russe'
+        title: 'Russe'
     }, {
         id: index++,
         value: 'australian',
-        name: 'Australienne'
+        title: 'Australienne'
     }, 
 ]

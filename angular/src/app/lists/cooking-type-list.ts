@@ -4,14 +4,14 @@ let index: number = 0;
 
 export const COOKING_TYPE_LIST: CookingTypeList = [
     {
-      id: index++,
-      inputId: 'hotPlate',
-      image: 'hot-plate.svg',
-      altImage: 'hot plate',
-      title: 'Plaque chauffante',
-      checked: false,
-      value: 'hot plate',
-      required: false,
+        id: index++,
+        inputId: 'hotPlate',
+        image: 'hot-plate.svg',
+        altImage: 'hot plate',
+        title: 'Plaque chauffante',
+        checked: false,
+        value: 'hot plate',
+        required: false,
     }, {
         id: index++,
         inputId: 'stove',

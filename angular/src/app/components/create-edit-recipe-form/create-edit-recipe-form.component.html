@@ -31,7 +31,7 @@
             <select name="selectCuisineType" id="selectCuisineType">
                 <option value="">---</option>
                 @for (ct of cuisineTypeList(); track ct.id) {
-                    <option [value]="ct.value">{{ ct.name }}</option>
+                    <option [value]="ct.value">{{ ct.title }}</option>
                 }
             </select>
         </label>

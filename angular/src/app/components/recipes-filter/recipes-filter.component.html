@@ -1,15 +1,21 @@
 <nav class="recipesFilter">
-    <h2>Recipes</h2>
+    <div class="filterHeader">
+        <h2>Filtres</h2>
+        <button type="button" appShowRecipesFilter btnType="burger">
+            <span class="burgerFirstLine"></span>
+            <span class="burgerSecondLine"></span>
+        </button>
+    </div>
 
     <div class="filtersList">
         @for (filter of recipesFilter(); track filter.id) {
             <ul class="navFilters" [id]="'filter' + filter.id">
-                <li [appShowRecipesFilter]="'filter' + filter.id">
+                <li [appShowRecipesFilter]="'filter' + filter.id" btnType="plus">
                     <h3>{{ filter.title }}</h3>
-                    <div>
+                    <button type="button">
                         <span class="horizontalLine"></span>
                         <span class="verticalLine"></span>
-                    </div>
+                    </button>
                 </li>
                 <li class="navFiltersListItem">
                     <ul>

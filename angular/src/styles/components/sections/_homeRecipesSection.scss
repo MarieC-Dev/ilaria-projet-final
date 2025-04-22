@@ -9,6 +9,11 @@
     select {
         @include arrowsSelectStyle($firstColor, white);
     }
+
+    @media only screen and (max-width: 767px) {
+        flex-direction: column;
+        padding: 0 1rem;
+    }
     
     .recipesContainer {
         width: 100%;
@@ -21,6 +26,11 @@
 
         .recipesList {
             @include gridRecipes(1fr 1fr 1fr);
+
+            @media only screen and (max-width: 767px) {
+                display: flex;
+                flex-direction: column;
+            }
         }
     }
 }

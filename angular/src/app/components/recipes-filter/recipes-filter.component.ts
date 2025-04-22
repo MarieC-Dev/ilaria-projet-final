@@ -10,5 +10,5 @@ import { ShowRecipesFilterDirective } from '../../directives/show-recipes-filter
 })
 export class RecipesFilterComponent {
   recipesFilter = signal(RECIPES_FILTER);
-  //showRecipesFilter = inject(ShowRecipesFilterDirective);
+
 }

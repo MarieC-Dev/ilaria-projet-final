@@ -75,20 +75,6 @@ export class ShowRecipesFilterDirective implements OnInit {
     const plusIcon: HTMLElement = this.document.querySelector(`#${this.id} .verticalLine`)!;
     // TODO Gérer la version desktop
 
-    console.log('Hauteur de la liste avec items', getItemList.scrollHeight);
-    console.log('Hauteur total', filtersListDiv.scrollHeight + getItemList.scrollHeight);
-
-    /*
-      1er : 515,5
-      2eme : 196
-      3eme : 231,5
-
-      Header : 36,5 + 16 = 52,5
-
-      1er : 515,5 + 52,5 = 568
-    */
-    
-
     const initPlus = () => {
       this.setMaxHeightAnimation(getItemList, 0, 0.4 * getItemList.childNodes.length);
       this.setTransformAnimation(plusIcon, 'translateY(-2px) rotate(-90deg)');

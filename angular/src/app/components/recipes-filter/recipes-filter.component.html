@@ -1,7 +1,7 @@
 <nav class="recipesFilter">
-    <div class="filterHeader">
+    <div class="filterHeader" appShowRecipesFilter buttonType="burger">
         <h2>Filtres</h2>
-        <button type="button" appShowRecipesFilter btnType="burger">
+        <button type="button">
             <span class="burgerFirstLine"></span>
             <span class="burgerSecondLine"></span>
         </button>
@@ -10,7 +10,7 @@
     <div class="filtersList">
         @for (filter of recipesFilter(); track filter.id) {
             <ul class="navFilters" [id]="'filter' + filter.id">
-                <li [appShowRecipesFilter]="'filter' + filter.id" btnType="plus">
+                <li appShowRecipesFilter [navFiltersId]="'filter' + filter.id" buttonType="plus">
                     <h3>{{ filter.title }}</h3>
                     <button type="button">
                         <span class="horizontalLine"></span>

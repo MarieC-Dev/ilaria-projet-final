@@ -24,6 +24,10 @@
         display: flex;
         justify-content: $justify;
         margin: $marginUl;
+
+        @media only screen and (max-width: 767px) {
+            justify-content: center;
+        }
     
         li, li a {
             display: flex;

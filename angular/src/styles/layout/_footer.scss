@@ -7,6 +7,11 @@ footer {
     padding: 5rem;
     background-color: white;
 
+    @media only screen and (max-width: 767px) {
+        width: auto;
+        padding: 3rem 1rem;
+    }
+
     @include socialNetworks(
         flex-end, // justify-content
         0 auto, // margin ul
@@ -18,8 +23,14 @@ footer {
 
     .socialNetworks {
         width: $sectionWidth;
-        justify-content: flex-end;
-        margin: 0 auto;
+
+        @media only screen and (max-width: 767px) {
+            width: auto;
+
+            li {
+                margin: 0 0 1rem .5rem;
+            }
+        }
 
         li {
             margin: 0 0 2rem 1.5rem;
@@ -31,6 +42,11 @@ footer {
         display: flex;
         justify-content: space-between;
         margin: 0 auto;
+
+        @media only screen and (max-width: 767px) {
+            width: auto;
+            flex-direction: column;
+        }
 
         ul {
             display: flex;
@@ -49,5 +65,10 @@ footer {
         margin: 2rem auto 0 auto;
         font-weight: 500;
         color: $mediumGrey;
+
+        @media only screen and (max-width: 767px) {
+            width: auto;
+            margin: 1rem auto 0 auto;
+        }
     }
 }

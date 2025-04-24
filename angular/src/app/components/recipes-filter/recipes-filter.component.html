@@ -9,8 +9,8 @@
 
     <div class="filtersList">
         @for (filter of recipesFilter(); track filter.id) {
-            <ul class="navFilters" [id]="'filter' + filter.id">
-                <li appShowRecipesFilter [navFiltersId]="'filter' + filter.id" buttonType="plus">
+            <ul class="ulFilters" [id]="'filter' + filter.id">
+                <li appShowRecipesFilter [ulFiltersId]="'filter' + filter.id" buttonType="plus">
                     <h3>{{ filter.title }}</h3>
                     <button type="button">
                         <span class="horizontalLine"></span>

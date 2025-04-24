@@ -5,75 +5,74 @@ import { Directive, HostListener, Inject, Input, OnInit, Renderer2 } from '@angu
   selector: '[appShowRecipesFilter]'
 })
 export class ShowRecipesFilterDirective implements OnInit {
-  @Input() navFiltersId: string = '';
+  @Input() ulFiltersId: string = '';
   @Input() buttonType: 'burger' | 'plus' = 'plus';
 
   private burgerBtnState: boolean = false;
   private plusBtnState: boolean = false;
 
+  // CONSTRUCTOR
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2
   ) { }
 
-  ngOnInit(): void {
-    const burgerBtn: HTMLElement = this.document.querySelector('.filterHeader button')!;
-    const burgerDisplay = getComputedStyle(burgerBtn).display;
+  // NG ON INIT
+  ngOnInit(): void {    
+    this.onClickBurgerBtn();
 
-    if(this.burgerBtnState) {
-      this.onClickBurgerBtn();
-    }
-
-    if(this.navFiltersId) {
-      this.onClickPlusBtn(this.navFiltersId);
+    if(this.ulFiltersId) {
+      this.onClickPlusBtn(this.ulFiltersId);
     }
   }
 
+  // ON CLICK
   @HostListener('click') onClick() {
     if(this.buttonType === 'burger') {
       this.burgerBtnState = !this.burgerBtnState;
       this.onClickBurgerBtn();
     } else if(this.buttonType === 'plus') {
       this.plusBtnState = !this.plusBtnState;
-      this.onClickPlusBtn(this.navFiltersId);
+      this.onClickPlusBtn(this.ulFiltersId);
     } else {
       throw new Error('The button has no directive');
     }
   }
 
-  // HANDLE BURGER BUTTON
+  // ON CLICK BURGER BUTTON method
   onClickBurgerBtn() {
+    const burgerBtn: HTMLElement = this.document.querySelector('.filterHeader button')!;
+    const burgerDisplayState = getComputedStyle(burgerBtn).display;
+
     const filtersListDiv: HTMLElement = this.document.querySelector('div.filtersList')!;
     const burgerBtnFirstLine: HTMLElement = this.document.querySelector('.filterHeader button span.burgerFirstLine')!;
     const burgerBtnSecondLine: HTMLElement = this.document.querySelector('.filterHeader button span.burgerSecondLine')!;
     const translate: number = 6;
     const degree: number = 45;
 
-    const initBurger = () => {
-      this.setMaxHeightAnimation(filtersListDiv, 0, 0.1 * filtersListDiv.childNodes.length);
-      this.renderer.setStyle(burgerBtnFirstLine, 'transform', `translateY(0) rotate(0)`);
-      this.renderer.setStyle(burgerBtnSecondLine, 'transform', `translateY(0) rotate(0)`);
-    }
+    if(burgerDisplayState !== 'none') { // burger btn display flex, block, etc... -> MOBILE
+      this.renderer.setStyle(filtersListDiv, 'transition', `max-height ${0.1 * filtersListDiv.childNodes.length}s ease-in-out`);
 
-    const setInitBurger = () => {
-      this.setMaxHeightAnimation(filtersListDiv, filtersListDiv.scrollHeight, 0.1 * filtersListDiv.childNodes.length);
-      this.renderer.setStyle(burgerBtnFirstLine, 'transform', `translateY(${translate}px) rotate(-${degree}deg)`);
-      this.renderer.setStyle(burgerBtnSecondLine, 'transform', `translateY(-${translate}px) rotate(${degree}deg)`);
-    }
-    
-    if(filtersListDiv.offsetHeight === 0 && this.burgerBtnState) {
-      setInitBurger();     
-    } else {
-      initBurger();
+      if(this.burgerBtnState) {
+        this.renderer.setStyle(filtersListDiv, 'max-height', `${filtersListDiv.scrollHeight}px`);   
+
+        this.renderer.setStyle(burgerBtnFirstLine, 'transform', `translateY(${translate}px) rotate(-${degree}deg)`);
+        this.renderer.setStyle(burgerBtnSecondLine, 'transform', `translateY(-${translate}px) rotate(${degree}deg)`);
+      } else {
+        this.renderer.setStyle(filtersListDiv, 'max-height', '0');   
+        this.renderer.setStyle(burgerBtnFirstLine, 'transform', `translateY(0px) rotate(0deg)`);
+        this.renderer.setStyle(burgerBtnSecondLine, 'transform', `translateY(0px) rotate(0deg)`);
+      }
+    } else { // burger btn display none -> DESKTOP
+      this.renderer.setStyle(filtersListDiv, 'max-height', 'auto');
     }
   }
 
-  // HANDLE PLUS BUTTONS (with ids)
+  // ON CLICK PLUS BUTTONS method (with ids)
   onClickPlusBtn(id: string) {
     const filtersListDiv: HTMLElement = this.document.querySelector('div.filtersList')!;
     const getItemList: HTMLElement = this.document.querySelector(`#${id} .navFiltersListItem`)!;
     const plusIcon: HTMLElement = this.document.querySelector(`#${id} .verticalLine`)!;
-    // TODO Gérer la version desktop
 
     const initPlus = () => {
       this.setMaxHeightAnimation(getItemList, 0, 0.4 * getItemList.childNodes.length);
@@ -81,8 +80,15 @@ export class ShowRecipesFilterDirective implements OnInit {
     }
 
     const setInitPlus = () => {
-      this.setMaxHeightAnimation(filtersListDiv, filtersListDiv.scrollHeight + getItemList.scrollHeight + 16, 0.4 * getItemList.childNodes.length);
-      this.setMaxHeightAnimation(getItemList, getItemList.scrollHeight, 0.4 * getItemList.childNodes.length);
+      this.setMaxHeightAnimation(
+        filtersListDiv, 
+        filtersListDiv.scrollHeight + getItemList.scrollHeight + 16, 
+        0.4 * getItemList.childNodes.length
+      );
+      this.setMaxHeightAnimation(
+        getItemList, 
+        getItemList.scrollHeight, 
+        0.4 * getItemList.childNodes.length);
       this.renderer.setStyle(plusIcon, 'transform', 'translateY(-2px) rotate(0)');
     }
 

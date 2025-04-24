@@ -40,10 +40,9 @@ form.searchFormComponent {
     }
 }
 
-.sortBySelect {
+select.sortBySelect {
     @include arrowsSelectStyle($firstColor, white);
-    width: 180px;
-    height: max-content;
+    
     display: flex;
     padding: 1rem 2rem;
     background-color: $firstColor;
@@ -52,11 +51,16 @@ form.searchFormComponent {
     border: 0;
     border-radius: 3rem;
 
-    background-position: 
-        calc(100% - 20px) 28px, 
-        calc(100% - 15px) 28px, 
-        calc(100% - 2.5em) 16px, 
-        calc(100% - 20px) 19px, 
-        calc(100% - 15px) 19px, 
-        calc(100% - 2.5em) 16px;
+    @media (min-width: 768px) {
+        width: 180px;
+        height: max-content;
+        background-position: 
+            calc(100% - 20px) 28px, 
+            calc(100% - 15px) 28px, 
+            calc(100% - 2.5em) 16px, 
+            calc(100% - 20px) 19px, 
+            calc(100% - 15px) 19px, 
+            calc(100% - 2.5em) 16px;
+    }
+
 }

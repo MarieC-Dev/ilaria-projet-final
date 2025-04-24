@@ -6,14 +6,37 @@
     padding: 0 3rem;
     margin-bottom: 6rem;
 
-    select {
-        @include arrowsSelectStyle($firstColor, white);
-    }
-
     @media only screen and (max-width: 767px) {
         flex-direction: column;
         padding: 0 1rem;
     }
+
+    .mobileRecipesFilter .recipesHeader {
+        display: none;
+
+        @media only screen and (max-width: 767px) {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+    }
+
+    select {
+        @include arrowsSelectStyle($firstColor, white);
+
+        @media only screen and (max-width: 767px) {
+            padding: .75rem 1.5rem;
+
+            background-position: 
+                calc(100% - 20px) 24px,
+                calc(100% - 15px) 24px,
+                calc(100% - 2.5em) 5px,
+                calc(100% - 20px) 15px,
+                calc(100% - 15px) 15px,
+                calc(100% - 2.5em) 5px;
+        }
+    }
+
+    
     
     .recipesContainer {
         width: 100%;

@@ -28,13 +28,13 @@ export class ShowRecipesFilterDirective implements OnInit {
 
   // ON CLICK
   @HostListener('click') onClick() {
-    if(this.buttonType === 'burger') {
+    if(this.buttonType === 'burger') { // Burger button type
       this.burgerBtnState = !this.burgerBtnState;
       this.onClickBurgerBtn();
-    } else if(this.buttonType === 'plus') {
+    } else if(this.buttonType === 'plus') { // Plus button type
       this.plusBtnState = !this.plusBtnState;
       this.onClickPlusBtn(this.ulFiltersId);
-    } else {
+    } else { // no type
       throw new Error('The button has no directive');
     }
   }
@@ -74,34 +74,25 @@ export class ShowRecipesFilterDirective implements OnInit {
     const getItemList: HTMLElement = this.document.querySelector(`#${id} .navFiltersListItem`)!;
     const plusIcon: HTMLElement = this.document.querySelector(`#${id} .verticalLine`)!;
 
-    const initPlus = () => {
-      this.setMaxHeightAnimation(getItemList, 0, 0.4 * getItemList.childNodes.length);
-      this.renderer.setStyle(plusIcon, 'transform', 'translateY(-2px) rotate(-90deg)');
+    const setMaxHeightAnimation = (elm: HTMLElement, height: number, duration: number) => {
+      this.renderer.setStyle(elm, 'max-height', `${height}px`);   
+      this.renderer.setStyle(elm, 'transition', `max-height ${duration}s ease-in-out`);
     }
 
-    const setInitPlus = () => {
-      this.setMaxHeightAnimation(
+    if(this.plusBtnState) {
+      setMaxHeightAnimation(
         filtersListDiv, 
         filtersListDiv.scrollHeight + getItemList.scrollHeight + 16, 
         0.4 * getItemList.childNodes.length
       );
-      this.setMaxHeightAnimation(
+      setMaxHeightAnimation(
         getItemList, 
         getItemList.scrollHeight, 
         0.4 * getItemList.childNodes.length);
       this.renderer.setStyle(plusIcon, 'transform', 'translateY(-2px) rotate(0)');
-    }
-
-    if(getItemList.offsetHeight === 0 && this.plusBtnState) {
-      setInitPlus();
     } else {
-      initPlus();
+      setMaxHeightAnimation(getItemList, 0, 0.4 * getItemList.childNodes.length);
+      this.renderer.setStyle(plusIcon, 'transform', 'translateY(-2px) rotate(-90deg)');
     }
-  }
-
-  /* Set styles methodes */
-  setMaxHeightAnimation(elm: HTMLElement, height: number, duration: number) {
-    this.renderer.setStyle(elm, 'max-height', `${height}px`);   
-    this.renderer.setStyle(elm, 'transition', `max-height ${duration}s ease-in-out`);
   }
 }

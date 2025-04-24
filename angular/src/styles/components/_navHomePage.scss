@@ -1,92 +1,102 @@
 @use '../utils/variables' as *;
 
-.homeRecipesSection nav.recipesFilter {  
-    width: 280px;
-    padding: 0 2rem 0 0;
-    background-color: white;
-
-    @media only screen and (max-width: 767px) {
-        width: 100%;
-        padding: 0;
-    }
-
-    .filterHeader {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 2.5rem;
+.homeRecipesSection {
+    .mobileRecipesFilter .recipesHeader {
+        display: none;
 
         @media only screen and (max-width: 767px) {
-            margin-bottom: 1rem;
-        }
-
-        button {
-            display: none;
-
-            @media only screen and (max-width: 767px) {
-                display: flex;
-                flex-direction: column;
-
-                span {
-                    width: 24px;
-                    height: 4px;
-                    margin: .25rem 0;
-                    background-color: $darkGrey;
-                    border-radius: 2rem;
-                    transition: transform .2s ease-in-out;
-                }
-            }
+            display: flex;
         }
     }
 
-    .filtersList {
-        overflow: hidden;
+    nav.recipesFilter {  
+        width: 280px;
+        padding: 0 2rem 0 0;
+        background-color: white;
+    
+        @media only screen and (max-width: 767px) {
+            width: 100%;
+            padding: 0;
+        }
 
-        .navFilters {
-            overflow: hidden;
+        .filterHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
     
-            & > li:first-child {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                cursor: pointer;
+            @media only screen and (max-width: 767px) {
+                margin-bottom: 1rem;
+            }
     
-                button {
-                    width: 16px;
-                    height: 16px;
+            button {
+                display: none;
+    
+                @media only screen and (max-width: 767px) {
                     display: flex;
                     flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
     
                     span {
-                        width: 16px;
-                        height: 2px;
-                        background-color: black;
-                        border: 0;
+                        width: 24px;
+                        height: 4px;
+                        margin: .25rem 0;
+                        background-color: $darkGrey;
+                        border-radius: 2rem;
                         transition: transform .2s ease-in-out;
-                    }
-    
-                    span.verticalLine {
-                        transform: translateY(-2px) rotate(-90deg);
                     }
                 }
             }
+        }
     
-            .navFiltersListItem {
-                padding-left: 1.5rem;
-                margin-top: 1rem;
+        .filtersList {
+            overflow: hidden;
     
-                ul {
-                    margin-bottom: 1rem;
-    
-                    li {
-                        padding: 1rem 0;
-                        
-                        @media only screen and (max-width: 767px) {
-                            padding: .5rem 0;
+            .navFilters {
+                overflow: hidden;
+        
+                & > li:first-child {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    cursor: pointer;
+        
+                    button {
+                        width: 16px;
+                        height: 16px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+        
+                        span {
+                            width: 16px;
+                            height: 2px;
+                            background-color: black;
+                            border: 0;
+                            transition: transform .2s ease-in-out;
                         }
-                    } 
+        
+                        span.verticalLine {
+                            transform: translateY(-2px) rotate(-90deg);
+                        }
+                    }
+                }
+        
+                .navFiltersListItem {
+                    padding-left: 1.5rem;
+                    margin-top: 1rem;
+        
+                    ul {
+                        margin-bottom: 1rem;
+        
+                        li {
+                            padding: 1rem 0;
+                            
+                            @media only screen and (max-width: 767px) {
+                                padding: .5rem 0;
+                            }
+                        } 
+                    }
                 }
             }
         }

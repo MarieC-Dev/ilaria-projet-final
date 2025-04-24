@@ -8,6 +8,11 @@ form.searchFormComponent {
     align-items: center;
     margin-bottom: 2rem;
 
+    @media only screen and (max-width: 767px) {
+        width: auto;
+        flex-direction: column;
+    }
+
     label {
         width: 70%;
         display: flex;
@@ -18,6 +23,13 @@ form.searchFormComponent {
 
         @include svgStyle(28px, $darkGrey);
 
+        @media only screen and (max-width: 767px) {
+            width: 100%;
+            padding: 1rem;
+
+            @include svgStyle(20px, $darkGrey);
+        }
+
         input {
             width: 100%;
             margin-left: 1.5rem;
@@ -26,8 +38,6 @@ form.searchFormComponent {
             border: 0;
         }
     }
-
-    
 }
 
 .sortBySelect {

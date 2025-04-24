@@ -11,8 +11,10 @@
     </section>
 
     <section class="homeRecipesSection">
-
-        <app-recipes-filter />
+        <div class="mobileRecipesFilter">
+            <app-recipes-filter />
+            <app-search-form addClass="recipesHeader" selectId="sortRecipes" />
+        </div>
 
         <div class="recipesContainer">
             <!-- recipesHeader -->

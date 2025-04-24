@@ -16,28 +16,33 @@ export class ShowRecipesFilterDirective implements OnInit {
     private renderer: Renderer2
   ) { }
 
-  ngOnInit(): void {    
-    this.handleBurgerBtn();
+  ngOnInit(): void {
+    const burgerBtn: HTMLElement = this.document.querySelector('.filterHeader button')!;
+    const burgerDisplay = getComputedStyle(burgerBtn).display;
+
+    if(this.burgerBtnState) {
+      this.onClickBurgerBtn();
+    }
 
     if(this.navFiltersId) {
-      this.handlePlusBtn(this.navFiltersId);
+      this.onClickPlusBtn(this.navFiltersId);
     }
   }
 
   @HostListener('click') onClick() {
     if(this.buttonType === 'burger') {
       this.burgerBtnState = !this.burgerBtnState;
-      this.handleBurgerBtn();
+      this.onClickBurgerBtn();
     } else if(this.buttonType === 'plus') {
       this.plusBtnState = !this.plusBtnState;
-      this.handlePlusBtn(this.navFiltersId);
+      this.onClickPlusBtn(this.navFiltersId);
     } else {
       throw new Error('The button has no directive');
     }
   }
 
   // HANDLE BURGER BUTTON
-  handleBurgerBtn() {
+  onClickBurgerBtn() {
     const filtersListDiv: HTMLElement = this.document.querySelector('div.filtersList')!;
     const burgerBtnFirstLine: HTMLElement = this.document.querySelector('.filterHeader button span.burgerFirstLine')!;
     const burgerBtnSecondLine: HTMLElement = this.document.querySelector('.filterHeader button span.burgerSecondLine')!;
@@ -46,14 +51,14 @@ export class ShowRecipesFilterDirective implements OnInit {
 
     const initBurger = () => {
       this.setMaxHeightAnimation(filtersListDiv, 0, 0.1 * filtersListDiv.childNodes.length);
-      this.setTransformAnimation(burgerBtnFirstLine, `translateY(0) rotate(0)`);
-      this.setTransformAnimation(burgerBtnSecondLine, `translateY(0) rotate(0)`);
+      this.renderer.setStyle(burgerBtnFirstLine, 'transform', `translateY(0) rotate(0)`);
+      this.renderer.setStyle(burgerBtnSecondLine, 'transform', `translateY(0) rotate(0)`);
     }
 
     const setInitBurger = () => {
       this.setMaxHeightAnimation(filtersListDiv, filtersListDiv.scrollHeight, 0.1 * filtersListDiv.childNodes.length);
-      this.setTransformAnimation(burgerBtnFirstLine, `translateY(${translate}px) rotate(-${degree}deg)`);
-      this.setTransformAnimation(burgerBtnSecondLine, `translateY(-${translate}px) rotate(${degree}deg)`);
+      this.renderer.setStyle(burgerBtnFirstLine, 'transform', `translateY(${translate}px) rotate(-${degree}deg)`);
+      this.renderer.setStyle(burgerBtnSecondLine, 'transform', `translateY(-${translate}px) rotate(${degree}deg)`);
     }
     
     if(filtersListDiv.offsetHeight === 0 && this.burgerBtnState) {
@@ -64,7 +69,7 @@ export class ShowRecipesFilterDirective implements OnInit {
   }
 
   // HANDLE PLUS BUTTONS (with ids)
-  handlePlusBtn(id: string) {
+  onClickPlusBtn(id: string) {
     const filtersListDiv: HTMLElement = this.document.querySelector('div.filtersList')!;
     const getItemList: HTMLElement = this.document.querySelector(`#${id} .navFiltersListItem`)!;
     const plusIcon: HTMLElement = this.document.querySelector(`#${id} .verticalLine`)!;
@@ -72,13 +77,13 @@ export class ShowRecipesFilterDirective implements OnInit {
 
     const initPlus = () => {
       this.setMaxHeightAnimation(getItemList, 0, 0.4 * getItemList.childNodes.length);
-      this.setTransformAnimation(plusIcon, 'translateY(-2px) rotate(-90deg)');
+      this.renderer.setStyle(plusIcon, 'transform', 'translateY(-2px) rotate(-90deg)');
     }
 
     const setInitPlus = () => {
       this.setMaxHeightAnimation(filtersListDiv, filtersListDiv.scrollHeight + getItemList.scrollHeight + 16, 0.4 * getItemList.childNodes.length);
       this.setMaxHeightAnimation(getItemList, getItemList.scrollHeight, 0.4 * getItemList.childNodes.length);
-      this.setTransformAnimation(plusIcon, 'translateY(-2px) rotate(0)');
+      this.renderer.setStyle(plusIcon, 'transform', 'translateY(-2px) rotate(0)');
     }
 
     if(getItemList.offsetHeight === 0 && this.plusBtnState) {
@@ -92,9 +97,5 @@ export class ShowRecipesFilterDirective implements OnInit {
   setMaxHeightAnimation(elm: HTMLElement, height: number, duration: number) {
     this.renderer.setStyle(elm, 'max-height', `${height}px`);   
     this.renderer.setStyle(elm, 'transition', `max-height ${duration}s ease-in-out`);
-  }
-
-  setTransformAnimation(elm: HTMLElement, property: string) {
-    this.renderer.setStyle(elm, 'transform', property);   
   }
 }

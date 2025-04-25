@@ -4,14 +4,15 @@
 .homeRecipesSection {
     display: grid;
     grid-template-columns: max-content 1fr max-content;
-    grid-row: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
     padding: 0 3rem;
     margin-bottom: 6rem;
 
     @media (max-width: 767px) {
         grid-template-columns: 1fr 1fr;
-        grid-row: 1fr 1fr 1fr;
+        grid-template-rows: repeat(3, max-content);
         padding: 0 1rem;
+        margin: 0;
     }
 
     app-recipes-filter {

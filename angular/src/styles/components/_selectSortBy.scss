@@ -1,0 +1,31 @@
+@use '../utils/mixins' as *;
+@use '../utils/variables' as *;
+
+.sortBySelectContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: $firstColor;
+    color: white;
+    border-radius: 3rem;
+    overflow: hidden;
+
+    select, select::picker(select) {
+        appearance: none;
+    }
+    
+    select.sortBySelect {      
+        display: flex;
+        font-size: 16px;
+        background-color: $firstColor;
+        color: white;
+        border: 0;
+    }
+
+    svg {
+        width: max-content;
+        height: 18px;
+    }
+}
+

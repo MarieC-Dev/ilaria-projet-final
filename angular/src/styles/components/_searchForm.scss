@@ -14,7 +14,6 @@ form.searchFormComponent {
     }
 
     label {
-        width: 70%;
         display: flex;
         align-items: center;
         padding: 1rem 1.5rem;
@@ -38,29 +37,4 @@ form.searchFormComponent {
             border: 0;
         }
     }
-}
-
-select.sortBySelect {
-    @include arrowsSelectStyle($firstColor, white);
-    
-    display: flex;
-    padding: 1rem 2rem;
-    background-color: $firstColor;
-    color: white;
-    font-size: 16px;
-    border: 0;
-    border-radius: 3rem;
-
-    @media (min-width: 768px) {
-        width: 180px;
-        height: max-content;
-        background-position: 
-            calc(100% - 20px) 28px, 
-            calc(100% - 15px) 28px, 
-            calc(100% - 2.5em) 16px, 
-            calc(100% - 20px) 19px, 
-            calc(100% - 15px) 19px, 
-            calc(100% - 2.5em) 16px;
-    }
-
 }

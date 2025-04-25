@@ -11,15 +11,18 @@
     </section>
 
     <section class="homeRecipesSection">
-        <div class="mobileRecipesFilter">
-            <app-recipes-filter />
-            <app-search-form addClass="recipesHeader" selectId="sortRecipes" />
-        </div>
+        <app-recipes-filter />
+        <form class="searchFormComponent recipesHeader">
+            <label for="recipesSearch">
+                <button type="button">
+                    <app-search-icon />
+                </button>
+                <input type="text" name="recipesSearch" id="recipesSearch" placeholder="Search for recipes...">
+            </label>
+        </form>
+        <app-sort-by-select selectId="sortRecipes" />
 
         <div class="recipesContainer">
-            <!-- recipesHeader -->
-            <app-search-form addClass="recipesHeader" selectId="sortRecipes" />
-
             <div class="recipesList">
                 @for (recipe of recipesList(); track recipe.id;) {
                     <app-recipe-item

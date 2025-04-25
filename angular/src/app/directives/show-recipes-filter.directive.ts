@@ -47,7 +47,6 @@ export class ShowRecipesFilterDirective implements OnInit {
     const filtersListDiv: HTMLElement = this.document.querySelector('div.filtersList')!;
     const burgerBtnFirstLine: HTMLElement = this.document.querySelector('.filterHeader button span.burgerFirstLine')!;
     const burgerBtnSecondLine: HTMLElement = this.document.querySelector('.filterHeader button span.burgerSecondLine')!;
-    const translate: number = 6;
     const degree: number = 45;
 
     if(burgerDisplayState !== 'none') { // burger btn display flex, block, etc... -> MOBILE
@@ -56,8 +55,8 @@ export class ShowRecipesFilterDirective implements OnInit {
       if(this.burgerBtnState) {
         this.renderer.setStyle(filtersListDiv, 'max-height', `${filtersListDiv.scrollHeight}px`);   
 
-        this.renderer.setStyle(burgerBtnFirstLine, 'transform', `translateY(${translate}px) rotate(-${degree}deg)`);
-        this.renderer.setStyle(burgerBtnSecondLine, 'transform', `translateY(-${translate}px) rotate(${degree}deg)`);
+        this.renderer.setStyle(burgerBtnFirstLine, 'transform', `translateY(5px) rotate(-${degree}deg)`);
+        this.renderer.setStyle(burgerBtnSecondLine, 'transform', `translateY(-6px) rotate(${degree}deg)`);
       } else {
         this.renderer.setStyle(filtersListDiv, 'max-height', '0');   
         this.renderer.setStyle(burgerBtnFirstLine, 'transform', `translateY(0px) rotate(0deg)`);

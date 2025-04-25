@@ -8,6 +8,8 @@ nav.recipesFilter {
     @media (max-width: 767px) {
         width: 100%;
         padding: 0;
+        margin-top: .5rem;
+        background-color: transparent;
     }
 
     .filterHeader {
@@ -17,7 +19,8 @@ nav.recipesFilter {
         margin-bottom: 2.5rem;
 
         @media only screen and (max-width: 767px) {
-            margin-bottom: 1rem;
+            width: 30%;
+            margin-bottom: 2rem;
 
             h2 {
                 font-size: 18px;
@@ -54,6 +57,12 @@ nav.recipesFilter {
                 justify-content: space-between;
                 align-items: center;
                 cursor: pointer;
+
+                @media only screen and (max-width: 767px) {
+                    h3 {
+                        font-size: 16px;
+                    }
+                }
     
                 button {
                     width: 16px;
@@ -62,6 +71,11 @@ nav.recipesFilter {
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
+
+                    @media only screen and (max-width: 767px) {
+                        width: 14px;
+                        height: 14px;
+                    }
     
                     span {
                         width: 16px;
@@ -69,6 +83,10 @@ nav.recipesFilter {
                         background-color: black;
                         border: 0;
                         transition: transform .2s ease-in-out;
+
+                        @media only screen and (max-width: 767px) {
+                            width: 14px;
+                        }
                     }
     
                     span.verticalLine {

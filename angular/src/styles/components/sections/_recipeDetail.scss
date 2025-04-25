@@ -227,7 +227,7 @@ $sizeImgRecipe: 500px;
     .otherRecipesList {
         max-width: $sectionWidth;
         @include gridRecipes(1fr 1fr 1fr 1fr);
-        margin: 0 auto;
+        //margin: 0 auto;
 
         a {
             max-width: max-content;

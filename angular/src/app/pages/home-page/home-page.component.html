@@ -46,16 +46,24 @@
 
         <app-sort-by-select selectId="sortVideos" />
 
-        <!-- TODO home page videos is comment -->
-        <div>
-            <iframe src="https://youtube.com/embed/U3dWg3A7IcA?si=SF3svYv6tfWMldYm">
-            </iframe>
-            <iframe src="https://youtube.com/embed/Fm3iH1PPgMw?si=ZOwWoOUGllt4Ryt6">
-            </iframe>
-            <iframe src="https://youtube.com/embed/Uwm72U1zGUU?si=fT5iK20yC8ETHx0C">
-            </iframe>
-            <iframe  src="https://youtube.com/embed/-8t0qYTovKM?si=HfKMGpUNjFFEki2J">
-            </iframe>
+        <div class="videosSliderWrapper">
+            <app-chevron-down-icon />
+            <div class="wrapperVideos">
+                <!-- <p>{{ videosList() | json }}</p> -->
+                <ul class="videosList">
+                    @for (item of videosList(); track item.id) {
+                        <li class="videoItem" [id]="`video${item.id}`">
+                            <iframe [src]="item.link" 
+                                class="e2e-trusted-url"
+                                title="YouTube video player" 
+                                frameborder="0" 
+                                allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <app-chevron-down-icon />
         </div>
     </section>
 
@@ -68,3 +76,8 @@
         </form>
     </section>
 </div>
+
+<!--
+Angular 19 : j'ai mis sur mon site 4 videos youtube avec iframe. J'ai également injecté DomSanitizer et importé 
+
+-->

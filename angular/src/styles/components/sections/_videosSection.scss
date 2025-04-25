@@ -20,17 +20,44 @@
     select {
         @include arrowsSelectStyle($firstColor, white);
     }
-    
-    div {
+
+    .videosSliderWrapper {
         width: 100%;
         display: flex;
-        justify-content: space-between;
-        
-        iframe {
-            width: 250px;
-            height: 450px;
-            border: 0;
-            border-radius: 1.5rem;
+        justify-content: center;
+
+        app-chevron-down-icon svg {
+            width: 32px;
+        }
+        app-chevron-down-icon:first-child svg{
+            transform: rotate(90deg);
+        }
+        app-chevron-down-icon:last-child svg {
+            transform: rotate(-90deg);
+        }
+
+        .wrapperVideos {
+            width: 100%;
+
+            ul.videosList {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+
+                li {
+                    width: 100%;
+                    iframe {
+                        width: 250px;
+                        height: 450px;
+                        border-radius: 1.5rem;
+            
+                        @media only screen and (max-width: 767px) {
+                            width: 150px;
+                            height: 300px;
+                        }
+                    }
+                }
+            }
         }
     }
 }

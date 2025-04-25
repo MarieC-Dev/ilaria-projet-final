@@ -8,7 +8,7 @@
     padding: 0 3rem;
     margin-bottom: 6rem;
 
-    @media only screen and (max-width: 767px) {
+    @media (max-width: 767px) {
         grid-template-columns: 1fr 1fr;
         grid-row: 1fr 1fr 1fr;
         padding: 0 1rem;
@@ -18,7 +18,7 @@
         grid-column: 1/2;
         grid-row: 1/3;
 
-        @media only screen and (max-width: 767px) {
+        @media (max-width: 767px) {
             width: 200%;
             grid-column: 1/2;
             grid-row: 1/2;
@@ -29,13 +29,17 @@
         grid-column: 2/3;
         grid-row: 1/2;
 
-        @media only screen and (max-width: 767px) {
+        @media (max-width: 767px) {
             grid-column: 1/3;
             grid-row: 2/3;
         }
 
         label {
             width: 90%;
+
+            @media (max-width: 767px) {
+                width: 100%;
+            }
         }
     }
 
@@ -43,7 +47,7 @@
         grid-column: 3/4;
         grid-row: 1/2;
 
-        @media only screen and (max-width: 767px) {
+        @media (max-width: 767px) {
             width: max-content;
             grid-column: 2/3;
             grid-row: 1/2;
@@ -52,7 +56,7 @@
         .sortBySelectContainer {
             margin: 0 0 0 auto;
 
-            @media only screen and (max-width: 767px) {
+            @media (max-width: 767px) {
                 width: 80%;
                 padding: .75rem 1.5rem;
 
@@ -70,7 +74,7 @@
         grid-column: 2/4;
         grid-row: 2/3;
 
-        @media only screen and (max-width: 767px) {
+        @media (max-width: 767px) {
             grid-column: 1/3;
             grid-row: 3/4;
         }
@@ -78,8 +82,7 @@
         .recipesList {
             @include gridRecipes(1fr 1fr 1fr);
 
-            @media only screen and (max-width: 767px) {
-                display: flex;
+            @media (max-width: 767px) {
                 flex-direction: column;
             }
         }

@@ -8,6 +8,11 @@
     grid-auto-rows: 1fr;
     gap: 2rem;
     //grid-auto-flow: row | column | row dense | column dense;
+
+    @media (max-width: 767px) {
+        grid-template-columns: 1fr;
+        grid-auto-columns: none;
+    }
 }
 
 @mixin socialNetworks(
@@ -86,13 +91,6 @@
             calc(100% - 15px) calc(20px + -2px),
             calc(100% - 40px) 16px;
     } @else {
-        /* background-position:
-            calc(100% - 20px) calc(15px + 8px),
-            calc(100% - 15px) calc(15px + 8px),
-            calc(100% - 2.5em) 16px,
-            calc(100% - 20px) calc(17px + -2px),
-            calc(100% - 15px) calc(17px + -2px),
-            calc(100% - 2.5em) 16px; */
         background-position: 
             calc(100% - 20px) 28px, 
             calc(100% - 15px) 28px, 

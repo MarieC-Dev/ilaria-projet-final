@@ -6,7 +6,7 @@ nav.recipesFilter {
     background-color: white;
 
     @media (max-width: 767px) {
-        width: 100%;
+        width: 120%;
         padding: 0;
         margin-top: .5rem;
         background-color: transparent;
@@ -19,7 +19,7 @@ nav.recipesFilter {
         margin-bottom: 2.5rem;
 
         @media only screen and (max-width: 767px) {
-            width: 40%;
+            width: 35%;
             margin-bottom: 2rem;
 
             h2 {

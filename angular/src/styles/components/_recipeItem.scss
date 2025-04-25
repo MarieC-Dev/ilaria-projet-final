@@ -20,6 +20,10 @@
             align-items: center;
             border-radius: .5rem;
             overflow: hidden;
+
+            @media (max-width: 767px) {
+                max-height: 200px;
+            }
             
             img {
                 width: 100%;
@@ -29,11 +33,19 @@
     }
 
     @include svgStyle(32px, white);
+    @media (max-width: 767px) {
+        @include svgStyle(24px, white);
+    }
     svg {
         position: absolute;
         top: 20px;
         right: 20px;
         z-index: 5;
+
+        @media (max-width: 767px) {
+            top: 16px;
+            right: 16px;
+        }
 
         &:hover {
             fill: $secondColor;
@@ -42,11 +54,20 @@
 
     h4 {
         margin: 1.5rem 0 .5rem 0;
+
+        @media (max-width: 767px) {
+            margin: .5rem 0;
+            text-align: center;
+        }
     }
 
     ul {
         display: flex;
         justify-content: space-between;
+
+        @media (max-width: 767px) {
+            justify-content: space-evenly;
+        }
 
         li {
             display: flex;

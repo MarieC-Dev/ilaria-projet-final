@@ -44,23 +44,18 @@ export class ShowRecipesFilterDirective implements OnInit {
     const burgerBtn: HTMLElement = this.document.querySelector('.filterHeader button')!;
     const burgerDisplayState = getComputedStyle(burgerBtn).display;
 
+    const burgerArrow: HTMLElement = this.document.querySelector('.filterHeader button svg')!;
     const filtersListDiv: HTMLElement = this.document.querySelector('div.filtersList')!;
-    const burgerBtnFirstLine: HTMLElement = this.document.querySelector('.filterHeader button span.burgerFirstLine')!;
-    const burgerBtnSecondLine: HTMLElement = this.document.querySelector('.filterHeader button span.burgerSecondLine')!;
-    const degree: number = 45;
 
     if(burgerDisplayState !== 'none') { // burger btn display flex, block, etc... -> MOBILE
       this.renderer.setStyle(filtersListDiv, 'transition', `max-height ${0.1 * filtersListDiv.childNodes.length}s ease-in-out`);
 
       if(this.burgerBtnState) {
-        this.renderer.setStyle(filtersListDiv, 'max-height', `${filtersListDiv.scrollHeight}px`);   
-
-        this.renderer.setStyle(burgerBtnFirstLine, 'transform', `translateY(5px) rotate(-${degree}deg)`);
-        this.renderer.setStyle(burgerBtnSecondLine, 'transform', `translateY(-6px) rotate(${degree}deg)`);
+        this.renderer.setStyle(filtersListDiv, 'max-height', `${filtersListDiv.scrollHeight}px`);
+        this.renderer.setStyle(burgerArrow, 'transform', `rotate(-180deg)`);
       } else {
         this.renderer.setStyle(filtersListDiv, 'max-height', '0');   
-        this.renderer.setStyle(burgerBtnFirstLine, 'transform', `translateY(0px) rotate(0deg)`);
-        this.renderer.setStyle(burgerBtnSecondLine, 'transform', `translateY(0px) rotate(0deg)`);
+        this.renderer.setStyle(burgerArrow, 'transform', `rotate(0deg)`);
       }
     } else { // burger btn display none -> DESKTOP
       this.renderer.setStyle(filtersListDiv, 'max-height', 'auto');

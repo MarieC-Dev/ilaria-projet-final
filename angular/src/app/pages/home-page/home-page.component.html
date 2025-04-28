@@ -42,28 +42,30 @@
     </section>
 
     <section class="videosSection">
-        <h2>Videos</h2>
+        <h2>Dernière vidéo</h2>
 
-        <app-sort-by-select selectId="sortVideos" />
+        <!-- <app-sort-by-select selectId="sortVideos" /> -->
+        <a href="/accueil" class="btn-bg-red">Voir toutes les vidéos</a>
 
-        <div class="videosSliderWrapper">
-            <app-chevron-down-icon />
+        <div class="videosSliderWrapper" appVideosSlider>
+            <youtube-player [videoId]="'U3dWg3A7IcA'" />
+            <!-- <button type="button" appVideosSlider buttonType="previous">
+                <app-chevron-down-icon />
+            </button>
+            
             <div class="wrapperVideos">
-                <!-- <p>{{ videosList() | json }}</p> -->
                 <ul class="videosList">
-                    @for (item of videosList(); track item.id) {
+                    @for (item of videos; track item.id) {
                         <li class="videoItem" [id]="`video${item.id}`">
-                            <iframe [src]="item.link" 
-                                class="e2e-trusted-url"
-                                title="YouTube video player" 
-                                frameborder="0" 
-                                allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                            <youtube-player [videoId]="item.link" placeholderImageQuality="standard" />
                         </li>
                     }
                 </ul>
             </div>
-            <app-chevron-down-icon />
+
+            <button type="button" appVideosSlider buttonType="next">
+                <app-chevron-down-icon />
+            </button> -->
         </div>
     </section>
 
@@ -78,6 +80,6 @@
 </div>
 
 <!--
-Angular 19 : j'ai mis sur mon site 4 videos youtube avec iframe. J'ai également injecté DomSanitizer et importé 
-
+    Angular 19 : j'ai mis sur mon site 4 videos youtube avec iframe. 
+    J'ai également injecté DomSanitizer et importé 
 -->

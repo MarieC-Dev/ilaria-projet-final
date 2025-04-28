@@ -1,6 +1,8 @@
 @use '../../utils/mixins' as *;
 @use '../../utils/variables' as *;
 
+$arrowMg: 1rem;
+
 .videosSection {
     width: 1216px;
     display: flex;
@@ -17,36 +19,69 @@
         margin-bottom: 2.5rem;
     }
 
-    select {
-        @include arrowsSelectStyle($firstColor, white);
+    a {
+        height: max-content;
+        font-weight: 700;
     }
 
     .videosSliderWrapper {
         width: 100%;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
 
-        app-chevron-down-icon svg {
-            width: 32px;
+        /* button, app-chevron-down-icon, svg {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        app-chevron-down-icon:first-child svg{
-            transform: rotate(90deg);
+
+        button {
+            width: 20px;
+            height: 32px;
+
+            app-chevron-down-icon {
+                width: 32px;
+                height: 32px;
+
+                svg {
+                    width: 32px;
+                    height: max-content;
+                }
+            }            
         }
-        app-chevron-down-icon:last-child svg {
-            transform: rotate(-90deg);
+        button:first-child {
+            margin-right: $arrowMg;
+
+            svg {
+                transform: rotate(90deg);
+            }
+        }
+        button:last-child {
+            margin-left: $arrowMg;
+
+            svg {
+                transform: rotate(-90deg);
+            }
         }
 
         .wrapperVideos {
-            width: 100%;
+            max-width: calc(282px * 4);
+            overflow: hidden;
 
             ul.videosList {
-                width: 100%;
                 display: flex;
                 justify-content: space-between;
-
+                
                 li {
                     width: 100%;
-                    iframe {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 0 1rem;
+    
+                    youtube-player {
                         width: 250px;
                         height: 450px;
                         border-radius: 1.5rem;
@@ -58,6 +93,18 @@
                     }
                 }
             }
-        }
+
+            youtube-player {
+                width: 250px;
+                height: 450px;
+                display: flex;
+                border-radius: 1.5rem;
+    
+                @media only screen and (max-width: 767px) {
+                    width: 150px;
+                    height: 300px;
+                }
+            }
+        } */
     }
 }

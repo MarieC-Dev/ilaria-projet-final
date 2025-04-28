@@ -1,4 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
+import { YouTubePlayer } from '@angular/youtube-player';
+
 import { PageSliderComponent } from '../../components/page-slider/page-slider.component';
 import { RecipesFilterComponent } from '../../components/recipes-filter/recipes-filter.component';
 import { RECIPE_LIST } from '../../lists/recipe-list.fake';
@@ -10,6 +12,7 @@ import { SortBySelectComponent } from "../../components/sort-by-select/sort-by-s
 import { ChevronDownIconComponent } from "../../components/icons/chevron-down-icon/chevron-down-icon.component";
 import { JsonPipe } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { VideosSliderDirective } from '../../directives/videos-slider.directive';
 
 @Component({
   selector: 'app-home-page',
@@ -20,6 +23,8 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
     SearchIconComponent, 
     SortBySelectComponent, 
     ChevronDownIconComponent,
+    VideosSliderDirective,
+    YouTubePlayer,
     JsonPipe
   ],
   templateUrl: './home-page.component.html',
@@ -33,30 +38,34 @@ export class HomePageComponent {
   youtubeUrl!: string;
   videosUrl!: SafeResourceUrl;
 
-  videos: Array<SafeUrl> = [
-    'U3dWg3A7IcA?si=SF3svYv6tfWMldYm',
-    'Fm3iH1PPgMw?si=ZOwWoOUGllt4Ryt6',
-    'Uwm72U1zGUU?si=fT5iK20yC8ETHx0C',
-    '-8t0qYTovKM?si=HfKMGpUNjFFEki2J'
-  ];
-
-  updateVideosUrl(id: SafeUrl): any {
-    this.youtubeUrl = 'https://youtube.com/embed/' + id;
-    return this.videosUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.youtubeUrl);
-  }
-
-  videosList() {
-    const array: Array<any> = [];
-
-    for (let i = 0; i < this.videos.length; i++) {
-      array.push({
-        id: i,
-        link: this.updateVideosUrl(this.videos[i])
-      });      
-    }
-
-    return array;
-  }
+  index: number = 0;
+  /* videos = [
+    {
+      id: this.index++,
+      link: 'U3dWg3A7IcA?si=SF3svYv6tfWMldYm',
+    }, {
+      id: this.index++,
+      link: 'Fm3iH1PPgMw?si=ZOwWoOUGllt4Ryt6',
+    }, {
+      id: this.index++,
+      link: 'Uwm72U1zGUU?si=fT5iK20yC8ETHx0C',
+    }, {
+      id: this.index++,
+      link: '8y2XtISJOCM?si=bC14nyiv-Cg6O1yW',
+    }, {
+      id: this.index++,
+      link: 'uq-QTUCuspU?si=WDDwj6wwwclgLXfO',
+    }, {
+      id: this.index++,
+      link: 'Oetn61s9sXU?si=AprDZ6srTiXyY8_n',
+    }, {
+      id: this.index++,
+      link: 'aIQSInpPLA8?si=r55fwrzOUQTI5O6r',
+    }, {
+      id: this.index++,
+      link: '-8t0qYTovKM?si=HfKMGpUNjFFEki2J',
+    }, 
+  ]; */
   
   getRecipeAverage(id: number) {
     return this.recipeAverage.getRecipeAverage(id, this.recipesList());

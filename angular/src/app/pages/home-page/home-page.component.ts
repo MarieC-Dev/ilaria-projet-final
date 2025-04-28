@@ -41,33 +41,6 @@ export class HomePageComponent {
   videosUrl!: SafeResourceUrl;
 
   index: number = 0;
-  /* videos = [
-    {
-      id: this.index++,
-      link: 'U3dWg3A7IcA?si=SF3svYv6tfWMldYm',
-    }, {
-      id: this.index++,
-      link: 'Fm3iH1PPgMw?si=ZOwWoOUGllt4Ryt6',
-    }, {
-      id: this.index++,
-      link: 'Uwm72U1zGUU?si=fT5iK20yC8ETHx0C',
-    }, {
-      id: this.index++,
-      link: '8y2XtISJOCM?si=bC14nyiv-Cg6O1yW',
-    }, {
-      id: this.index++,
-      link: 'uq-QTUCuspU?si=WDDwj6wwwclgLXfO',
-    }, {
-      id: this.index++,
-      link: 'Oetn61s9sXU?si=AprDZ6srTiXyY8_n',
-    }, {
-      id: this.index++,
-      link: 'aIQSInpPLA8?si=r55fwrzOUQTI5O6r',
-    }, {
-      id: this.index++,
-      link: '-8t0qYTovKM?si=HfKMGpUNjFFEki2J',
-    }, 
-  ]; */
   
   getRecipeAverage(id: number) {
     return this.recipeAverage.getRecipeAverage(id, this.recipesList());

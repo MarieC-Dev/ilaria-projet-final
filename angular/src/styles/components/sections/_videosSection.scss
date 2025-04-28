@@ -2,109 +2,98 @@
 @use '../../utils/variables' as *;
 
 $arrowMg: 1rem;
+$videoWidth: 320px;
 
 .videosSection {
     width: 1216px;
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    flex-direction: column;
     margin: 0 auto 6rem auto;
 
     @media only screen and (max-width: 767px) {
         width: auto;
         padding: 3rem 1rem;
+        margin: 0 auto;
     }
     
-    h2 {
-        margin-bottom: 2.5rem;
-    }
-
-    a {
-        height: max-content;
-        font-weight: 700;
-    }
-
-    .videosSliderWrapper {
-        width: 100%;
+    .videosTitle {
         display: flex;
         justify-content: space-between;
+        margin-bottom: 2.5rem;
+
+        @media only screen and (max-width: 767px) {
+            flex-direction: column;
+            margin-bottom: 1.5rem;
+
+            h2 {
+                text-align: center;
+            }
+        }
+    
+        a {
+            height: max-content;
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+
+            @media only screen and (max-width: 767px) {
+                width: max-content;
+                margin: 1rem auto 0 auto;
+            }
+    
+            app-play-icon, svg {
+                width: 28px;
+                height: 28px;
+                margin-right: 1.5rem;
+                fill: white;
+
+                @media only screen and (max-width: 767px) {
+                    width: 24px;
+                    height: 24px;
+                    margin-right: 1rem;
+                }
+            }
+        }
+    }
+
+    .videoWrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
         align-items: center;
         margin: 0 auto;
 
-        /* button, app-chevron-down-icon, svg {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        youtube-player, youtube-player-placeholder {
+            width: calc($videoWidth + 400px) !important;
+            height: calc(($videoWidth + 400px) / 1.64) !important;
         }
-
-        button {
-            width: 20px;
-            height: 32px;
-
-            app-chevron-down-icon {
-                width: 32px;
-                height: 32px;
-
-                svg {
-                    width: 32px;
-                    height: max-content;
-                }
-            }            
-        }
-        button:first-child {
-            margin-right: $arrowMg;
-
-            svg {
-                transform: rotate(90deg);
-            }
-        }
-        button:last-child {
-            margin-left: $arrowMg;
-
-            svg {
-                transform: rotate(-90deg);
+        
+        @media only screen and (max-width: 450px) {
+            youtube-player, youtube-player-placeholder {
+                width: $videoWidth !important;
+                height: calc($videoWidth / 1.64) !important;
             }
         }
 
-        .wrapperVideos {
-            max-width: calc(282px * 4);
-            overflow: hidden;
-
-            ul.videosList {
-                display: flex;
-                justify-content: space-between;
-                
-                li {
-                    width: 100%;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    padding: 0 1rem;
-    
-                    youtube-player {
-                        width: 250px;
-                        height: 450px;
-                        border-radius: 1.5rem;
-            
-                        @media only screen and (max-width: 767px) {
-                            width: 150px;
-                            height: 300px;
-                        }
-                    }
-                }
+        @media only screen and (min-width: 451px) and (max-width: 550px) {
+            youtube-player, youtube-player-placeholder {
+                width: calc($videoWidth + 100px) !important;
+                height: calc(($videoWidth + 100px) / 1.64) !important;
             }
+        }
 
-            youtube-player {
-                width: 250px;
-                height: 450px;
-                display: flex;
-                border-radius: 1.5rem;
-    
-                @media only screen and (max-width: 767px) {
-                    width: 150px;
-                    height: 300px;
-                }
+        @media only screen and (min-width: 551px) and (max-width: 650px) {
+            youtube-player, youtube-player-placeholder {
+                width: calc($videoWidth + 200px) !important;
+                height: calc(($videoWidth + 200px) / 1.64) !important;
             }
-        } */
+        }
+
+        @media only screen and (min-width: 651px) and (max-width: 750px) {
+            youtube-player, youtube-player-placeholder {
+                width: calc($videoWidth + 300px) !important;
+                height: calc(($videoWidth + 300px) / 1.64) !important;
+            }
+        }
     }
 }

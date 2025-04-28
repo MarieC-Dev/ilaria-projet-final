@@ -37,7 +37,7 @@ footer {
         }
     }
 
-    .linksFooter {
+    .navigation {
         width: $sectionWidth;
         display: flex;
         justify-content: space-between;
@@ -48,21 +48,19 @@ footer {
             flex-direction: column;
         }
 
-        ul {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        li {
+            margin: .5rem 0;
+            font-weight: 500;
 
-            li {
-                margin: .5rem 0;
-                font-weight: 500;
+            &:hover {
+                color: $firstColor;
             }
         }
     }
 
     p {
         width: $sectionWidth;
-        margin: 2rem auto 0 auto;
+        margin: 3rem auto 0 auto;
         font-weight: 500;
         color: $mediumGrey;
 

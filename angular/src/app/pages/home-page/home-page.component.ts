@@ -13,20 +13,22 @@ import { ChevronDownIconComponent } from "../../components/icons/chevron-down-ic
 import { JsonPipe } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { VideosSliderDirective } from '../../directives/videos-slider.directive';
+import { PlayIconComponent } from "../../components/icons/play-icon/play-icon.component";
 
 @Component({
   selector: 'app-home-page',
   imports: [
-    PageSliderComponent, 
-    RecipesFilterComponent, 
-    RecipeItemComponent, 
-    SearchIconComponent, 
-    SortBySelectComponent, 
+    PageSliderComponent,
+    RecipesFilterComponent,
+    RecipeItemComponent,
+    SearchIconComponent,
+    SortBySelectComponent,
     ChevronDownIconComponent,
     VideosSliderDirective,
     YouTubePlayer,
-    JsonPipe
-  ],
+    JsonPipe,
+    PlayIconComponent
+],
   templateUrl: './home-page.component.html',
   styleUrl: '../../../styles.scss'
 })

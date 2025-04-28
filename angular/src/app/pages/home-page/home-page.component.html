@@ -42,44 +42,27 @@
     </section>
 
     <section class="videosSection">
-        <h2>Dernière vidéo</h2>
+        <div class="videosTitle">
+            <h2>Dernière vidéo</h2>
 
-        <!-- <app-sort-by-select selectId="sortVideos" /> -->
-        <a href="/accueil" class="btn-bg-red">Voir toutes les vidéos</a>
+            <!-- <app-sort-by-select selectId="sortVideos" /> -->
+            <a href="/accueil" class="btn-bg-red">
+                <app-play-icon />
+                Voir toutes les vidéos
+            </a>
+        </div>
 
-        <div class="videosSliderWrapper" appVideosSlider>
-            <youtube-player [videoId]="'U3dWg3A7IcA'" />
-            <!-- <button type="button" appVideosSlider buttonType="previous">
-                <app-chevron-down-icon />
-            </button>
-            
-            <div class="wrapperVideos">
-                <ul class="videosList">
-                    @for (item of videos; track item.id) {
-                        <li class="videoItem" [id]="`video${item.id}`">
-                            <youtube-player [videoId]="item.link" placeholderImageQuality="standard" />
-                        </li>
-                    }
-                </ul>
-            </div>
-
-            <button type="button" appVideosSlider buttonType="next">
-                <app-chevron-down-icon />
-            </button> -->
+        <div class="videoWrapper" appVideosSlider>
+            <youtube-player videoId="4sm39CWrmns" />
         </div>
     </section>
 
     <section class="newsletterSection">
-        <h2>Be the first to know about the latest deals, receive new trending recipes & more</h2>
+        <h2>Soyez le premier informé des nouvelles recettes tendance et plus encore !</h2>
 
         <form method="post">
-            <input type="text" name="newsletterEmail" email="newsletterEmail" placeholder="Email Address">
-            <button type="submit">Subscribe</button>
+            <input type="text" name="newsletterEmail" email="newsletterEmail" placeholder="Adresse mail" required>
+            <button type="submit">Recevoir la newsletter</button>
         </form>
     </section>
 </div>
-
-<!--
-    Angular 19 : j'ai mis sur mon site 4 videos youtube avec iframe. 
-    J'ai également injecté DomSanitizer et importé 
--->

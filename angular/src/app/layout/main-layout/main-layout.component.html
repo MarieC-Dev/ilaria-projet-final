@@ -62,52 +62,46 @@
             }
         </ul>
         
-        <div class="linksFooter">
-            <ul>
-                <li>
-                    <a href="">Presentations</a>
-                </li>
-                <li>
-                    <a href="">Professionals</a>
-                </li>
-                <li>
-                    <a href="">Stores</a>
-                </li>
-            </ul>
-            <ul>
-                <li>
-                    <a href="">Webinars</a>
-                </li>
-                <li>
-                    <a href="">Workshops</a>
-                </li>
-                <li>
-                    <a href="">Local Meetups</a>
-                </li>
-            </ul>
-            <ul>
-                <li>
-                    <a href="">Our Initiatives</a>
-                </li>
-                <li>
-                    <a href="">Giving Back</a>
-                </li>
-                <li>
-                    <a href="">Communities</a>
-                </li>
-            </ul>
-            <ul>
-                <li>
-                    <a href="">Contact Form</a>
-                </li>
-                <li>
-                    <a href="">Work With Us</a>
-                </li>
-                <li>
-                    <a href="">Visit Us</a>
-                </li>
-            </ul>
-        </div>
+        <ul class="navigation">
+            <li class="navigationItem">
+                <a 
+                    routerLink="/accueil" 
+                    routerLinkActive="active" 
+                    ariaCurrentWhenActive="page">Accueil</a>
+            </li>
+            <li class="navigationItem">
+                <a 
+                    routerLink="/recettes" 
+                    routerLinkActive="active" 
+                    ariaCurrentWhenActive="page">Recettes</a>
+            </li>
+            <li class="navigationItem">
+                <a 
+                    routerLink="/rechercher" 
+                    routerLinkActive="active" 
+                    ariaCurrentWhenActive="page">Rechercher</a>
+            </li>
+            <li class="navigationItem">
+                <a 
+                    routerLink="/contact" 
+                    routerLinkActive="active" 
+                    ariaCurrentWhenActive="page">Contact</a>
+            </li>
+            <li>
+                <a 
+                    class="btn-transparent"
+                    routerLink="/connexion" 
+                    routerLinkActive="active" 
+                    ariaCurrentWhenActive="page">Connexion</a>
+            </li>
+            <li>
+                <a 
+                    class="btn-transparent"
+                    routerLink="/inscription"
+                    routerLinkActive="active" 
+                    ariaCurrentWhenActive="page">Inscription</a>
+            </li>
+        </ul>
 
         <p>Made by in Guatemala City.</p>
     </footer>

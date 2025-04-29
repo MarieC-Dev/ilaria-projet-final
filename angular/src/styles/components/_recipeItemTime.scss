@@ -13,10 +13,6 @@ ul.recipeItemTimeList {
         width: 100%;
         display: flex;
         justify-content: space-between;
-
-        &__making, &__cooking, &__pause {
-            width: auto;
-        }
     }
 
     li.recipeItemTime {
@@ -26,9 +22,17 @@ ul.recipeItemTimeList {
         align-items: center;
         padding: 1rem 2rem;
         text-align: center;
+
+        @media only screen and (max-width: 767px) {
+            padding: .5rem;
+        }
     
         img {
             height: 32px;
+
+            @media only screen and (max-width: 767px) {
+                height: 28px;
+            }
         }
     
         h4 {
@@ -39,31 +43,41 @@ ul.recipeItemTimeList {
             color: $mediumGrey;
         }
 
+        &__making, &__cooking, &__pause {
+            width: 32%;
+            margin: 0 auto;
+        }
+
+        &__servingNumber, &__difficultyLevel {
+            width: 48%;
+            padding-bottom: 0;
+        }
+
         &__totalTime {
             width: 100%;
             grid-column: 1/6;
             grid-row: 3/4;
         }
-
-        &__servingNumber, &__difficultyLevel {
-            padding-bottom: 0;
-        }
     }
 
     li.recipeLineTime {
-        width: 1%;
+        width: 2%;
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 1rem 0;
 
+        @media only screen and (max-width: 767px) {
+            padding: 0;
+        }
+
         hr.recipeItemVerticalBorder{
             height: 100%;
             margin: 0;
         }
-    }
-    
-    hr.recipeItemHorizontalBorder {
-        width: 100%;
+
+        hr.recipeItemHorizontalBorder {
+            width: 100%;
+        }
     }
 }

@@ -1,12 +1,29 @@
 @use '../utils/variables' as *;
 
+app-recipe-item-time {
+    width: 100%;
+}
+
 ul.recipeItemTimeList {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    flex-direction: column;
+
+    li.timesWrapper ul {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        &__making, &__cooking, &__pause {
+            width: auto;
+        }
+    }
 
     li.recipeItemTime {
         width: 49%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         padding: 1rem 2rem;
         text-align: center;
     
@@ -21,11 +38,16 @@ ul.recipeItemTimeList {
         p {
             color: $mediumGrey;
         }
-    }
 
-    li.servingNumber {
-        width: 100%;
-        padding-bottom: 0;
+        &__totalTime {
+            width: 100%;
+            grid-column: 1/6;
+            grid-row: 3/4;
+        }
+
+        &__servingNumber, &__difficultyLevel {
+            padding-bottom: 0;
+        }
     }
 
     li.recipeLineTime {

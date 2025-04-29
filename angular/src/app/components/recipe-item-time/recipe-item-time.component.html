@@ -1,55 +1,80 @@
 <ul class="recipeItemTimeList">
-    <li class="recipeItemTime">
-        <img src="clock-regular.svg" alt="Icon">
-        <h4>Temps de préparation</h4>
-        <p>{{ getHours(makingHours()) }} {{ getMinutes(makingMinutes()) }}</p>
+    <!-- TIMES -->
+    <li class="timesWrapper">
+        <ul>
+            <li class="recipeItemTime recipeItemTime__making">
+                <img src="clock-regular.svg" alt="Icon">
+                <h4>Préparation</h4>
+                <p>{{ getHours(makingHours()) }} {{ getMinutes(makingMinutes()) }}</p>
+            </li>
+            <li class="recipeLineTime">
+                <hr class="recipeItemVerticalBorder" />
+            </li>
+        
+            @if (cookingTime()) {
+                <li class="recipeItemTime recipeItemTime__cooking">
+                    <img src="cooking-time.svg" alt="Icon">
+                    <h4>Cuisson</h4>
+                    <p>{{ getHours(cookingHours()) }} {{ getMinutes(cookingMinutes()) }}</p>
+                </li>
+            } @else {
+                <li class="recipeItemTime recipeItemTime__cooking">
+                    <img src="not-solid.svg" alt="Icon">
+                    <h4>Pas de cuisson</h4>
+                </li>
+            }
+        
+            <li class="recipeLineTime">
+                <hr class="recipeItemVerticalBorder" />
+            </li>
+        
+            @if (pauseTime()) {
+                <li class="recipeItemTime recipeItemTime__pause">
+                    <img src="pause-time.svg" alt="Icon">
+                    <h4>Repos</h4>
+                    <p>{{ getHours(pauseHours()) }} {{ getMinutes(pauseMinutes()) }}</p>
+                </li>
+            } @else {
+                <li class="recipeItemTime recipeItemTime__pause">
+                    <img src="not-solid.svg" alt="Icon">
+                    <h4>Pas de repos</h4>
+                </li>
+            }
+        </ul>
     </li>
-    <li class="recipeLineTime">
-        <hr class="recipeItemVerticalBorder" />
+
+    <li>
+        <hr class="recipeItemHorizontalBorder">
     </li>
-
-    @if (cookingTime()) {
-        <li class="recipeItemTime">
-            <img src="cooking-time.svg" alt="Icon">
-            <h4>Temps de cuisson</h4>
-            <p>{{ getHours(cookingHours()) }} {{ getMinutes(cookingMinutes()) }}</p>
-        </li>
-    } @else {
-        <li class="recipeItemTime">
-            <img src="not-solid.svg" alt="Icon">
-            <h4>Pas de cuisson</h4>
-        </li>
-    }
-
-    <hr class="recipeItemHorizontalBorder">
-
-    @if (pauseTime()) {
-        <li class="recipeItemTime">
-            <img src="pause-time.svg" alt="Icon">
-            <h4>Temps de repos</h4>
-            <p>{{ getHours(pauseHours()) }} {{ getMinutes(pauseMinutes()) }}</p>
-        </li>
-        <li class="recipeLineTime">
-            <hr class="recipeItemVerticalBorder" />
-        </li>
-    } @else {
-        <li class="recipeItemTime">
-            <img src="not-solid.svg" alt="Icon">
-            <h4>Pas de repos</h4>
-        </li>
-    }
     
-    <li class="recipeItemTime">
+    <li class="recipeItemTime recipeItemTime__totalTime">
         <img src="total-time.svg" alt="Icon">
         <h4>Temps total</h4>
         <p>{{ getTotalTime() }}</p>
     </li>
+    <!-- ### -->
 
-    <hr class="recipeItemHorizontalBorder">
+    <li>
+        <hr class="recipeItemHorizontalBorder">
+    </li>
 
-    <li class="recipeItemTime servingNumber">
-        <img src="users.svg" alt="Icon">
-        <h4>Portions</h4>
-        <p>{{ servingNumber() }} {{ servingUnit() }}</p>
+    <li class="timesWrapper">
+        <ul>
+            <li class="recipeItemTime recipeItemTime__servingNumber">
+                <img src="users.svg" alt="Icon">
+                <h4>Portions</h4>
+                <p>{{ servingNumber() }} {{ servingUnit() }}</p>
+            </li>
+
+            <li class="recipeLineTime">
+                <hr class="recipeItemVerticalBorder" />
+            </li>
+
+            <li class="recipeItemTime recipeItemTime__difficultyLevel">
+                <img src="difficulty.svg" alt="Icon">
+                <h4>Difficulté</h4>
+                <p>{{ 'Facile' }}</p>
+            </li>
+        </ul>
     </li>
 </ul>

@@ -29,7 +29,7 @@ export class ShowCommentAnswersDirective {
   ) {}
 
   @HostListener('click') onClick() {
-    this.setHeight(this.targetId, this.checkBool);
+    this.setHeight(this.targetId, this.checkBool);    
   }
 
   setHeight(id: string, bool: boolean) {
@@ -37,14 +37,20 @@ export class ShowCommentAnswersDirective {
     
     if(target) {
       const scrollHeight = target.scrollHeight;
-      const lenghtTarget = target.childNodes.length
+      const lenghtTarget = target.childNodes.length;
+
+      console.log(target);
+      
+      //this.renderer.setStyle(target, 'background-color', 'red');
       
       if(!bool) {
         this.renderer.setStyle(target, 'max-height', scrollHeight + 'px');
         this.renderer.setStyle(target, 'transition', `max-height ${0.15 * lenghtTarget}s ease-in-out`);
+        console.log('! bool');
       } else {
         this.renderer.setStyle(target, 'max-height', '0');
         this.renderer.setStyle(target, 'transition', `max-height ${0.15 * lenghtTarget}s ease-in-out`);
+        console.log('bool');
       }
     }
   }

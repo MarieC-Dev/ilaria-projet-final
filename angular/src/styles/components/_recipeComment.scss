@@ -2,10 +2,6 @@
 
 $imgSize: 72px;
 
-/* .recipeComment:not(.answersList .recipeComment) {
-    clip-path: rect(auto auto 0 auto);
-} */
-
 .recipeComment {
     background-color: white;
     overflow: hidden;
@@ -27,6 +23,20 @@ $imgSize: 72px;
     
             #userPicture {
                 height: $imgSize;
+            }
+        }
+
+        @media only screen and (max-width: 767px) {
+            margin-bottom: 1rem;
+
+            #wrapperUserPicture {
+                width: 48px;
+                height: 48px;
+                margin-right: 1rem;
+
+                #userPicture {
+                    height: 48px;
+                }
             }
         }
 

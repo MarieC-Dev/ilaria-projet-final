@@ -8,6 +8,10 @@ $marginText: calc($widthImg + $marginTitle);
     display: flex;
     flex-direction: column;
     margin-bottom: 2rem;
+
+    @media only screen and (max-width: 767px) {
+        margin-bottom: 1.5rem;
+    }
     
     .headerStep {
         display: flex;
@@ -16,15 +20,27 @@ $marginText: calc($widthImg + $marginTitle);
         margin-bottom: 1rem;
         color: $firstColor;
 
+        @media only screen and (max-width: 767px) {
+            margin-bottom: .5rem;
+        }
+
         img {
             width: $widthImg;
             height: auto;
+
+            @media only screen and (max-width: 767px) {
+                width: 24px;
+            }
         }
 
         h4 {
             width: max-content;
             margin: 0 $marginTitle;
             white-space: nowrap;
+
+            @media only screen and (max-width: 767px) {
+                margin: 0 1rem 0 .5rem;
+            }
         }
 
         hr {
@@ -35,5 +51,14 @@ $marginText: calc($widthImg + $marginTitle);
 
     p {
         margin-left: $marginText;
+
+        @media only screen and (max-width: 767px) {
+            width: 88%;
+            margin: 0 auto;
+        }
     }
+}
+
+app-recipe-step:last-child .recipeStepComponent {
+    margin-bottom: 0;
 }

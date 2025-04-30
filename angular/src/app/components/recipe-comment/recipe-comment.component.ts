@@ -13,7 +13,7 @@ export class RecipeCommentComponent {
   ids = input<string>('');
   picture = input<string>('');
   username = input<string>('');
-  date = input<Date>();
+  date = input<string>();
   note = input<number>();
   text = input<string>('');
   answersArray = input<number>(0);

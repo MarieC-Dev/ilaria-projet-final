@@ -22,7 +22,7 @@ export interface RecipeCommentResponse {
     id: number,
     author: User,
     text: string,
-    created: Date,
+    created: string,
 }
 
 export interface RecipeComment {
@@ -31,7 +31,7 @@ export interface RecipeComment {
     starScore: number, // 1 - 5 stars
     text: string,
     answers: RecipeCommentResponse[],
-    created: Date,
+    created: string,
 }
 
 export interface Time {
@@ -73,7 +73,7 @@ export interface Recipe {
     tags: RecipeTag[],
     opinions?: RecipeComment[],
 
-    created: Date,
+    created: string,
 }
 
 export type RecipeList = Recipe[];

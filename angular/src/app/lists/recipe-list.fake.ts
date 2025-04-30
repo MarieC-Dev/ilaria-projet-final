@@ -1,6 +1,28 @@
 import { RecipeList } from "../models/recipe.model";
 import { COOKING_TYPE_LIST } from "./cooking-type-list";
 
+
+
+function getNewDate() {
+    const newDate = new Date();
+    let optionsDate: any = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    let options: any = {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        hour12: false,
+    };
+    const formatter = new Intl.DateTimeFormat('fr-FR', options);
+    /* const day = newDate.getDate();
+    const month = newDate.getMonth() + 1;
+    const year = newDate.getFullYear();
+    return `${day}/${month < 10 ? '0' + month : month}/${year}`; */
+    const formattedDate = formatter.format(newDate);
+    return formattedDate.toString();
+}
+
 let index = 0;
 const ingredientsList = [
     {
@@ -96,7 +118,7 @@ const opinions = [
                     picture: 'profil-3.jpg'
                 },
                 text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                created: new Date()
+                created: getNewDate()
             }, {
                 id: 1,
                 author: {
@@ -105,7 +127,7 @@ const opinions = [
                     picture: 'profil-2.jpg'
                 },
                 text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                created: new Date()
+                created: getNewDate()
             }, {
                 id: 2,
                 author: {
@@ -114,7 +136,7 @@ const opinions = [
                     picture: 'profil-3.jpg'
                 },
                 text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                created: new Date()
+                created: getNewDate()
             }, {
                 id: 3,
                 author: {
@@ -123,7 +145,7 @@ const opinions = [
                     picture: 'profil.jpg'
                 },
                 text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                created: new Date()
+                created: getNewDate()
             }, {
                 id: 4,
                 author: {
@@ -132,10 +154,10 @@ const opinions = [
                     picture: 'profil-2.jpg'
                 },
                 text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                created: new Date()
+                created: getNewDate()
             },
         ],
-        created: new Date(),
+        created: getNewDate(),
     }, {
         id: 1,
         author: {
@@ -154,7 +176,7 @@ const opinions = [
                     picture: 'profil-2.jpg'
                 },
                 text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                created: new Date()
+                created: getNewDate()
             }, {
                 id: 1,
                 author: {
@@ -163,10 +185,10 @@ const opinions = [
                     picture: 'profil.jpg'
                 },
                 text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                created: new Date()
+                created: getNewDate()
             },
         ],
-        created: new Date(),
+        created: getNewDate(),
     }, {
         id: 2,
         author: {
@@ -177,7 +199,7 @@ const opinions = [
         starScore: 4,
         text: "Accompagnée d'une quiche, c'était très bon. Merci!",
         answers: [],
-        created: new Date(),
+        created: getNewDate(),
     }, {
         id: 3,
         author: {
@@ -188,7 +210,7 @@ const opinions = [
         starScore: 3,
         text: "Moyen",
         answers: [],
-        created: new Date(),
+        created: getNewDate(),
     },  {
         id: 4,
         author: {
@@ -199,7 +221,7 @@ const opinions = [
         starScore: 3,
         text: "Peu mieux faire",
         answers: [],
-        created: new Date(),
+        created: getNewDate(),
     }, 
 ];
 
@@ -243,14 +265,14 @@ export const RECIPE_LIST: RecipeList = [
             username: 'Toto le cuisto',
             picture: '',
             numberOfRecipes: 21,
-            created: new Date()
+            created: getNewDate()
         },
     
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
         opinions: opinions,
-        created: new Date(),
+        created: getNewDate(),
     }, {
         id: index++,
         image: 'salade.jpg',
@@ -290,14 +312,14 @@ export const RECIPE_LIST: RecipeList = [
             username: 'Toto le cuisto',
             picture: '',
             numberOfRecipes: 21,
-            created: new Date()
+            created: getNewDate()
         },
     
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
         opinions: opinions,
-        created: new Date(),
+        created: getNewDate(),
     }, {
         id: index++,
         image: 'salade.jpg',
@@ -337,14 +359,14 @@ export const RECIPE_LIST: RecipeList = [
             username: 'Toto le cuisto',
             picture: '',
             numberOfRecipes: 21,
-            created: new Date()
+            created: getNewDate()
         },
     
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
         opinions: opinions,
-        created: new Date(),
+        created: getNewDate(),
     }, {
         id: index++,
         image: 'salade.jpg',
@@ -384,14 +406,14 @@ export const RECIPE_LIST: RecipeList = [
             username: 'Toto le cuisto',
             picture: '',
             numberOfRecipes: 21,
-            created: new Date()
+            created: getNewDate()
         },
     
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
         opinions: opinions,
-        created: new Date(),
+        created: getNewDate(),
     }, {
         id: index++,
         image: 'salade.jpg',
@@ -431,14 +453,14 @@ export const RECIPE_LIST: RecipeList = [
             username: 'Toto le cuisto',
             picture: '',
             numberOfRecipes: 21,
-            created: new Date()
+            created: getNewDate()
         },
     
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
         opinions: opinions,
-        created: new Date(),
+        created: getNewDate(),
     }, {
         id: index++,
         image: 'salade.jpg',
@@ -478,14 +500,14 @@ export const RECIPE_LIST: RecipeList = [
             username: 'Toto le cuisto',
             picture: '',
             numberOfRecipes: 21,
-            created: new Date()
+            created: getNewDate()
         },
     
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
         opinions: opinions,
-        created: new Date(),
+        created: getNewDate(),
     }, {
         id: index++,
         image: 'salade.jpg',
@@ -525,14 +547,14 @@ export const RECIPE_LIST: RecipeList = [
             username: 'Toto le cuisto',
             picture: '',
             numberOfRecipes: 21,
-            created: new Date()
+            created: getNewDate()
         },
     
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
         opinions: opinions,
-        created: new Date(),
+        created: getNewDate(),
     }, {
         id: index++,
         image: 'salade.jpg',
@@ -572,14 +594,14 @@ export const RECIPE_LIST: RecipeList = [
             username: 'Toto le cuisto',
             picture: '',
             numberOfRecipes: 21,
-            created: new Date()
+            created: getNewDate()
         },
     
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
         opinions: opinions,
-        created: new Date(),
+        created: getNewDate(),
     }, {
         id: index++,
         image: 'salade.jpg',
@@ -619,14 +641,14 @@ export const RECIPE_LIST: RecipeList = [
             username: 'Toto le cuisto',
             picture: '',
             numberOfRecipes: 21,
-            created: new Date()
+            created: getNewDate()
         },
     
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
         opinions: opinions,
-        created: new Date(),
+        created: getNewDate(),
     }, {
         id: index++,
         image: 'salade.jpg',
@@ -666,14 +688,14 @@ export const RECIPE_LIST: RecipeList = [
             username: 'Toto le cuisto',
             picture: '',
             numberOfRecipes: 21,
-            created: new Date()
+            created: getNewDate()
         },
     
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
         opinions: opinions,
-        created: new Date(),
+        created: getNewDate(),
     }, {
         id: index++,
         image: 'salade.jpg',
@@ -713,14 +735,14 @@ export const RECIPE_LIST: RecipeList = [
             username: 'Toto le cuisto',
             picture: '',
             numberOfRecipes: 21,
-            created: new Date()
+            created: getNewDate()
         },
     
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
         opinions: opinions,
-        created: new Date(),
+        created: getNewDate(),
     }, {
         id: index++,
         image: 'salade.jpg',
@@ -760,14 +782,14 @@ export const RECIPE_LIST: RecipeList = [
             username: 'Toto le cuisto',
             picture: '',
             numberOfRecipes: 21,
-            created: new Date()
+            created: getNewDate()
         },
     
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
         opinions: opinions,
-        created: new Date(),
+        created: getNewDate(),
     }, {
         id: index++,
         image: 'salade.jpg',
@@ -807,13 +829,13 @@ export const RECIPE_LIST: RecipeList = [
             username: 'Toto le cuisto',
             picture: '',
             numberOfRecipes: 21,
-            created: new Date()
+            created: getNewDate()
         },
     
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
         opinions: opinions,
-        created: new Date(),
+        created: getNewDate(),
     },
 ];

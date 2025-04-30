@@ -5,7 +5,7 @@ export interface User {
     email?: string,
     password?: string,
     numberOfRecipes?: number,
-    created?: Date
+    created?: string
 }
 
 export type UserList = User[];

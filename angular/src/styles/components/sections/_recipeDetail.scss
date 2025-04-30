@@ -202,6 +202,8 @@ section.recipeSectionBorder {
         }
 
         @media only screen and (max-width: 767px) {
+            padding: 2rem 0;
+
             &__desktop {
                 display: none !important;
             }
@@ -211,7 +213,6 @@ section.recipeSectionBorder {
                 display: flex !important;
                 flex-direction: column;
                 align-items: center;
-                padding: 2rem 0;
                 margin: 0;
             }
         }
@@ -331,6 +332,7 @@ section.recipeSectionBorder {
         border: 1px solid $lightGrey;
 
         @media only screen and (max-width: 767px) {
+            width: 100%;
             margin: 1rem 0;
         }
     }
@@ -348,6 +350,10 @@ section.recipeSectionBorder {
     
                 &:not(.commentAndAnswers:last-child) {
                     margin-bottom: 3rem;
+
+                    @media only screen and (max-width: 767px) {
+                        margin-bottom: 1.5rem;
+                    }
                 }
             }
         }

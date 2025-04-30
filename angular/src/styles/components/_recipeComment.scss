@@ -73,6 +73,10 @@ $imgSize: 72px;
         margin-top: 1rem;
         color: $firstColor;
 
+        @media only screen and (max-width: 767px) {
+            margin: .5rem auto 0 auto;
+        }
+
         &.show img {
             transform: rotate(180deg);
             transition: transform .2s ease-in-out;
@@ -95,9 +99,18 @@ $imgSize: 72px;
     //margin: 2rem 0 3rem 0;
     overflow: hidden;
 
+    @media only screen and (max-width: 767px) {
+        padding: 0 1rem;
+    }
+
     .recipeComment {
         padding: 2rem;
         margin: 0 0 0 5rem;
+
+        @media only screen and (max-width: 767px) {
+            padding: 1rem 1.5rem;
+            margin: 0;
+        }
 
         &.isAnswer.userAnswer {
             background-color: $lightBrown;
@@ -108,6 +121,10 @@ $imgSize: 72px;
 
 app-recipe-comment:first-child {
     margin-top: 2rem;
+
+    @media only screen and (max-width: 767px) {
+        margin-top: 1rem;
+    }
 
     .authorAnswer {
         padding-top: 0;

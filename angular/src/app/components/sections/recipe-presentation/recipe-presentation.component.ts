@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { SpicyIconComponent } from "../../icons/spicy-icon/spicy-icon.component";
 
 @Component({
   selector: 'app-recipe-presentation',
-  imports: [CommonModule, SpicyIconComponent],
+  imports: [CommonModule],
   templateUrl: './recipe-presentation.component.html',
   styleUrl: './recipe-presentation.component.scss'
 })

@@ -163,18 +163,17 @@ div.recipePage {
 }
 
 section.recipeSectionBorder {
-    padding: 1rem;
+    width: 100%;
 
     .recipeBorder {
-        margin: -1.5rem auto 5rem auto;
+        //margin: -1.5rem auto 5rem auto;
         border: 1px solid $lightGrey;
     
         @media only screen and (max-width: 767px) {
-            margin: 0;
+            margin: 1rem 0;
         }
     }
 }
-
 
 .recipeDetails {
     display: grid;
@@ -190,6 +189,7 @@ section.recipeSectionBorder {
         grid-auto-rows: 1fr;
         row-gap: 0;
         align-items: center;
+        padding: 1.5rem 0;
     }
 
     div.recipeIngredients, 
@@ -202,7 +202,7 @@ section.recipeSectionBorder {
         }
 
         @media only screen and (max-width: 767px) {
-            padding: 2rem 0;
+            padding: 1.5rem 0;
 
             &__desktop {
                 display: none !important;
@@ -333,7 +333,7 @@ section.recipeSectionBorder {
 
         @media only screen and (max-width: 767px) {
             width: 100%;
-            margin: 1rem 0;
+            margin: 1.5rem 0;
         }
     }
 

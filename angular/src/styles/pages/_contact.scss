@@ -6,8 +6,21 @@
     justify-content: space-between;
     margin: 3rem auto 0 auto;
 
+    @media screen and (max-width: 767px) {
+        width: auto;
+        flex-direction: column;
+        padding: 1.5rem 0;
+        margin: 0;
+    }
+
     section {
         width: 47%;
+
+        @media screen and (max-width: 767px) {
+            width: auto;
+            display: flex;
+            flex-direction: column;
+        }
     }
 
     .leftContact {
@@ -15,30 +28,65 @@
         flex-direction: column;
         justify-content: center;
 
+        @media screen and (max-width: 767px) {
+            padding: 1.5rem 1rem;
+
+            h1 {
+                font-size: 40px;
+                text-align: center;
+            }
+        }
+
         p {
             margin: 2rem 0;
             line-height: 1.7;
+
+            @media screen and (max-width: 767px) {
+                margin: 1rem auto;
+                text-align: center;
+            }
         }
 
         button {
             margin: 1rem auto 0 auto;
+
+            @media screen and (max-width: 767px) {
+                margin: 0 auto;
+            }
         }
     }
 
     .rightContact {
+        @media screen and (max-width: 767px) {
+            margin-top: 1.5rem;
+        }
+
         form {
             padding: 2.5rem;
             background-color: $firstColor;
             border-radius: 1.5rem;
 
+            @media screen and (max-width: 767px) {
+                padding: 3rem 2rem;
+                border-radius: 0;
+            }
+
             .formInputDiv {
                 width: 100%;
                 align-items: flex-start;
+
+                @media screen and (max-width: 767px) {
+                    align-items: center;
+                }
             }
 
             label, input, textarea {
                 color: white;
                 text-align: left;
+
+                @media screen and (max-width: 767px) {
+                    text-align: center;
+                }
 
                 &::placeholder { 
                     color: white;

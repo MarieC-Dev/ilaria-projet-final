@@ -10,6 +10,9 @@ footer {
     @media only screen and (max-width: 767px) {
         width: auto;
         padding: 3rem 1rem;
+        position: relative;
+        z-index: 0;
+        top: 0px; // 80
     }
 
     @include socialNetworks(
@@ -21,19 +24,22 @@ footer {
         $x-twitter
     );
 
+    @media screen and (max-width: 767px) {
+        @include socialNetworks(
+            center, // justify-content
+            0 auto 1.5rem auto, // margin ul
+            0 0 1rem .5rem, // margin li
+            $facebook, // border color second social icon ...
+            $linkedin,
+            $x-twitter
+        );
+    }
+
     .socialNetworks {
         width: $sectionWidth;
 
-        @media only screen and (max-width: 767px) {
+        @media screen and (max-width: 767px) {
             width: auto;
-
-            li {
-                margin: 0 0 1rem .5rem;
-            }
-        }
-
-        li {
-            margin: 0 0 2rem 1.5rem;
         }
     }
 
@@ -46,6 +52,8 @@ footer {
         @media only screen and (max-width: 767px) {
             width: auto;
             flex-direction: column;
+            align-items: center;
+            margin: 0 auto 1rem auto;
         }
 
         li {

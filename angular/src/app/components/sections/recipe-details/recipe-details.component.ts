@@ -5,12 +5,17 @@ import { SocialNetworksComponent } from '../../social-networks/social-networks.c
 import { Ingredient, RecipeComment, RecipeStep, RecipeTag } from '../../../models/recipe.model';
 import { RecipeAverageService } from '../../../services/recipe-average.service';
 import { RECIPE_LIST } from '../../../lists/recipe-list.fake';
-import { User } from '../../../models/user.model';
 import { commonSocial } from '../../../lists/social-networks-list';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-recipe-details',
-  imports: [RecipeStepComponent, RecipeCommentComponent, SocialNetworksComponent],
+  imports: [
+    RecipeStepComponent, 
+    RecipeCommentComponent, 
+    SocialNetworksComponent, 
+    CommonModule
+  ],
   templateUrl: './recipe-details.component.html',
   styleUrl: './recipe-details.component.scss'
 })

@@ -54,6 +54,11 @@
                 }
             </ul>
         </div>
+
+        <div class="wrapperNavImage" 
+            *ngIf="recipe.steps.length >= 5 && recipeOpinions()!.length > 1">
+            <img src="recipe-detail-image.jpg" alt="détail de la recette image">
+        </div>
     </nav>
 
     <hr class="dividingStepsComments">
@@ -61,7 +66,7 @@
     <div class="recipeComments">
         <h3>Commentaires</h3>
 
-        <div class="commentsContainer">
+        <div class="commentsContainer" *ngIf="recipeOpinions()!.length > 0">
             @for (opinion of recipeOpinions(); track opinion.id) {
                 <div class="commentAndAnswers">
                     <div>
@@ -91,6 +96,11 @@
                     }
                 </div>
             }
+        </div>
+
+        <div class="noCommentsContainer" *ngIf="recipeOpinions()!.length === 0">
+            <p>Cette recette n'a pas encore été notée. Soyez le premier à laisser un commentaires !</p>
+            <button class="btn-bg-red" type="button">Noter la recette</button>
         </div>
     </div>
 

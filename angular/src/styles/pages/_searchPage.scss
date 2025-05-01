@@ -8,15 +8,42 @@
     align-items: center;
     padding: 3rem 0;
 
+    @media screen and (max-width: 767px) {
+        padding: 1.5rem 0 0 0;
+    }
+
     section {
         width: $sectionWidth;
+
+        @media screen and (max-width: 767px) {
+            width: 100% !important;
+            padding: 1.5rem 1rem;
+        }
     }
 
     .searchSection {
         width: $sectionWidth;
 
-        select {
-            @include arrowsSelectStyle($lightFirstColor, $darkGrey);
+        .searchFormComponent {
+            @media screen and (max-width: 767px) {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 0;
+            }
+
+            label {
+                width: 100%;
+                margin-right: 6rem;
+
+                @media screen and (max-width: 767px) {
+                    margin: 0 0 1rem 0;
+                }
+            }
+
+            select {
+                @include arrowsSelectStyle($firstColor, white);
+            }
         }
     }
 

@@ -36,3 +36,9 @@ button {
     background-color: transparent;
     border: 0;
 }
+
+.mainLayout {
+    @media screen and (max-width: 767px) {
+        overflow-x: hidden;
+    }
+}

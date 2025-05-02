@@ -1,29 +1,30 @@
 <div class="profilePage">
     <section class="profileLinksSection">
-        <div class="wrapperProfileLinksList">
-            <div class="profileLinksList">
-                <a 
-                    class="btn-bg-darkGrey btn-bg-darkGrey__profile"
-                    routerLink="/profil/mes-infos" 
-                    routerLinkActive="btn-bg-darkGrey__profile--active" 
-                    ariaCurrentWhenActive="page">
-                    Mon profil
-                </a>
-                <a 
-                    class="btn-bg-darkGrey btn-bg-darkGrey__profile"
-                    routerLink="/profil/mes-favoris" 
-                    routerLinkActive="btn-bg-darkGrey__profile--active" 
-                    ariaCurrentWhenActive="page">
-                    Mes favoris
-                </a>
-                <a 
-                    class="btn-bg-darkGrey btn-bg-darkGrey__profile"
-                    routerLink="/profil/mes-recettes" 
-                    routerLinkActive="btn-bg-darkGrey__profile--active" 
-                    ariaCurrentWhenActive="page">
-                    Mes recettes
-                </a>
-            </div>
+        <div class="profileLinksList">
+            <a 
+                class="btn-bg-darkGrey btn-bg-darkGrey__profile"
+                routerLink="/profil/mes-infos" 
+                routerLinkActive="btn-bg-darkGrey__profile--active" 
+                ariaCurrentWhenActive="page">
+                <app-profile-icon />
+                <p>Mon profil</p>
+            </a>
+            <a 
+                class="btn-bg-darkGrey btn-bg-darkGrey__profile"
+                routerLink="/profil/mes-favoris" 
+                routerLinkActive="btn-bg-darkGrey__profile--active" 
+                ariaCurrentWhenActive="page">
+                <app-heart-icon />
+                <p>Mes favoris</p>
+            </a>
+            <a 
+                class="btn-bg-darkGrey btn-bg-darkGrey__profile"
+                routerLink="/profil/mes-recettes" 
+                routerLinkActive="btn-bg-darkGrey__profile--active" 
+                ariaCurrentWhenActive="page">
+                <app-recipe-icon />
+                <p>Mes recettes</p>
+            </a>
         </div>
     </section>
 

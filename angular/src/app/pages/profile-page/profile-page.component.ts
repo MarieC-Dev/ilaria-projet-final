@@ -4,6 +4,9 @@ import { RecipeItemComponent } from "../../components/recipe-item/recipe-item.co
 import { RECIPE_LIST } from '../../lists/recipe-list.fake';
 import { RecipeAverageService } from '../../services/recipe-average.service';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { ProfileIconComponent } from '../../components/icons/profile-icon/profile-icon.component';
+import { HeartIconComponent } from '../../components/icons/heart-icon/heart-icon.component';
+import { RecipeIconComponent } from '../../components/icons/recipe-icon/recipe-icon.component';
 
 @Component({
   selector: 'app-profile-page',
@@ -11,7 +14,10 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
     FormInputComponent, 
     RecipeItemComponent, 
     RouterLink, 
-    RouterLinkActive
+    RouterLinkActive,
+    ProfileIconComponent,
+    HeartIconComponent,
+    RecipeIconComponent
   ],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.scss'

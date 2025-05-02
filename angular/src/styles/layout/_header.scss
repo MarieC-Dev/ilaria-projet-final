@@ -15,7 +15,7 @@ header {
         flex-direction: column-reverse;
         justify-content: flex-end;
         padding: 0;
-        position: sticky;
+        position: fixed;
         z-index: 5;
         top: 0;
         right: 0;
@@ -128,7 +128,7 @@ main {
     @media only screen and (max-width: 767px) {
         position: relative;
         z-index: 0;
-        top: 0px; // 80
+        top: 80px; // 80
         left: 0;
         right: 0;
     }

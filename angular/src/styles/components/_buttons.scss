@@ -42,6 +42,7 @@ $mobilePadding: .75rem 1.5rem;
 
     &:hover:not(.btn-disabled) {
         background-color: $darkGrey;
+        color: white;
         border-color: $darkGrey;
     }
 }

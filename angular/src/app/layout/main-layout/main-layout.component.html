@@ -20,7 +20,9 @@
                 class="btn-transparent"
                 routerLink="/connexion" 
                 routerLinkActive="active" 
-                ariaCurrentWhenActive="page">Connexion</a>
+                ariaCurrentWhenActive="page"
+                appBurgerMenu
+                (click)="appBurgerMenu.closeMenu()">Connexion</a>
             <a 
                 class="btn-bg btn-bg-red"
                 routerLink="/inscription"

@@ -17,20 +17,8 @@ export class BurgerMenuDirective {
     console.log(this.isOpen);
   }
 
-  // $event -> click
   @HostListener('click', ['$event']) onClickBurger(event: MouseEvent) {
     event.stopPropagation();
-  }
-
-  // on click on target (HTML element)
-  @HostListener('click', ['$event.target']) onClickNavLink(target: HTMLElement) { 
-    const linkTag = target.tagName === 'A' ? true : false;
-
-    if(this.isOpen && linkTag) {
-      this.isOpen = false;
-      this.isOpenChange.emit(this.isOpen);
-      this.closeMenu();
-    }
   }
 
   toggleMenu() {

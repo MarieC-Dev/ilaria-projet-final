@@ -24,8 +24,6 @@ export class BurgerMenuDirective {
   toggleMenu() {
     this.isOpen = !this.isOpen;
 
-    console.log(this.isOpen);
-
     if(this.isOpen) {
       this.openMenu();
     } else {

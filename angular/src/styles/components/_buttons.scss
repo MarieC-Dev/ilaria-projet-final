@@ -85,13 +85,13 @@ $mobilePadding: .75rem 1.5rem;
         padding: $mobilePadding;
     }
 
-    &:hover:not(.btn-disabled) {
+    &:hover:not(.btn-disabled, .btn-bg-darkGrey__profile) {
         background-color: white;
         color: $darkGrey;
         border-color: $darkGrey;
     }
 
-    &__border {
+    &__border, &__profile--active {
         background-color: white;
         color: $darkGrey;
         border-color: $darkGrey;
@@ -102,6 +102,19 @@ $mobilePadding: .75rem 1.5rem;
             border-color: $darkGrey;
         }
     }
+
+    &__profile {
+        &:hover{
+            background-color: $thirdColor;
+            color: black;
+            border-color: $darkGrey;
+        }
+    }
+
+    /* &--active:hover {
+        background-color: $thirdColor;
+        color: black;
+    } */
 }
 
 button.btn-disabled {

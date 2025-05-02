@@ -22,12 +22,30 @@
     }
 
     .profileLinksSection {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        
-        a {
-            margin: 0 2rem;
+        .profileLinksList {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+
+            @media screen and (max-width: 767px) {
+                display: grid;
+            }
+
+            a.profileLinkActive {
+                background-color: white;
+                color: $darkGrey;
+                border-color: $darkGrey;
+            
+                &:hover {
+                    background-color: $thirdColor;
+                    color: black;
+                    border-color: $darkGrey;
+                }
+            }
+            
+            a {
+                margin: 0 2rem;
+            }
         }
     }
 

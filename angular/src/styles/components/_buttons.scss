@@ -50,7 +50,7 @@ $mobilePadding: .75rem 1.5rem;
 .btn-bg-yellow {
     padding: 1rem 2.5rem;
     background-color: $thirdColor;
-    color: black;
+    color: $darkGrey;
     border: 2px solid $thirdColor;
     border-radius: 3rem;
 
@@ -95,26 +95,25 @@ $mobilePadding: .75rem 1.5rem;
         background-color: white;
         color: $darkGrey;
         border-color: $darkGrey;
-
-        &:hover:not(.btn-disabled) {
-            background-color: $darkGrey;
-            color: white;
-            border-color: $darkGrey;
-        }
     }
 
-    &__profile {
+    &__border:hover:not(.btn-disabled) {
+        background-color: $darkGrey;
+        color: white;
+        border-color: $darkGrey;
+    }
+
+    &__profile, &__profile--active {
         &:hover{
             background-color: $thirdColor;
-            color: black;
+            color: $darkGrey;
             border-color: $darkGrey;
+
+            svg {
+                fill: $darkGrey !important;
+            }
         }
     }
-
-    /* &--active:hover {
-        background-color: $thirdColor;
-        color: black;
-    } */
 }
 
 button.btn-disabled {

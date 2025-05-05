@@ -71,3 +71,56 @@
         }
     }
 }
+
+@media screen and (max-width: 767px) {
+    table.myRecipesTable {
+        thead tr {
+            .myrecipeCheckbox {
+                border: 1px solid $lightGrey;
+                border-radius: 3px;
+            }
+        }
+
+        thead tr, tbody tr {
+            th, td {
+                display: flex;
+                justify-content: flex-start !important;
+            }
+
+            th.myrecipeButtons {
+                display: none !important;
+            }
+        }
+
+        thead tr, tbody tr {
+            display: grid;
+            grid-template-columns: 10% 90%;
+            grid-template-rows: repeat(3, 1fr);
+            grid-auto-rows: 1fr;
+
+            th, td {
+                padding: 0;
+            }
+
+            th:nth-child(1), td:nth-child(1) {
+                width: max-content !important;
+                grid-column: 1/2;
+                grid-row: 1/4;
+            }
+
+            th:nth-child(2), th:nth-child(3), th:nth-child(4),
+            td:nth-child(2), td:nth-child(3), td:nth-child(4), td:nth-child(5), td:nth-child(6) {
+                width: auto !important;
+                grid-column: 2/3;
+                margin: .25rem 0 .25rem 1rem !important;
+
+                button svg {
+                    width: 24px;
+                    height: 32px;
+                    margin: 0 1rem 0 0;
+                }
+            }
+            
+        }
+    }
+}

@@ -1,13 +1,21 @@
 @use '../../utils/variables' as *;
 @use '../../utils/mixins' as *;
 
-.myfavorites-myrecipes {
+.profilePage section.myfavorites-myrecipes {
+    @media screen and (max-width: 767px) {
+        padding: 2rem 1rem;
+    }
+
     h2 {
         margin-bottom: 2rem;
     }
 
     form {
         width: 80%;
+
+        @media screen and (max-width: 767px) {
+            width: 100%;
+        }
 
         div.searchMyfavoritesMyrecipesDiv {
             display: flex;
@@ -16,6 +24,10 @@
             padding: .75rem 2rem;
             border: 2px solid $darkGrey;
             border-radius: 3rem;
+
+            @media screen and (max-width: 767px) {
+                padding: .75rem 1.5rem;
+            }
 
             input {
                 width: 100%;
@@ -29,6 +41,18 @@
                 margin-left: 2rem;
 
                 @include svgStyle(32px, $firstColor);
+
+                @media screen and (max-width: 767px) {
+                    width: auto;
+                    height: auto;
+                    margin-left: 1rem;
+
+                    app-search-icon, svg {
+                        width: 28px;
+                        height: 28px;
+                        display: block;
+                    }
+                }
             }
         }
     }

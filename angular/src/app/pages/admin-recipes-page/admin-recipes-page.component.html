@@ -1,1 +1,35 @@
-<p>admin-recipes-page works!</p>
+<div class="profilePage">
+    <section class="profileLinksSection">
+        <div class="profileLinksList">
+            <a 
+                class="btn-bg-darkGrey btn-bg-darkGrey__profile"
+                routerLink="/admin/mes-infos" 
+                routerLinkActive="btn-bg-darkGrey__profile--active" 
+                ariaCurrentWhenActive="page">
+                <app-profile-icon />
+                <p>Mon profil</p>
+            </a>
+            <a 
+                class="btn-bg-darkGrey btn-bg-darkGrey__profile"
+                routerLink="/admin/mes-favoris" 
+                routerLinkActive="btn-bg-darkGrey__profile--active" 
+                ariaCurrentWhenActive="page">
+                <app-heart-icon />
+                <p>Mes favoris</p>
+            </a>
+            <a 
+                class="btn-bg-darkGrey btn-bg-darkGrey__profile"
+                routerLink="/admin/mes-recettes" 
+                routerLinkActive="btn-bg-darkGrey__profile--active" 
+                ariaCurrentWhenActive="page">
+                <app-recipe-icon />
+                <p>Mes recettes</p>
+            </a>
+        </div>
+    </section>
+
+    <app-myfavorites-myrecipes 
+        title="Mes recettes"
+        [isRecipes]="true" 
+        [isFavorites]="false" />
+</div>

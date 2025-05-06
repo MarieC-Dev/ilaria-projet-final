@@ -6,10 +6,11 @@ import { FormInputComponent } from '../../components/form-components/form-input/
 import { RecipeItemComponent } from '../../components/recipe-item/recipe-item.component';
 import { RECIPE_LIST } from '../../lists/recipe-list.fake';
 import { RecipeAverageService } from '../../services/recipe-average.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-admin-page',
-  imports: [ProfileIconComponent, HeartIconComponent, RecipeIconComponent, FormInputComponent, RecipeItemComponent],
+  imports: [RouterModule, ProfileIconComponent, HeartIconComponent, RecipeIconComponent, FormInputComponent, RecipeItemComponent],
   templateUrl: './admin-page.component.html',
   styleUrl: './admin-page.component.scss'
 })

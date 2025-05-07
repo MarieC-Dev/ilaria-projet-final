@@ -31,7 +31,7 @@ CREATE TABLE RecipeData (
     FOREIGN KEY (cookingTypeId) REFERENCES CookingTypesList(id),
     FOREIGN KEY (authorId) REFERENCES User(id),
     FOREIGN KEY (servingNumberId) REFERENCES ServingNumber(id),
-    FOREIGN KEY (recipeTimeId) REFERENCES RecipeTimeId(id),
+    FOREIGN KEY (recipeTimeId) REFERENCES RecipeTimeList(id),
     FOREIGN KEY (ingredientsListId) REFERENCES IngredientsList(id),
     FOREIGN KEY (stepsListId) REFERENCES StepsList(id),
     FOREIGN KEY (noteCommentListId) REFERENCES NoteCommentList(id),

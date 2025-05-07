@@ -11,5 +11,5 @@ CREATE TABLE TagList (
     tagId INT NOT NULL,
 
     FOREIGN KEY (recipeId) REFERENCES RecipeData(id),
-    FOREIGN KEY (noteCommentId) REFERENCES Tag(id)
+    FOREIGN KEY (tagId) REFERENCES Tag(id)
 );

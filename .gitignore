@@ -3,5 +3,7 @@ node_modules
 .env
 .angular
 .vscode
+*.idea
+*.vscode
 
 angular/*.md

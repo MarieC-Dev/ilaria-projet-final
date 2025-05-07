@@ -8,9 +8,6 @@ SOURCE noteCommentTable.sql;
 SOURCE tagTable.sql;
 SOURCE userTable.sql;
 
-CREATE DATABASE recipeSite;
-USE recipeSite;
-
 CREATE TABLE RecipeData (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
@@ -33,7 +30,7 @@ CREATE TABLE RecipeData (
     FOREIGN KEY (cuisineTypeId) REFERENCES CuisineType(id),
     FOREIGN KEY (cookingTypeId) REFERENCES CookingTypesList(id),
     FOREIGN KEY (authorId) REFERENCES User(id),
-    FOREIGN KEY (servingType) REFERENCES ServingNumber(id),
+    FOREIGN KEY (servingNumberId) REFERENCES ServingNumber(id),
     FOREIGN KEY (recipeTimeId) REFERENCES RecipeTimeId(id),
     FOREIGN KEY (ingredientsListId) REFERENCES IngredientsList(id),
     FOREIGN KEY (stepsListId) REFERENCES StepsList(id),

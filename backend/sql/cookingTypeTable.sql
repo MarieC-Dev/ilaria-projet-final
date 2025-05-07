@@ -2,7 +2,7 @@ SOURCE database.sql;
 
 CREATE TABLE CookingType (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name VARCHAR(100) NOT NULL
+    type ENUM('hot-plate', 'stove', 'air-fryer', 'barbecue', 'no-cooking') NOT NULL UNIQUE
 );
 
 CREATE TABLE CookingTypesList (
@@ -12,5 +12,8 @@ CREATE TABLE CookingTypesList (
 
     FOREIGN KEY (recipeId) REFERENCES RecipeData(id),
     FOREIGN KEY (cookingTypeId) REFERENCES CookingType(id),
-    UNIQUE (recipeId, cookingTypeId)
+    -- UNIQUE (recipeId, cookingTypeId)
 );
+
+INSERT INTO CookingType (type) 
+    VALUES ('hot-plate'), ('stove'), ('air-fryer'), ('barbecue'), ('no-cooking');

@@ -11,7 +11,6 @@ CREATE TABLE User (
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(100),
     roleId INT NOT NULL DEFAULT 3,
-    recipeListId INT NOT NULL,
     created DATETIME NOT NULL,
 
     FOREIGN KEY (roleId) REFERENCES Roles(id)

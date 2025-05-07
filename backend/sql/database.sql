@@ -1,23 +1,15 @@
+SOURCE cuisineTypeTable.sql;
 SOURCE cookingTypeTable.sql;
+SOURCE servingNumberTable.sql;
 SOURCE recipeTimeTable.sql;
 SOURCE ingredientTable.sql;
 SOURCE stepTable.sql;
 SOURCE noteCommentTable.sql;
 SOURCE tagTable.sql;
+SOURCE userTable.sql;
 
 CREATE DATABASE recipeSite;
 USE recipeSite;
-
-CREATE TABLE CuisineType (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name VARCHAR(100)
-);
-
-CREATE TABLE ServingNumber (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    number INT NOT NULL,
-    servingType VARCHAR(100) NOT NULL
-)
 
 CREATE TABLE RecipeData (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -29,7 +21,7 @@ CREATE TABLE RecipeData (
     cookingTypeId INT NOT NULL, -- foreign key
     servingNumberId INT NOT NULL, -- foreign key
     difficulty INT NOT NULL,
-    author VARCHAR(255) NOT NULL, -- USER
+    authorId INT NOT NULL, -- foreign key
     recipeTimeId INT NOT NULL, -- foreign key
     ingredientsListId INT NOT NULL, -- foreign key
     stepsListId VARCHAR(255), -- foreign key
@@ -40,6 +32,7 @@ CREATE TABLE RecipeData (
 
     FOREIGN KEY (cuisineTypeId) REFERENCES CuisineType(id),
     FOREIGN KEY (cookingTypeId) REFERENCES CookingTypesList(id),
+    FOREIGN KEY (authorId) REFERENCES User(id),
     FOREIGN KEY (servingType) REFERENCES ServingNumber(id),
     FOREIGN KEY (recipeTimeId) REFERENCES RecipeTimeId(id),
     FOREIGN KEY (ingredientsListId) REFERENCES IngredientsList(id),

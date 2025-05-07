@@ -1,0 +1,5 @@
+CREATE TABLE ServingNumber (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    number INT NOT NULL,
+    servingType VARCHAR(100) NOT NULL
+);

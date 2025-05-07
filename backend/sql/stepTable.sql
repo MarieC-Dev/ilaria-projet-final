@@ -1,0 +1,15 @@
+SOURCE database.sql;
+
+CREATE TABLE Step (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    description LONGTEXT NOT NULL
+);
+
+CREATE TABLE StepsList (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    recipeId INT NOT NULL,
+    stepId INT NOT NULL,
+
+    FOREIGN KEY (recipeId) REFERENCES RecipeData(id),
+    FOREIGN KEY (stepId) REFERENCES Step(id)
+);

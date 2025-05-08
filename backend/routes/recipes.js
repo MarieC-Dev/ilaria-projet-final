@@ -1,3 +1,10 @@
+const db = require('../middlewares/db_connection');
+
 exports.getAllRecipes = async (req, res) => {
-    console.log('ICI');
+    try {
+        const [rows] = await db.query('SELECT * FROM RecipeData');
+        res.status(200).json(rows);
+    } catch (error) {
+        res.status(500).json({ msg: 'Something went wrong : ' + error });
+    }
 }

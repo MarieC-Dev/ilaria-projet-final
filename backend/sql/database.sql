@@ -101,18 +101,6 @@ CREATE TABLE IngredientsList (
     FOREIGN KEY (ingredientId) REFERENCES Ingredient(id)
 );
 
-CREATE TABLE RecipeTimeList (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    recipeId INT NOT NULL,
-    makingTimeId INT NOT NULL,
-    cookingTimeId INT,
-    pauseTimeId INT,
-    FOREIGN KEY (recipeId) REFERENCES RecipeData(id),
-    FOREIGN KEY (makingTimeId) REFERENCES TimeTable(id),
-    FOREIGN KEY (cookingTimeId) REFERENCES TimeTable(id),
-    FOREIGN KEY (pauseTimeId) REFERENCES TimeTable(id)
-);
-
 CREATE TABLE StepsList (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     recipeId INT NOT NULL,

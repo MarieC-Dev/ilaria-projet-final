@@ -21,24 +21,69 @@
                 id="signup-picture"
                 type="file"
                 label="Photo de profil"
-                inputId="signup-signup-add-picture"
+                inputId="signup-add-picture"
                 [required]="false" /> -->
 
-            @for (input of formInputConnection(); track input.id) {
-                <app-form-input
-                    [id]="input.id"
-                    [type]="input.type"
-                    [label]="input.label"
-                    [inputId]="input.inputId"
-                    [required]="input.required" />
-            }
+            <div class="formInputDiv" id="container-signup-add-picture">
+                <label for="signup-add-picture">
+                    Choisissez une photo de profil : <span style="color: #EB4137">*</span>
+                </label>
+
+                <input type="file"
+                    id="signup-add-picture"
+                    name="signup-add-picture"
+                    placeholder="Choisissez une photo de profil"
+                    [(ngModel)]="newUser.imageName"
+                />
+            </div>
+
+            <div class="formInputDiv" id="container-signup-username">
+                <label for="signup-username">
+                    Nom d'utilisateur : <span style="color: #EB4137">*</span>
+                </label>
+
+                <input type="text"
+                    id="signup-username"
+                    name="signup-username"
+                    placeholder="Nom d'utilisateur"
+                    [(ngModel)]="newUser.username"
+                    required
+                />
+            </div>
+
+            <div class="formInputDiv" id="container-signup-email">
+                <label for="signup-email">
+                    Email : <span style="color: #EB4137">*</span>
+                </label>
+
+                <input type="email"
+                    id="signup-email"
+                    name="signup-email"
+                    placeholder="email@example.com"
+                    [(ngModel)]="newUser.email"
+                    required
+                />
+            </div>
+
+            <div class="formInputDiv" id="container-signup-password">
+                <label for="signup-password">
+                    Mot de passe : <span style="color: #EB4137">*</span>
+                </label>
+
+                <input type="password"
+                    id="signup-password"
+                    name="signup-password"
+                    placeholder="**********"
+                    [(ngModel)]="newUser.password"
+                />
+            </div>
 
             <a href="">Mot de passe oublié ?</a>
 
-            <button type="submit" class="btn-bg btn-bg-red">
+            <button (click)="onSubmit()" type="button" class="btn-bg btn-bg-red"> <!-- submit -->
                 Connexion
             </button>
         </form>
     </div>
-   
+
 </section>

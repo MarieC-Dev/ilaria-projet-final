@@ -4,7 +4,8 @@ const cors = require('cors');
 const app = express();
 const PORT = 3000;
 const db = require('./middlewares/db_connection.js');
-const {getAllRecipes} = require("./routes/recipes");
+const { getAllRecipes } = require("./routes/recipes");
+const { createRecipe } = require("./routes/recipes");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -27,6 +28,7 @@ app.get('/', async (req, res) => {
 });
 
 app.get('/recipes', getAllRecipes);
+app.post('/recipes', createRecipe);
 
 app.listen(PORT, () => {
   console.log(`➡️  BACKEND on port ${PORT} ✅`);

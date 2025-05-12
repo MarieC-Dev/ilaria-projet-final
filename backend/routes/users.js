@@ -12,12 +12,15 @@ exports.getAllUsers = async (req, res) => {
 };
 
 exports.createUser = async (req, res) => {
-    let { username, email, password } = req.body;
-    const querySql = 'INSERT INTO User (username, email, password) VALUES (?, ?, ?)';
+    let { imageName, imageData, username, email, password, created } = req.body;
+    const queries = [imageName, imageData, username, email, password];
+    created = Date.now();
+    
+    const querySql = 'INSERT INTO User (imageName, imageData, username, email, password) VALUES (?, ?, ?, ?, ?)';
 
     console.log(req.body);
 
-    db.execute(querySql, [username, email, password], (err, result) => {
+    db.execute(querySql, queries, (err, result) => {
         if(err) {
             console.log('Error creating user');
             res.status(500).json({ msg: 'Error create user : ' + err });

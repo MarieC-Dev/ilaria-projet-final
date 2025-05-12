@@ -12,17 +12,10 @@
 
         <p>Ajoutez vos informations personnelles</p>
 
-        <form method="post" (ngSubmit)="onSubmit()">
+        <form method="post" enctype="multipart/form-data" (ngSubmit)="onSubmit()">
             <div class="wrapperIcon">
                 <img src="user-regular.svg" alt="user icon">
             </div>
-
-            <!-- <app-form-input
-                id="signup-picture"
-                type="file"
-                label="Photo de profil"
-                inputId="signup-add-picture"
-                [required]="false" /> -->
 
             <div class="formInputDiv" id="container-signup-add-picture">
                 <label for="signup-add-picture">
@@ -33,7 +26,7 @@
                     id="signup-add-picture"
                     name="signup-add-picture"
                     placeholder="Choisissez une photo de profil"
-                    [(ngModel)]="newUser.imageName"
+                    (change)="onFileSelected($event)"
                 />
             </div>
 

@@ -28,10 +28,7 @@ export class SignupPageComponent implements OnInit {
 
   data: any[] = [];
 
-  constructor(
-    private usersApiService: UsersApiService,
-    private http: HttpClient
-  ) { }
+  constructor(private usersApiService: UsersApiService) { }
 
   ngOnInit() {
     //this.usersApiService.getAllUsers().subscribe(res => this.data = res);

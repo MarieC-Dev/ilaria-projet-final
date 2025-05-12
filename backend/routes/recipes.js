@@ -1,5 +1,4 @@
 const db = require('../middlewares/db_connection');
-const rxports = require("./recipes");
 
 exports.getAllRecipes = async (req, res) => {
     try {

@@ -12,7 +12,7 @@
 
         <p>Ajoutez vos informations personnelles</p>
 
-        <form method="post">
+        <form method="post" (ngSubmit)="onSubmit()">
             <div class="wrapperIcon">
                 <img src="user-regular.svg" alt="user icon">
             </div>
@@ -80,10 +80,14 @@
 
             <a href="">Mot de passe oublié ?</a>
 
-            <button (click)="onSubmit()" type="button" class="btn-bg btn-bg-red"> <!-- submit -->
+            <button type="submit" class="btn-bg btn-bg-red"> <!-- submit -->
                 Connexion
             </button>
         </form>
+
+        <br><br><br>
+
+        <!--<div>{{ data | json }}</div>-->
     </div>
 
 </section>

@@ -1,28 +1,52 @@
 <form method="post" class="createRecipeForm">
     <!-- Title -->
-    <app-form-input
-        id="createRecipeTitle"
-        type="text"
-        label="Titre de la recette"
-        inputId="createRecipeTitle"
-        [required]="true" />
+    <div class="formInputDiv" id="createRecipeTitleDiv">
+        <label for="createRecipeImg">
+            Titre de la recette : <span style="color: #EB4137">*</span>
+        </label>
+
+        <input type="text"
+            id="createRecipeTitle"
+            name="createRecipeTitle"
+            placeholder="Titre de la recette"
+            [(ngModel)]="newRecipe.name"
+            required
+        />
+    </div>
 
     <!-- Description -->
-    <app-form-input
-        id="createRecipeDescription"
-        label="Description"
-        inputId="createRecipeDescription"
-        [required]="false" />
+    <div class="formInputDiv" id="createRecipeDescriptionDiv">
+        <label for="createRecipeImg">
+            Description :
+        </label>
+
+        <textarea
+            id="createRecipeDescription"
+            name="createRecipeDescription"
+            placeholder="Description"
+            [rows]="10"
+            maxlength="250"
+            [(ngModel)]="newRecipe.description"
+            style="resize: none;">
+
+        </textarea>
+    </div>
 
     <!-- Ajouter une image -->
-    <app-form-input
-        id="createRecipeImgDiv"
-        type="file"
-        label="Ajouter une image"
-        inputId="createRecipeImg"
-        [required]="true" />
+    <div class="formInputDiv" id="createRecipeImgDiv">
+        <label for="createRecipeImg">
+            Ajouter une image : <span style="color: #EB4137">*</span>
+        </label>
 
-    <!-- TODO Types de cuisine -->
+        <input type="file"
+            id="createRecipeImg"
+            name="createRecipeImg"
+            placeholder="Ajouter une image"
+            [required]="true"
+            (change)="null" />
+    </div>
+
+    <!-- TODO Types de cuisine : !!! ICI !!! -->
     <app-multiple-inputs
         labelTitle="Type de cuisine :"
         inputId="cuisineTypeInputs"
@@ -48,9 +72,9 @@
         <ul>
             <li>
                 <label for="servingNumber">
-                    <input type="number" 
-                        id="servingNumber" 
-                        name="servingNumber" 
+                    <input type="number"
+                        id="servingNumber"
+                        name="servingNumber"
                         placeholder="Ex. : 4"
                         required />
                 </label>
@@ -71,7 +95,7 @@
 
  <!-- Difficulté -->
 <app-difficulty />
-   
+
    <hr class="createRecipeLine">
 
     <!-- Temps de préparation, cuisson, pause -->

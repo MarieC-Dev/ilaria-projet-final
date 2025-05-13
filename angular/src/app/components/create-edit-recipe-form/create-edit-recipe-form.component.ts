@@ -7,6 +7,7 @@ import { MultipleInputsComponent } from '../form-components/multiple-inputs/mult
 import { StepsIngredientsInputsComponent } from '../form-components/steps-ingredients-inputs/steps-ingredients-inputs.component';
 import { CUISINE_TYPE } from '../../lists/cuisine-type-list';
 import {RecipesApiService} from '../../services/recipes-api.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-create-edit-recipe-form',
@@ -17,6 +18,7 @@ import {RecipesApiService} from '../../services/recipes-api.service';
     StepsIngredientsInputsComponent,
     CookingTypeComponent,
     DifficultyComponent,
+    FormsModule
   ],
   templateUrl: './create-edit-recipe-form.component.html',
   styleUrl: './create-edit-recipe-form.component.scss'

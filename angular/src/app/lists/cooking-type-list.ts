@@ -5,12 +5,12 @@ let index: number = 0;
 export const COOKING_TYPE_LIST: CookingTypeList = [
     {
         id: index++,
-        inputId: 'hotPlate',
+        inputId: 'hot-plate',
         image: 'hot-plate.svg',
         altImage: 'hot plate',
         title: 'Plaque chauffante',
         checked: false,
-        value: 'hot plate',
+        value: 'hot-plate',
         required: false,
     }, {
         id: index++,
@@ -23,12 +23,12 @@ export const COOKING_TYPE_LIST: CookingTypeList = [
         required: false,
     }, {
         id: index++,
-        inputId: 'airFryer',
+        inputId: 'air-fryer',
         image: 'air-fryer.svg',
         altImage: 'air fryer',
         title: 'Air fryer',
         checked: false,
-        value: 'air fryer',
+        value: 'air-fryer',
         required: false,
     }, {
         id: index++,
@@ -46,7 +46,7 @@ export const COOKING_TYPE_LIST: CookingTypeList = [
         altImage: 'no cooking',
         title: 'Sans cuisson',
         checked: false,
-        value: 'no cooking',
+        value: 'no-cooking',
         required: false,
     }
 ];

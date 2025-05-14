@@ -72,6 +72,7 @@ CREATE TABLE RecipeData (
     imageName VARCHAR(255),
     imageData LONGBLOB,
     cuisineTypeId INT NOT NULL,
+    cookingTypeId INT NOT NULL,
     servingNumberId INT NOT NULL,
     difficulty INT NOT NULL,
     authorId INT NOT NULL,
@@ -79,20 +80,13 @@ CREATE TABLE RecipeData (
     created DATETIME,
 
     FOREIGN KEY (cuisineTypeId) REFERENCES CuisineType(id),
+    FOREIGN KEY (cookingTypeId) REFERENCES CookingType(id),
     FOREIGN KEY (authorId) REFERENCES User(id),
     FOREIGN KEY (servingNumberId) REFERENCES ServingNumber(id),
     FOREIGN KEY (recipeTimeId) REFERENCES TimeTable(id)
 );
 
 -- 3. Tables de liaison
-CREATE TABLE CookingTypesList (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    recipeId INT NOT NULL,
-    cookingTypeId INT NOT NULL,
-    FOREIGN KEY (recipeId) REFERENCES RecipeData(id),
-    FOREIGN KEY (cookingTypeId) REFERENCES CookingType(id)
-);
-
 CREATE TABLE IngredientsList (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     recipeId INT NOT NULL,

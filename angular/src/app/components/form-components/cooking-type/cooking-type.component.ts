@@ -12,31 +12,22 @@ import { FormsModule } from '@angular/forms';
 })
 export class CookingTypeComponent implements OnInit {
   cookingTypeList = signal(COOKING_TYPE_LIST);
-  @Input() checkbox: string[] = [];
-  @Output() checkboxChange = new EventEmitter<string[]>();
+  @Input() checkbox: string = '';
+  @Output() checkboxChange = new EventEmitter<string>();
 
   ngOnInit(): void {}
 
   onInput(event: Event): void {
     const check = event.target as HTMLInputElement;
-    console.log(check.checked);
-    console.log(this.cookingTypeList());
-    //this.checkboxChange.emit(check.value);
+    this.checkboxChange.emit(check.value);
   }
 
   onCheckboxChange(type: CookingType) {
-    // Si type 'no-cooking' est checked -> décoche tous sauf lui
-    if(type.inputId === 'no-cooking') {
-      if(type.checked) {
-        const findOtherType = this.cookingTypeList().filter(elm => elm.inputId !== 'no-cooking');
+    // Si 1 type est sélectionné, unchecked les autres
+    const findOtherElm = this.cookingTypeList().filter(elm => elm.inputId !== type.inputId);
 
-        for (let i = 0; i < findOtherType.length; i++) {
-          findOtherType[i].checked = false;
-        }
-      }
-    } else {
-      const findNoCooking: CookingType | any = this.cookingTypeList().find(elm => elm.inputId === 'no-cooking');
-      findNoCooking.checked = false;
+    for (let i = 0; i < findOtherElm.length; i++) {
+      findOtherElm[i].checked = false;
     }
   }
 

@@ -8,11 +8,11 @@ import { StepsIngredientsInputsComponent } from '../form-components/steps-ingred
 import { CUISINE_TYPE } from '../../lists/cuisine-type-list';
 import {RecipesApiService} from '../../services/recipes-api.service';
 import { FormsModule } from '@angular/forms';
+import {COOKING_TYPE_LIST} from '../../lists/cooking-type-list';
 
 @Component({
   selector: 'app-create-edit-recipe-form',
   imports: [
-    FormInputComponent,
     MultipleInputsComponent,
     InputsTimesComponent,
     StepsIngredientsInputsComponent,
@@ -25,13 +25,14 @@ import { FormsModule } from '@angular/forms';
 })
 export class CreateEditRecipeFormComponent {
   cuisineTypeList = signal(CUISINE_TYPE);
+  cookingTypeList = signal(COOKING_TYPE_LIST);
   newRecipe = {
     name: '',
     description: '',
     imageName: '',
     imageData: '',
     cuisineType: '',
-    cookingType: [],
+    cookingType: 4, // 4 -> no cooking (by default)
     servingNumber: 0,
     difficulty: 0,
     authorId: 0,
@@ -42,9 +43,10 @@ export class CreateEditRecipeFormComponent {
   constructor(private recipesApiService: RecipesApiService) {
   }
 
-  onCheckboxChanged(checkedValue: string[]): void {
-    //newRecipe.cookingType
-    //console.log(checkedValue);
+  onCheckboxChanged(checkedValue: any): void {
+    const findItemChecked = this.cookingTypeList().find(elm => elm.inputId === checkedValue)!;
+    this.newRecipe.cookingType = findItemChecked.id;
+    console.log(this.newRecipe.cookingType);
   }
 
   onSubmit() {

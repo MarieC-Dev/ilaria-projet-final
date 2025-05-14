@@ -1,4 +1,5 @@
 <form method="post" class="createRecipeForm">
+    <!-- TODO selects styles (border) -->
     <!-- Title -->
     <div class="formInputDiv" id="createRecipeTitleDiv">
         <label for="createRecipeImg">
@@ -46,13 +47,13 @@
             (change)="null" />
     </div>
 
-    <!-- TODO Types de cuisine : !!! ICI !!! -->
+    <!-- Types de cuisine -->
     <app-multiple-inputs
         labelTitle="Type de cuisine :"
         inputId="cuisineTypeInputs"
         [required]="true">
         <label for="servingName">
-            <select name="selectCuisineType" id="selectCuisineType">
+            <select name="selectCuisineType" id="selectCuisineType" [(ngModel)]="newRecipe.cuisineType">
                 <option value="">---</option>
                 @for (ct of cuisineTypeList(); track ct.id) {
                     <option [value]="ct.value">{{ ct.title }}</option>
@@ -62,7 +63,7 @@
     </app-multiple-inputs>
 
     <!-- Types de cuisson -->
-    <app-cooking-type />
+    <app-cooking-type (checkboxChange)="onCheckboxChanged($event)" />
 
     <!-- Nombre de portions -->
     <app-multiple-inputs
@@ -93,13 +94,13 @@
         </ul>
     </app-multiple-inputs>
 
- <!-- Difficulté -->
-<app-difficulty />
+    <!-- Difficulté -->
+    <app-difficulty />
 
-   <hr class="createRecipeLine">
+    <hr class="createRecipeLine">
 
     <!-- Temps de préparation, cuisson, pause -->
-   <app-inputs-times />
+    <app-inputs-times />
 
     <hr class="createRecipeLine">
 

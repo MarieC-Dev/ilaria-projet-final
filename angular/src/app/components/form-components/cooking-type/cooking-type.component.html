@@ -10,12 +10,13 @@
                         <img [src]="type.image" [alt]="type.altImage">
                         <p>{{ type.title }}</p>
                     </div>
-                    <input type="checkbox" 
+                    <input type="checkbox"
                         [id]="type.inputId"
                         [name]="type.inputId"
+                        [value]="type.value"
                         [(ngModel)]="type.checked"
                         (ngModelChange)="onCheckboxChange(type)"
-                        [value]="type.value"
+                        (input)="onInput($event)"
                         [required]="type.required" />
                 </label>
             </li>

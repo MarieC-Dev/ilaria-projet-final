@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, signal} from '@angular/core';
 import { MultipleInputsComponent } from '../multiple-inputs/multiple-inputs.component';
 import { CookingType, CookingTypeList } from '../../../models/cooking-type.model';
 import { COOKING_TYPE_LIST } from '../../../lists/cooking-type-list';
@@ -12,8 +12,17 @@ import { FormsModule } from '@angular/forms';
 })
 export class CookingTypeComponent implements OnInit {
   cookingTypeList = signal(COOKING_TYPE_LIST);
+  @Input() checkbox: string[] = [];
+  @Output() checkboxChange = new EventEmitter<string[]>();
 
   ngOnInit(): void {}
+
+  onInput(event: Event): void {
+    const check = event.target as HTMLInputElement;
+    console.log(check.checked);
+    console.log(this.cookingTypeList());
+    //this.checkboxChange.emit(check.value);
+  }
 
   onCheckboxChange(type: CookingType) {
     // Si type 'no-cooking' est checked -> décoche tous sauf lui
@@ -24,7 +33,7 @@ export class CookingTypeComponent implements OnInit {
         for (let i = 0; i < findOtherType.length; i++) {
           findOtherType[i].checked = false;
         }
-      }    
+      }
     } else {
       const findNoCooking: CookingType | any = this.cookingTypeList().find(elm => elm.inputId === 'no-cooking');
       findNoCooking.checked = false;

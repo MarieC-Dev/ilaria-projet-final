@@ -30,7 +30,8 @@ export class CreateEditRecipeFormComponent {
     description: '',
     imageName: '',
     imageData: '',
-    cuisineType: 0,
+    cuisineType: '',
+    cookingType: [],
     servingNumber: 0,
     difficulty: 0,
     authorId: 0,
@@ -39,6 +40,11 @@ export class CreateEditRecipeFormComponent {
   };
 
   constructor(private recipesApiService: RecipesApiService) {
+  }
+
+  onCheckboxChanged(checkedValue: string[]): void {
+    //newRecipe.cookingType
+    //console.log(checkedValue);
   }
 
   onSubmit() {

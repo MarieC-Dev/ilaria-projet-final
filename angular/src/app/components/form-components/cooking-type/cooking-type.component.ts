@@ -2,16 +2,18 @@ import {Component, EventEmitter, Input, OnInit, Output, signal} from '@angular/c
 import { MultipleInputsComponent } from '../multiple-inputs/multiple-inputs.component';
 import { CookingType, CookingTypeList } from '../../../models/cooking-type.model';
 import { COOKING_TYPE_LIST } from '../../../lists/cooking-type-list';
-import { FormsModule } from '@angular/forms';
+import {ControlContainer, FormControlName, FormGroupDirective, FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-cooking-type',
-  imports: [MultipleInputsComponent, FormsModule],
+  imports: [MultipleInputsComponent, FormsModule, ReactiveFormsModule],
   templateUrl: './cooking-type.component.html',
-  styleUrl: './cooking-type.component.scss'
+  styleUrl: './cooking-type.component.scss',
+  viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
 export class CookingTypeComponent implements OnInit {
   cookingTypeList = signal(COOKING_TYPE_LIST);
+  @Input() controlName!: string;
   @Input() checkbox: string = '';
   @Output() checkboxChange = new EventEmitter<string>();
 
@@ -31,4 +33,5 @@ export class CookingTypeComponent implements OnInit {
     }
   }
 
+  protected readonly FormControlName = FormControlName;
 }

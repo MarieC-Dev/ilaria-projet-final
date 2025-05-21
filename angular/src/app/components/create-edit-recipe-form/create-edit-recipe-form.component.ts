@@ -7,8 +7,9 @@ import { MultipleInputsComponent } from '../form-components/multiple-inputs/mult
 import { StepsIngredientsInputsComponent } from '../form-components/steps-ingredients-inputs/steps-ingredients-inputs.component';
 import { CUISINE_TYPE } from '../../lists/cuisine-type-list';
 import {RecipesApiService} from '../../services/recipes-api.service';
-import { FormsModule } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {COOKING_TYPE_LIST} from '../../lists/cooking-type-list';
+import {RecipeFormFactory} from '../../factories/recipe-form.factory';
 
 @Component({
   selector: 'app-create-edit-recipe-form',
@@ -18,7 +19,8 @@ import {COOKING_TYPE_LIST} from '../../lists/cooking-type-list';
     StepsIngredientsInputsComponent,
     CookingTypeComponent,
     DifficultyComponent,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './create-edit-recipe-form.component.html',
   styleUrl: './create-edit-recipe-form.component.scss'
@@ -26,32 +28,21 @@ import {COOKING_TYPE_LIST} from '../../lists/cooking-type-list';
 export class CreateEditRecipeFormComponent {
   cuisineTypeList = signal(CUISINE_TYPE);
   cookingTypeList = signal(COOKING_TYPE_LIST);
-  newRecipe = {
-    name: '',
-    description: '',
-    imageName: '',
-    imageData: '',
-    cuisineType: '',
-    cookingType: 4, // 4 -> no cooking (by default)
-    servingNumber: 0,
-    difficulty: 0,
-    authorId: 0,
-    recipeTime: 0,
-    created: Date.now(),
-  };
+  newRecipe = inject(RecipeFormFactory);
 
-  constructor(private recipesApiService: RecipesApiService) {
-  }
+  constructor(private recipesApiService: RecipesApiService) { }
 
   onCheckboxChanged(checkedValue: any): void {
     const findItemChecked = this.cookingTypeList().find(elm => elm.inputId === checkedValue)!;
-    this.newRecipe.cookingType = findItemChecked.id;
-    console.log(this.newRecipe.cookingType);
+    //this.newRecipe.cookingType = findItemChecked.id;
+    this.newRecipe.createRecipeForm().controls['cookingType'].setValue(findItemChecked.id);
+    console.log(this.newRecipe.createRecipeForm().controls['cookingType']);
   }
 
   onSubmit() {
-    this.recipesApiService.createRecipe(this.newRecipe).subscribe((res) => {
+    /*this.recipesApiService.createRecipe(this.newRecipe).subscribe((res) => {
       console.log(res);
-    })
+    })*/
+    console.log(this.newRecipe.createRecipeForm());
   }
 }

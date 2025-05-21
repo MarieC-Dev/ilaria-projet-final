@@ -17,7 +17,9 @@
                         [(ngModel)]="type.checked"
                         (ngModelChange)="onCheckboxChange(type)"
                         (input)="onInput($event)"
-                        [required]="type.required" />
+                        [required]="type.required"
+                        [formControlName]="controlName"
+                    />
                 </label>
             </li>
         }

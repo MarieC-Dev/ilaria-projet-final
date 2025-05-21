@@ -1,5 +1,7 @@
-<form method="post" class="createRecipeForm">
-    <!-- TODO selects styles (border) -->
+<form
+    class="createRecipeForm"
+    [formGroup]="newRecipe.createRecipeForm()"
+    (ngSubmit)="onSubmit()">
     <!-- Title -->
     <div class="formInputDiv" id="createRecipeTitleDiv">
         <label for="createRecipeImg">
@@ -10,8 +12,7 @@
             id="createRecipeTitle"
             name="createRecipeTitle"
             placeholder="Titre de la recette"
-            [(ngModel)]="newRecipe.name"
-            required
+            formControlName="name"
         />
     </div>
 
@@ -27,9 +28,8 @@
             placeholder="Description"
             [rows]="10"
             maxlength="250"
-            [(ngModel)]="newRecipe.description"
-            style="resize: none;">
-
+            style="resize: none;"
+            formControlName="description">
         </textarea>
     </div>
 
@@ -43,8 +43,7 @@
             id="createRecipeImg"
             name="createRecipeImg"
             placeholder="Ajouter une image"
-            [required]="true"
-            (change)="null" />
+            formControlName="imageName" />
     </div>
 
     <!-- Types de cuisine -->
@@ -53,36 +52,41 @@
         inputId="cuisineTypeInputs"
         [required]="true">
         <label for="servingName">
-            <select name="selectCuisineType" id="selectCuisineType" [(ngModel)]="newRecipe.cuisineType">
-                <option value="">---</option>
-                @for (ct of cuisineTypeList(); track ct.id) {
-                    <option [value]="ct.value">{{ ct.title }}</option>
-                }
+            <select
+                name="selectCuisineType"
+                id="selectCuisineType"
+                formControlName="cuisineType">
+                    <option value="">---</option>
+                    @for (ct of cuisineTypeList(); track ct.id) {
+                        <option [value]="ct.value">{{ ct.title }}</option>
+                    }
             </select>
         </label>
     </app-multiple-inputs>
 
     <!-- Types de cuisson -->
-    <app-cooking-type (checkboxChange)="onCheckboxChanged($event)" />
+    <app-cooking-type
+        (checkboxChange)="onCheckboxChanged($event)"
+        controlName="cookingType" />
 
     <!-- Nombre de portions -->
     <app-multiple-inputs
         labelTitle="Nombre de portions :"
         inputId="servingNumberInputs"
         [required]="true">
-        <ul>
+        <ul formGroupName="servingNumber">
             <li>
                 <label for="servingNumber">
                     <input type="number"
                         id="servingNumber"
                         name="servingNumber"
                         placeholder="Ex. : 4"
-                        required />
+                        formControlName="number" />
                 </label>
             </li>
             <li>
                 <label for="servingName">
-                    <select name="servingName" id="servingName">
+                    <select name="servingName" id="servingName" formControlName="type">
                         <option value="">Type de portion</option>
                         <option value="person">Personne(s)</option>
                         <option value="piece">Parts(s)</option>
@@ -95,7 +99,7 @@
     </app-multiple-inputs>
 
     <!-- Difficulté -->
-    <app-difficulty />
+    <app-difficulty controlName="difficulty" />
 
     <hr class="createRecipeLine">
 

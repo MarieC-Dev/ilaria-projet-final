@@ -3,15 +3,15 @@
     inputId="difficultyInputs"
     [required]="true">
     <label for="difficulties">
-        <input type="range" 
+        <input type="range"
             id="difficulties"
             name="difficulties"
             min="0"
             [max]="difficulties.length"
             step="1"
-            [(ngModel)]="difficultyValue"
-            [value]="difficultyValue()"
-            [required]="true" style="padding:0;">
+            [value]="difficultyValue"
+            style="padding:0;"
+            [formControlName]="controlName" />
     </label>
 
     <p>{{ getDifficulty() }}</p>

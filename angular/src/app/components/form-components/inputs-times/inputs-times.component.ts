@@ -1,15 +1,15 @@
-import { Component, inject, model, OnInit, signal } from '@angular/core';
+import {Component, inject, Input, model, OnInit, signal} from '@angular/core';
 import { MultipleInputsComponent } from '../multiple-inputs/multiple-inputs.component';
 import { INPUTS_TIMES } from '../../../lists/inputs-times.list';
 import { CommonModule, JsonPipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {ControlContainer, FormGroupDirective, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { TotalTimeService } from '../../../services/total-time.service';
 
 @Component({
   selector: 'app-inputs-times',
-  imports: [MultipleInputsComponent, CommonModule, FormsModule, JsonPipe],
+  imports: [MultipleInputsComponent, CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './inputs-times.component.html',
-  styleUrl: './inputs-times.component.scss'
+  styleUrl: './inputs-times.component.scss',
 })
 export class InputsTimesComponent implements OnInit {
   times = signal(INPUTS_TIMES);

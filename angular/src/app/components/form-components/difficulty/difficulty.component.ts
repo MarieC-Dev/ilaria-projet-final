@@ -1,22 +1,30 @@
-import { Component, model, OnInit, signal } from '@angular/core';
+import {Component, inject, Input, model, OnInit, signal} from '@angular/core';
 import { MultipleInputsComponent } from '../multiple-inputs/multiple-inputs.component';
-import { FormsModule } from '@angular/forms';
+import {ControlContainer, FormControl, FormGroupDirective, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {RecipeFormFactory} from '../../../factories/recipe-form.factory';
 
 @Component({
   selector: 'app-difficulty',
-  imports: [MultipleInputsComponent, FormsModule],
+  imports: [MultipleInputsComponent, FormsModule, ReactiveFormsModule],
   templateUrl: './difficulty.component.html',
-  styleUrl: './difficulty.component.scss'
+  styleUrl: './difficulty.component.scss',
+  viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
-export class DifficultyComponent implements OnInit {
+export class DifficultyComponent {
+  recipeForm = inject(RecipeFormFactory);
   index: number = 0;
   difficulties = ['Très facile', 'Facile', 'Moyen', 'Difficile'];
-  difficultyValue = model(1);
+  /*difficultyValue = model(1);*/
+  difficultyValue = this.recipeForm.createRecipeForm().controls['difficulty'] as FormControl;
+  @Input() controlName!: string;
+  /*@Input()
+  set controlName(value: number) {
+    this.difficultyValue.setValue(value);
+  };*/
 
-  ngOnInit(): void {}
-
-  getDifficulty() {   
-    switch(this.difficultyValue()) {
+  getDifficulty() {
+    console.log(this.difficultyValue.value);
+    switch(this.difficultyValue.value) {
       case 0:
         return 'Ne sais pas';
         break;

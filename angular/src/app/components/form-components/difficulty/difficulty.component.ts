@@ -11,19 +11,23 @@ import {RecipeFormFactory} from '../../../factories/recipe-form.factory';
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
 export class DifficultyComponent {
+  recipeForm = inject(RecipeFormFactory);
+  recipeDifficultyControl = this.recipeForm.createRecipeForm().controls['difficulty'] as FormControl;
+  recipeDifficultyValue: number = this.recipeDifficultyControl.value;
   difficulties = ['Très facile', 'Facile', 'Moyen', 'Difficile'];
 
   @Input() controlName!: string;
   @Input() difficultyValue!: any;
-  @Output() valueChanged = new EventEmitter<number>();
 
   onInputChange(event: Event) {
     let elm = event.target as HTMLInputElement;
-    this.valueChanged.emit(parseInt(elm.value));
+
+    this.recipeDifficultyControl.setValue(elm.value);
+    console.log(this.recipeDifficultyControl.value)
   }
 
   getDifficulty() {
-    switch(parseInt(this.difficultyValue)) {
+    switch(parseInt(this.recipeDifficultyControl.value)) {
       case 0:
         return 'Ne sais pas';
         break;

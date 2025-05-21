@@ -33,11 +33,6 @@ export class CreateEditRecipeFormComponent {
 
   constructor(private recipesApiService: RecipesApiService) { }
 
-  onDifficultyChange(newValue: any) {
-    this.newRecipe.createRecipeForm().controls['difficulty'].setValue(newValue);
-    console.log(this.newRecipe.createRecipeForm().controls['difficulty'].value);
-  }
-
   onCheckboxChanged(checkedValue: any): void {
     const findItemChecked = this.cookingTypeList().find(elm => elm.inputId === checkedValue)!;
     //this.newRecipe.cookingType = findItemChecked.id;

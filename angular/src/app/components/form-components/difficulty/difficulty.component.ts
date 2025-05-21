@@ -1,4 +1,4 @@
-import {Component, inject, Input, model, OnInit, signal} from '@angular/core';
+import {Component, EventEmitter, inject, Input, model, OnInit, Output, signal} from '@angular/core';
 import { MultipleInputsComponent } from '../multiple-inputs/multiple-inputs.component';
 import {ControlContainer, FormControl, FormGroupDirective, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RecipeFormFactory} from '../../../factories/recipe-form.factory';
@@ -11,20 +11,19 @@ import {RecipeFormFactory} from '../../../factories/recipe-form.factory';
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
 export class DifficultyComponent {
-  recipeForm = inject(RecipeFormFactory);
-  index: number = 0;
   difficulties = ['Très facile', 'Facile', 'Moyen', 'Difficile'];
-  /*difficultyValue = model(1);*/
-  difficultyValue = this.recipeForm.createRecipeForm().controls['difficulty'] as FormControl;
+
   @Input() controlName!: string;
-  /*@Input()
-  set controlName(value: number) {
-    this.difficultyValue.setValue(value);
-  };*/
+  @Input() difficultyValue!: any;
+  @Output() valueChanged = new EventEmitter<number>();
+
+  onInputChange(event: Event) {
+    let elm = event.target as HTMLInputElement;
+    this.valueChanged.emit(parseInt(elm.value));
+  }
 
   getDifficulty() {
-    console.log(this.difficultyValue.value);
-    switch(this.difficultyValue.value) {
+    switch(parseInt(this.difficultyValue)) {
       case 0:
         return 'Ne sais pas';
         break;

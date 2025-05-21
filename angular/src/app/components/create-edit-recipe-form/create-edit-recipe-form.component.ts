@@ -1,4 +1,4 @@
-import {Component, inject, signal} from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import { CookingTypeComponent } from '../form-components/cooking-type/cooking-type.component';
 import { DifficultyComponent } from '../form-components/difficulty/difficulty.component';
 import { FormInputComponent } from '../form-components/form-input/form-input.component';
@@ -29,8 +29,14 @@ export class CreateEditRecipeFormComponent {
   cuisineTypeList = signal(CUISINE_TYPE);
   cookingTypeList = signal(COOKING_TYPE_LIST);
   newRecipe = inject(RecipeFormFactory);
+  recipeDifficuty = this.newRecipe.createRecipeForm().controls['difficulty'].value as FormControl;
 
   constructor(private recipesApiService: RecipesApiService) { }
+
+  onDifficultyChange(newValue: any) {
+    this.newRecipe.createRecipeForm().controls['difficulty'].setValue(newValue);
+    console.log(this.newRecipe.createRecipeForm().controls['difficulty'].value);
+  }
 
   onCheckboxChanged(checkedValue: any): void {
     const findItemChecked = this.cookingTypeList().find(elm => elm.inputId === checkedValue)!;

@@ -99,7 +99,10 @@
     </app-multiple-inputs>
 
     <!-- Difficulté -->
-    <app-difficulty controlName="difficulty" />
+    <app-difficulty
+      controlName="difficulty"
+      [difficultyValue]="recipeDifficuty"
+      (valueChanged)="onDifficultyChange($event)"/>
 
     <hr class="createRecipeLine">
 

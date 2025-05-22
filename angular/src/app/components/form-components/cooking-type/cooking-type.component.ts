@@ -1,6 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output, signal} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import { MultipleInputsComponent } from '../multiple-inputs/multiple-inputs.component';
-import { CookingType, CookingTypeList } from '../../../models/cooking-type.model';
+import { CookingType } from '../../../models/cooking-type.model';
 import { COOKING_TYPE_LIST } from '../../../lists/cooking-type-list';
 import {
   ControlContainer,
@@ -19,19 +25,20 @@ import {
 export class CookingTypeComponent {
   cookingTypeList = signal(COOKING_TYPE_LIST);
   @Input() controlName!: string;
+  @ViewChild('checkboxList') checkboxList!: ElementRef;
+  @ViewChild('checkboxElm') checkboxElm!: ElementRef;
 
   constructor(private controlContainer: ControlContainer) {}
 
   onCheck(type: CookingType) {
+    type.checked = !type.checked;
+
     const findOtherElm = this.cookingTypeList().filter(elm => elm.inputId !== type.inputId);
-    //type.checked = !type.checked;
 
     for (let i = 0; i < findOtherElm.length; i++) {
       findOtherElm[i].checked = false;
     }
 
-    if(type.checked) {
-      console.log(this.controlContainer.control?.value);
-    }
+    console.log(this.checkboxList.nativeElement.children);
   }
 }

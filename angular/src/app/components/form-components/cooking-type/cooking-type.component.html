@@ -2,19 +2,22 @@
     labelTitle="Type de cuisson :"
     inputId="cookingTypeInputs"
     [required]="true">
-    <ul class="cookingTypeInputs">
+    <ul class="cookingTypeInputs" #checkboxList>
         @for (type of cookingTypeList(); track type.id) {
             <li [class]="type.checked ? 'liTypeCooking selectedType' : 'liTypeCooking'">
-                <label [for]="type.inputId">
-                    <div>
+                <!--<button type="button" (click)="onCheck(type, $event)">
+                    toto
+                </button>-->
+                <label>
+                    <button type="button" (click)="onCheck(type)">
                         <img [src]="type.image" [alt]="type.altImage">
                         <p>{{ type.title }}</p>
-                    </div>
+                    </button>
                     <input type="checkbox"
+                        #checkboxElm
                         [id]="type.inputId"
                         [name]="type.inputId"
                         [checked]="type.checked"
-                        (click)="onCheck(type)"
                         [value]="type.value"
                         [formControlName]="controlName"
                     />

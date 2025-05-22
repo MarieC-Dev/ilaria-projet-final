@@ -26,18 +26,15 @@ import {RecipeFormFactory} from '../../factories/recipe-form.factory';
   styleUrl: './create-edit-recipe-form.component.scss'
 })
 export class CreateEditRecipeFormComponent {
-  cuisineTypeList = signal(CUISINE_TYPE);
-  cookingTypeList = signal(COOKING_TYPE_LIST);
   newRecipe = inject(RecipeFormFactory);
   recipeDifficultyControl = this.newRecipe.createRecipeForm().controls['difficulty'] as FormControl;
+  cuisineTypeList = signal(CUISINE_TYPE);
+  cookingTypeList = signal(COOKING_TYPE_LIST);
 
   constructor(private recipesApiService: RecipesApiService) { }
 
-  onCheckboxChanged(checkedValue: any): void {
-    const findItemChecked = this.cookingTypeList().find(elm => elm.inputId === checkedValue)!;
-    //this.newRecipe.cookingType = findItemChecked.id;
-    this.newRecipe.createRecipeForm().controls['cookingType'].setValue(findItemChecked.id);
-    console.log(this.newRecipe.createRecipeForm().controls['cookingType']);
+  onCheckbox(checkedValue: any): void {
+    //console.log(this.newRecipe.createRecipeForm().controls['cookingType']);
   }
 
   onSubmit() {
@@ -46,4 +43,5 @@ export class CreateEditRecipeFormComponent {
     })*/
     console.log(this.newRecipe.createRecipeForm());
   }
+
 }

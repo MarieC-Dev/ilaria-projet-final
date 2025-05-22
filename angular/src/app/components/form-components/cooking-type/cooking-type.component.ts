@@ -2,7 +2,14 @@ import {Component, EventEmitter, Input, OnInit, Output, signal} from '@angular/c
 import { MultipleInputsComponent } from '../multiple-inputs/multiple-inputs.component';
 import { CookingType, CookingTypeList } from '../../../models/cooking-type.model';
 import { COOKING_TYPE_LIST } from '../../../lists/cooking-type-list';
-import {ControlContainer, FormControlName, FormGroupDirective, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {
+  ControlContainer,
+  FormControl,
+  FormControlName,
+  FormGroupDirective,
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 
 @Component({
   selector: 'app-cooking-type',
@@ -11,27 +18,25 @@ import {ControlContainer, FormControlName, FormGroupDirective, FormsModule, Reac
   styleUrl: './cooking-type.component.scss',
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
-export class CookingTypeComponent implements OnInit {
+export class CookingTypeComponent {
   cookingTypeList = signal(COOKING_TYPE_LIST);
   @Input() controlName!: string;
-  @Input() checkbox: string = '';
+  @Input() cookingTypeControl!: FormControl;
   @Output() checkboxChange = new EventEmitter<string>();
 
-  ngOnInit(): void {}
+  constructor(private controlContainer: ControlContainer) {}
 
-  onInput(event: Event): void {
-    const check = event.target as HTMLInputElement;
-    this.checkboxChange.emit(check.value);
-  }
-
-  onCheckboxChange(type: CookingType) {
-    // Si 1 type est sélectionné, unchecked les autres
+  onCheck(type: CookingType) {
     const findOtherElm = this.cookingTypeList().filter(elm => elm.inputId !== type.inputId);
+    type.checked = !type.checked;
 
     for (let i = 0; i < findOtherElm.length; i++) {
       findOtherElm[i].checked = false;
     }
-  }
 
-  protected readonly FormControlName = FormControlName;
+    if(type.checked) {
+      this.controlContainer.control?.get('cookingType')?.setValue(type.inputId);
+      console.log(this.controlContainer.control?.value);
+    }
+  }
 }

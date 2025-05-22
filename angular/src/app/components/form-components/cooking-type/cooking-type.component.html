@@ -13,10 +13,8 @@
                     <input type="checkbox"
                         [id]="type.inputId"
                         [name]="type.inputId"
-                        [value]="type.value"
-                        [(ngModel)]="type.checked"
-                        (ngModelChange)="onCheckboxChange(type)"
-                        (input)="onInput($event)"
+                        [checked]="type.checked"
+                        (click)="onCheck(type)"
                         [required]="type.required"
                         [formControlName]="controlName"
                     />

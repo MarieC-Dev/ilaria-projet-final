@@ -29,7 +29,7 @@ export class CreateEditRecipeFormComponent {
   cuisineTypeList = signal(CUISINE_TYPE);
   cookingTypeList = signal(COOKING_TYPE_LIST);
   newRecipe = inject(RecipeFormFactory);
-  recipeDifficuty = this.newRecipe.createRecipeForm().controls['difficulty'].value as FormControl;
+  recipeDifficultyControl = this.newRecipe.createRecipeForm().controls['difficulty'] as FormControl;
 
   constructor(private recipesApiService: RecipesApiService) { }
 

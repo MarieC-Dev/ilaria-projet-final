@@ -10,24 +10,26 @@ import {RecipeFormFactory} from '../../../factories/recipe-form.factory';
   styleUrl: './difficulty.component.scss',
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
-export class DifficultyComponent {
+export class DifficultyComponent implements OnInit {
   recipeForm = inject(RecipeFormFactory);
   recipeDifficultyControl = this.recipeForm.createRecipeForm().controls['difficulty'] as FormControl;
-  recipeDifficultyValue: number = this.recipeDifficultyControl.value;
   difficulties = ['Très facile', 'Facile', 'Moyen', 'Difficile'];
+  difficultyValue: number = parseInt(this.recipeDifficultyControl.value);
 
   @Input() controlName!: string;
-  @Input() difficultyValue!: any;
+
+  ngOnInit() {
+  }
 
   onInputChange(event: Event) {
     let elm = event.target as HTMLInputElement;
+    let difValue: number = parseInt(elm.value);
 
-    this.recipeDifficultyControl.setValue(elm.value);
-    console.log(this.recipeDifficultyControl.value)
+    this.difficultyValue = difValue;
   }
 
-  getDifficulty() {
-    switch(parseInt(this.recipeDifficultyControl.value)) {
+  get difficultyNumber() {
+    switch(this.difficultyValue) {
       case 0:
         return 'Ne sais pas';
         break;

@@ -10,10 +10,9 @@
             [max]="difficulties.length"
             step="1"
             (input)="onInputChange($event)"
-            [value]="recipeDifficultyValue"
             style="padding:0;"
             [formControlName]="controlName" />
     </label>
 
-    <p>{{ getDifficulty() }}</p>
+    <p>{{ difficultyNumber }}</p>
 </app-multiple-inputs>

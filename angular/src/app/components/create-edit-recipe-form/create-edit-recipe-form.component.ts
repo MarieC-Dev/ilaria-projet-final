@@ -33,10 +33,6 @@ export class CreateEditRecipeFormComponent {
 
   constructor(private recipesApiService: RecipesApiService) { }
 
-  onCheckbox(checkedValue: any): void {
-    //console.log(this.newRecipe.createRecipeForm().controls['cookingType']);
-  }
-
   onSubmit() {
     /*this.recipesApiService.createRecipe(this.newRecipe).subscribe((res) => {
       console.log(res);

@@ -18,7 +18,7 @@
             align-items: center;
         }
 
-        button {
+        & > button {
             width: 170px;
             display: flex;
             justify-content: center;

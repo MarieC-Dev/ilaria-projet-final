@@ -1,6 +1,6 @@
 <form
     class="createRecipeForm"
-    [formGroup]="newRecipe.createRecipeForm()"
+    [formGroup]="recipeForm.formGroup"
     (ngSubmit)="onSubmit()">
     <!-- Title -->
     <div class="formInputDiv" id="createRecipeTitleDiv">
@@ -51,17 +51,14 @@
         labelTitle="Type de cuisine :"
         inputId="cuisineTypeInputs"
         [required]="true">
-        <label for="servingName">
-            <select
-                name="selectCuisineType"
-                id="selectCuisineType"
-                formControlName="cuisineType">
-                    <option value="">---</option>
-                    @for (ct of cuisineTypeList(); track ct.id) {
-                        <option [value]="ct.value">{{ ct.title }}</option>
-                    }
-            </select>
-        </label>
+        <select
+            id="selectCuisineType"
+            formControlName="cuisineType">
+            <option value="">---</option>
+            @for (ct of cuisineTypeList(); track ct.id) {
+              <option [value]="ct.value">{{ ct.title }}</option>
+            }
+        </select>
     </app-multiple-inputs>
 
     <!-- Types de cuisson -->
@@ -102,7 +99,110 @@
     <hr class="createRecipeLine">
 
     <!-- Temps de préparation, cuisson, pause -->
-    <app-inputs-times />
+    <div class="inputsTimesDiv" formGroupName="recipeTime">
+        <app-multiple-inputs
+            labelTitle="Temps de préparation :"
+            inputId="makingTimeInput"
+            [required]="true"
+            formGroupName="making">
+            <ul class="inputsTime">
+                <li>
+                    <label for="makingTimeHours">
+                        <input type="number"
+                               id="makingTimeHours"
+                               name="makingTimeHours"
+                               placeholder="Heures"
+                               formControlName="hours"
+                               [required]="true" />
+                        <!--[(ngModel)]="hoursValues()[time.id]"-->
+                        heure(s)
+                    </label>
+                </li>
+                <li>
+                    <label for="makingTimeMinutes">
+                        <input type="number"
+                               id="makingTimeMinutes"
+                               name="makingTimeMinutes"
+                               placeholder="Minutes"
+                               formControlName="minutes"
+                               [required]="true" />
+                        <!--[(ngModel)]="hoursValues()[time.id]"-->
+                        minutes
+                    </label>
+                </li>
+            </ul>
+        </app-multiple-inputs>
+
+        <app-multiple-inputs
+            labelTitle="Temps de cuisson :"
+            inputId="cookingTimeInput"
+            [required]="false">
+
+            <button class="btn-bg-darkGrey" type="button" (click)="isCooking = !isCooking">
+                {{ isCooking ? 'Supprimer' : 'Ajouter' }}
+            </button>
+
+            <ul *ngIf="isCooking" class="inputsTime" formGroupName="cooking">
+                <li>
+                    <label for="cookingTimeHours">
+                        <input type="number"
+                               id="cookingTimeHours"
+                               name="cookingTimeHours"
+                               placeholder="Heures"
+                               formControlName="hours"
+                               [required]="true" />
+                        heure(s)
+                    </label>
+                </li>
+                <li>
+                    <label for="cookingTimeMinutes">
+                        <input type="number"
+                               id="cookingTimeMinutes"
+                               name="cookingTimeMinutes"
+                               placeholder="Minutes"
+                               formControlName="minutes"
+                               [required]="true" />
+                        minutes
+                    </label>
+                </li>
+            </ul>
+        </app-multiple-inputs>
+
+        <app-multiple-inputs
+            labelTitle="Temps de pause :"
+            inputId="pauseTimeInput"
+            [required]="true">
+
+            <button class="btn-bg-darkGrey" type="button" (click)="isPause = !isPause">
+                {{ isPause ? 'Supprimer' : 'Ajouter' }}
+            </button>
+
+            <ul *ngIf="isPause" class="inputsTime" formGroupName="pause">
+                <li>
+                    <label for="pauseTimeHours">
+                        <input type="number"
+                               id="pauseTimeHours"
+                               name="pauseTimeHours"
+                               placeholder="Heures"
+                               formControlName="hours"
+                               [required]="false" />
+                        heure(s)
+                    </label>
+                </li>
+                <li>
+                    <label for="pauseTimeMinutes">
+                        <input type="number"
+                               id="pauseTimeMinutes"
+                               name="pauseTimeMinutes"
+                               placeholder="Minutes"
+                               formControlName="minutes"
+                               [required]="true" />
+                        minutes
+                    </label>
+                </li>
+            </ul>
+        </app-multiple-inputs>
+    </div>
 
     <hr class="createRecipeLine">
 

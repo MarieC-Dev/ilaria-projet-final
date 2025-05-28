@@ -18,6 +18,14 @@
             align-items: center;
         }
 
+        button {
+            width: 170px;
+            display: flex;
+            justify-content: center;
+            padding: .5rem 2.5rem;
+            margin: 0 auto;
+        }
+
         ul {
             display: flex;
             align-items: center;
@@ -55,6 +63,10 @@
             font-size: 24px;
             font-weight: 700;
             border-radius: 1rem;
+        }
+
+        .inputsTime {
+            margin-top: 1rem;
         }
     }
 }

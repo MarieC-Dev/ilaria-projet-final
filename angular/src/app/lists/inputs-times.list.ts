@@ -70,5 +70,5 @@ export const INPUTS_TIMES = [
             required: false
         },
         required: false,
-    }, 
+    },
 ];

@@ -3,8 +3,10 @@ import {FormGroup, FormArray, Validators, FormControl} from '@angular/forms';
 
 @Injectable({ providedIn: 'root' })
 export class RecipeFormFactory {
-  createRecipeForm(): FormGroup {
-    return new FormGroup({
+  formGroup: FormGroup;
+
+  constructor() {
+    this.formGroup = new FormGroup({
       name: new FormControl<string>('', Validators.required),
       description: new FormControl<string>(''),
       imageName: new FormControl<string>(''),
@@ -15,7 +17,7 @@ export class RecipeFormFactory {
         number: new FormControl<number>(0, Validators.required),
         type: new FormControl<string>('', Validators.required),
       }), // [ number, string ]
-      difficulty: new FormControl<number>(1, Validators.required),
+      difficulty: new FormControl<string>('', Validators.required),
 
       hasCookingTime: new FormControl<boolean>(false, Validators.required),
       hasPauseTime: new FormControl<boolean>(false, Validators.required),

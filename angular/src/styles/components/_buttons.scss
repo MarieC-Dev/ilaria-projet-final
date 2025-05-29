@@ -18,8 +18,8 @@ $mobilePadding: .75rem 1.5rem;
     }
 
     &:hover:not(.btn-disabled) {
-        background-color: $secondColor;
-        border-color: $secondColor;
+        background-color: white;
+        color: $firstColor;
     }
 
     &__border {

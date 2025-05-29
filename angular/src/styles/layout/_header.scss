@@ -24,10 +24,10 @@ header {
         background-color: rgba($color: $darkGrey, $alpha: .7);
     }
 
-    .navigationLeft {      
+    .navigationLeft {
         display: flex;
         background-color: white;
-        
+
         @media only screen and (max-width: 767px) {
             width: 100%;
             max-height: 0;
@@ -90,14 +90,14 @@ header {
 
         .burgerMenu {
             display: none;
-        
+
             @media only screen and (max-width: 767px) {
                 height: 24px;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
                 align-items: center;
-        
+
                 span {
                     width: 40px;
                     height: 6px;
@@ -107,6 +107,11 @@ header {
                 }
             }
         }
+
+    }
+
+    .btn-bg-red, .btn-bg-red:hover {
+        text-decoration: none;
     }
 
     a:hover, div > a:not(.btn-bg-red):hover {
@@ -121,7 +126,6 @@ header {
     a.btn-bg-red.active {
         background-color: white;
     }
-
 }
 
 main {

@@ -1,0 +1,32 @@
+<table class="stepsIngredientsList stepsIngredientsList__ingredientsList">
+    <thead>
+    <tr>
+        @for (item of headList; track $index) {
+            <th>{{ item }}</th>
+        }
+        <th>Supprimer</th>
+    </tr>
+    </thead>
+    <tbody>
+        @if (bodyList.length < 1) {
+            <tr class="tableRowEmpty">
+                <td>Aucun élément créé</td>
+            </tr>
+        } @else {
+            @for (item of bodyList.controls; track $index) {
+                <tr>
+                    <td>00</td>
+                    <td>Cuillère à soupe</td>
+                    @if(typeTable === 'ingredient') {
+                        <td>Ingrédients</td>
+                    }
+                    <td>
+                        <button type="button" (click)="removeFunc()">
+                            <app-delete-icon />
+                        </button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

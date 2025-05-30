@@ -171,7 +171,7 @@
         <app-multiple-inputs
             labelTitle="Temps de pause :"
             inputId="pauseTimeInput"
-            [required]="true">
+            [required]="false">
 
             <button class="btn-bg-darkGrey" type="button" (click)="isPause = !isPause">
                 {{ isPause ? 'Supprimer' : 'Ajouter' }}
@@ -206,8 +206,96 @@
 
     <hr class="createRecipeLine">
 
-    <!-- Étapes et ingrédients -->
-    <app-steps-ingredients-inputs />
+    <!-- Liste Ingrédients -->
+    <app-multiple-inputs
+        labelTitle="Liste des ingrédients :"
+        inputId="ingredientsListInputs"
+        [required]="true">
+        <ul formGroupName="ingredientDetail">
+            <li>
+                <label for="numberIngredient">
+                    <input type="number"
+                           id="numberIngredient"
+                           name="numberIngredient"
+                           formControlName="quantity"
+                           placeholder="Ex. : 10" />
+                </label>
+            </li>
+            <li>
+                <label for="ingredientUnity">
+                    <select name="ingredientUnity" id="ingredientUnity" formControlName="unit">
+                        <option value="">Unités</option>
+                        <option value="tablespoon">Cuillère à soupe</option>
+                        <option value="gram">Grammes</option>
+                        <option value="milligram">Milligramme(g)</option>
+                        <option value="liter">Litre(s)</option>
+                        <option value="milliliter">Millilitre(s)</option>
+                        <option value="pot">Pot(s)</option>
+                    </select>
+                </label>
+            </li>
+            <li>
+                <label for="ingredientName">
+                    <input type="text"
+                           id="ingredientName"
+                           name="ingredientName"
+                           formControlName="name"
+                           placeholder="Ex. : Chocolat en poudre" />
+                </label>
+            </li>
+            <li>
+                <button type="button"
+                        class="btn-bg-red stepsIngredientsBtn"
+                        (click)="addIngredient()">+</button>
+            </li>
+        </ul>
+
+        <app-table-list
+            typeTable="ingredient"
+            [headList]="tableHeadIngredient"
+            [bodyList]="ingredientsList"
+            [removeFunc]="removeIngredient" />
+    </app-multiple-inputs>
+
+    <hr class="createRecipeLine">
+
+    <!-- Liste Étapes -->
+    <app-multiple-inputs
+        labelTitle="Étapes de la recette :"
+        inputId="stepsListInputs"
+        [required]="true">
+        <ul formGroupName="stepDetail">
+            <li>
+                <label for="stepIndex">
+                    <input type="number"
+                           id="stepIndex"
+                           name="stepIndex"
+                           placeholder="Ex. : 10"
+                           formControlName="number"
+                           required />
+                </label>
+            </li>
+            <li>
+                <label for="stepDescription">
+                    <input type="text"
+                           id="stepDescription"
+                           name="stepDescription"
+                           placeholder="Ex. : Ajouter le beurre fondue à la préparation"
+                           formControlName="stepName"
+                           required />
+                </label>
+            </li>
+            <li>
+                <button type="button" class="btn-bg-red stepsIngredientsBtn" (click)="addStep()">+</button>
+            </li>
+        </ul>
+
+        <app-table-list
+            typeTable="step"
+            [headList]="tableHeadStep"
+            [bodyList]="stepsList"
+            [removeFunc]="removeStep" />
+    </app-multiple-inputs>
 
     <hr class="createRecipeLine">
 

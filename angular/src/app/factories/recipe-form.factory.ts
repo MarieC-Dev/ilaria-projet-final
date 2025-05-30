@@ -39,14 +39,14 @@ export class RecipeFormFactory {
 
       ingredientsList: new FormArray([]),
       ingredientDetail: new FormGroup({
-        quantity: new FormControl<number>(0),
+        quantity: new FormControl<string>(''),
         unit: new FormControl<string>(''),
         name: new FormControl<string>(''),
       }),
 
       stepsList: new FormArray([]),
       stepDetail: new FormGroup({
-        number: new FormControl<number>(0),
+        number: new FormControl<string>(''),
         stepName: new FormControl<string>(''),
       }),
       created: new FormControl<Date|number>(Date.now(), Validators.required),

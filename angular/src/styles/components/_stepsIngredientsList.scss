@@ -4,6 +4,10 @@
     width: 80%;
 }
 
+app-table-list {
+    width: 100%;
+}
+
 .stepsIngredientsList {
     &__ingredientsList {
         th:nth-child(2), td:nth-child(2) {
@@ -47,5 +51,11 @@
         tr:nth-child(even) {
             background-color: $lightGrey;
         }
+    }
+
+    tbody tr.tableRowEmpty td {
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
 }

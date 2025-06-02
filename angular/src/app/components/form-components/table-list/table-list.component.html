@@ -1,8 +1,8 @@
 <table class="stepsIngredientsList stepsIngredientsList__ingredientsList">
     <thead>
     <tr>
-        @for (item of headList; track $index) {
-            <th>{{ item }}</th>
+        @for (itemHead of headList; track $index) {
+            <th>{{ itemHead }}</th>
         }
         <th>Supprimer</th>
     </tr>
@@ -13,19 +13,31 @@
                 <td>Aucun élément créé</td>
             </tr>
         } @else {
-            @for (item of bodyList.controls; track $index) {
-                <tr>
-                    <td>00</td>
-                    <td>Cuillère à soupe</td>
-                    @if(typeTable === 'ingredient') {
-                        <td>Ingrédients</td>
-                    }
-                    <td>
-                        <button type="button" (click)="removeFunc()">
-                            <app-delete-icon />
-                        </button>
-                    </td>
-                </tr>
+            @for (itemBody of bodyList.controls; track $index) {
+                @if(typeTable === 'ingredient') {
+                    <tr>
+                        <td>{{ itemBody.value.quantity }}</td>
+                        <td>{{ getIngredientUnit(itemBody) }}</td>
+                        <td>{{ itemBody.value.name }}</td>
+                        <td>
+                            <button type="button" (click)="removeFunc()">
+                                <app-delete-icon />
+                            </button>
+                        </td>
+                    </tr>
+                }
+
+                @if(typeTable === 'step') {
+                    <tr>
+                        <td>{{ itemBody.value.number }}</td>
+                        <td>{{ itemBody.value.stepName }}</td>
+                        <td>
+                            <button type="button" (click)="removeFunc()">
+                                <app-delete-icon />
+                            </button>
+                        </td>
+                    </tr>
+                }
             }
         }
     </tbody>

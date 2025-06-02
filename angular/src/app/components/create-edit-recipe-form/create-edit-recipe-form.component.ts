@@ -51,12 +51,24 @@ export class CreateEditRecipeFormComponent implements OnInit{
   }
 
   /* INGREDIENTS */
-  get ingredientsList() {
+  get ingredientsList(): FormArray {
     return this.recipeForm.formGroup.get('ingredientsList') as FormArray;
   }
 
-  addIngredient() {
-    this.ingredientsList.push(this.recipeForm.formGroup.get('ingredientDetail'))
+  addIngredient(): void {
+    const ingredientItem = this.recipeForm.formGroup.get('ingredientDetail') as FormGroup;
+    const newIngredient = new FormGroup({
+      quantity: new FormControl<string>(ingredientItem.value.quantity),
+      unit: new FormControl<string>(ingredientItem.value.unit),
+      name: new FormControl<string>(ingredientItem.value.name),
+    })
+
+    this.ingredientsList.push(newIngredient);
+    ingredientItem.patchValue({
+      quantity: '',
+      unit: '',
+      name: ''
+    });
   }
 
   removeIngredient() {
@@ -66,11 +78,21 @@ export class CreateEditRecipeFormComponent implements OnInit{
 
   /* STEPS */
   get stepsList() {
-    return this.recipeForm.formGroup.get('ingredientsList') as FormArray;
+    return this.recipeForm.formGroup.get('stepsList') as FormArray;
   }
 
   addStep() {
-    this.ingredientsList.push(this.recipeForm.formGroup.get('ingredientDetail'))
+    const step: FormGroup = this.recipeForm.formGroup.get('stepDetail') as FormGroup;
+    const newStep: FormGroup = new FormGroup({
+      number: new FormControl<string>(step.value.number),
+      stepName: new FormControl<string>(step.value.stepName),
+    });
+    this.stepsList.push(newStep);
+
+    step.patchValue({
+      number: '',
+      stepName: ''
+    });
   }
 
   removeStep() {

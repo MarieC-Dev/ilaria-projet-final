@@ -12,7 +12,7 @@ export class RecipeFormFactory {
       imageName: new FormControl<string>(''),
       imageData: new FormControl<string>(''),
       cuisineType: new FormControl<string>('', Validators.required), // return string
-      cookingType: new FormControl<string>('', Validators.required), // No cooking by default
+      cookingType: new FormControl<number>(4, Validators.required), // No cooking by default
       servingNumber: new FormGroup({
         number: new FormControl<number>(0, Validators.required),
         type: new FormControl<string>('', Validators.required),
@@ -37,12 +37,12 @@ export class RecipeFormFactory {
         }),
       }),
 
-      ingredientsList: new FormArray([]),
       ingredientDetail: new FormGroup({
         quantity: new FormControl<string>(''),
-        unit: new FormControl<string>(''),
+        unit: new FormControl(''),
         name: new FormControl<string>(''),
       }),
+      ingredientsList: new FormArray([]),
 
       stepsList: new FormArray([]),
       stepDetail: new FormGroup({

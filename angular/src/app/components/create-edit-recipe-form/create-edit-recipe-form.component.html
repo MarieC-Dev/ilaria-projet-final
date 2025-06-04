@@ -245,8 +245,10 @@
             </li>
             <li>
                 <button type="button"
-                        class="btn-bg-red stepsIngredientsBtn"
-                        (click)="addIngredient()">+</button>
+                    class="btn-bg-red stepsIngredientsBtn"
+                    (click)="addDetails('ingredientDetail', ingredientsList, 'quantity', 'unit', 'name')">
+                    +
+                </button>
             </li>
         </ul>
 
@@ -286,7 +288,11 @@
                 </label>
             </li>
             <li>
-                <button type="button" class="btn-bg-red stepsIngredientsBtn" (click)="addStep()">+</button>
+                <button type="button"
+                        class="btn-bg-red stepsIngredientsBtn"
+                        (click)="addDetails('stepDetail', stepsList, 'number', 'stepName')">
+                    +
+                </button>
             </li>
         </ul>
 

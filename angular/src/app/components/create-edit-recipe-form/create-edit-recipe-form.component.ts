@@ -1,23 +1,19 @@
-import {Component, computed, inject, model, OnInit, signal} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import { CookingTypeComponent } from '../form-components/cooking-type/cooking-type.component';
 import { DifficultyComponent } from '../form-components/difficulty/difficulty.component';
-import { FormInputComponent } from '../form-components/form-input/form-input.component';
 import { MultipleInputsComponent } from '../form-components/multiple-inputs/multiple-inputs.component';
 import { CUISINE_TYPE } from '../../lists/cuisine-type-list';
 import {RecipesApiService} from '../../services/recipes-api.service';
 import {
   FormArray,
-  FormBuilder,
   FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  Validators
 } from '@angular/forms';
 import {COOKING_TYPE_LIST} from '../../lists/cooking-type-list';
 import {RecipeFormFactory} from '../../factories/recipe-form.factory';
 import {CommonModule} from '@angular/common';
-import {DeleteIconComponent} from '../icons/delete-icon/delete-icon.component';
 import {TableListComponent} from '../form-components/table-list/table-list.component';
 
 @Component({
@@ -29,7 +25,6 @@ import {TableListComponent} from '../form-components/table-list/table-list.compo
     DifficultyComponent,
     FormsModule,
     ReactiveFormsModule,
-    DeleteIconComponent,
     TableListComponent,
   ],
   templateUrl: './create-edit-recipe-form.component.html',
@@ -43,6 +38,7 @@ export class CreateEditRecipeFormComponent implements OnInit{
   isPause = false;
   tableHeadIngredient: string[] = ['Quantité', 'Unités', 'Ingrédients'];
   tableHeadStep: string[] = ['N°', 'Description'];
+  //this.recipeForm.formGroup.get('stepsList') as FormArray
 
   constructor(private recipesApiService: RecipesApiService) { }
 
@@ -50,25 +46,25 @@ export class CreateEditRecipeFormComponent implements OnInit{
     this.recipeForm = new RecipeFormFactory();
   }
 
+  addDetails(detailName: string, arrayList: FormArray, ...fields: string[]): void {
+    const detailItem = this.recipeForm.formGroup.get(detailName) as FormGroup;
+    const newDetail : { [key: string]: FormControl } = {}; // puis => FormGroup(newDetail)
+
+    fields.forEach(field => {
+      newDetail[field] = new FormControl<string>(detailItem.value[field]);
+    });
+
+    const detailsGroup = new FormGroup(newDetail);
+    arrayList.push(detailsGroup);
+
+    fields.forEach(field => {
+      detailItem.patchValue({ [field]: '' });
+    });
+  }
+
   /* INGREDIENTS */
   get ingredientsList(): FormArray {
     return this.recipeForm.formGroup.get('ingredientsList') as FormArray;
-  }
-
-  addIngredient(): void {
-    const ingredientItem = this.recipeForm.formGroup.get('ingredientDetail') as FormGroup;
-    const newIngredient = new FormGroup({
-      quantity: new FormControl<string>(ingredientItem.value.quantity),
-      unit: new FormControl<string>(ingredientItem.value.unit),
-      name: new FormControl<string>(ingredientItem.value.name),
-    })
-
-    this.ingredientsList.push(newIngredient);
-    ingredientItem.patchValue({
-      quantity: '',
-      unit: '',
-      name: ''
-    });
   }
 
   removeIngredient() {
@@ -78,21 +74,13 @@ export class CreateEditRecipeFormComponent implements OnInit{
 
   /* STEPS */
   get stepsList() {
-    return this.recipeForm.formGroup.get('stepsList') as FormArray;
-  }
+    const stepsFormArray: FormArray = this.recipeForm.formGroup.get('stepsList') as FormArray;
+    stepsFormArray.value.sort((a: any, b: any) => a.number - b.number);
 
-  addStep() {
-    const step: FormGroup = this.recipeForm.formGroup.get('stepDetail') as FormGroup;
-    const newStep: FormGroup = new FormGroup({
-      number: new FormControl<string>(step.value.number),
-      stepName: new FormControl<string>(step.value.stepName),
-    });
-    this.stepsList.push(newStep);
+    console.log(stepsFormArray.value);
+    return stepsFormArray;
 
-    step.patchValue({
-      number: '',
-      stepName: ''
-    });
+    // innerHTML innerText - reset layout data (html)
   }
 
   removeStep() {

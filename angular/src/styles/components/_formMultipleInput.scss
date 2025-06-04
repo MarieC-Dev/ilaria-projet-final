@@ -57,6 +57,18 @@
             @include arrowsSelectStyle(white, $darkGrey, $isTall: true);
         }
 
+        #ingredientUnity {
+            width: 180px;
+        }
+
+        #ingredientName {
+            width: 300px;
+        }
+
+        #stepDescription {
+            width: 500px;
+        }
+
         .stepsIngredientsBtn {
             padding: .5rem 1.5rem;
             margin: .5rem 0 0 0;

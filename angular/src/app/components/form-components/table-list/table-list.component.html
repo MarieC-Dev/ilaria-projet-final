@@ -1,11 +1,11 @@
 <table class="stepsIngredientsList stepsIngredientsList__ingredientsList">
     <thead>
-    <tr>
-        @for (itemHead of headList; track $index) {
-            <th>{{ itemHead }}</th>
-        }
-        <th>Supprimer</th>
-    </tr>
+        <tr>
+            @for (itemHead of headList; track $index) {
+                <th>{{ itemHead }}</th>
+            }
+            <th>Supprimer</th>
+        </tr>
     </thead>
     <tbody>
         @if (bodyList.length < 1) {
@@ -13,8 +13,19 @@
                 <td>Aucun élément créé</td>
             </tr>
         } @else {
-            @for (itemBody of bodyList.controls; track $index) {
-                @if(typeTable === 'ingredient') {
+            <!--@for (itemBody of sortedStepsList; track $index) {
+                <tr>
+                    <td>{{ itemBody.number }}</td>
+                    <td>{{ itemBody.stepName }}</td>
+                    <td>
+                        <button type="button" (click)="removeStep()">
+                            <app-delete-icon />
+                        </button>
+                    </td>
+                </tr>
+            }-->
+            @if(typeTable === 'ingredient') {
+                @for (itemBody of bodyList; track $index) {
                     <tr>
                         <td>{{ itemBody.value.quantity }}</td>
                         <td>{{ getIngredientUnit(itemBody) }}</td>
@@ -26,11 +37,13 @@
                         </td>
                     </tr>
                 }
+            }
 
-                @if(typeTable === 'step') {
+            @if(typeTable === 'step') {
+                @for (itemBody of bodyList; track $index) {
                     <tr>
-                        <td>{{ itemBody.value.number }}</td>
-                        <td>{{ itemBody.value.stepName }}</td>
+                        <td>{{ itemBody.number }}</td>
+                        <td>{{ itemBody.stepName }}</td>
                         <td>
                             <button type="button" (click)="removeFunc()">
                                 <app-delete-icon />
@@ -39,6 +52,7 @@
                     </tr>
                 }
             }
+
         }
     </tbody>
 </table>

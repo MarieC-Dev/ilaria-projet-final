@@ -15,7 +15,7 @@ import {JsonPipe} from '@angular/common';
 export class TableListComponent {
   @Input() typeTable!: string;
   @Input() headList: Array<string> = [];
-  @Input() bodyList!: FormArray;
+  @Input() bodyList!: any;
   @Input() removeFunc!: any;
 
   getIngredientUnit(item: any): string {

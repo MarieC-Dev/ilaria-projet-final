@@ -38,7 +38,6 @@ export class CreateEditRecipeFormComponent implements OnInit{
   isPause = false;
   tableHeadIngredient: string[] = ['Quantité', 'Unités', 'Ingrédients'];
   tableHeadStep: string[] = ['N°', 'Description'];
-  //this.recipeForm.formGroup.get('stepsList') as FormArray
 
   constructor(private recipesApiService: RecipesApiService) { }
 
@@ -74,13 +73,17 @@ export class CreateEditRecipeFormComponent implements OnInit{
 
   /* STEPS */
   get stepsList() {
-    const stepsFormArray: FormArray = this.recipeForm.formGroup.get('stepsList') as FormArray;
-    stepsFormArray.value.sort((a: any, b: any) => a.number - b.number);
+    return this.recipeForm.formGroup.get('stepsList') as FormArray;
+  }
 
-    console.log(stepsFormArray.value);
-    return stepsFormArray;
-
+  get sortedStepsList() {
     // innerHTML innerText - reset layout data (html)
+    // TODO Il existe déjà une étape '2'. Supprimez là pour la remplacer
+
+    const mapList = this.stepsList.controls.map(ctrl => ctrl.value);
+    const sortedList = mapList.sort((a, b) => a.number - b.number)
+
+    return sortedList;
   }
 
   removeStep() {

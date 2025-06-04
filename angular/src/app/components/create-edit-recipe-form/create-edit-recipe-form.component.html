@@ -255,7 +255,7 @@
         <app-table-list
             typeTable="ingredient"
             [headList]="tableHeadIngredient"
-            [bodyList]="ingredientsList"
+            [bodyList]="ingredientsList.controls"
             [removeFunc]="removeIngredient" />
     </app-multiple-inputs>
 
@@ -299,7 +299,7 @@
         <app-table-list
             typeTable="step"
             [headList]="tableHeadStep"
-            [bodyList]="stepsList"
+            [bodyList]="sortedStepsList"
             [removeFunc]="removeStep" />
     </app-multiple-inputs>
 

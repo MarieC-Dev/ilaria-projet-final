@@ -38,6 +38,8 @@ export class CreateEditRecipeFormComponent implements OnInit{
   isPause = false;
   tableHeadIngredient: string[] = ['Quantité', 'Unités', 'Ingrédients'];
   tableHeadStep: string[] = ['N°', 'Description'];
+  errorAddIngredient = signal('');
+  errorAddStep = signal('');
 
   constructor(private recipesApiService: RecipesApiService) { }
 
@@ -54,11 +56,30 @@ export class CreateEditRecipeFormComponent implements OnInit{
     });
 
     const detailsGroup = new FormGroup(newDetail);
-    arrayList.push(detailsGroup);
+
+    if(detailName === 'stepDetail') {
+      if (arrayList.value.find((elm: any) => elm.number === detailsGroup.value['number'])) { // ou array.some(() => ...)
+        this.errorAddStep.set(`L'étape ${detailsGroup.value['number']} existe déjà. Supprimer celle qui existe pour la remplacer ou changez le numéro`);
+      } else if(detailsGroup.value['number'] === '' || detailsGroup.value['stepName'] === '') {
+        this.errorAddStep.set('Les 2 champs sont requis');
+      } else {
+        this.errorAddStep.set('');
+
+        arrayList.push(detailsGroup);
+
+        fields.forEach(field => {
+          detailItem.patchValue({ [field]: '' });
+        });
+      }
+    }
+
+    // ici
+    /*arrayList.push(detailsGroup);
 
     fields.forEach(field => {
       detailItem.patchValue({ [field]: '' });
-    });
+    });*/
+    // ... |
   }
 
   /* INGREDIENTS */
@@ -77,12 +98,8 @@ export class CreateEditRecipeFormComponent implements OnInit{
   }
 
   get sortedStepsList() {
-    // innerHTML innerText - reset layout data (html)
-    // TODO Il existe déjà une étape '2'. Supprimez là pour la remplacer
-
     const mapList = this.stepsList.controls.map(ctrl => ctrl.value);
-    const sortedList = mapList.sort((a, b) => a.number - b.number)
-
+    const sortedList = mapList.sort((a, b) => a.number - b.number);
     return sortedList;
   }
 

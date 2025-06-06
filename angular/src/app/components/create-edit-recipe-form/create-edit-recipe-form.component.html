@@ -252,6 +252,8 @@
             </li>
         </ul>
 
+        <p class="errorMessage" *ngIf="errorAddIngredient() !== ''">{{ errorAddIngredient() }}</p>
+
         <app-table-list
             typeTable="ingredient"
             [headList]="tableHeadIngredient"
@@ -295,6 +297,8 @@
                 </button>
             </li>
         </ul>
+
+        <p class="errorMessage" *ngIf="errorAddStep() !== ''">{{ errorAddStep() }}</p>
 
         <app-table-list
             typeTable="step"

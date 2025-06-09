@@ -1,4 +1,4 @@
-import {Component, Input, input} from '@angular/core';
+import {Component, EventEmitter, Input, input, Output} from '@angular/core';
 import {DeleteIconComponent} from "../../icons/delete-icon/delete-icon.component";
 import {FormArray} from '@angular/forms';
 import {JsonPipe} from '@angular/common';
@@ -16,7 +16,11 @@ export class TableListComponent {
   @Input() typeTable!: string;
   @Input() headList: Array<string> = [];
   @Input() bodyList!: any;
-  @Input() removeFunc!: any;
+  @Output() removeFunc = new EventEmitter<Event>();
+
+  onClick(event: Event) {
+    this.removeFunc.emit(event);
+  }
 
   getIngredientUnit(item: any): string {
     switch (item.value.unit) {

@@ -218,7 +218,7 @@
                            id="numberIngredient"
                            name="numberIngredient"
                            formControlName="quantity"
-                           placeholder="Ex. : 10" />
+                           placeholder="100" />
                 </label>
             </li>
             <li>
@@ -240,7 +240,10 @@
                            id="ingredientName"
                            name="ingredientName"
                            formControlName="name"
-                           placeholder="Ex. : Chocolat en poudre" />
+                           placeholder="Ex. : Chocolat en poudre"
+                           required
+                           (keydown.enter)="addDetails('ingredientDetail', ingredientsList, 'quantity', 'unit', 'name')"
+                    />
                 </label>
             </li>
             <li>
@@ -258,7 +261,7 @@
             typeTable="ingredient"
             [headList]="tableHeadIngredient"
             [bodyList]="ingredientsList.controls"
-            [removeFunc]="removeIngredient" />
+            (removeFunc)="removeRow($event, ingredientsList, 'ingredientIndex')" />
     </app-multiple-inputs>
 
     <hr class="createRecipeLine">
@@ -274,7 +277,7 @@
                     <input type="number"
                            id="stepIndex"
                            name="stepIndex"
-                           placeholder="Ex. : 10"
+                           placeholder="1"
                            formControlName="number"
                            required />
                 </label>
@@ -286,6 +289,7 @@
                            name="stepDescription"
                            placeholder="Ex. : Ajouter le beurre fondue à la préparation"
                            formControlName="stepName"
+                           (keydown.enter)="addDetails('stepDetail', stepsList, 'number', 'stepName')"
                            required />
                 </label>
             </li>
@@ -304,13 +308,11 @@
             typeTable="step"
             [headList]="tableHeadStep"
             [bodyList]="sortedStepsList"
-            [removeFunc]="removeStep" />
+            (removeFunc)="removeRow($event, stepsList, 'stepIndex')" />
     </app-multiple-inputs>
 
     <hr class="createRecipeLine">
 
-    <!--TODO change date now (created)-->
-
-    <button class="btn-bg-red" type="submit">Soumettre</button>
+    <button type="submit" class="btn-disabled btn-bg-red" disabled>Soumettre</button> <!-- TODO type submit -->
 </form>
 

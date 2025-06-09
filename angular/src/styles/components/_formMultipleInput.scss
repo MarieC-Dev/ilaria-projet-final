@@ -34,7 +34,7 @@
                 margin: 0 1rem;
 
                 input[type=number] {
-                    width: 150px;
+                    width: 100px;
                     text-align: center;
 
                     &::-webkit-outer-spin-button,
@@ -57,9 +57,9 @@
             @include arrowsSelectStyle(white, $darkGrey, $isTall: true);
         }
 
-        #ingredientUnity {
+        /*#ingredientUnity {
             width: 180px;
-        }
+        }*/
 
         #ingredientName {
             width: 300px;

@@ -26,12 +26,12 @@
             }-->
             @if(typeTable === 'ingredient') {
                 @for (itemBody of bodyList; track $index) {
-                    <tr>
+                    <tr [attr.data-ingredient-index]="$index">
                         <td>{{ itemBody.value.quantity }}</td>
                         <td>{{ getIngredientUnit(itemBody) }}</td>
                         <td>{{ itemBody.value.name }}</td>
                         <td>
-                            <button type="button" (click)="removeFunc()">
+                            <button type="button" (click)="onClick($event)">
                                 <app-delete-icon />
                             </button>
                         </td>
@@ -41,11 +41,11 @@
 
             @if(typeTable === 'step') {
                 @for (itemBody of bodyList; track $index) {
-                    <tr>
+                    <tr [attr.data-step-index]="$index">
                         <td>{{ itemBody.number }}</td>
                         <td>{{ itemBody.stepName }}</td>
                         <td>
-                            <button type="button" (click)="removeFunc()">
+                            <button type="button" (click)="onClick($event)">
                                 <app-delete-icon />
                             </button>
                         </td>

@@ -51,22 +51,22 @@ export class CreateEditRecipeFormComponent implements OnInit{
     const detailItem = this.recipeForm.formGroup.get(detailName) as FormGroup;
     let newDetail : { [key: string]: FormControl } = {}; // puis => FormGroup(newDetail)
 
-    //detailItem.value['name'] = detailItem.value['name'].charAt(0).toUpperCase() + detailItem.value['name'].slice(1);
-
     fields.forEach(field => {
       newDetail[field] = new FormControl<string>(detailItem.value[field]);
     });
 
     const detailsGroup = new FormGroup(newDetail);
-    console.log(detailsGroup);
 
     if(detailName === 'ingredientDetail') {
       const ingredientValue = detailsGroup.value['name'].trim().toLowerCase();
       detailsGroup.value['name'] = detailsGroup.value['name'].charAt(0).toUpperCase() + detailsGroup.value['name'].slice(1);
 
-      /*if(detailsGroup.value['quantity'] === '' || detailsGroup.value['unit'] === '' || detailsGroup.value['name'] === '') {
+      if(detailsGroup.value['quantity'] === '' ||
+        detailsGroup.value['quantity'] === '0' ||
+        detailsGroup.value['unit'] === '' ||
+        detailsGroup.value['name'] === '') {
         this.errorAddIngredient.set('Les 3 champs sont requis');
-      } else */if (arrayList.value.find((elm: any) => elm.name.trim().toLowerCase() === ingredientValue)) {
+      } else if (arrayList.value.find((elm: any) => elm.name.trim().toLowerCase() === ingredientValue)) {
         this.errorAddIngredient.set(`L'ingrédient ${detailsGroup.value['name']} existe déjà`);
       } else {
         this.errorAddIngredient.set('');
@@ -76,14 +76,15 @@ export class CreateEditRecipeFormComponent implements OnInit{
         fields.forEach(field => {
           detailItem.patchValue({ [field]: '' });
         });
-        console.log(arrayList.value);
       }
     }
 
     if(detailName === 'stepDetail') {
       detailsGroup.value['stepName'] = detailsGroup.value['stepName'].charAt(0).toUpperCase() + detailsGroup.value['stepName'].slice(1);
 
-      if(detailsGroup.value['number'] === '' || detailsGroup.value['stepName'] === '') {
+      if(detailsGroup.value['number'] === '' ||
+        detailsGroup.value['number'] === '0' ||
+        detailsGroup.value['stepName'] === '') {
         this.errorAddStep.set('Les 2 champs sont requis');
       }
       else if (arrayList.value.find((elm: any) => elm.number === detailsGroup.value['number'])) {
@@ -101,13 +102,18 @@ export class CreateEditRecipeFormComponent implements OnInit{
     }
   }
 
+  // ingredientIndex (ingredient-index) || stepIndex (step-index)
+  removeRow(event: Event, arrayList: FormArray, dataIndex: string) {
+    const element = event.target as HTMLElement;
+    const indexElement = element.closest('tr')!.dataset[dataIndex];
+
+    arrayList.removeAt(Number(indexElement));
+    console.log(dataIndex);
+  }
+
   /* INGREDIENTS */
   get ingredientsList(): FormArray {
     return this.recipeForm.formGroup.get('ingredientsList') as FormArray;
-  }
-
-  removeIngredient() {
-    console.log('Remove');
   }
   /* ===== */
 
@@ -120,10 +126,6 @@ export class CreateEditRecipeFormComponent implements OnInit{
     const mapList = this.stepsList.controls.map(ctrl => ctrl.value);
     const sortedList = mapList.sort((a, b) => a.number - b.number);
     return sortedList;
-  }
-
-  removeStep() {
-    console.log('Remove');
   }
   /* ===== */
 

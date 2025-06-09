@@ -44,11 +44,11 @@ export class RecipeFormFactory {
       }),
       ingredientsList: new FormArray([]),
 
-      stepsList: new FormArray([]),
       stepDetail: new FormGroup({
         number: new FormControl<string>(''),
         stepName: new FormControl<string>(''),
       }),
+      stepsList: new FormArray([]),
       created: new FormControl<Date|number>(Date.now(), Validators.required),
     });
   }

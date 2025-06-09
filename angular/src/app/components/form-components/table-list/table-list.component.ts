@@ -30,7 +30,7 @@ export class TableListComponent {
         break;
       case 'milliliter': return 'Millilitres (ml)';
         break;
-      case 'p': return 'Pot(s) de yaourt';
+      case 'pot': return 'Pot(s) de yaourt';
         break;
       default: return '';
     }

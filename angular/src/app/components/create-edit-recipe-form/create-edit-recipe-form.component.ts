@@ -49,20 +49,47 @@ export class CreateEditRecipeFormComponent implements OnInit{
 
   addDetails(detailName: string, arrayList: FormArray, ...fields: string[]): void {
     const detailItem = this.recipeForm.formGroup.get(detailName) as FormGroup;
-    const newDetail : { [key: string]: FormControl } = {}; // puis => FormGroup(newDetail)
+    let newDetail : { [key: string]: FormControl } = {}; // puis => FormGroup(newDetail)
+
+    //detailItem.value['name'] = detailItem.value['name'].charAt(0).toUpperCase() + detailItem.value['name'].slice(1);
 
     fields.forEach(field => {
       newDetail[field] = new FormControl<string>(detailItem.value[field]);
     });
 
     const detailsGroup = new FormGroup(newDetail);
+    console.log(detailsGroup);
+
+    if(detailName === 'ingredientDetail') {
+      const ingredientValue = detailsGroup.value['name'].trim().toLowerCase();
+      detailsGroup.value['name'] = detailsGroup.value['name'].charAt(0).toUpperCase() + detailsGroup.value['name'].slice(1);
+
+      /*if(detailsGroup.value['quantity'] === '' || detailsGroup.value['unit'] === '' || detailsGroup.value['name'] === '') {
+        this.errorAddIngredient.set('Les 3 champs sont requis');
+      } else */if (arrayList.value.find((elm: any) => elm.name.trim().toLowerCase() === ingredientValue)) {
+        this.errorAddIngredient.set(`L'ingrédient ${detailsGroup.value['name']} existe déjà`);
+      } else {
+        this.errorAddIngredient.set('');
+
+        arrayList.push(detailsGroup);
+
+        fields.forEach(field => {
+          detailItem.patchValue({ [field]: '' });
+        });
+        console.log(arrayList.value);
+      }
+    }
 
     if(detailName === 'stepDetail') {
-      if (arrayList.value.find((elm: any) => elm.number === detailsGroup.value['number'])) { // ou array.some(() => ...)
-        this.errorAddStep.set(`L'étape ${detailsGroup.value['number']} existe déjà. Supprimer celle qui existe pour la remplacer ou changez le numéro`);
-      } else if(detailsGroup.value['number'] === '' || detailsGroup.value['stepName'] === '') {
+      detailsGroup.value['stepName'] = detailsGroup.value['stepName'].charAt(0).toUpperCase() + detailsGroup.value['stepName'].slice(1);
+
+      if(detailsGroup.value['number'] === '' || detailsGroup.value['stepName'] === '') {
         this.errorAddStep.set('Les 2 champs sont requis');
-      } else {
+      }
+      else if (arrayList.value.find((elm: any) => elm.number === detailsGroup.value['number'])) {
+        this.errorAddStep.set(`L'étape ${detailsGroup.value['number']} existe déjà`);
+      }
+      else {
         this.errorAddStep.set('');
 
         arrayList.push(detailsGroup);
@@ -72,14 +99,6 @@ export class CreateEditRecipeFormComponent implements OnInit{
         });
       }
     }
-
-    // ici
-    /*arrayList.push(detailsGroup);
-
-    fields.forEach(field => {
-      detailItem.patchValue({ [field]: '' });
-    });*/
-    // ... |
   }
 
   /* INGREDIENTS */

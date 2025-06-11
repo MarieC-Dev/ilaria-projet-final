@@ -14,6 +14,7 @@
             placeholder="Titre de la recette"
             formControlName="name"
         />
+        <!--<p *ngIf="!recipeForm.formGroup.get('name')?.valid && recipeFormStatus() === 'INVALID'">Le nom de la recette doit contenir au moins 4 caractères</p>-->
     </div>
 
     <!-- Description -->
@@ -241,7 +242,6 @@
                            name="ingredientName"
                            formControlName="name"
                            placeholder="Ex. : Chocolat en poudre"
-                           required
                            (keydown.enter)="addDetails('ingredientDetail', ingredientsList, 'quantity', 'unit', 'name')"
                     />
                 </label>
@@ -278,8 +278,7 @@
                            id="stepIndex"
                            name="stepIndex"
                            placeholder="1"
-                           formControlName="number"
-                           required />
+                           formControlName="number" />
                 </label>
             </li>
             <li>
@@ -289,8 +288,7 @@
                            name="stepDescription"
                            placeholder="Ex. : Ajouter le beurre fondue à la préparation"
                            formControlName="stepName"
-                           (keydown.enter)="addDetails('stepDetail', stepsList, 'number', 'stepName')"
-                           required />
+                           (keydown.enter)="addDetails('stepDetail', stepsList, 'number', 'stepName')" />
                 </label>
             </li>
             <li>
@@ -313,6 +311,10 @@
 
     <hr class="createRecipeLine">
 
-    <button type="submit" class="btn-disabled btn-bg-red" disabled>Soumettre</button> <!-- TODO type submit -->
+    <p>Statut du formulaire : {{ recipeFormStatus() }}</p>
+    <p>Le nom est : {{ recipeName }}</p>
+
+    <button type="submit" class="btn-bg-red">Soumettre</button> <!-- TODO type submit -->
+    <!--<button type="submit" class="btn-disabled btn-bg-red" disabled>Soumettre</button>--> <!-- TODO type submit -->
 </form>
 

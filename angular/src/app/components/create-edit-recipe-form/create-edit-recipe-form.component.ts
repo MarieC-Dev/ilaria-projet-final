@@ -1,4 +1,4 @@
-import {Component, OnInit, signal} from '@angular/core';
+import {Component, effect, OnInit, signal} from '@angular/core';
 import { CookingTypeComponent } from '../form-components/cooking-type/cooking-type.component';
 import { DifficultyComponent } from '../form-components/difficulty/difficulty.component';
 import { MultipleInputsComponent } from '../form-components/multiple-inputs/multiple-inputs.component';
@@ -40,11 +40,16 @@ export class CreateEditRecipeFormComponent implements OnInit{
   tableHeadStep: string[] = ['N°', 'Description'];
   errorAddIngredient = signal('');
   errorAddStep = signal('');
+  recipeFormStatus = signal('');
 
   constructor(private recipesApiService: RecipesApiService) { }
 
   ngOnInit(): void {
     this.recipeForm = new RecipeFormFactory();
+
+    this.recipeFormStatus.set(this.recipeForm.formGroup.status);
+
+    this.recipeForm.formGroup.statusChanges.subscribe((status) => this.recipeFormStatus.set(status));
   }
 
   addDetails(detailName: string, arrayList: FormArray, ...fields: string[]): void {
@@ -108,8 +113,13 @@ export class CreateEditRecipeFormComponent implements OnInit{
     const indexElement = element.closest('tr')!.dataset[dataIndex];
 
     arrayList.removeAt(Number(indexElement));
-    console.log(dataIndex);
   }
+
+
+  get recipeName() {
+    return this.recipeForm.formGroup.get('name')?.valid;
+  }
+
 
   /* INGREDIENTS */
   get ingredientsList(): FormArray {
@@ -134,5 +144,6 @@ export class CreateEditRecipeFormComponent implements OnInit{
       console.log(res);
     })*/
     console.log(this.recipeForm);
+    console.log(this.recipeForm.formGroup.status);
   }
 }

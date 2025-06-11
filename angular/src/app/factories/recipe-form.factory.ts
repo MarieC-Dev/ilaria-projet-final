@@ -7,7 +7,7 @@ export class RecipeFormFactory {
 
   constructor() {
     this.formGroup = new FormGroup({
-      name: new FormControl<string>('', Validators.required),
+      name: new FormControl<string>('', [Validators.required, Validators.minLength(4)]),
       description: new FormControl<string>(''),
       imageName: new FormControl<string>(''),
       imageData: new FormControl<string>(''),
@@ -18,9 +18,6 @@ export class RecipeFormFactory {
         type: new FormControl<string>('', Validators.required),
       }), // [ number, string ]
       difficulty: new FormControl<string>('', Validators.required),
-
-      hasCookingTime: new FormControl<boolean>(false, Validators.required),
-      hasPauseTime: new FormControl<boolean>(false, Validators.required),
 
       recipeTime: new FormGroup({
         making: new FormGroup({
@@ -39,17 +36,17 @@ export class RecipeFormFactory {
 
       ingredientDetail: new FormGroup({
         quantity: new FormControl<string>(''),
-        unit: new FormControl(''),
+        unit: new FormControl<string>(''),
         name: new FormControl<string>(''),
       }),
-      ingredientsList: new FormArray([]),
+      ingredientsList: new FormArray([], [Validators.required, Validators.minLength(3)]),
 
       stepDetail: new FormGroup({
         number: new FormControl<string>(''),
         stepName: new FormControl<string>(''),
       }),
-      stepsList: new FormArray([]),
-      created: new FormControl<Date|number>(Date.now(), Validators.required),
+      stepsList: new FormArray([], [Validators.required, Validators.minLength(2)]),
+      //created: new FormControl<Date|number>(Date.now(), Validators.required),
     });
   }
 }

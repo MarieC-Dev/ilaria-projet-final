@@ -5,9 +5,6 @@
     <ul class="cookingTypeInputs" #checkboxList>
         @for (type of cookingTypeList(); track type.id) {
             <li [class]="type.checked ? 'liTypeCooking selectedType' : 'liTypeCooking'">
-                <!--<button type="button" (click)="onCheck(type, $event)">
-                    toto
-                </button>-->
                 <label>
                     <button type="button" (click)="onCheck(type)">
                         <img [src]="type.image" [alt]="type.altImage">

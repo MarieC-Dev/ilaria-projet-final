@@ -14,23 +14,23 @@ export class RecipeFormFactory {
       cuisineType: new FormControl<string>('', Validators.required), // return string
       cookingType: new FormControl<string>('', Validators.required), // No cooking by default
       servingNumber: new FormGroup({
-        number: new FormControl<number>(0, Validators.required),
+        number: new FormControl<string>('', Validators.required),
         type: new FormControl<string>('', Validators.required),
       }), // [ number, string ]
       difficulty: new FormControl<string>('', Validators.required),
 
       recipeTime: new FormGroup({
         making: new FormGroup({
-          hours: new FormControl<number>(0, Validators.required),
-          minutes: new FormControl<number>(0, Validators.required),
+          hours: new FormControl<string>('', Validators.required),
+          minutes: new FormControl<string>('', Validators.required),
         }),
         cooking: new FormGroup({
-          hours: new FormControl<number>(0),
-          minutes: new FormControl<number>(0),
+          hours: new FormControl<string>(''),
+          minutes: new FormControl<string>(''),
         }),
         pause: new FormGroup({
-          hours: new FormControl<number>(0),
-          minutes: new FormControl<number>(0),
+          hours: new FormControl<string>(''),
+          minutes: new FormControl<string>(''),
         }),
       }),
 
@@ -39,7 +39,7 @@ export class RecipeFormFactory {
         unit: new FormControl<string>(''),
         name: new FormControl<string>(''),
       }),
-      ingredientsList: new FormArray([], [Validators.required, Validators.minLength(3)]),
+      ingredientsList: new FormArray([], [Validators.required, Validators.minLength(2)]),
 
       stepDetail: new FormGroup({
         number: new FormControl<string>(''),

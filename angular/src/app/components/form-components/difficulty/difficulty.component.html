@@ -8,4 +8,6 @@
       <option value="intermediate">Moyen</option>
       <option value="difficult">Difficile</option>
     </select>
+
+    <p class="formControlError" *ngIf="ifInvalidControl.includes('difficulty')">Le nombre de portions est requis</p>
 </app-multiple-inputs>

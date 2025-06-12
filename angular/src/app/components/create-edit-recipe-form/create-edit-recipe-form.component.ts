@@ -41,7 +41,8 @@ export class CreateEditRecipeFormComponent implements OnInit{
   errorAddIngredient = signal('');
   errorAddStep = signal('');
   recipeFormStatus = signal('');
-  cookingTypeControls: any = ['hotPlate', 'stove', 'airFryer', 'barbecue', 'noCooking']
+  cookingTypeControls: any = ['hotPlate', 'stove', 'airFryer', 'barbecue', 'noCooking'];
+  arrayInvalidControl: string[] = [];
 
   constructor(private recipesApiService: RecipesApiService) { }
 
@@ -156,14 +157,14 @@ export class CreateEditRecipeFormComponent implements OnInit{
     })*/
 
     Object.keys(this.recipeForm.formGroup.controls).forEach(ctrl => {
-      const control = this.recipeForm.formGroup.get(ctrl);
+      const control = this.recipeForm.formGroup.get(ctrl) as FormControl;
 
       if(control && control?.invalid) {
-        console.log(ctrl);
-        console.log(control.invalid);
+        this.arrayInvalidControl.push(ctrl);
       }
-    })
+    });
 
+    console.log(this.arrayInvalidControl);
     console.log(this.recipeForm.formGroup.value);
   }
 }

@@ -16,9 +16,9 @@
                         [checked]="type.checked"
                         [value]="type.value"
                     />
-                        <!--[formControlName]="controlName"-->
                 </label>
             </li>
         }
     </ul>
+    <p class="formControlError" *ngIf="ifInvalidControl.includes('cookingType')">Le type de cuisson est requis</p>
 </app-multiple-inputs>

@@ -13,10 +13,11 @@ import {
   FormsModule,
   ReactiveFormsModule
 } from '@angular/forms';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-cooking-type',
-  imports: [MultipleInputsComponent, FormsModule, ReactiveFormsModule],
+  imports: [MultipleInputsComponent, FormsModule, ReactiveFormsModule, NgIf],
   templateUrl: './cooking-type.component.html',
   styleUrl: './cooking-type.component.scss',
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
@@ -24,6 +25,7 @@ import {
 export class CookingTypeComponent {
   cookingTypeList = signal(COOKING_TYPE_LIST);
   //@Input() controlName!: string;
+  @Input() ifInvalidControl!: string[];
   @Output() checkboxValue = new EventEmitter<string>();
   @ViewChild('checkboxList') checkboxList!: ElementRef;
 

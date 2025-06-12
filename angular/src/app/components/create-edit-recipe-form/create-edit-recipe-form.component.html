@@ -14,7 +14,7 @@
             placeholder="Titre de la recette"
             formControlName="name"
         />
-        <!--<p *ngIf="!recipeForm.formGroup.get('name')?.valid && recipeFormStatus() === 'INVALID'">Le nom de la recette doit contenir au moins 4 caractères</p>-->
+        <p class="formControlError" *ngIf="arrayInvalidControl.includes('name')">Le nom de la recette doit contenir au moins 4 caractères</p>
     </div>
 
     <!-- Description -->
@@ -60,10 +60,11 @@
               <option [value]="ct.value">{{ ct.title }}</option>
             }
         </select>
+        <p class="formControlError" *ngIf="arrayInvalidControl.includes('cuisineType')">Le type de cuisine est requis</p>
     </app-multiple-inputs>
 
     <!-- Types de cuisson -->
-    <app-cooking-type (checkboxValue)="getCheckboxValue($event)" />
+    <app-cooking-type (checkboxValue)="getCheckboxValue($event)" [ifInvalidControl]="arrayInvalidControl" />
 
     <!-- Nombre de portions -->
     <app-multiple-inputs
@@ -92,10 +93,11 @@
                 </label>
             </li>
         </ul>
+        <p class="formControlError" *ngIf="arrayInvalidControl.includes('servingNumber')">Le nombre de portions est requis</p>
     </app-multiple-inputs>
 
     <!-- Difficulté -->
-    <app-difficulty controlName="difficulty" />
+    <app-difficulty controlName="difficulty" [ifInvalidControl]="arrayInvalidControl" />
 
     <hr class="createRecipeLine">
 
@@ -112,10 +114,9 @@
                         <input type="number"
                                id="makingTimeHours"
                                name="makingTimeHours"
-                               placeholder="Heures"
+                               placeholder="Ex : 2"
                                formControlName="hours"
                                [required]="true" />
-                        <!--[(ngModel)]="hoursValues()[time.id]"-->
                         heure(s)
                     </label>
                 </li>
@@ -124,14 +125,15 @@
                         <input type="number"
                                id="makingTimeMinutes"
                                name="makingTimeMinutes"
-                               placeholder="Minutes"
+                               placeholder="Ex : 00"
                                formControlName="minutes"
                                [required]="true" />
-                        <!--[(ngModel)]="hoursValues()[time.id]"-->
                         minutes
                     </label>
                 </li>
             </ul>
+
+            <p class="formControlError" *ngIf="arrayInvalidControl.includes('recipeTime')">Le temps de préparation est requis</p>
         </app-multiple-inputs>
 
         <app-multiple-inputs
@@ -149,7 +151,7 @@
                         <input type="number"
                                id="cookingTimeHours"
                                name="cookingTimeHours"
-                               placeholder="Heures"
+                               placeholder="Ex : 1"
                                formControlName="hours"
                                [required]="true" />
                         heure(s)
@@ -160,7 +162,7 @@
                         <input type="number"
                                id="cookingTimeMinutes"
                                name="cookingTimeMinutes"
-                               placeholder="Minutes"
+                               placeholder="Ex : 30"
                                formControlName="minutes"
                                [required]="true" />
                         minutes
@@ -184,7 +186,7 @@
                         <input type="number"
                                id="pauseTimeHours"
                                name="pauseTimeHours"
-                               placeholder="Heures"
+                               placeholder="Ex : 1"
                                formControlName="hours"
                                [required]="false" />
                         heure(s)
@@ -195,7 +197,7 @@
                         <input type="number"
                                id="pauseTimeMinutes"
                                name="pauseTimeMinutes"
-                               placeholder="Minutes"
+                               placeholder="Ex : 30"
                                formControlName="minutes"
                                [required]="true" />
                         minutes
@@ -262,6 +264,8 @@
             [headList]="tableHeadIngredient"
             [bodyList]="ingredientsList.controls"
             (removeFunc)="removeRow($event, ingredientsList, 'ingredientIndex')" />
+
+        <p class="formControlError" *ngIf="arrayInvalidControl.includes('ingredientsList')">Renseignez au moins 2 ingrédients</p>
     </app-multiple-inputs>
 
     <hr class="createRecipeLine">
@@ -307,13 +311,19 @@
             [headList]="tableHeadStep"
             [bodyList]="sortedStepsList"
             (removeFunc)="removeRow($event, stepsList, 'stepIndex')" />
+
+        <p class="formControlError" *ngIf="arrayInvalidControl.includes('stepsList')">Renseignez au moins 2 étapes de la recette</p>
     </app-multiple-inputs>
 
     <hr class="createRecipeLine">
 
-    <p>Statut du formulaire : {{ recipeFormStatus() }}</p>
+    <!--<p>Statut du formulaire : {{ recipeFormStatus() }}</p>-->
 
-    <button type="submit" class="btn-bg-red">Soumettre</button> <!-- TODO type submit -->
-    <!--<button type="submit" class="btn-disabled btn-bg-red" disabled>Soumettre</button>--> <!-- TODO type submit -->
+    <button
+        type="submit"
+        [class]="recipeFormStatus() === 'INVALID' ? 'btn-disabled btn-bg-red' : 'btn-bg-red'"
+        [disabled]="recipeFormStatus() === 'INVALID' ? true : false">
+        Soumettre
+    </button>
 </form>
 

@@ -13,9 +13,4 @@ import {RecipeFormFactory} from '../../../factories/recipe-form.factory';
 export class DifficultyComponent {
   recipeForm = inject(RecipeFormFactory);
   @Input() controlName!: string;
-
-  onChange(event: Event) {
-    const target = event.target as HTMLInputElement;
-    console.log(target.value)
-  }
 }

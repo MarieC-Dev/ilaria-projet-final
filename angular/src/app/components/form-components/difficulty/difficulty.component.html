@@ -2,25 +2,10 @@
     labelTitle="Difficulté :"
     inputId="difficultyInputs"
     [required]="true">
-    <select [formControlName]="controlName" (change)="onChange($event)">
+    <select [formControlName]="controlName">
       <option value="">Niveau de difficulté</option>
       <option value="easy">Facile</option>
       <option value="intermediate">Moyen</option>
       <option value="difficult">Difficile</option>
     </select>
-
-    <!--<div id="difficultyBar">
-        <div>
-            <input type="checkbox" name="" id="easy" />
-            <button type="button">Facile</button>
-        </div>
-        <div>
-            <input type="checkbox" name="" id="intermediate" />
-            <button type="button">Moyen</button>
-        </div>
-        <div>
-            <input type="checkbox" name="" id="difficult" />
-            <button type="button">Difficile</button>
-        </div>
-    </div>-->
 </app-multiple-inputs>

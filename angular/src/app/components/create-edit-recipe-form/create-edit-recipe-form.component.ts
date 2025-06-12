@@ -41,6 +41,7 @@ export class CreateEditRecipeFormComponent implements OnInit{
   errorAddIngredient = signal('');
   errorAddStep = signal('');
   recipeFormStatus = signal('');
+  cookingTypeControls: any = ['hotPlate', 'stove', 'airFryer', 'barbecue', 'noCooking']
 
   constructor(private recipesApiService: RecipesApiService) { }
 
@@ -49,7 +50,14 @@ export class CreateEditRecipeFormComponent implements OnInit{
 
     this.recipeFormStatus.set(this.recipeForm.formGroup.status);
 
-    this.recipeForm.formGroup.statusChanges.subscribe((status) => this.recipeFormStatus.set(status));
+    this.recipeForm.formGroup.statusChanges.subscribe((status) =>
+      this.recipeFormStatus.set(status)
+    );
+  }
+
+  getCheckboxValue(value: string) {
+    let cookingTypeControl = this.recipeForm.formGroup.get('cookingType');
+    cookingTypeControl?.setValue(value);
   }
 
   addDetails(detailName: string, arrayList: FormArray, ...fields: string[]): void {
@@ -107,7 +115,7 @@ export class CreateEditRecipeFormComponent implements OnInit{
     }
   }
 
-  // ingredientIndex (ingredient-index) || stepIndex (step-index)
+  // dataIndex = ingredientIndex (ingredient-index) || stepIndex (step-index)
   removeRow(event: Event, arrayList: FormArray, dataIndex: string) {
     const element = event.target as HTMLElement;
     const indexElement = element.closest('tr')!.dataset[dataIndex];
@@ -115,11 +123,9 @@ export class CreateEditRecipeFormComponent implements OnInit{
     arrayList.removeAt(Number(indexElement));
   }
 
-
   get recipeName() {
     return this.recipeForm.formGroup.get('name')?.valid;
   }
-
 
   /* INGREDIENTS */
   get ingredientsList(): FormArray {
@@ -139,11 +145,25 @@ export class CreateEditRecipeFormComponent implements OnInit{
   }
   /* ===== */
 
+  getErrorMessage() {
+    // 'name' + '... message ...'
+    // recipeForm.formGroup.get('name')?.valid
+  }
+
   onSubmit() {
     /*this.recipesApiService.createRecipe(this.recipeForm).subscribe((res) => {
       console.log(res);
     })*/
-    console.log(this.recipeForm);
-    console.log(this.recipeForm.formGroup.status);
+
+    Object.keys(this.recipeForm.formGroup.controls).forEach(ctrl => {
+      const control = this.recipeForm.formGroup.get(ctrl);
+
+      if(control && control?.invalid) {
+        console.log(ctrl);
+        console.log(control.invalid);
+      }
+    })
+
+    console.log(this.recipeForm.formGroup.value);
   }
 }

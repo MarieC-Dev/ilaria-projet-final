@@ -1,13 +1,12 @@
 import {
   Component,
-  ElementRef,
-  Input,
+  ElementRef, EventEmitter,
+  Input, Output,
   signal,
   ViewChild,
 } from '@angular/core';
 import { MultipleInputsComponent } from '../multiple-inputs/multiple-inputs.component';
-import { CookingType } from '../../../models/cooking-type.model';
-import { COOKING_TYPE_LIST } from '../../../lists/cooking-type-list';
+import {COOKING_TYPE_LIST} from '../../../lists/cooking-type-list';
 import {
   ControlContainer,
   FormGroupDirective,
@@ -24,21 +23,19 @@ import {
 })
 export class CookingTypeComponent {
   cookingTypeList = signal(COOKING_TYPE_LIST);
-  @Input() controlName!: string;
+  //@Input() controlName!: string;
+  @Output() checkboxValue = new EventEmitter<string>();
   @ViewChild('checkboxList') checkboxList!: ElementRef;
-  @ViewChild('checkboxElm') checkboxElm!: ElementRef;
 
-  constructor(private controlContainer: ControlContainer) {}
-
-  onCheck(type: CookingType) {
+  onCheckBtn(type: any) {
     type.checked = !type.checked;
 
     const findOtherElm = this.cookingTypeList().filter(elm => elm.inputId !== type.inputId);
 
-    for (let i = 0; i < findOtherElm.length; i++) {
-      findOtherElm[i].checked = false;
+    for (let j = 0; j < findOtherElm.length; j++) {
+      findOtherElm[j].checked = false;
     }
 
-    console.log(this.checkboxList.nativeElement.children);
+    this.checkboxValue.emit(type.value);
   }
 }

@@ -6,18 +6,17 @@
         @for (type of cookingTypeList(); track type.id) {
             <li [class]="type.checked ? 'liTypeCooking selectedType' : 'liTypeCooking'">
                 <label>
-                    <button type="button" (click)="onCheck(type)">
+                    <button type="button" (click)="onCheckBtn(type)">
                         <img [src]="type.image" [alt]="type.altImage">
                         <p>{{ type.title }}</p>
                     </button>
                     <input type="checkbox"
-                        #checkboxElm
                         [id]="type.inputId"
                         [name]="type.inputId"
                         [checked]="type.checked"
                         [value]="type.value"
-                        [formControlName]="controlName"
                     />
+                        <!--[formControlName]="controlName"-->
                 </label>
             </li>
         }

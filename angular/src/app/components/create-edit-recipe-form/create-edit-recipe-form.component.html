@@ -97,12 +97,12 @@
     </app-multiple-inputs>
 
     <!-- Difficulté -->
-    <!--<app-difficulty controlName="difficulty" [ifInvalidControl]="arrayInvalidControl" />
+    <app-difficulty controlName="difficulty" [ifInvalidControl]="arrayInvalidControl" />
 
-    <hr class="createRecipeLine">-->
+    <hr class="createRecipeLine">
 
     <!-- Temps de préparation, cuisson, pause -->
-    <!--<div class="inputsTimesDiv" formGroupName="recipeTime">
+    <div class="inputsTimesDiv" formGroupName="recipeTime">
         <app-multiple-inputs
             labelTitle="Temps de préparation :"
             inputId="makingTimeInput"
@@ -207,10 +207,10 @@
         </app-multiple-inputs>
     </div>
 
-    <hr class="createRecipeLine">-->
+    <hr class="createRecipeLine">
 
     <!-- Liste Ingrédients -->
-    <!--<app-multiple-inputs
+    <app-multiple-inputs
         labelTitle="Liste des ingrédients :"
         inputId="ingredientsListInputs"
         [required]="true">
@@ -268,10 +268,10 @@
         <p class="formControlError" *ngIf="arrayInvalidControl.includes('ingredientsList')">Renseignez au moins 2 ingrédients</p>
     </app-multiple-inputs>
 
-    <hr class="createRecipeLine">-->
+    <hr class="createRecipeLine">
 
     <!-- Liste Étapes -->
-    <!--<app-multiple-inputs
+    <app-multiple-inputs
         labelTitle="Étapes de la recette :"
         inputId="stepsListInputs"
         [required]="true">
@@ -315,9 +315,7 @@
         <p class="formControlError" *ngIf="arrayInvalidControl.includes('stepsList')">Renseignez au moins 2 étapes de la recette</p>
     </app-multiple-inputs>
 
-    <hr class="createRecipeLine">-->
-
-    <!--<p>Statut du formulaire : {{ recipeFormStatus() }}</p>-->
+    <hr class="createRecipeLine">
 
     <button
         type="submit"

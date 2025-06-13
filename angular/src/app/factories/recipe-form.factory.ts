@@ -11,13 +11,13 @@ export class RecipeFormFactory {
       description: new FormControl<string>(''),
       imageName: new FormControl<string>(''),
       imageData: new FormControl<string>(''),
-      cuisineType: new FormControl<string>('', Validators.required), // return string
-      cookingType: new FormControl<string>('', Validators.required), // No cooking by default
+      cuisineType: new FormControl<string>('', Validators.required),
+      cookingType: new FormControl<string>('', Validators.required),
       servingNumber: new FormGroup({
         number: new FormControl<string>('', Validators.required),
         type: new FormControl<string>('', Validators.required),
-      }), // [ number, string ]
-      /*difficulty: new FormControl<string>('', Validators.required),
+      }),
+      difficulty: new FormControl<string>('', Validators.required),
 
       recipeTime: new FormGroup({
         making: new FormGroup({
@@ -45,7 +45,7 @@ export class RecipeFormFactory {
         number: new FormControl<string>(''),
         stepName: new FormControl<string>(''),
       }),
-      stepsList: new FormArray([], [Validators.required, Validators.minLength(2)]),*/
+      stepsList: new FormArray([], [Validators.required, Validators.minLength(2)]),
       created: new FormControl<Date|number>(Date.now()),
     });
   }

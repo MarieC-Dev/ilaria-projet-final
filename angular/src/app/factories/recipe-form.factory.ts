@@ -17,7 +17,7 @@ export class RecipeFormFactory {
         number: new FormControl<string>('', Validators.required),
         type: new FormControl<string>('', Validators.required),
       }), // [ number, string ]
-      difficulty: new FormControl<string>('', Validators.required),
+      /*difficulty: new FormControl<string>('', Validators.required),
 
       recipeTime: new FormGroup({
         making: new FormGroup({
@@ -45,8 +45,8 @@ export class RecipeFormFactory {
         number: new FormControl<string>(''),
         stepName: new FormControl<string>(''),
       }),
-      stepsList: new FormArray([], [Validators.required, Validators.minLength(2)]),
-      //created: new FormControl<Date|number>(Date.now(), Validators.required),
+      stepsList: new FormArray([], [Validators.required, Validators.minLength(2)]),*/
+      created: new FormControl<Date|number>(Date.now()),
     });
   }
 }

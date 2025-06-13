@@ -15,6 +15,7 @@ import {COOKING_TYPE_LIST} from '../../lists/cooking-type-list';
 import {RecipeFormFactory} from '../../factories/recipe-form.factory';
 import {CommonModule} from '@angular/common';
 import {TableListComponent} from '../form-components/table-list/table-list.component';
+import {HttpEventType} from '@angular/common/http';
 
 @Component({
   selector: 'app-create-edit-recipe-form',
@@ -116,8 +117,7 @@ export class CreateEditRecipeFormComponent implements OnInit{
     }
   }
 
-  // dataIndex = ingredientIndex (ingredient-index) || stepIndex (step-index)
-  removeRow(event: Event, arrayList: FormArray, dataIndex: string) {
+  removeRow(event: Event, arrayList: FormArray, dataIndex: string) { // dataIndex = ingredientIndex (ingredient-index) || stepIndex (step-index)
     const element = event.target as HTMLElement;
     const indexElement = element.closest('tr')!.dataset[dataIndex];
 
@@ -146,16 +146,7 @@ export class CreateEditRecipeFormComponent implements OnInit{
   }
   /* ===== */
 
-  getErrorMessage() {
-    // 'name' + '... message ...'
-    // recipeForm.formGroup.get('name')?.valid
-  }
-
   onSubmit() {
-    /*this.recipesApiService.createRecipe(this.recipeForm).subscribe((res) => {
-      console.log(res);
-    })*/
-
     Object.keys(this.recipeForm.formGroup.controls).forEach(ctrl => {
       const control = this.recipeForm.formGroup.get(ctrl) as FormControl;
 
@@ -164,7 +155,19 @@ export class CreateEditRecipeFormComponent implements OnInit{
       }
     });
 
-    console.log(this.arrayInvalidControl);
-    console.log(this.recipeForm.formGroup.value);
+    this.recipesApiService.createRecipe(this.recipeForm.formGroup.value, {
+      reportProgress: true,
+      observe: 'events',
+    }).subscribe((event: any) => {
+      switch (event.type) {
+        case HttpEventType.UploadProgress:
+          console.log('Uploaded ' + event.loaded + ' out of ' + event.total + ' bytes');
+          break;
+        case HttpEventType.Response:
+          console.log('Finished uploading!');
+          console.log(event.body);
+          break;
+      }
+    });
   }
 }

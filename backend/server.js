@@ -51,7 +51,7 @@ const uploadImg = multer({
 });
 
 app.get('/recipes', getAllRecipes);
-app.post('/recipes', createRecipe);
+app.post('/create-recipes', createRecipe);
 
 app.get('/users', getAllUsers);
 app.post('/create-user', uploadImg.single('signup-add-picture'), createUser);

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RecipesApiService {
-  private readonly API_URL: string = 'http://localhost:3000';
+  API_URL: string = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
 
@@ -14,7 +14,7 @@ export class RecipesApiService {
     return this.http.get<any[]>(`${this.API_URL}/recipes`);
   }
 
-  createRecipe(recipe: any): Observable<any> {
-    return this.http.post(`${this.API_URL}/recipes`, recipe);
+  createRecipe(recipe: any, report: any): Observable<any> {
+    return this.http.post(`${this.API_URL}/create-recipes`, recipe, report);
   }
 }

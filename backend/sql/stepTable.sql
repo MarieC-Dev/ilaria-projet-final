@@ -2,7 +2,7 @@ SOURCE database.sql;
 
 CREATE TABLE Step (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    description LONGTEXT NOT NULL
+    stepName LONGTEXT NOT NULL
 );
 
 CREATE TABLE StepsList (

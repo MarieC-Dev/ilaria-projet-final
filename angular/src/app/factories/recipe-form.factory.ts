@@ -42,7 +42,6 @@ export class RecipeFormFactory {
       ingredientsList: new FormArray([], [Validators.required, Validators.minLength(2)]),
 
       stepDetail: new FormGroup({
-        number: new FormControl<string>(''),
         stepName: new FormControl<string>(''),
       }),
       stepsList: new FormArray([], [Validators.required, Validators.minLength(2)]),

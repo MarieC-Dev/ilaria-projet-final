@@ -13,17 +13,6 @@
                 <td>Aucun élément créé</td>
             </tr>
         } @else {
-            <!--@for (itemBody of sortedStepsList; track $index) {
-                <tr>
-                    <td>{{ itemBody.number }}</td>
-                    <td>{{ itemBody.stepName }}</td>
-                    <td>
-                        <button type="button" (click)="removeStep()">
-                            <app-delete-icon />
-                        </button>
-                    </td>
-                </tr>
-            }-->
             @if(typeTable === 'ingredient') {
                 @for (itemBody of bodyList; track $index) {
                     <tr [attr.data-ingredient-index]="$index">
@@ -42,7 +31,7 @@
             @if(typeTable === 'step') {
                 @for (itemBody of bodyList; track $index) {
                     <tr [attr.data-step-index]="$index">
-                        <td>{{ itemBody.number }}</td>
+                        <td>{{ $index + 1 }}</td>
                         <td>{{ itemBody.stepName }}</td>
                         <td>
                             <button type="button" (click)="onClick($event)">
@@ -52,7 +41,6 @@
                     </tr>
                 }
             }
-
         }
     </tbody>
 </table>

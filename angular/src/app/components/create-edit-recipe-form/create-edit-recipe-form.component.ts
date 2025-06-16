@@ -34,7 +34,6 @@ import {HttpEventType} from '@angular/common/http';
 export class CreateEditRecipeFormComponent implements OnInit{
   recipeForm!: RecipeFormFactory;
   cuisineTypeList = signal(CUISINE_TYPE);
-  cookingTypeList = signal(COOKING_TYPE_LIST);
   isCooking = false;
   isPause = false;
   tableHeadIngredient: string[] = ['Quantité', 'Unités', 'Ingrédients'];
@@ -42,7 +41,6 @@ export class CreateEditRecipeFormComponent implements OnInit{
   errorAddIngredient = signal('');
   errorAddStep = signal('');
   recipeFormStatus = signal('');
-  cookingTypeControls: any = ['hotPlate', 'stove', 'airFryer', 'barbecue', 'noCooking'];
   arrayInvalidControl: string[] = [];
 
   constructor(private recipesApiService: RecipesApiService) { }
@@ -97,13 +95,8 @@ export class CreateEditRecipeFormComponent implements OnInit{
     if(detailName === 'stepDetail') {
       detailsGroup.value['stepName'] = detailsGroup.value['stepName'].charAt(0).toUpperCase() + detailsGroup.value['stepName'].slice(1);
 
-      if(detailsGroup.value['number'] === '' ||
-        detailsGroup.value['number'] === '0' ||
-        detailsGroup.value['stepName'] === '') {
-        this.errorAddStep.set('Les 2 champs sont requis');
-      }
-      else if (arrayList.value.find((elm: any) => elm.number === detailsGroup.value['number'])) {
-        this.errorAddStep.set(`L'étape ${detailsGroup.value['number']} existe déjà`);
+      if(detailsGroup.value['stepName'] === '') {
+        this.errorAddStep.set('Ce champ est requis pour créer une nouvelle étape');
       }
       else {
         this.errorAddStep.set('');

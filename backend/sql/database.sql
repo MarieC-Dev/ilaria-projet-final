@@ -16,16 +16,6 @@ CREATE TABLE User (
     FOREIGN KEY (roleId) REFERENCES Roles(id)
 );
 
-CREATE TABLE CuisineType (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name VARCHAR(100)
-);
-
-CREATE TABLE CookingType (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    type ENUM('hot-plate', 'stove', 'air-fryer', 'barbecue', 'no-cooking') NOT NULL UNIQUE
-);
-
 CREATE TABLE Ingredient (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     quantity INT NOT NULL,
@@ -71,16 +61,14 @@ CREATE TABLE RecipeData (
     description LONGTEXT,
     imageName VARCHAR(255),
     imageData LONGBLOB,
-    cuisineTypeId INT NOT NULL,
-    cookingTypeId INT NOT NULL,
+    cuisineType VARCHAR(100) NOT NULL,
+    cookingType VARCHAR(100) NOT NULL,
     servingNumberId INT NOT NULL,
     difficulty INT NOT NULL,
     authorId INT NOT NULL,
     recipeTimeId INT NOT NULL,
     created DATETIME,
 
-    FOREIGN KEY (cuisineTypeId) REFERENCES CuisineType(id),
-    FOREIGN KEY (cookingTypeId) REFERENCES CookingType(id),
     FOREIGN KEY (authorId) REFERENCES User(id),
     FOREIGN KEY (servingNumberId) REFERENCES ServingNumber(id),
     FOREIGN KEY (recipeTimeId) REFERENCES TimeTable(id)

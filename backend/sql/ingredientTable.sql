@@ -4,7 +4,7 @@ CREATE TABLE Ingredient (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     quantity INT NOT NULL,
     unit VARCHAR(100) NOT NULL,
-    ingredient VARCHAR(100) NOT NULL
+    name VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE IngredientsList (

@@ -28,7 +28,7 @@ exports.createRecipe = async (req, res) => {
     console.log(req.body);
 
     // cuisineTypeId (ID) - cookingTypeId (ID) - servingNumberId (ID) - recipeTimeId (ID)
-    const querySql = 'INSERT INTO User (name, description, imageName, imageData, cuisineType, cookingType, servingNumber, difficulty, recipeTime, created) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    const querySqlRecipe = 'INSERT INTO User (name, description, imageName, imageData, cuisineType, cookingType, servingNumber, difficulty, recipeTime, created) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 
     /*
     * name
@@ -43,6 +43,8 @@ exports.createRecipe = async (req, res) => {
     * recipeTimeId (ID)
     * created
     * */
+
+
 
     return res.status(201).json({ msg: 'The recipe is created !', response: req.body })
 }

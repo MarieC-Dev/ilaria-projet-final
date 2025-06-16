@@ -124,10 +124,6 @@ export class CreateEditRecipeFormComponent implements OnInit{
     arrayList.removeAt(Number(indexElement));
   }
 
-  get recipeName() {
-    return this.recipeForm.formGroup.get('name')?.valid;
-  }
-
   /* INGREDIENTS */
   get ingredientsList(): FormArray {
     return this.recipeForm.formGroup.get('ingredientsList') as FormArray;

@@ -234,6 +234,9 @@
                         <option value="liter">Litres (L)</option>
                         <option value="milliliter">Millilitres (ml)</option>
                         <option value="pot">Pot(s) de yaourt</option>
+                        <option value="pinch">Pincée</option>
+                        <option value="bottle">Bouteille</option>
+                        <option value="other">Autre (présicez à côté)</option>
                     </select>
                 </label>
             </li>
@@ -283,13 +286,13 @@
                            name="stepDescription"
                            placeholder="Ex. : Ajouter le beurre fondue à la préparation"
                            formControlName="stepName"
-                           (keydown.enter)="addDetails('stepDetail', stepsList, 'number', 'stepName')" />
+                           (keydown.enter)="addDetails('stepDetail', stepsList, 'stepName')" />
                 </label>
             </li>
             <li>
                 <button type="button"
                         class="btn-bg-red stepsIngredientsBtn"
-                        (click)="addDetails('stepDetail', stepsList, 'number', 'stepName')">
+                        (click)="addDetails('stepDetail', stepsList, 'stepName')">
                     +
                 </button>
             </li>

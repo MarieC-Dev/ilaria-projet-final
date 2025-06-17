@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {FormGroup, FormArray, Validators, FormControl} from '@angular/forms';
 
 @Injectable({ providedIn: 'root' })
@@ -21,14 +21,17 @@ export class RecipeFormFactory {
 
       recipeTime: new FormGroup({
         making: new FormGroup({
+          type: new FormControl<string>('making'),
           hours: new FormControl<string>('', Validators.required),
           minutes: new FormControl<string>('', Validators.required),
         }),
         cooking: new FormGroup({
+          type: new FormControl<string>('cooking'),
           hours: new FormControl<string>(''),
           minutes: new FormControl<string>(''),
         }),
         pause: new FormGroup({
+          type: new FormControl<string>('pause'),
           hours: new FormControl<string>(''),
           minutes: new FormControl<string>(''),
         }),
@@ -39,13 +42,14 @@ export class RecipeFormFactory {
         unit: new FormControl<string>(''),
         name: new FormControl<string>(''),
       }),
-      ingredientsList: new FormArray([], [Validators.required, Validators.minLength(2)]),
+      ingredientsList: new FormArray([], [Validators.required, Validators.minLength(1)]),
 
       stepDetail: new FormGroup({
+        number: new FormControl<string>(''),
         stepName: new FormControl<string>(''),
       }),
-      stepsList: new FormArray([], [Validators.required, Validators.minLength(2)]),
-      created: new FormControl<Date|number>(Date.now()),
+      stepsList: new FormArray([], [Validators.required, Validators.minLength(1)]),
+      created: new FormControl<string>(''),
     });
   }
 }

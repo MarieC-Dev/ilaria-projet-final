@@ -1,4 +1,4 @@
-import {Component, effect, OnInit, signal} from '@angular/core';
+import {Component, effect, inject, OnInit, signal} from '@angular/core';
 import { CookingTypeComponent } from '../form-components/cooking-type/cooking-type.component';
 import { DifficultyComponent } from '../form-components/difficulty/difficulty.component';
 import { MultipleInputsComponent } from '../form-components/multiple-inputs/multiple-inputs.component';
@@ -16,6 +16,7 @@ import {RecipeFormFactory} from '../../factories/recipe-form.factory';
 import {CommonModule} from '@angular/common';
 import {TableListComponent} from '../form-components/table-list/table-list.component';
 import {HttpEventType} from '@angular/common/http';
+import {DatetimeService} from '../../services/datetime.service';
 
 @Component({
   selector: 'app-create-edit-recipe-form',
@@ -42,6 +43,7 @@ export class CreateEditRecipeFormComponent implements OnInit{
   errorAddStep = signal('');
   recipeFormStatus = signal('');
   arrayInvalidControl: string[] = [];
+  createdDate = inject(DatetimeService);
 
   constructor(private recipesApiService: RecipesApiService) { }
 
@@ -72,7 +74,9 @@ export class CreateEditRecipeFormComponent implements OnInit{
 
     if(detailName === 'ingredientDetail') {
       const ingredientValue = detailsGroup.value['name'].trim().toLowerCase();
-      detailsGroup.value['name'] = detailsGroup.value['name'].charAt(0).toUpperCase() + detailsGroup.value['name'].slice(1);
+      detailsGroup.patchValue({
+        name: detailsGroup.value['name'].toLowerCase().charAt(0).toUpperCase() + detailsGroup.value['name'].slice(1),
+      });
 
       if(detailsGroup.value['quantity'] === '' ||
         detailsGroup.value['quantity'] === '0' ||
@@ -93,7 +97,11 @@ export class CreateEditRecipeFormComponent implements OnInit{
     }
 
     if(detailName === 'stepDetail') {
-      detailsGroup.value['stepName'] = detailsGroup.value['stepName'].charAt(0).toUpperCase() + detailsGroup.value['stepName'].slice(1);
+      let i: number = 0;
+      detailsGroup.patchValue({
+        number: i++,
+        stepName: detailsGroup.value['stepName'].toLowerCase().charAt(0).toUpperCase() + detailsGroup.value['stepName'].slice(1),
+      });
 
       if(detailsGroup.value['stepName'] === '') {
         this.errorAddStep.set('Ce champ est requis pour créer une nouvelle étape');
@@ -143,6 +151,10 @@ export class CreateEditRecipeFormComponent implements OnInit{
         this.arrayInvalidControl.push(ctrl);
       }
     });
+
+    this.recipeForm.formGroup.get('created')?.setValue(this.createdDate.datetime);
+
+    console.log(this.recipeForm.formGroup.value);
 
     this.recipesApiService.createRecipe(this.recipeForm.formGroup.value, {
       reportProgress: true,

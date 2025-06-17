@@ -36,8 +36,13 @@ export class TableListComponent {
         break;
       case 'pot': return 'Pot(s) de yaourt';
         break;
+      case 'pinch': return 'Pincée';
+        break;
+      case 'bottle': return 'Bouteille';
+        break;
+      case 'other': return 'Autre (présicez à côté)';
+        break;
       default: return '';
     }
   }
-
 }

@@ -12,13 +12,16 @@ const { getAllUsers } = require("./routes/users");
 const { createUser } = require("./routes/users");
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(cors({
   origin: 'http://localhost:4200',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
+  credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
 }));
+
+app.use(express.urlencoded({ extended: true }));
 //app.use(express.static('public'));
 
 const storage = multer.diskStorage({
@@ -51,10 +54,10 @@ const uploadImg = multer({
 });
 
 app.get('/recipes', getAllRecipes);
-app.post('/create-recipes', createRecipe);
+app.post('/recipes', uploadImg.single('create-recipe-picture'), createRecipe);
 
 app.get('/users', getAllUsers);
-app.post('/create-user', uploadImg.single('signup-add-picture'), createUser);
+app.post('/users', uploadImg.single('signup-add-picture'), createUser);
 
 app.listen(PORT, () => {
   console.log(`➡️  BACKEND on port ${PORT} ✅`);

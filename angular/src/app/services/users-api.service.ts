@@ -15,6 +15,6 @@ export class UsersApiService {
   }
 
   createUser(user: any): Observable<any> {
-    return this.http.post(`${this.API_URL}/create-user`, user);
+    return this.http.post(`${this.API_URL}/users`, user);
   }
 }

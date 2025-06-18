@@ -156,19 +156,10 @@ export class CreateEditRecipeFormComponent implements OnInit{
 
     console.log(this.recipeForm.formGroup.value);
 
-    this.recipesApiService.createRecipe(this.recipeForm.formGroup.value, {
-      reportProgress: true,
-      observe: 'events',
-    }).subscribe((event: any) => {
-      switch (event.type) {
-        case HttpEventType.UploadProgress:
-          console.log('Uploaded ' + event.loaded + ' out of ' + event.total + ' bytes');
-          break;
-        case HttpEventType.Response:
-          console.log('Finished uploading!');
-          console.log(event.body);
-          break;
-      }
-    });
+    this.recipesApiService.createRecipe(this.recipeForm.formGroup.value).subscribe((data) => console.log(data));
+    /*{
+      next: (result) => console.log('Recette créée ', result),
+        error: (err) => console.log('Front recipe creation error ', err)
+    }*/
   }
 }

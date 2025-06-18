@@ -1,0 +1,5 @@
+CREATE TABLE Session (
+    session_id VARCHAR(128) NOT NULL PRIMARY KEY,
+    expires INT(11) NOT NULL,
+    data TEXT NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

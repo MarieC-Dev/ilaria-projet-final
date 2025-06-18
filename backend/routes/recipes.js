@@ -11,154 +11,94 @@ exports.getAllRecipes = async (req, res) => {
 
 exports.createRecipe = async (req, res) => {
     let {
-        name,
-        description,
-        imageName, imageData,
-        cuisineType,
-        cookingType,
-        servingNumber,
-        difficulty,
-        recipeTime,
-        ingredientsList,
-        stepsList,
-        authorId,
-        created
+        name, description, imageName, imageData, cuisineType, cookingType, servingNumber, difficulty, recipeTime, ingredientsList, stepsList, authorId, created
     } = req.body;
 
-    console.log(req.body);
+    const result = [];
 
-    let indexServingNumber = 0;
-    let indexRecipeTime = 0;
-    let indexRecipeData = 0;
-    let indexIngredient = 0;
-    let indexStep = 0;
+    console.log(authorId);
 
-    const insertIntoServingNumber = 'INSERT INTO ServingNumber (number, servingType) VALUES (?, ?)';
-    const insertIntoRecipeTime = 'INSERT INTO TimeTable (type, hours, minutes) VALUES ?'; // making , cooking , pause
-    const insertIntoRecipeData = 'INSERT INTO RecipeData (name, description, imageName, imageData, cuisineType, cookingType, servingNumberId, difficulty, authorId, recipeTimeId, created) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    const insertIntoIngredient = 'INSERT INTO Ingredient (quantity, unit, name) VALUES (?, ?, ?)';
-    const insertIntoStep = 'INSERT INTO Step (number, stepName) VALUES (?, ?)';
-
-    const servingNumberQueries = [servingNumber.number, servingNumber.type];
-    const recipeTimeQueries = [
-        [recipeTime.making.type, Number(recipeTime.making.hours), Number(recipeTime.making.minutes)],
-        [recipeTime.cooking.type, recipeTime.cooking.hours ? Number(recipeTime.cooking.hours) : 0, recipeTime.cooking.minutes ? Number(recipeTime.cooking.minutes) : 0],
-        [recipeTime.pause.type, recipeTime.pause.hours ? Number(recipeTime.pause.hours) : 0, recipeTime.pause.minutes ? Number(recipeTime.pause.minutes) : 0],
-    ];
-    const recipeDataQueries = [
-        name, description, imageName, imageData, cuisineType, cookingType, indexServingNumber, difficulty, authorId, indexRecipeTime, created
-    ];
-    const ingredientQueries = [indexRecipeData, ingredientsList];
-    const stepQueries = [indexRecipeData, stepsList];
-
-    // TODO imbriquer les requêtes (recipeData > ...othersTables)
-
-    /* 1. servingNumber & recipeTime creation */
-    db.query(insertIntoServingNumber, servingNumberQueries,(err, result) => {
-        if(err) {
-            console.log('Serving number error : ', err);
-            res.status(500).json({error: 'Serving number error : ' + err});
+    try {
+        if(
+            !name || !cuisineType || !cookingType || !servingNumber.number || !servingNumber.type || !difficulty ||
+            !recipeTime.making.type || !recipeTime.cooking.type || !recipeTime.pause.type ||
+            ingredientsList === [] || stepsList === []
+        ) {
+            return res.status(404).json({msg: 'recipe time data not found'})
         }
 
-        indexServingNumber = result.insertId;
+        /* 1. SERVING NUMBER & RECIPE TIME creation */
+        const recipeTimeQueries = [
+            [recipeTime.making.type, Number(recipeTime.making.hours), Number(recipeTime.making.minutes)],
+            [recipeTime.cooking.type, recipeTime.cooking.hours ? Number(recipeTime.cooking.hours) : 0, recipeTime.cooking.minutes ? Number(recipeTime.cooking.minutes) : 0],
+            [recipeTime.pause.type, recipeTime.pause.hours ? Number(recipeTime.pause.hours) : 0, recipeTime.pause.minutes ? Number(recipeTime.pause.minutes) : 0],
+        ];
 
-        res.status(201).json({msg: 'Serving number is created !', result});
-    });
+        const [servingNumberResult] = db.promise().query(
+            'INSERT INTO ServingNumber (number, servingType) VALUES (?, ?)',
+            [servingNumber.number, servingNumber.type]
+        );
 
-    db.query(insertIntoRecipeTime, [recipeTimeQueries], (err, result) => {
-        if(err) {
-            console.log('Recipe time error : ', err);
-            res.status(500).json({error: 'Recipe time error : ' + err});
-        }
+        const [recipeTypeResult] = db.promise().query(
+            'INSERT INTO TimeTable (type, hours, minutes) VALUES ?',
+            recipeTimeQueries
+        );
 
-        indexRecipeTime = result.insertId;
+        const servingNumberId = servingNumberResult.insertId;
+        const recipeTimeId = recipeTypeResult.insertId;
+        /* ===== */
 
-        res.status(201).json({msg: 'Recipe time is created !', result});
-    });
-    /* ===== */
+        /* 2. RECIPE DATA creation - get servingNumber & recipeTime IDs */
+        const recipeDataQueries = [
+            name, description, imageName, imageData, cuisineType, cookingType, servingNumberId, difficulty, 0, recipeTimeId, created
+        ];
+        const [recipeDataResult] = db.promise().query(
+            'INSERT INTO RecipeData (name, description, imageName, imageData, cuisineType, cookingType, servingNumberId, difficulty, authorId, recipeTimeId, created) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [ recipeDataQueries ]
+        );
+        const recipeDataId = recipeDataResult.insertId;
+        result.push(recipeDataResult);
+        /* ===== */
 
-    /* 2. recipeData creation - get servingNumber & recipeTime IDs */
-    db.query(insertIntoRecipeData, recipeDataQueries, (err, result) => {
-        if(err) {
-            console.log('Recipe data error : ', err);
-            res.status(500).json({error: 'Recipe data error : ' + err});
-        }
+        /* 3. INGREDIENTS LIST & STEPS LIST creation - both get recipeData ID */
+        const [ingredientResult] = db.promise().query(
+            'INSERT INTO Ingredient (quantity, unit, name) VALUES (?, ?, ?)',
+            [ingredientsList[0].quantity, ingredientsList[0].unit, ingredientsList[0].name]
+        );
+        const ingredientId = ingredientResult.insertId;
 
-        indexRecipeData = result.insertId;
+        const [ingredientsListResult] = db.promise().query(
+            'INSERT INTO IngredientsList (recipeId, ingredientId) VALUES (?, ?)',
+            [recipeDataId, ingredientId]
+        );
+        const ingredientsListId = ingredientsListResult.insertId;
 
-        res.status(201).json({msg: 'Recipe data is created !', result});
-    });
-    /* ===== */
+        const [stepResult] = db.promise().query(
+            'INSERT INTO Step (number, stepName) VALUES (?, ?, ?)',
+            [stepsList[0].number, stepsList[0].stepName]
+        );
+        const stepId = stepResult.insertId;
 
-    /* 3. ingredientsList & stepsList creation - both get recipeData ID */
-    db.query(insertIntoIngredient, ingredientQueries, (err, result) => {
-        if(err) {
-            console.log('Ingredient error : ', err);
-            res.status(500).json({error: 'Ingredient error : ' + err});
-        }
+        const [stepsListResult] = db.promise().query(
+            'INSERT INTO StepsList (recipeId, stepId) VALUES (?, ?)',
+            [recipeDataId, stepId]
+        );
+        const stepsListId = stepsListResult.insertId;
 
-        indexIngredient = result.insertId;
-
-        res.status(201).json({msg: 'Ingredient is created !', result});
-    });
-
-    db.query(insertIntoStep, stepQueries, (err, result) => {
-        if(err) {
-            console.log('Step error : ', err);
-            res.status(500).json({error: 'Step error : ' + err});
-        }
-
-        indexStep = result.insertId;
-
-        res.status(201).json({msg: 'Step is created !', result});
-    });
-    /* ===== */
-
-    /*function sendIntoDb(insertInto, queries, tableName) {
-        db.query(insertInto, queries, (err, rows) => {
-            if(err) {
-                console.log(tableName + ' error : ', err);
-                res.status(500).json({error: tableName + ' error : ' + err});
-            }
-
-            indexStep = rows.insertId;
-
-            res.status(201).json({msg: tableName + ' is created !', rows});
+        return res.status(201).json({
+            msg: 'The recipe is created !',
+            servingNumberId,
+            recipeTimeId,
+            recipeDataId,
+            ingredientsListId,
+            stepsListId
         });
-    }*/
+        /* ===== */
+    } catch (error) {
+        res.status(500).json({ recipeErr: 'Erreur lors de la création de la recette ' + error })
+    }
 
-    /*
-    * name
-    * description
-    * imageName
-    * imageData
-    * cuisineType
-    * cookingType
-    * servingNumberId (ID)
-        * number
-        * type
-    * difficulty
-    * recipeTime (ID)
-        * making
-            * hours
-            * minutes
-        * cooking
-            * hours
-            * minutes
-        * pause
-            * hours
-            * minutes
-    * ingredientsList [ (ID)
-        * quantity
-        * unit
-        * name
-      ]
-    * stepsList [ (ID)
-        * stepName
-      ]
-    * authorId
-    * created
-    * */
+    console.log(result);
 
     //return res.status(201).json({ msg: 'The recipe is created !', response: req.body })
 }

@@ -3,6 +3,10 @@ const app = express();
 const cors = require('cors');
 const multer  = require('multer');
 const path = require('path');
+const session = require("express-session");
+const MySQLStore = require("express-mysql-session")(session);
+const cookieParser = require("cookie-parser");
+require("dotenv").config();
 
 const PORT = 3000;
 const db = require('./middlewares/db_connection.js');
@@ -10,6 +14,22 @@ const { getAllRecipes } = require("./routes/recipes");
 const { createRecipe } = require("./routes/recipes");
 const { getAllUsers } = require("./routes/users");
 const { createUser } = require("./routes/users");
+
+// Session store
+const sessionStore = new MySQLStore({}, db);
+
+app.use(cookieParser());
+app.use(session({
+  secret: process.env.SESSION_SECRET_KEY,
+  resave: false,
+  saveUninitialized: false,
+  store: sessionStore,
+  cookie: {
+    secure: false,
+    httpOnly: true,
+    sameSite: "lax",
+  },
+}));
 
 app.use(express.json());
 app.use(cors({
@@ -58,6 +78,12 @@ app.post('/recipes', uploadImg.single('create-recipe-picture'), createRecipe);
 
 app.get('/users', getAllUsers);
 app.post('/users', uploadImg.single('signup-add-picture'), createUser);
+
+sessionStore.onReady().then(() => {
+  console.log('✅ MySQLStore ready');
+}).catch(error => {
+  console.error('❌ MySQLStore error', error);
+});
 
 app.listen(PORT, () => {
   console.log(`➡️  BACKEND on port ${PORT} ✅`);

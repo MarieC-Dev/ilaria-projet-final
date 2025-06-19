@@ -21,11 +21,7 @@ exports.createUser = async (req, res) => {
     }
 
     const [usersRows] = await db.execute('SELECT * FROM User');
-    
 
-
-    console.log(req.body);
-    // TODO here
     bcrypt.hash(password, 10)
         .then(pwdHash => {
             const insertIntoUser = 'INSERT INTO User (imageName, imageData, username, email, password, roleId) VALUES (?, ?, ?, ?, ?, ?)';

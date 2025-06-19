@@ -14,6 +14,7 @@ const { getAllRecipes } = require("./routes/recipes");
 const { createRecipe } = require("./routes/recipes");
 const { getAllUsers } = require("./routes/users");
 const { createUser } = require("./routes/users");
+const { login } = require("./routes/login");
 
 // Session store
 const sessionStore = new MySQLStore({}, db);
@@ -78,6 +79,8 @@ app.post('/recipes', uploadImg.single('create-recipe-picture'), createRecipe);
 
 app.get('/users', getAllUsers);
 app.post('/users', uploadImg.single('signup-add-picture'), createUser);
+
+app.post('/login', login);
 
 sessionStore.onReady().then(() => {
   console.log('✅ MySQLStore ready');

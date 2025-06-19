@@ -13,6 +13,17 @@ exports.getAllUsers = async (req, res) => {
     }
 };
 
+exports.getUser = async (req, res) => {
+    try {
+        const [sessionRows] = db.execute('SELECT * FROM Session');
+        const session = JSON.parse(sessionRows[0].data);
+
+        return res.status(200).json({ profile: session });
+    } catch (error) {
+        return res.status(500).json({ errorProfile: 'Utilisateur introuvable ' + error })
+    }
+}
+
 exports.createUser = async (req, res) => {
     let { imageName, imageData, username, email, password } = req.body;
 

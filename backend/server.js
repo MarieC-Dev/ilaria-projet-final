@@ -12,9 +12,11 @@ const PORT = 3000;
 const db = require('./middlewares/db_connection.js');
 const { getAllRecipes } = require("./routes/recipes");
 const { createRecipe } = require("./routes/recipes");
-const { getAllUsers } = require("./routes/users");
+const { getAllUsers, getUser} = require("./routes/users");
 const { createUser } = require("./routes/users");
 const { login } = require("./routes/login");
+
+const { authMiddleware } = require("./middlewares/authMiddleware");
 
 // Session store
 const sessionStore = new MySQLStore({}, db);
@@ -78,6 +80,7 @@ app.get('/recipes', getAllRecipes);
 app.post('/recipes', uploadImg.single('create-recipe-picture'), createRecipe);
 
 app.get('/users', getAllUsers);
+app.get('/users/:id', authMiddleware, getUser);
 app.post('/users', uploadImg.single('signup-add-picture'), createUser);
 
 app.post('/login', login);

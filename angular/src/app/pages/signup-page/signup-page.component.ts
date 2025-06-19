@@ -5,6 +5,7 @@ import {formatDate, JsonPipe, NgIf} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserFormFactory} from '../../factories/user-form.factory';
 import {DatetimeService} from '../../services/datetime.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-signup-page',
@@ -18,7 +19,7 @@ export class SignupPageComponent implements OnInit {
   createdDate = inject(DatetimeService);
   data: any[] = [];
 
-  constructor(private usersApiService: UsersApiService) { }
+  constructor(private usersApiService: UsersApiService, private router: Router) { }
 
   ngOnInit() {
     this.userForm = new UserFormFactory();
@@ -28,7 +29,10 @@ export class SignupPageComponent implements OnInit {
     this.userForm.formGroupCreate.get('created')?.setValue(this.createdDate.datetime);
 
     this.usersApiService.createUser(this.userForm.formGroupCreate.value).subscribe({
-      next: (response) => console.log('Utilisateur créé :', response),
+      next: (response) => {
+        console.log('Utilisateur créé :', response)
+        this.router.navigate(['/admin/mes-infos'])
+      },
       error: (err) => console.error('Erreur FRONT :', err)
     });
   }

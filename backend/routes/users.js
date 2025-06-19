@@ -1,9 +1,10 @@
+const express = require("express");
+const router = express.Router();
 const db = require("../middlewares/db_connection");
 const authMiddleware = require("../middlewares/authMiddleware");
 const bcrypt = require("bcryptjs")
 
-exports.getAllUsers = async (req, res) => {
-    //res.send('Hello World!');
+router.get('/', async (req, res) => {
     try {
         const [usersRows] = await db.query('SELECT * FROM User');
         console.log(usersRows);
@@ -11,9 +12,9 @@ exports.getAllUsers = async (req, res) => {
     } catch (error) {
         res.status(500).json({ msg: 'Something went wrong : ' + error });
     }
-};
+})
 
-exports.getUser = async (req, res) => {
+router.get('/:id', authMiddleware, async (req, res) => {
     try {
         const [sessionRows] = db.execute('SELECT * FROM Session');
         const session = JSON.parse(sessionRows[0].data);
@@ -22,9 +23,9 @@ exports.getUser = async (req, res) => {
     } catch (error) {
         return res.status(500).json({ errorProfile: 'Utilisateur introuvable ' + error })
     }
-}
+});
 
-exports.createUser = async (req, res) => {
+router.post('/', async (req, res) => {
     let { imageName, imageData, username, email, password } = req.body;
 
     if(!username || !email || !password) {
@@ -51,4 +52,6 @@ exports.createUser = async (req, res) => {
         .catch(error => {
             console.log('Failed to hash password', error)
         })
-}
+});
+
+module.exports = router;

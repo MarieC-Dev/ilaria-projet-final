@@ -9,7 +9,6 @@ const db = require('./db_connection.js');
 router.use(cookieParser());
 
 module.exports = async (req, res, next) => {
-
     const [rows] = await db.query('SELECT * FROM Session');
     console.log('📌 SESSIONS :', rows);
 
@@ -20,7 +19,7 @@ module.exports = async (req, res, next) => {
             data: JSON.parse(rows[0].data),
         }
 
-        // 📌 Vérifie ce qui est stocké
+        // 📌 check session content
         console.log(session);
 
         if (!session || !session.data.token) {
@@ -31,8 +30,6 @@ module.exports = async (req, res, next) => {
             if (err) {
                 return res.status(401).json({ error: 'Token invalide' });
             }
-
-            //req.user = decoded; // Ajoute les infos du token à req.user
             next();
         });
     }

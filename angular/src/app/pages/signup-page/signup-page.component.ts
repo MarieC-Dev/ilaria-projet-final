@@ -35,5 +35,14 @@ export class SignupPageComponent implements OnInit {
       },
       error: (err) => console.error('Erreur FRONT :', err)
     });
+
+    this.userForm.formGroupCreate.patchValue({
+      imageName: '',
+      imageData: '',
+      username: '',
+      email: '',
+      password: '',
+      created: ''
+    })
   }
 }

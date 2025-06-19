@@ -12,7 +12,7 @@
 
         <p>Ajoutez vos informations personnelles</p>
 
-        <form method="post" enctype="multipart/form-data" (ngSubmit)="onSubmit()">
+        <form method="post" enctype="multipart/form-data" [formGroup]="userForm.formGroupCreate" (ngSubmit)="onSubmit()">
             <div class="wrapperIcon">
                 <img src="user-regular.svg" alt="user icon">
             </div>
@@ -26,7 +26,7 @@
                     id="signup-add-picture"
                     name="signup-add-picture"
                     placeholder="Choisissez une photo de profil"
-                    (change)="onFileSelected($event)"
+                    formControlName="imageName"
                 />
             </div>
 
@@ -39,7 +39,7 @@
                     id="signup-username"
                     name="signup-username"
                     placeholder="Nom d'utilisateur"
-                    [(ngModel)]="newUser.username"
+                    formControlName="username"
                     required
                 />
             </div>
@@ -53,7 +53,7 @@
                     id="signup-email"
                     name="signup-email"
                     placeholder="email@example.com"
-                    [(ngModel)]="newUser.email"
+                    formControlName="email"
                     required
                 />
             </div>
@@ -67,7 +67,8 @@
                     id="signup-password"
                     name="signup-password"
                     placeholder="**********"
-                    [(ngModel)]="newUser.password"
+                    formControlName="password"
+                    required
                 />
             </div>
 
@@ -77,10 +78,6 @@
                 Connexion
             </button>
         </form>
-
-        <br><br><br>
-
-        <!--<div>{{ data | json }}</div>-->
     </div>
 
 </section>

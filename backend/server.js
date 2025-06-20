@@ -13,7 +13,7 @@ const db = require('./middlewares/db_connection.js');
 const { getAllRecipes } = require("./routes/recipes");
 const { createRecipe } = require("./routes/recipes");
 const usersRoute = require("./routes/users");
-const { login } = require("./routes/login");
+const login = require("./routes/login");
 
 const { authMiddleware } = require("./middlewares/authMiddleware");
 
@@ -80,7 +80,7 @@ app.use('/users', usersRoute);
 app.get('/recipes', getAllRecipes);
 app.post('/recipes', uploadImg.single('create-recipe-picture'), createRecipe);
 
-app.post('/login', login);
+app.use('/login', login);
 
 sessionStore.onReady().then(() => {
   console.log('✅ MySQLStore ready');

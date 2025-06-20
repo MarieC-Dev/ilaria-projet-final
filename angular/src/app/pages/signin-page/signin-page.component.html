@@ -4,7 +4,7 @@
 
         <ul class="socialNetworks">
             @for (social of socialNetworksList(); track $index) {
-                <app-social-networks 
+                <app-social-networks
                     [link]="social.href"
                     [pathImg]="social.path"
                     [altImg]="social.altImg" />
@@ -13,22 +13,40 @@
 
         <p>Ou utilisez votre adresse mail :</p>
 
-        <form method="post">
+        <form method="post" [formGroup]="userLogin.formGroupLogin" (ngSubmit)="onSubmit()">
             <!-- TODO put back in its place -->
-            @for (input of formInputConnection(); track input.id) {
-                <app-form-input
-                    [id]="input.id"
-                    [type]="input.type"
-                    [label]="input.label"
-                    [inputId]="input.inputId"
-                    [required]="input.required" />
-            }
+            <div class="formInputDiv" id="div-signin-email">
+                <label for="signin-email">
+                    Email : <span style="color: #EB4137">*</span>
+                </label>
+
+                <input type="email"
+                       id="signin-email"
+                       name="signin-email"
+                       placeholder="Email"
+                       formControlName="email"
+                       required
+                />
+            </div>
+
+            <div class="formInputDiv" id="div-signin-password">
+                <label for="signin-password">
+                    Mot de passe : <span style="color: #EB4137">*</span>
+                </label>
+
+                <input type="password"
+                       id="signin-password"
+                       name="signin-password"
+                       placeholder="Mot de passe"
+                       formControlName="password"
+                       required
+                />
+            </div>
 
             <a href="">Mot de passe oublié ?</a>
 
             <button type="submit" class="btn-bg btn-bg-red">
-                <!-- TODO Connexion supprimer le a href et remettre "connexion" -->
-                 <a href="/profil/mes-infos">Connexion</a>
+                Connexion
             </button>
         </form>
 

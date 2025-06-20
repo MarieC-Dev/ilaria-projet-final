@@ -22,6 +22,7 @@ const sessionStore = new MySQLStore({}, db);
 
 app.use(cookieParser());
 app.use(session({
+  name: 'session_cookie',
   secret: process.env.SESSION_SECRET_KEY,
   resave: false,
   saveUninitialized: false,

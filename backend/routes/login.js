@@ -28,24 +28,26 @@ router.post('/',  async (req, res) => {
         return res.status(404).json({ msg: 'Utilisateur introuvable' });
     }
 
-    bcrypt.compare(password, loginRows[0].password)
+    const userLogin = loginRows[0];
+
+    bcrypt.compare(password, userLogin.password)
         .then(result => {
             if(!result) {
                 return res.status(404).json({ msg: "Identifiants incorrectes" })
             }
 
             let token = jwt.sign(
-                { id: loginRows[0].id, email: loginRows[0].email },
+                { id: userLogin.id, email: userLogin.email },
                 process.env.TOKEN_SECRET,
                 { expiresIn: '7d' }
             );
 
             req.session.user = {
-                id: loginRows[0].id,
-                username: loginRows[0].username,
-                email: loginRows[0].email,
-                pwd: loginRows[0].password,
-                role: loginRows[0].role
+                id: userLogin.id,
+                username: userLogin.username,
+                email: userLogin.email,
+                pwd: userLogin.password,
+                role: userLogin.role
             }
             req.session.token = token;
 

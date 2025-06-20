@@ -19,10 +19,14 @@ export class UsersApiService {
   }
 
   createUser(user: any): Observable<any> {
-    return this.http.post(`${this.API_URL}/users`, user);
+    return this.http.post(`${this.API_URL}/users`, user, {
+      withCredentials: true
+    })
   }
 
   login(user: any): Observable<any> {
-    return this.http.post(`${this.API_URL}/login`, user);
+    return this.http.post(`${this.API_URL}/login`, user, {
+      withCredentials: true
+    });
   }
 }

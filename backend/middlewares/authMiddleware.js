@@ -19,7 +19,6 @@ module.exports = async (req, res, next) => {
             data: JSON.parse(rows[0].data),
         }
 
-        // 📌 check session content
         console.log(session);
 
         if (!session || !session.data.token) {

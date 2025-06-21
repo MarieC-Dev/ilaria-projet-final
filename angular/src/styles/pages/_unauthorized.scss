@@ -1,0 +1,17 @@
+.unauthorizedPage {
+    width: 80%;
+    height: calc(100vh - 334px - 119px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    text-align: center;
+}
+
+p {
+    margin: 1rem 0 2rem 0;
+}
+
+a {
+    margin: 0 auto;
+}

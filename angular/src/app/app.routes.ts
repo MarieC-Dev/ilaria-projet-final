@@ -14,45 +14,33 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { AdminFavoritesPageComponent } from './pages/admin-favorites-page/admin-favorites-page.component';
 import { AdminRecipesPageComponent } from './pages/admin-recipes-page/admin-recipes-page.component';
+import {accountGuardGuard} from './guards/account-guard.guard';
+import {UnauthorizedComponent} from './pages/unauthorized/unauthorized.component';
 
 export const routes: Routes = [
-    /* { path: '/recipe/:id', component: RecipeDetailsPage }, */
-    { path: 'admin/mes-recettes', component: AdminRecipesPageComponent },
-    { path: 'admin/mes-favoris', component: AdminFavoritesPageComponent },
-    { path: 'admin/mes-infos', component: AdminPageComponent },
-    { path: 'profil/mes-recettes/modifier', component: EditRecipePageComponent },
-    { path: 'profil/mes-recettes', component: ProfileRecipesPageComponent },
-    { path: 'profil/creer-une-recette', component: CreateRecipesComponent },
-    { path: 'profil/mes-favoris', component: ProfileFavoritesPageComponent },
-    { path: 'profil/mes-infos', component: ProfilePageComponent },
-    { path: 'accueil', component: HomePageComponent },
-    { path: 'recettes', component: RecipeDetailsPage },
-    { path: 'connexion', component: SigninPageComponent },
-    { path: 'inscription', component: SignupPageComponent },
-    { path: 'contact', component: ContactPageComponent },
-    { path: 'rechercher', component: SearchPageComponent },
-    { path: '', redirectTo: 'accueil', pathMatch: 'full' },
-    { path: '**', component: NotFoundPageComponent },
+  /* { path: '/recipe/:id', component: RecipeDetailsPage }, */
+  { path: 'admin/mes-recettes', component: AdminRecipesPageComponent },
+  { path: 'admin/mes-favoris', component: AdminFavoritesPageComponent },
+  { path: 'admin/mes-infos', component: AdminPageComponent },
+  {
+    path: 'profil/:id',
+    component: ProfilePageComponent,
+    canActivate: [accountGuardGuard],
+    canActivateChild: [accountGuardGuard],
+    children: [
+      { path: 'mes-recettes/modifier', component: EditRecipePageComponent },
+      { path: 'mes-recettes', component: ProfileRecipesPageComponent },
+      { path: 'creer-une-recette', component: CreateRecipesComponent },
+      { path: 'mes-favoris', component: ProfileFavoritesPageComponent },
+    ]
+  },
+  { path: 'accueil', component: HomePageComponent },
+  { path: 'recettes', component: RecipeDetailsPage },
+  { path: 'connexion', component: SigninPageComponent },
+  { path: 'inscription', component: SignupPageComponent },
+  { path: 'contact', component: ContactPageComponent },
+  { path: 'rechercher', component: SearchPageComponent },
+  { path: 'unauthorized', component: UnauthorizedComponent },
+  { path: '', redirectTo: 'accueil', pathMatch: 'full' },
+  { path: '**', component: NotFoundPageComponent },
 ];
-
-/*
-<a 
-    routerlink="/profil/mes-infos" 
-    routerlinkactive="btn-bg-darkGrey__profile--active" 
-    ariacurrentwhenactive="page" 
-    class="btn-bg-darkGrey btn-bg-darkGrey__profile btn-bg-darkGrey__profile--active" 
-    ng-reflect-router-link="/profil/mes-infos" 
-    ng-reflect-router-link-active="btn-bg-darkGrey__profile--acti" 
-    ng-reflect-aria-current-when-active="page" 
-    href="/profil/mes-infos" 
-    aria-current="page">
-<p>Mon profil</p>
-</a>
-
-<a 
-    routerlink="/admin/mes-infos" 
-    routerlinkactive="btn-bg-darkGrey__profile--active" 
-    ariacurrentwhenactive="page" 
-    class="btn-bg-darkGrey btn-bg-darkGrey__profile">
-<p>Mon profil</p></a>
-*/

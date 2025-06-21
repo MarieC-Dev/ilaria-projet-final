@@ -2,15 +2,16 @@ import {Component, OnInit, signal} from '@angular/core';
 import { SocialNetworksComponent } from '../../components/social-networks/social-networks.component';
 import { connectionSocial } from '../../lists/social-networks-list';
 import { SIGNIN } from '../../lists/signin-signup-list';
-import { FormInputComponent } from '../../components/form-components/form-input/form-input.component';
 import {UserFormFactory} from '../../factories/user-form.factory';
 import {ReactiveFormsModule} from '@angular/forms';
-import {NgIf} from '@angular/common';
 import {UsersApiService} from '../../services/users-api.service';
+import {AccountAccessService} from '../../services/account-access.service';
+import {JsonPipe} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-signin-page',
-  imports: [SocialNetworksComponent, ReactiveFormsModule],
+  imports: [SocialNetworksComponent, ReactiveFormsModule, JsonPipe],
   templateUrl: './signin-page.component.html',
   styleUrl: './signin-page.component.scss'
 })
@@ -18,8 +19,12 @@ export class SigninPageComponent implements OnInit {
   socialNetworksList = signal(connectionSocial);
   formInputConnection = signal(SIGNIN);
   userLogin!: UserFormFactory;
+  access = {};
 
-  constructor(private usersApiService: UsersApiService) { }
+  constructor(
+    private router: Router,
+    private usersApiService: UsersApiService
+  ) { }
 
   ngOnInit(): void {
     this.userLogin = new UserFormFactory();
@@ -27,8 +32,13 @@ export class SigninPageComponent implements OnInit {
 
   onSubmit() {
     this.usersApiService.login(this.userLogin.formGroupLogin.value).subscribe({
-      next: (result) => console.log(result),
+      next: (res) => {
+        console.log(res);
+        this.router.navigate(['/']);
+      },
       error: (err) => console.log('Login front error ', err)
     })
+
+
   }
 }

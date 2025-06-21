@@ -7,14 +7,6 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 router.use(cookieParser());
 
-router.get('/user', async (req, res) => {
-    if(req.session.user) {
-        return res.json({ isAuthenticated: true, user: req.session.user });
-    } else {
-        return res.json({ isAuthenticated: false, msg: 'User not connected' })
-    }
-})
-
 router.post('/',  async (req, res) => {
     const { email, password } = req.body;
 
@@ -47,7 +39,7 @@ router.post('/',  async (req, res) => {
                 username: userLogin.username,
                 email: userLogin.email,
                 pwd: userLogin.password,
-                role: userLogin.role
+                roleId: userLogin.roleId
             }
             req.session.token = token;
 
@@ -61,6 +53,16 @@ router.post('/',  async (req, res) => {
         .catch(error => {
             console.log("Erreur bcrypt compare login : ", error);
         })
+})
+
+router.get('/user', async (req, res) => {
+    console.log('USER LOGIN', req.session);
+
+    if(req.session.user) {
+        return res.json({ isAuthenticated: true, user: req.session.user });
+    } else {
+        return res.json({ isAuthenticated: false, msg: 'User not connected' })
+    }
 })
 
 module.exports = router;

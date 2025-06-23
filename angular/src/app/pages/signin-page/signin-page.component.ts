@@ -19,11 +19,11 @@ export class SigninPageComponent implements OnInit {
   socialNetworksList = signal(connectionSocial);
   formInputConnection = signal(SIGNIN);
   userLogin!: UserFormFactory;
-  access = {};
 
   constructor(
     private router: Router,
-    private usersApiService: UsersApiService
+    private usersApiService: UsersApiService,
+    private acountAccess: AccountAccessService
   ) { }
 
   ngOnInit(): void {
@@ -34,11 +34,13 @@ export class SigninPageComponent implements OnInit {
     this.usersApiService.login(this.userLogin.formGroupLogin.value).subscribe({
       next: (res) => {
         console.log(res);
-        this.router.navigate(['/']);
+        window.location.reload();
       },
       error: (err) => console.log('Login front error ', err)
     })
 
-
+    if(this.acountAccess.isLoggedIn()) {
+      this.router.navigate(['/']);
+    }
   }
 }

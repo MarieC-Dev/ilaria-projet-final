@@ -3,9 +3,9 @@
         <ul class="navigationLeft">
             @for (item of headerNav; track $index) {
                 <li class="navigationItem">
-                    <a 
-                        [routerLink]="item.link" 
-                        routerLinkActive="active" 
+                    <a
+                        [routerLink]="item.link"
+                        routerLinkActive="active"
                         ariaCurrentWhenActive="page"
                         appBurgerMenu
                         (click)="appBurgerMenu.closeMenu()">{{ item.name }}</a>
@@ -14,33 +14,32 @@
         </ul>
 
         <div class="navigationRight">
+            <!--<p>{{ (userStatus | async)?.isAuthenticated }}</p>-->
             <app-search-icon />
 
-            <a 
-                class="btn-transparent"
-                routerLink="/admin/mes-infos" 
-                routerLinkActive="active" 
-                ariaCurrentWhenActive="page">Admin</a>
-            <a 
-                class="btn-transparent"
-                routerLink="/profil/mes-infos" 
-                routerLinkActive="active" 
-                ariaCurrentWhenActive="page">User</a>
-            <a 
-                class="btn-transparent"
-                routerLink="/connexion" 
-                routerLinkActive="active" 
-                ariaCurrentWhenActive="page"
-                appBurgerMenu
-                (click)="appBurgerMenu.closeMenu()">Connexion</a>
-            <a 
-                class="btn-bg btn-bg-red"
-                routerLink="/inscription"
-                routerLinkActive="active" 
-                ariaCurrentWhenActive="page">Inscription</a>
-            
-            <button type="button" 
-                class="burgerMenu" 
+            @if ((userStatus | async)?.isAuthenticated) {
+                <a
+                    class="btn-bg-red"
+                    routerLink="/profil/:id"
+                    routerLinkActive="active"
+                    ariaCurrentWhenActive="page">Mon profil</a>
+            } @else {
+                <a
+                    class="btn-transparent"
+                    routerLink="/connexion"
+                    routerLinkActive="active"
+                    ariaCurrentWhenActive="page"
+                    appBurgerMenu
+                    (click)="appBurgerMenu.closeMenu()">Connexion</a>
+                <a
+                    class="btn-bg btn-bg-red"
+                    routerLink="/inscription"
+                    routerLinkActive="active"
+                    ariaCurrentWhenActive="page">Inscription</a>
+            }
+
+            <button type="button"
+                class="burgerMenu"
                 appBurgerMenu
                 (click)="appBurgerMenu.toggleMenu()">
                 <span></span>
@@ -56,50 +55,50 @@
     <footer>
         <ul class="socialNetworks">
             @for (social of socialNetworksList(); track $index) {
-                <app-social-networks 
+                <app-social-networks
                     [link]="social.href"
                     [pathImg]="social.path"
                     [altImg]="social.altImg" />
             }
         </ul>
-        
+
         <ul class="navigation">
             <li class="navigationItem">
-                <a 
-                    routerLink="/accueil" 
-                    routerLinkActive="active" 
+                <a
+                    routerLink="/accueil"
+                    routerLinkActive="active"
                     ariaCurrentWhenActive="page">Accueil</a>
             </li>
             <li class="navigationItem">
-                <a 
-                    routerLink="/recettes" 
-                    routerLinkActive="active" 
+                <a
+                    routerLink="/recettes"
+                    routerLinkActive="active"
                     ariaCurrentWhenActive="page">Recettes</a>
             </li>
             <li class="navigationItem">
-                <a 
-                    routerLink="/rechercher" 
-                    routerLinkActive="active" 
+                <a
+                    routerLink="/rechercher"
+                    routerLinkActive="active"
                     ariaCurrentWhenActive="page">Rechercher</a>
             </li>
             <li class="navigationItem">
-                <a 
-                    routerLink="/contact" 
-                    routerLinkActive="active" 
+                <a
+                    routerLink="/contact"
+                    routerLinkActive="active"
                     ariaCurrentWhenActive="page">Contact</a>
             </li>
             <li>
-                <a 
+                <a
                     class="btn-transparent"
-                    routerLink="/connexion" 
-                    routerLinkActive="active" 
+                    routerLink="/connexion"
+                    routerLinkActive="active"
                     ariaCurrentWhenActive="page">Connexion</a>
             </li>
             <li>
-                <a 
+                <a
                     class="btn-transparent"
                     routerLink="/inscription"
-                    routerLinkActive="active" 
+                    routerLinkActive="active"
                     ariaCurrentWhenActive="page">Inscription</a>
             </li>
         </ul>

@@ -17,6 +17,8 @@ import {CommonModule} from '@angular/common';
 import {TableListComponent} from '../form-components/table-list/table-list.component';
 import {HttpEventType} from '@angular/common/http';
 import {DatetimeService} from '../../services/datetime.service';
+import {AccountAccessService} from '../../services/account-access.service';
+import {switchMap, tap} from 'rxjs';
 
 @Component({
   selector: 'app-create-edit-recipe-form',
@@ -43,9 +45,15 @@ export class CreateEditRecipeFormComponent implements OnInit{
   errorAddStep = signal('');
   recipeFormStatus = signal('');
   arrayInvalidControl: string[] = [];
+  authorIdValue: number = 0;
   createdDate = inject(DatetimeService);
 
-  constructor(private recipesApiService: RecipesApiService) { }
+  constructor(private accountAccess: AccountAccessService, private recipesApiService: RecipesApiService) {
+    this.accountAccess.isLoggedIn().subscribe({
+      next: (result) => this.authorIdValue = result.user.id,
+      error: (err) => console.log(err)
+    });
+  }
 
   ngOnInit(): void {
     this.recipeForm = new RecipeFormFactory();
@@ -55,6 +63,8 @@ export class CreateEditRecipeFormComponent implements OnInit{
     this.recipeForm.formGroup.statusChanges.subscribe((status) =>
       this.recipeFormStatus.set(status)
     );
+
+    //console.log(this.recipeForm.formGroup.get('authorId')?.value);
   }
 
   getCheckboxValue(value: string) {
@@ -152,14 +162,13 @@ export class CreateEditRecipeFormComponent implements OnInit{
       }
     });
 
+    this.recipeForm.formGroup.get('authorId')?.setValue(this.authorIdValue);
     this.recipeForm.formGroup.get('created')?.setValue(this.createdDate.datetime);
 
-    console.log(this.recipeForm.formGroup.value);
+    this.recipesApiService.createRecipe(this.recipeForm.formGroup.value).subscribe({
+      next: (result) => console.log('Recette créée', result),
+      error: (err) => console.log('Err Front create recipe', err)
+    });
 
-    this.recipesApiService.createRecipe(this.recipeForm.formGroup.value).subscribe((data) => console.log(data));
-    /*{
-      next: (result) => console.log('Recette créée ', result),
-        error: (err) => console.log('Front recipe creation error ', err)
-    }*/
   }
 }

@@ -16,7 +16,7 @@ exports.createRecipe = async (req, res) => {
 
     const result = [];
 
-    console.log(authorId);
+    //console.log(req.body);
 
     try {
         if(
@@ -29,18 +29,18 @@ exports.createRecipe = async (req, res) => {
 
         /* 1. SERVING NUMBER & RECIPE TIME creation */
         const recipeTimeQueries = [
-            [recipeTime.making.type, Number(recipeTime.making.hours), Number(recipeTime.making.minutes)],
-            [recipeTime.cooking.type, recipeTime.cooking.hours ? Number(recipeTime.cooking.hours) : 0, recipeTime.cooking.minutes ? Number(recipeTime.cooking.minutes) : 0],
-            [recipeTime.pause.type, recipeTime.pause.hours ? Number(recipeTime.pause.hours) : 0, recipeTime.pause.minutes ? Number(recipeTime.pause.minutes) : 0],
+            recipeTime.making.type, Number(recipeTime.making.hours), Number(recipeTime.making.minutes),
+            recipeTime.pause.type, Number(recipeTime.pause.hours), Number(recipeTime.pause.minutes),
+            recipeTime.cooking.type, Number(recipeTime.cooking.hours), Number(recipeTime.cooking.minutes),
         ];
 
-        const [servingNumberResult] = db.promise().query(
+        const [servingNumberResult] = await db.query(
             'INSERT INTO ServingNumber (number, servingType) VALUES (?, ?)',
             [servingNumber.number, servingNumber.type]
         );
 
-        const [recipeTypeResult] = db.promise().query(
-            'INSERT INTO TimeTable (type, hours, minutes) VALUES ?',
+        const [recipeTypeResult] = await db.query(
+            'INSERT INTO TimeTable (typeMaking, makingH, makingMin, typePause, pauseH, pauseMin, typeCooking, cookingH, cookingMin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
             recipeTimeQueries
         );
 
@@ -50,39 +50,52 @@ exports.createRecipe = async (req, res) => {
 
         /* 2. RECIPE DATA creation - get servingNumber & recipeTime IDs */
         const recipeDataQueries = [
-            name, description, imageName, imageData, cuisineType, cookingType, servingNumberId, difficulty, 0, recipeTimeId, created
+            name, description, imageName, imageData, cuisineType, cookingType, servingNumberId, difficulty, authorId, recipeTimeId, created
         ];
-        const [recipeDataResult] = db.promise().query(
+        const [recipeDataResult] = await db.query(
             'INSERT INTO RecipeData (name, description, imageName, imageData, cuisineType, cookingType, servingNumberId, difficulty, authorId, recipeTimeId, created) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-            [ recipeDataQueries ]
+            recipeDataQueries
         );
+
         const recipeDataId = recipeDataResult.insertId;
         result.push(recipeDataResult);
         /* ===== */
 
         /* 3. INGREDIENTS LIST & STEPS LIST creation - both get recipeData ID */
-        const [ingredientResult] = db.promise().query(
-            'INSERT INTO Ingredient (quantity, unit, name) VALUES (?, ?, ?)',
-            [ingredientsList[0].quantity, ingredientsList[0].unit, ingredientsList[0].name]
+        const ingredientQueries = ingredientsList.map((item) => [item.quantity, item.unit, item.name]);
+
+        const [ingredientResult] = await db.query(
+            'INSERT INTO Ingredient (quantity, unit, name) VALUES ?',
+            [ingredientQueries]
         );
+
         const ingredientId = ingredientResult.insertId;
 
-        const [ingredientsListResult] = db.promise().query(
+        const [ingredientsListResult] = await db.query(
             'INSERT INTO IngredientsList (recipeId, ingredientId) VALUES (?, ?)',
             [recipeDataId, ingredientId]
         );
+
         const ingredientsListId = ingredientsListResult.insertId;
 
-        const [stepResult] = db.promise().query(
-            'INSERT INTO Step (number, stepName) VALUES (?, ?, ?)',
-            [stepsList[0].number, stepsList[0].stepName]
+        const stepQueries = stepsList.map((item) => [item.stepName]);
+        console.log(stepQueries);
+        const [stepResult] = await db.query(
+            'INSERT INTO Step (stepName) VALUES ?',
+            [stepQueries]
         );
+
         const stepId = stepResult.insertId;
 
-        const [stepsListResult] = db.promise().query(
+        const [stepsListResult] = await db.query(
             'INSERT INTO StepsList (recipeId, stepId) VALUES (?, ?)',
             [recipeDataId, stepId]
         );
+
+        if(!stepsListResult) {
+            return res.status(404).json({ stepsListResult: 'Not found' })
+        }
+
         const stepsListId = stepsListResult.insertId;
 
         return res.status(201).json({
@@ -95,10 +108,8 @@ exports.createRecipe = async (req, res) => {
         });
         /* ===== */
     } catch (error) {
-        res.status(500).json({ recipeErr: 'Erreur lors de la création de la recette ' + error })
+        res.status(500).json({ recipeErr: 'BACK Erreur lors de la création de la recette ' + error })
     }
-
-    console.log(result);
 
     //return res.status(201).json({ msg: 'The recipe is created !', response: req.body })
 }

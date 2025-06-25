@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {catchError, Observable} from 'rxjs';
+import {catchError, Observable, throwError} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +15,11 @@ export class RecipesApiService {
   }
 
   createRecipe(recipe: any): Observable<any> {
-    return this.http.post(`${this.API_URL}/recipes`, recipe)
-      .pipe(
-        catchError((error): any => console.log('recipe api post error :', error))
-      );
+    return this.http.post(`${this.API_URL}/recipes`, recipe).pipe(
+      catchError((error) => {
+        console.log('recipe api post error :', error);
+        return throwError(() => error);
+      })
+    );
   }
 }

@@ -49,6 +49,7 @@ export class RecipeFormFactory {
         stepName: new FormControl<string>(''),
       }),
       stepsList: new FormArray([], [Validators.required, Validators.minLength(1)]),
+      authorId: new FormControl<number>(0, Validators.required),
       created: new FormControl<string>(''),
     });
   }

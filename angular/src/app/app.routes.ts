@@ -22,15 +22,16 @@ export const routes: Routes = [
   { path: 'admin/mes-recettes', component: AdminRecipesPageComponent },
   { path: 'admin/mes-favoris', component: AdminFavoritesPageComponent },
   { path: 'admin/mes-infos', component: AdminPageComponent },
+  { path: 'profil/creer-une-recette', component: CreateRecipesComponent },
   {
-    path: 'profil/:id',
+    path: 'profil/:id/',
     component: ProfilePageComponent,
     canActivate: [accountGuardGuard],
     canActivateChild: [accountGuardGuard],
     children: [
       { path: 'mes-recettes/modifier', component: EditRecipePageComponent },
       { path: 'mes-recettes', component: ProfileRecipesPageComponent },
-      { path: 'creer-une-recette', component: CreateRecipesComponent },
+      /*{ path: 'creer-une-recette', component: CreateRecipesComponent },*/
       { path: 'mes-favoris', component: ProfileFavoritesPageComponent },
     ]
   },

@@ -3,10 +3,10 @@
 
     <form *ngIf="isFavorites()">
         <div class="searchMyfavoritesMyrecipesDiv">
-            <input 
-                type="text" 
-                name="searchMyfavorites" 
-                id="searchMyfavorites" 
+            <input
+                type="text"
+                name="searchMyfavorites"
+                id="searchMyfavorites"
                 placeholder="Rechercher parmi les favoris">
             <button type="button">
                 <app-search-icon />
@@ -18,7 +18,7 @@
     <div *ngIf="isFavorites()" class="myFavoritesDiv">
         <div class="myFavoritesItems">
             @for (fav of favoritesArray(); track fav.id) {
-                <app-recipe-item 
+                <app-recipe-item
                     [id]="fav.id"
                     [picture]="fav.image"
                     [name]="fav.title"
@@ -30,6 +30,8 @@
     </div>
 
     <!-- @If RECIPES : -->
+    <a class="btn-bg-yellow" routerLink="creer">Créer une recette</a>
+
     <table *ngIf="isRecipes()" class="myRecipesTable">
         <thead>
             <tr>

@@ -60,7 +60,7 @@ $mobilePadding: .75rem 1.5rem;
 
     &:hover:not(.btn-disabled) {
         background-color: white;
-        border-color: white;
+        border-color: $thirdColor;
     }
 
     &__border {

@@ -8,10 +8,11 @@ import { COLORS } from '../../icons/colors';
 import { ModifyIconComponent } from "../../icons/modify-icon/modify-icon.component";
 import { DeleteIconComponent } from "../../icons/delete-icon/delete-icon.component";
 import { SearchIconComponent } from "../../icons/search-icon/search-icon.component";
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-myfavorites-myrecipes',
-  imports: [CommonModule, RecipeItemComponent, ChevronDownIconComponent, JsonPipe, ModifyIconComponent, DeleteIconComponent, SearchIconComponent],
+  imports: [CommonModule, RecipeItemComponent, ChevronDownIconComponent, JsonPipe, ModifyIconComponent, DeleteIconComponent, SearchIconComponent, RouterLink],
   templateUrl: './myfavorites-myrecipes.component.html',
   styleUrl: './myfavorites-myrecipes.component.scss'
 })
@@ -26,7 +27,7 @@ export class MyfavoritesMyrecipesComponent {
   recipesArray = input<Array<any>>([]);
   average = inject(RecipeAverageService);
 
-  getAverage(id: number, array: RecipeList) {   
+  getAverage(id: number, array: RecipeList) {
     return this.average.getRecipeAverage(id, array);
   }
 

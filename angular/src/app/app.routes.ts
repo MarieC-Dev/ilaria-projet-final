@@ -28,11 +28,11 @@ export const routes: Routes = [
     canActivate: [accountGuardGuard],
     canActivateChild: [accountGuardGuard],
     children: [
-      { path: 'profil/:id/mes-infos', component: ProfilePageComponent },
       { path: 'profil/:id/mes-recettes/modifier', component: EditRecipePageComponent },
+      { path: 'profil/:id/mes-recettes/creer', component: CreateRecipesComponent },
       { path: 'profil/:id/mes-recettes', component: ProfileRecipesPageComponent },
-      { path: 'profil/:id/creer-une-recette', component: CreateRecipesComponent },
       { path: 'profil/:id/mes-favoris', component: ProfileFavoritesPageComponent },
+      { path: 'profil/:id/mes-infos', component: ProfilePageComponent },
     ]
   },
   { path: 'accueil', component: HomePageComponent },

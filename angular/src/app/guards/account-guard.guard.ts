@@ -10,11 +10,14 @@ export const accountGuardGuard: CanActivateChildFn = (
   const accountAccess: AccountAccessService = inject(AccountAccessService);
   let authenticated: boolean = false;
   const router = inject(Router);
+  let childRouteId = Number(childRoute.paramMap.get('id'));
 
   return accountAccess.isLoggedIn().pipe(
     tap(result => {
-      if(!result.isAuthenticated) {
-        router.navigate(['/unauthorized']);
+      if(childRouteId !== 0 && childRouteId !== null) { //console.log(childRouteId);
+        if(!result.isAuthenticated || result.user.id !== childRouteId) {
+          router.navigate(['/unauthorized']);
+        }
       }
     }),
     map(result => result.isAuthenticated)

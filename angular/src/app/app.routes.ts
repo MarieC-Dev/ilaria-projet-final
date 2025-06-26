@@ -24,15 +24,15 @@ export const routes: Routes = [
   { path: 'admin/mes-infos', component: AdminPageComponent },
   { path: 'profil/creer-une-recette', component: CreateRecipesComponent },
   {
-    path: 'profil/:id/',
-    component: ProfilePageComponent,
+    path: '',
     canActivate: [accountGuardGuard],
     canActivateChild: [accountGuardGuard],
     children: [
-      { path: 'mes-recettes/modifier', component: EditRecipePageComponent },
-      { path: 'mes-recettes', component: ProfileRecipesPageComponent },
-      /*{ path: 'creer-une-recette', component: CreateRecipesComponent },*/
-      { path: 'mes-favoris', component: ProfileFavoritesPageComponent },
+      { path: 'profil/:id', component: ProfilePageComponent },
+      { path: 'profil/:id/mes-recettes/modifier', component: EditRecipePageComponent },
+      { path: 'profil/:id/mes-recettes', component: ProfileRecipesPageComponent },
+      { path: 'profil/:id/creer-une-recette', component: CreateRecipesComponent },
+      { path: 'profil/:id/mes-favoris', component: ProfileFavoritesPageComponent },
     ]
   },
   { path: 'accueil', component: HomePageComponent },

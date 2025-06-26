@@ -69,35 +69,47 @@ exports.createRecipe = async (req, res) => {
             [ingredientQueries]
         );
 
-        const ingredientId = ingredientResult.insertId;
+        let ingredientId = ingredientResult.insertId;
+
+        const ingredientsIdsArray = [];
+
+        for(let i = 0; i < ingredientQueries.length; i++) {
+            ingredientsIdsArray.push(ingredientId++);
+        }
 
         const [ingredientsListResult] = await db.query(
-            'INSERT INTO IngredientsList (recipeId, ingredientId) VALUES (?, ?)',
-            [recipeDataId, ingredientId]
+            'INSERT INTO IngredientsList (recipeId, ingredientId) VALUES ?',
+            [ingredientsIdsArray.map((id) => [recipeDataId, id])]
         );
 
         const ingredientsListId = ingredientsListResult.insertId;
 
+        console.log('before steps');
+
+        // steps
         const stepQueries = stepsList.map((item) => [item.stepName]);
-        console.log(stepQueries);
+
         const [stepResult] = await db.query(
             'INSERT INTO Step (stepName) VALUES ?',
             [stepQueries]
         );
 
-        const stepId = stepResult.insertId;
+        let stepId = stepResult.insertId;
+
+        let stepsIdsArray = [];
+
+        for(let i = 0; i < stepQueries.length; i++) {
+            stepsIdsArray.push(stepId++);
+        }
 
         const [stepsListResult] = await db.query(
-            'INSERT INTO StepsList (recipeId, stepId) VALUES (?, ?)',
-            [recipeDataId, stepId]
+            'INSERT INTO StepsList (recipeId, stepId) VALUES ?',
+            [stepsIdsArray.map((id) => [recipeDataId, id])]
         );
-
-        if(!stepsListResult) {
-            return res.status(404).json({ stepsListResult: 'Not found' })
-        }
 
         const stepsListId = stepsListResult.insertId;
 
+        /* 4. RESULT - creation new recipe */
         return res.status(201).json({
             msg: 'The recipe is created !',
             servingNumberId,

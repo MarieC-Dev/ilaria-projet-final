@@ -8,13 +8,13 @@
             }
         </ul>
     </div>
-    
+
     <div class="recipeSteps">
         <h3>Étapes de préparation</h3>
 
         <div class="stepsContainer">
             @for (step of recipeSteps(); track step.id) {
-                <app-recipe-step 
+                <app-recipe-step
                     [nbStep]="getNumberStep(step.id, recipeSteps())"
                     [description]="step.description" />
             }
@@ -47,7 +47,7 @@
 
             <ul class="socialNetworks">
                 @for (social of socialNetworksList(); track $index) {
-                    <app-social-networks 
+                    <app-social-networks
                         [link]="social.href"
                         [pathImg]="social.path"
                         [altImg]="social.altImg" />
@@ -55,7 +55,7 @@
             </ul>
         </div>
 
-        <div class="wrapperNavImage" 
+        <div class="wrapperNavImage"
             *ngIf="recipe.steps.length >= 5 && recipeOpinions()!.length > 1">
             <img src="recipe-detail-image.jpg" alt="détail de la recette image">
         </div>
@@ -66,34 +66,19 @@
     <div class="recipeComments">
         <h3>Commentaires</h3>
 
+        <a routerLink="commentaire" class="btn-bg-yellow">Écrire un commentaire</a>
+
         <div class="commentsContainer" *ngIf="recipeOpinions()!.length > 0">
             @for (opinion of recipeOpinions(); track opinion.id) {
                 <div class="commentAndAnswers">
-                    <div>
-                        <app-recipe-comment
-                            [classes]="getClassComment(recipe.author.username)"
-                            [ids]="'commentId' + opinion.id"
-                            [picture]="opinion.author.picture"
-                            [username]="opinion.author.username"
-                            [date]="opinion.created"
-                            [note]="opinion.starScore"
-                            [text]="opinion.text"
-                            [answersArray]="opinion.answers.length" />
-                    </div>
-
-                    @if(opinion.answers.length > 0) {
-                        <div class="answersList" [id]="'answersList' + opinion.id"> 
-                            @for (answer of opinion.answers; track answer.id) {
-                                <app-recipe-comment
-                                    [classes]="getClassComment(recipe.author.username, answer.author.username)"
-                                    [ids]="'answerId' + answer.id"
-                                    [picture]="answer.author.picture"
-                                    [username]="answer.author.username"
-                                    [date]="answer.created"
-                                    [text]="answer.text" />
-                            }
-                        </div>
-                    }
+                    <app-recipe-comment
+                        [classes]="getClassComment(recipe.author.username)"
+                        [ids]="'commentId' + opinion.id"
+                        [picture]="opinion.author.picture"
+                        [username]="opinion.author.username"
+                        [date]="opinion.created"
+                        [note]="opinion.starScore"
+                        [text]="opinion.text" />
                 </div>
             }
         </div>
@@ -119,7 +104,7 @@
 
         <ul class="socialNetworks">
             @for (social of socialNetworksList(); track $index) {
-                <app-social-networks 
+                <app-social-networks
                     [link]="social.href"
                     [pathImg]="social.path"
                     [altImg]="social.altImg" />

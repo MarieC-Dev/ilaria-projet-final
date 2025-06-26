@@ -7,14 +7,16 @@ import { RecipeAverageService } from '../../../services/recipe-average.service';
 import { RECIPE_LIST } from '../../../lists/recipe-list.fake';
 import { commonSocial } from '../../../lists/social-networks-list';
 import { CommonModule } from '@angular/common';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-recipe-details',
   imports: [
-    RecipeStepComponent, 
-    RecipeCommentComponent, 
-    SocialNetworksComponent, 
-    CommonModule
+    RecipeStepComponent,
+    RecipeCommentComponent,
+    SocialNetworksComponent,
+    CommonModule,
+    RouterLink
   ],
   templateUrl: './recipe-details.component.html',
   styleUrl: './recipe-details.component.scss'
@@ -23,7 +25,7 @@ export class RecipeDetailsComponent {
   recipeAverage = inject(RecipeAverageService);
   recipesList = signal(RECIPE_LIST);
   recipe = this.recipesList()[0];
-  
+
   recipeSteps = input.required<RecipeStep[]>();
 
   recipeOpinions = input<RecipeComment[]>();

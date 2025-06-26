@@ -3,6 +3,10 @@
 .wrapperCreateRecipe {
     padding: 5rem 0;
     background-color: $lightGrey;
+
+    button.btn-bg-yellow {
+        margin: 0 auto 3rem auto;
+    }
 }
 
 .createEditRecipe {

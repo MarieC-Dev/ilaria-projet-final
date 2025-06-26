@@ -24,15 +24,16 @@ export const routes: Routes = [
   { path: 'admin/mes-infos', component: AdminPageComponent },
   { path: 'profil/creer-une-recette', component: CreateRecipesComponent },
   {
-    path: '',
+    path: 'profil/:id',
+    canActivate: [accountGuardGuard],
     canActivateChild: [accountGuardGuard],
     children: [
-      { path: 'profil/:id/mes-recettes/modifier', component: EditRecipePageComponent },
-      { path: 'profil/:id/mes-recettes/creer', component: CreateRecipesComponent },
-      { path: 'profil/:id/mes-recettes', component: ProfileRecipesPageComponent },
-      { path: 'profil/:id/mes-favoris', component: ProfileFavoritesPageComponent },
-      { path: 'profil/:id/mes-infos', component: ProfilePageComponent },
-    ]
+      { path: 'mes-recettes/modifier', component: EditRecipePageComponent },
+      { path: 'mes-recettes/creer', component: CreateRecipesComponent },
+      { path: 'mes-recettes', component: ProfileRecipesPageComponent },
+      { path: 'mes-favoris', component: ProfileFavoritesPageComponent },
+      { path: 'mes-infos', component: ProfilePageComponent },
+    ],
   },
   { path: 'accueil', component: HomePageComponent },
   { path: 'recettes', component: RecipeDetailsPage },
@@ -42,5 +43,6 @@ export const routes: Routes = [
   { path: 'rechercher', component: SearchPageComponent },
   { path: 'unauthorized', component: UnauthorizedComponent },
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
+  { path: 'profil', component: NotFoundPageComponent },
   { path: '**', component: NotFoundPageComponent },
 ];

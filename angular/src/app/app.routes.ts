@@ -25,7 +25,6 @@ export const routes: Routes = [
   { path: 'profil/creer-une-recette', component: CreateRecipesComponent },
   {
     path: '',
-    canActivate: [accountGuardGuard],
     canActivateChild: [accountGuardGuard],
     children: [
       { path: 'profil/:id/mes-recettes/modifier', component: EditRecipePageComponent },

@@ -14,13 +14,12 @@
         </ul>
 
         <div class="navigationRight">
-            <!--<p>{{ (userStatus | async)?.isAuthenticated }}</p>-->
             <app-search-icon />
 
             @if ((userStatus | async)?.isAuthenticated) {
                 <a
                     class="btn-bg-red"
-                    routerLink="/profil/:id"
+                    [routerLink]="'/profil/' + (userStatus | async)?.user.id + '/mes-infos'"
                     routerLinkActive="active"
                     ariaCurrentWhenActive="page">Mon profil</a>
             } @else {

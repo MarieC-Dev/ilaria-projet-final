@@ -7,17 +7,14 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { ProfileIconComponent } from '../../components/icons/profile-icon/profile-icon.component';
 import { HeartIconComponent } from '../../components/icons/heart-icon/heart-icon.component';
 import { RecipeIconComponent } from '../../components/icons/recipe-icon/recipe-icon.component';
+import {HeaderProfileComponent} from '../../layout/header-profile/header-profile.component';
 
 @Component({
   selector: 'app-profile-page',
   imports: [
-    FormInputComponent, 
-    RecipeItemComponent, 
-    RouterLink, 
-    RouterLinkActive,
-    ProfileIconComponent,
-    HeartIconComponent,
-    RecipeIconComponent
+    FormInputComponent,
+    RecipeItemComponent,
+    HeaderProfileComponent
   ],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.scss'
@@ -27,7 +24,7 @@ export class ProfilePageComponent {
   lastRecipe = this.recipesList().slice(-1)[0];
   recipeAverage = inject(RecipeAverageService);
 
-  getRecipeAverage(id: number) {   
+  getRecipeAverage(id: number) {
     return this.recipeAverage.getRecipeAverage(id, this.recipesList().slice(-1));
   }
 }

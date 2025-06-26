@@ -1,26 +1,26 @@
 <div class="profilePage adminPage">
     <section class="profileLinksSection">
         <div class="profileLinksList">
-            <a 
+            <a
                 class="btn-bg-darkGrey btn-bg-darkGrey__profile"
-                routerLink="/admin/mes-infos" 
-                routerLinkActive="btn-bg-darkGrey__profile--active" 
+                routerLink="/admin/mes-infos"
+                routerLinkActive="btn-bg-darkGrey__profile--active"
                 ariaCurrentWhenActive="page">
                 <app-profile-icon />
                 <p>Mon profil</p>
             </a>
-            <a 
+            <a
                 class="btn-bg-darkGrey btn-bg-darkGrey__profile"
-                routerLink="/admin/mes-favoris" 
-                routerLinkActive="btn-bg-darkGrey__profile--active" 
+                routerLink="/admin/mes-favoris"
+                routerLinkActive="btn-bg-darkGrey__profile--active"
                 ariaCurrentWhenActive="page">
                 <app-heart-icon />
                 <p>Mes favoris</p>
             </a>
-            <a 
+            <a
                 class="btn-bg-darkGrey btn-bg-darkGrey__profile"
-                routerLink="/admin/mes-recettes" 
-                routerLinkActive="btn-bg-darkGrey__profile--active" 
+                routerLink="/admin/mes-recettes"
+                routerLinkActive="btn-bg-darkGrey__profile--active"
                 ariaCurrentWhenActive="page">
                 <app-recipe-icon />
                 <p>Mes recettes</p>
@@ -41,62 +41,38 @@
                 <input type="file" name="profileImageInput" id="profileImageInput" [required]="false">
             </div>
             <!-- Username -->
-            <app-form-input 
-                label="Username" 
-                id="profileUsername" 
-                type="text" 
+            <app-form-input
+                label="Username"
+                id="profileUsername"
+                type="text"
                 inputId="profileUsernameInput"
                 value="Toto le cuisto"
                 [required]="true" />
 
             <!-- Email -->
-            <app-form-input 
-                label="Email" 
+            <app-form-input
+                label="Email"
                 id="profileEmail"
-                type="email" 
+                type="email"
                 inputId="profileEmailInput"
                 value="toto-le-cuisto@email.com"
                 [required]="true" />
 
             <!-- Password -->
-            <app-form-input 
-                label="Mot de passe" 
-                id="profilePassword" 
-                type="password" 
+            <app-form-input
+                label="Mot de passe"
+                id="profilePassword"
+                type="password"
                 inputId="profilePasswordInput"
                 value="azertyuiop12345"
                 [required]="true" />
 
             <!-- Si une valeur d'un input a changé -> disabled = false -->
-            <button type="submit" 
-                class="btn-bg-red btn-disabled" 
+            <button type="submit"
+                class="btn-bg-red btn-disabled"
                 disabled="disabled">
                 Modifier
             </button>
         </form>
-    </section>
-
-    <section class="myCreatedRecipesSection">
-        <!-- TODO 
-            If recipeList.length > 1 -> last recipe 
-            Else -> recipe
-            Return "Vous n'avez créée aucune recette" if empty
-        -->
-        <h3>Mes recettes</h3>
-
-        <div class="myCreatedRecipes">
-            <app-recipe-item 
-                [id]="lastRecipe.id" 
-                [picture]="lastRecipe.image"
-                [name]="lastRecipe.title"
-                [average]="getRecipeAverage(lastRecipe.id)"
-                [numberOfVotes]="lastRecipe.opinions?.length"
-                [authorName]="lastRecipe.author.username" />
-            
-            <button type="button" class="btn-bg-yellow">
-                <a href="">Voir mes autres recettes</a>
-            </button>
-
-        </div>
     </section>
 </div>

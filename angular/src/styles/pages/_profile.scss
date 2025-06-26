@@ -32,7 +32,7 @@
     @media screen and (max-width: 767px) {
         section:not(section:first-child) {
             padding: 2rem 1rem;
-        } 
+        }
     }
 
     .profileLinksSection {
@@ -45,13 +45,13 @@
             display: flex;
             flex-direction: row;
             justify-content: center;
-            
+
             @media screen and (max-width: 767px) {
                 width: 100%;
                 justify-content: space-around;
                 align-items: center;
             }
-            
+
             .btn-bg-darkGrey__profile {
                 width: max-content;
                 display: flex;
@@ -106,7 +106,7 @@
             @media screen and (max-width: 767px) {
                 width: 100%;
             }
-            
+
             .headerProfile {
                 display: flex;
                 flex-direction: column;
@@ -147,52 +147,16 @@
 
         .btn-bg-yellow {
             margin: 0 auto;
-            
-            &:hover {
-                border-color: $thirdColor;
-            }
-        }
-    }
-
-    .myCreatedRecipesSection {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        h3 {
-            margin-bottom: 2rem;
-
-            @media screen and (max-width: 767px) {
-                font-size: 24px;
-            }
-        }
-
-        .recipeItem {
-            max-width: 40%;
-            margin: 0 auto;
-
-            @media screen and (max-width: 767px) {
-                width: 100%;
-                max-width: initial;
-            }
-        }
-
-        button {
-            display: flex;
 
             &:hover {
                 border-color: $thirdColor;
             }
-        }
-
-        .recipe, button {
-            margin: 2rem auto 0 auto;
         }
     }
 }
 
-app-profile-icon, 
-app-heart-icon, 
+app-profile-icon,
+app-heart-icon,
 app-recipe-icon {
     display: flex;
 }

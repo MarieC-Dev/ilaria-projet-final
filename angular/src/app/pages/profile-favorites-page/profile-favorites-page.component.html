@@ -1,35 +1,10 @@
 <div class="profilePage">
     <section class="profileLinksSection">
-        <div class="profileLinksList">
-            <a 
-                class="btn-bg-darkGrey btn-bg-darkGrey__profile"
-                routerLink="/profil/mes-infos" 
-                routerLinkActive="btn-bg-darkGrey__profile--active" 
-                ariaCurrentWhenActive="page">
-                <app-profile-icon />
-                <p>Mon profil</p>
-            </a>
-            <a 
-                class="btn-bg-darkGrey btn-bg-darkGrey__profile"
-                routerLink="/profil/mes-favoris" 
-                routerLinkActive="btn-bg-darkGrey__profile--active" 
-                ariaCurrentWhenActive="page">
-                <app-heart-icon />
-                <p>Mes favoris</p>
-            </a>
-            <a 
-                class="btn-bg-darkGrey btn-bg-darkGrey__profile"
-                routerLink="/profil/mes-recettes" 
-                routerLinkActive="btn-bg-darkGrey__profile--active" 
-                ariaCurrentWhenActive="page">
-                <app-recipe-icon />
-                <p>Mes recettes</p>
-            </a>
-        </div>
+        <app-header-profile />
     </section>
 
-    <app-myfavorites-myrecipes 
-        [isFavorites]="true" 
+    <app-myfavorites-myrecipes
+        [isFavorites]="true"
         [isRecipes]="false"
         [favoritesArray]="favoritesList()"
         title="Mes favoris" />

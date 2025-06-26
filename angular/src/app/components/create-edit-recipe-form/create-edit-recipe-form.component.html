@@ -301,6 +301,7 @@
         <p class="errorMessage" *ngIf="errorAddStep() !== ''">{{ errorAddStep() }}</p>
 
         <app-table-list
+            class="stepsTable"
             typeTable="step"
             [headList]="tableHeadStep"
             [bodyList]="sortedStepsList"

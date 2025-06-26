@@ -59,3 +59,8 @@ app-table-list {
         justify-content: center;
     }
 }
+
+.stepsTable table thead th:nth-child(2),
+.stepsTable table tbody td:nth-child(2) {
+    width: 90%;
+}

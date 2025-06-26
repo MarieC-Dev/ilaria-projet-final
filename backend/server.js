@@ -10,8 +10,7 @@ require("dotenv").config();
 
 const PORT = 3000;
 const db = require('./middlewares/db_connection.js');
-const { getAllRecipes } = require("./routes/recipes");
-const { createRecipe } = require("./routes/recipes");
+const { getAllRecipes, createRecipe, updateRecipe, deleteRecipe, getOneRecipe} = require("./routes/recipes");
 const usersRoute = require("./routes/users");
 const login = require("./routes/login");
 
@@ -79,7 +78,10 @@ const uploadImg = multer({
 app.use('/users', usersRoute);
 
 app.get('/recipes', getAllRecipes);
+app.get('/recipes/:id', getOneRecipe);
 app.post('/recipes', uploadImg.single('create-recipe-picture'), createRecipe);
+app.put('/recipes/:id', uploadImg.single('create-recipe-picture'), updateRecipe);
+app.delete('/recipes/:id', deleteRecipe);
 
 app.use('/login', login);
 

@@ -1,0 +1,61 @@
+<div class="wrapperRecipeCommentForm">
+    <section class="recipeCommentForm">
+        <button type="button" class="btn-bg-yellow" (click)="goBack()">
+            Retour
+        </button>
+
+        <h2>Écrire un commentaire</h2>
+
+        <form
+            class="createRecipeForm"
+            [formGroup]="commentForm.formGroup"
+            (ngSubmit)="onSubmit()">
+
+            <div class="formInputDiv" id="recipeNoteDiv">
+                <label>
+                    Notez la recette : <span style="color: #EB4137">*</span>
+                </label>
+
+                <div class="wrapperRecipeNoteCheckbox">
+                    @for (noteItem of noteCheckboxItem; track noteItem.value) {
+                        <button type="button" class="recipeNoteCheckbox" (click)="onCheckStars(noteItem)">
+                            <div [class]="noteItem.checked ? 'starIcon starChecked' : 'starIcon'">
+                                <app-star-icon />
+                            </div>
+
+                            <div [class]="noteItem.checked ? 'starBorderIcon hideStar' : 'starBorderIcon'">
+                                <app-star-border-icon />
+                            </div>
+
+                            <input type="checkbox"
+                                   [id]="noteItem.checkboxName"
+                                   [name]="noteItem.checkboxName"
+                                   placeholder="Titre de la recette"
+                                   [value]="noteItem.value"
+                                   [checked]="noteItem.checked"
+                                   (click)="handleCheckbox($event)"
+                            />
+                        </button>
+                    }
+                </div>
+            </div>
+
+            <div class="formInputDiv" id="recipeCommentDiv">
+                <label>
+                    Commentez :
+                </label>
+                <textarea name="" id="" rows="5"></textarea>
+            </div>
+
+            <button
+                type="submit"
+                [class]="commentForm.formGroup.get('note')?.value === 0 ? 'btn-disabled btn-bg-red' : 'btn-bg-red'"
+                [disabled]="commentForm.formGroup.get('note')?.value === 0">
+                Soumettre
+            </button>
+        </form>
+    </section>
+</div>
+
+
+

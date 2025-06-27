@@ -1,0 +1,48 @@
+@use '../utils/variables' as *;
+
+.recipeCommentForm {
+    .wrapperRecipeNoteCheckbox {
+        display: flex;
+
+        .recipeNoteCheckbox {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 .25rem;
+
+            svg {
+                width: auto;
+                height: 2.5rem;
+            }
+
+            .starIcon svg {
+                fill: $thirdColor;
+                position: absolute;
+                z-index: 3;
+                transform: translateY(-22px);
+                opacity: 0;
+            }
+            .starIcon.starChecked svg {
+                opacity: 1;
+            }
+
+            .starBorderIcon svg {
+                fill: $darkGrey;
+                position: relative;
+                z-index: 2;
+                opacity: 1;
+            }
+            .starBorderIcon.hideStar svg {
+                opacity: 0;
+            }
+
+            input {
+                position: absolute;
+                z-index: 1;
+                opacity: 0;
+            }
+        }
+    }
+}

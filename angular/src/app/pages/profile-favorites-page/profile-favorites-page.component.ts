@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { MyfavoritesMyrecipesComponent } from "../../components/sections/myfavorites-myrecipes/myfavorites-myrecipes.component";
+import { MyfavoritesMyrecipesComponent } from "../../components/myfavorites-myrecipes/myfavorites-myrecipes.component";
 import { RECIPE_LIST } from '../../lists/recipe-list.fake';
 import { HeartIconComponent } from "../../components/icons/heart-icon/heart-icon.component";
 import { ProfileIconComponent } from "../../components/icons/profile-icon/profile-icon.component";

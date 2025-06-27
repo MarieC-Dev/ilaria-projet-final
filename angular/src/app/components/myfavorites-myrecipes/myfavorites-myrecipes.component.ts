@@ -1,13 +1,13 @@
 import { CommonModule, JsonPipe } from '@angular/common';
 import { Component, inject, input, signal } from '@angular/core';
-import { RecipeItemComponent } from '../../recipe-item/recipe-item.component';
-import { RecipeAverageService } from '../../../services/recipe-average.service';
-import { RecipeList } from '../../../models/recipe.model';
-import { ChevronDownIconComponent } from "../../icons/chevron-down-icon/chevron-down-icon.component";
-import { COLORS } from '../../icons/colors';
-import { ModifyIconComponent } from "../../icons/modify-icon/modify-icon.component";
-import { DeleteIconComponent } from "../../icons/delete-icon/delete-icon.component";
-import { SearchIconComponent } from "../../icons/search-icon/search-icon.component";
+import { RecipeItemComponent } from '../recipe-item/recipe-item.component';
+import { RecipeAverageService } from '../../services/recipe-average.service';
+import { RecipeList } from '../../models/recipe.model';
+import { ChevronDownIconComponent } from "../icons/chevron-down-icon/chevron-down-icon.component";
+import { COLORS } from '../icons/colors';
+import { ModifyIconComponent } from "../icons/modify-icon/modify-icon.component";
+import { DeleteIconComponent } from "../icons/delete-icon/delete-icon.component";
+import { SearchIconComponent } from "../icons/search-icon/search-icon.component";
 import {RouterLink} from '@angular/router';
 
 @Component({

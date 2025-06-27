@@ -1,6 +1,6 @@
 import { Component, inject, input, InputSignal, signal } from '@angular/core';
 import { RecipeStepComponent } from '../../recipe-step/recipe-step.component';
-import { RecipeCommentComponent } from '../../recipe-comment/recipe-comment.component';
+import { RecipeCommentComponent } from '../../recipe-comment-component/recipe-comment.component';
 import { SocialNetworksComponent } from '../../social-networks/social-networks.component';
 import { Ingredient, RecipeComment, RecipeStep, RecipeTag } from '../../../models/recipe.model';
 import { RecipeAverageService } from '../../../services/recipe-average.service';

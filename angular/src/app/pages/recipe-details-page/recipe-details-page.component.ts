@@ -4,9 +4,9 @@ import { CommonModule, JsonPipe } from '@angular/common';
 import { RecipeItemTimeComponent } from '../../components/recipe-item-time/recipe-item-time.component';
 import { RecipeAverageService } from '../../services/recipe-average.service';
 import { commonSocial } from '../../lists/social-networks-list';
-import { RecipePresentationComponent } from '../../components/sections/recipe-presentation/recipe-presentation.component';
-import { RecipeDetailsComponent } from '../../components/sections/recipe-details/recipe-details.component';
-import { OtherRecipesComponent } from '../../components/sections/other-recipes/other-recipes.component';
+import { RecipePresentationComponent } from '../../components/recipe-sections/recipe-presentation/recipe-presentation.component';
+import { RecipeDetailsComponent } from '../../components/recipe-sections/recipe-details/recipe-details.component';
+import { OtherRecipesComponent } from '../../components/recipe-sections/other-recipes/other-recipes.component';
 
 @Component({
   selector: 'app-recipe-details-page',

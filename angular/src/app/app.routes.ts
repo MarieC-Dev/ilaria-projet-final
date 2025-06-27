@@ -28,6 +28,12 @@ export const routes: Routes = [
   { path: 'admin/mes-infos', component: AdminPageComponent },
   { path: 'profil/creer-une-recette', component: CreateRecipesComponent },
   {
+    path: 'recettes/commentaire',
+    component: RecipeCommentPageComponent,
+    canActivate: [accountGuardGuard]
+  },
+  /*{ path: 'recettes/:id/commentaire', component: RecipeCommentPageComponent },*/
+  {
     path: 'profil/:id',
     canActivate: [accountGuardGuard],
     canActivateChild: [accountGuardGuard],

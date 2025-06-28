@@ -21,13 +21,40 @@ exports.getOneRecipe = async (req, res) => {
 }
 
 exports.createRecipe = async (req, res) => {
-    let {
+    /*let {
         name, description, imageName, imageData, cuisineType, cookingType, servingNumber, difficulty, recipeTime, ingredientsList, stepsList, authorId, created
+    } = req.body;*/
+    let {
+        name, description, imageName, imageData, cuisineType, cookingType, difficulty, ingredientsList, stepsList, authorId, created
     } = req.body;
+
+    const servingNumber = {
+        number: req.body['servingNumber.number'],
+        type: req.body['servingNumber.type'],
+    };
+
+    const recipeTime = {
+        making: {
+            type: req.body['recipeTime.making.type'],
+            hours: req.body['recipeTime.making.hours'],
+            minutes: req.body['recipeTime.making.minutes'],
+        },
+        cooking: {
+            type: req.body['recipeTime.cooking.type'],
+            hours: req.body['recipeTime.cooking.hours'],
+            minutes: req.body['recipeTime.cooking.minutes'],
+        },
+        pause: {
+            type: req.body['recipeTime.pause.type'],
+            hours: req.body['recipeTime.pause.hours'],
+            minutes: req.body['recipeTime.pause.minutes'],
+        }
+    };
 
     const result = [];
 
-    //console.log(req.body);
+    console.log('BODY : ', req.body);
+    console.log('FILE response : ', req.file);
 
     try {
         if(

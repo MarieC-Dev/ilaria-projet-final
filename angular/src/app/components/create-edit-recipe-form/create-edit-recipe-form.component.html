@@ -1,5 +1,8 @@
 <form
+    action="http://localhost:3000/recipes"
+    method="post"
     class="createRecipeForm"
+    enctype="multipart/form-data"
     [formGroup]="recipeForm.formGroup"
     (ngSubmit)="onSubmit()">
     <!-- Title -->
@@ -36,15 +39,16 @@
 
     <!-- Ajouter une image -->
     <div class="formInputDiv" id="createRecipeImgDiv">
-        <label for="createRecipeImg">
+        <label for="recipe-image">
             Ajouter une image :
         </label>
 
         <input type="file"
-            id="createRecipeImg"
-            name="createRecipeImg"
+            id="recipe-image"
+            name="recipe-image"
             placeholder="Ajouter une image"
-            formControlName="imageName" />
+            (change)="onFileSelected($event)" />
+        <!-- formControlName="imageName" img.setAttribute('src', url + 'uploads/' + user.userFileName); -->
     </div>
 
     <!-- Types de cuisine -->

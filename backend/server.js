@@ -14,7 +14,18 @@ const { getAllRecipes, createRecipe, updateRecipe, deleteRecipe, getOneRecipe} =
 const usersRoute = require("./routes/users");
 const login = require("./routes/login");
 
-const { authMiddleware } = require("./middlewares/authMiddleware");
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/uploads', express.static('uploads'));
+
+app.use(cors({
+  origin: 'http://localhost:4200',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+}));
 
 // Session store
 const sessionStore = new MySQLStore({}, db);
@@ -33,54 +44,38 @@ app.use(session({
   },
 }));
 
-app.use(express.json());
-app.use(cors({
-  origin: 'http://localhost:4200',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-}));
-
-app.use(express.urlencoded({ extended: true }));
-//app.use(express.static('public'));
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // dossier de destination
+    // chemin absolu vers le dossier uploads
+    cb(null, path.join(__dirname, 'uploads'));
   },
   filename: function (req, file, cb) {
-    // Renomme le fichier pour éviter les doublons
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
     const ext = path.extname(file.originalname);
-    cb(null, file.fieldname + '-' + uniqueSuffix + ext);
+    const baseName = path.basename(file.originalname, ext).replace(/\s+/g, '_');
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, baseName + '-' + uniqueSuffix + ext);
   }
 });
 
 // Filtrage des fichiers (optionnel)
-const fileFilter = (req, file, cb) => {
+/*const fileFilter = (req, file, cb) => {
   // Accepte uniquement les fichiers images
   if (file.mimetype.startsWith('image/')) {
     cb(null, true);
   } else {
     cb(new Error('Seules les images sont autorisées !'), false);
   }
-};
+};*/
 
 // Initialisation de multer
-const uploadImg = multer({
-  storage: storage,
-  fileFilter: fileFilter,
-  limits: { fileSize: 5 * 1024 * 1024 } // Limite à 5MB
-});
+const uploadImg = multer({ storage: storage });
 
 app.use('/users', usersRoute);
 
 app.get('/recipes', getAllRecipes);
 app.get('/recipes/:id', getOneRecipe);
-app.post('/recipes', uploadImg.single('create-recipe-picture'), createRecipe);
-app.put('/recipes/:id', uploadImg.single('create-recipe-picture'), updateRecipe);
+app.post('/recipes', uploadImg.single('recipe-image'), createRecipe);
+app.put('/recipes/:id', uploadImg.single('recipe-image'), updateRecipe);
 app.delete('/recipes/:id', deleteRecipe);
 
 app.use('/login', login);

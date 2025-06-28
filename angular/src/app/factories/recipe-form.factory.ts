@@ -10,7 +10,7 @@ export class RecipeFormFactory {
       name: new FormControl<string>('', [Validators.required, Validators.minLength(4)]),
       description: new FormControl<string>(''),
       imageName: new FormControl<string>(''),
-      imageData: new FormControl<string>(''),
+      imageData: new FormControl(),
       cuisineType: new FormControl<string>('', Validators.required),
       cookingType: new FormControl<string>('', Validators.required),
       servingNumber: new FormGroup({

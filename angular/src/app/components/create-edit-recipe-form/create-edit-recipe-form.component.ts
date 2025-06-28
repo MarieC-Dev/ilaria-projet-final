@@ -47,6 +47,7 @@ export class CreateEditRecipeFormComponent implements OnInit{
   arrayInvalidControl: string[] = [];
   authorIdValue: number = 0;
   createdDate = inject(DatetimeService);
+  selectedImage: File | null = null;
 
   constructor(private accountAccess: AccountAccessService, private recipesApiService: RecipesApiService) {
     this.accountAccess.isLoggedIn().subscribe({
@@ -153,7 +154,74 @@ export class CreateEditRecipeFormComponent implements OnInit{
   }
   /* ===== */
 
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+
+    if (input.files && input.files.length > 0) {
+      const formData = new FormData();
+      this.selectedImage = input.files[0];
+      //console.log('Image sélectionnée :', this.selectedImage);
+
+      this.recipeForm.formGroup.get('imageName')?.setValue(this.selectedImage.name);
+      this.recipeForm.formGroup.get('imageData')?.setValue([this.selectedImage]);
+
+      formData.append('recipe-image', this.selectedImage);
+    }
+  }
+
+  buildFormDataFromFormGroup(formGroup: FormGroup, file: File| any): FormData {
+    const formData = new FormData();
+
+    // Champs simples
+    formData.append('name', formGroup.get('name')?.value);
+    formData.append('description', formGroup.get('description')?.value);
+    formData.append('cuisineType', formGroup.get('cuisineType')?.value);
+    formData.append('cookingType', formGroup.get('cookingType')?.value);
+    formData.append('difficulty', formGroup.get('difficulty')?.value);
+    formData.append('authorId', formGroup.get('authorId')?.value);
+    formData.append('created', formGroup.get('created')?.value);
+
+    // Image
+    if (file) {
+      formData.append('recipe-image', file); // ce nom doit correspondre à multer.single('recipe-image')
+      formData.append('imageName', file.name);
+    }
+
+    // servingNumber
+    const servingNumber = formGroup.get('servingNumber') as FormGroup;
+    formData.append('servingNumber.number', servingNumber.get('number')?.value);
+    formData.append('servingNumber.type', servingNumber.get('type')?.value);
+
+    // recipeTime
+    const recipeTime = formGroup.get('recipeTime') as FormGroup;
+    ['making', 'cooking', 'pause'].forEach(section => {
+      const timeGroup = recipeTime.get(section) as FormGroup;
+      formData.append(`recipeTime.${section}.type`, timeGroup.get('type')?.value);
+      formData.append(`recipeTime.${section}.hours`, timeGroup.get('hours')?.value || '0');
+      formData.append(`recipeTime.${section}.minutes`, timeGroup.get('minutes')?.value || '0');
+    });
+
+    // ingredientsList
+    const ingredientsList = formGroup.get('ingredientsList') as FormArray;
+    ingredientsList.controls.forEach((group: any, i) => {
+      formData.append(`ingredientsList[${i}][quantity]`, group.get('quantity')?.value);
+      formData.append(`ingredientsList[${i}][unit]`, group.get('unit')?.value);
+      formData.append(`ingredientsList[${i}][name]`, group.get('name')?.value);
+    });
+
+    // stepsList
+    const stepsList = formGroup.get('stepsList') as FormArray;
+    stepsList.controls.forEach((group: any, i) => {
+      formData.append(`stepsList[${i}][stepName]`, group.get('stepName')?.value);
+    });
+
+    return formData;
+  }
+
   onSubmit() {
+    this.recipeForm.formGroup.get('authorId')?.setValue(this.authorIdValue);
+    this.recipeForm.formGroup.get('created')?.setValue(this.createdDate.datetime);
+
     Object.keys(this.recipeForm.formGroup.controls).forEach(ctrl => {
       const control = this.recipeForm.formGroup.get(ctrl) as FormControl;
 
@@ -162,10 +230,13 @@ export class CreateEditRecipeFormComponent implements OnInit{
       }
     });
 
-    this.recipeForm.formGroup.get('authorId')?.setValue(this.authorIdValue);
-    this.recipeForm.formGroup.get('created')?.setValue(this.createdDate.datetime);
+    const formData = this.buildFormDataFromFormGroup(this.recipeForm.formGroup, this.selectedImage);
 
-    this.recipesApiService.createRecipe(this.recipeForm.formGroup.value).subscribe({
+    for (const pair of formData.entries()) {
+      console.log(`${pair[0]}:`, pair[1]);
+    }
+
+    this.recipesApiService.createRecipe(formData).subscribe({
       next: (result) => console.log('Recette créée', result),
       error: (err) => console.log('Err Front create recipe', err)
     });

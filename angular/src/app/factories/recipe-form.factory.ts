@@ -27,13 +27,13 @@ export class RecipeFormFactory {
         }),
         cooking: new FormGroup({
           type: new FormControl<string>('cooking'),
-          hours: new FormControl<string>(''),
-          minutes: new FormControl<string>(''),
+          hours: new FormControl<string>('0'),
+          minutes: new FormControl<string>('0'),
         }),
         pause: new FormGroup({
           type: new FormControl<string>('pause'),
-          hours: new FormControl<string>(''),
-          minutes: new FormControl<string>(''),
+          hours: new FormControl<string>('0'),
+          minutes: new FormControl<string>('0'),
         }),
       }),
 

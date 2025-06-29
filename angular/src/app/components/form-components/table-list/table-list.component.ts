@@ -26,6 +26,10 @@ export class TableListComponent {
     switch (item.value.unit) {
       case 'tablespoon': return 'Cuillère à soupe';
         break;
+      case 'teaspoon': return 'Cuillère à café';
+        break;
+      case 'kilogram': return 'Kilogrammes (kg)';
+        break;
       case 'gram': return 'Grammes (g)';
         break;
       case 'milligram': return 'Milligrammes (mg)';
@@ -40,9 +44,19 @@ export class TableListComponent {
         break;
       case 'bottle': return 'Bouteille';
         break;
+      case 'box': return 'Boîtes';
+        break;
+      case 'piece': return 'Morceaux';
+        break;
       case 'other': return 'Autre (présicez à côté)';
         break;
       default: return '';
     }
   }
 }
+
+/*<option value="">Unités</option>
+                        <option value="teaspoon">Cuillère à café</option>
+                        <option value="kilogram">Kilogrammes (kg)</option>
+                        <option value="box">Boîte</option>
+                        <option value="piece">Morceaux</option>*/

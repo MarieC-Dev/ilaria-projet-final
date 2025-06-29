@@ -237,7 +237,7 @@ export class CreateEditRecipeFormComponent implements OnInit{
     }
 
     this.recipesApiService.createRecipe(formData).subscribe({
-      next: (result) => console.log('Recette créée', result),
+      next: (result) => window.location.reload(),
       error: (err) => console.log('Err Front create recipe', err)
     });
 

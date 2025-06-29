@@ -47,7 +47,6 @@
             name="recipe-image"
             placeholder="Ajouter une image"
             (change)="onFileSelected($event)" />
-        <!-- formControlName="imageName" img.setAttribute('src', url + 'uploads/' + user.userFileName); -->
     </div>
 
     <!-- Types de cuisine -->
@@ -232,6 +231,8 @@
                     <select name="ingredientUnity" id="ingredientUnity" formControlName="unit">
                         <option value="">Unités</option>
                         <option value="tablespoon">Cuillère à soupe</option>
+                        <option value="teaspoon">Cuillère à café</option>
+                        <option value="kilogram">Kilogrammes (kg)</option>
                         <option value="gram">Grammes (g)</option>
                         <option value="milligram">Milligrammes (mg)</option>
                         <option value="liter">Litres (L)</option>
@@ -239,6 +240,9 @@
                         <option value="pot">Pot(s) de yaourt</option>
                         <option value="pinch">Pincée</option>
                         <option value="bottle">Bouteille</option>
+                        <option value="box">Boîte</option>
+                        <option value="piece">Morceaux</option>
+
                         <option value="other">Autre (présicez à côté)</option>
                     </select>
                 </label>

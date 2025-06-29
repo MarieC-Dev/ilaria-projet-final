@@ -12,6 +12,7 @@ import { VideosSliderDirective } from '../../directives/videos-slider.directive'
 import { PlayIconComponent } from "../../components/icons/play-icon/play-icon.component";
 import {RecipesApiService} from '../../services/recipes-api.service';
 import {JsonPipe} from '@angular/common';
+import {UsersApiService} from '../../services/users-api.service';
 
 @Component({
   selector: 'app-home-page',
@@ -32,11 +33,14 @@ import {JsonPipe} from '@angular/common';
 export class HomePageComponent implements OnInit {
   recipesList = signal(RECIPE_LIST);
   getAllRecipes: any[] = [];
+  getAllUsers: any[] = [];
   recipeAverage = inject(RecipeAverageService);
 
   index: number = 0;
 
-  constructor(private recipeApi: RecipesApiService) {
+  constructor(
+    private recipeApi: RecipesApiService,
+    private userApi: UsersApiService) {
   }
 
   ngOnInit(): void {
@@ -44,6 +48,20 @@ export class HomePageComponent implements OnInit {
       next: (result) => this.getAllRecipes = result,
       error: (err) => console.log(err),
     });
+
+    this.userApi.getAllUsers().subscribe({
+      next: (result) => this.getAllUsers = result,
+      error: (err) => console.log(err),
+    });
+  }
+
+  getRecipeUsername() {
+    let array: any[] = [];
+    this.getAllRecipes.map((recipe) => {
+      const find = this.getAllUsers.find((user) => user.id === recipe.authorId);
+      array.push(find.username);
+    })
+    return array;
   }
 
   getRecipeAverage(id: number) {

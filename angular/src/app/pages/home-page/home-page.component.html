@@ -23,17 +23,15 @@
         <app-sort-by-select selectId="sortRecipes" />
 
         <div class="recipesContainer">
-            <!--<div>{{ getAllRecipes | json }}</div>-->
-
             <div class="recipesList">
-                @for (recipe of getAllRecipes; track recipe.id;) {
+                @for (recipe of getAllRecipes; track $index) {
                     <app-recipe-item
                         [id]="recipe.id"
                         [picture]="recipe.imageName"
                         [name]="recipe.name"
                         [average]="0"
                         [numberOfVotes]="0"
-                        [authorName]="'Toto'"
+                        [authorName]="getRecipeUsername()[$index]"
                     />
                 }
             </div>

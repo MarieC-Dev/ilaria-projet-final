@@ -6,7 +6,7 @@
     height: max-content;
     display: flex;
     flex-direction: column;
-    
+
     & > div {
         width: 100%;
         position: relative;
@@ -24,7 +24,7 @@
             @media (max-width: 767px) {
                 max-height: 200px;
             }
-            
+
             img {
                 width: 100%;
                 position: relative;
@@ -32,23 +32,30 @@
         }
     }
 
-    @include svgStyle(32px, white);
+    @include svgStyle(24px, white);
     @media (max-width: 767px) {
-        @include svgStyle(24px, white);
+        @include svgStyle(18px, white);
     }
-    svg {
+    button {
+        padding: .75rem;
+        background-color: $darkGrey;
+        border-radius: 3rem;
+        box-shadow: 0 0 15px 10px white;
         position: absolute;
         top: 20px;
         right: 20px;
         z-index: 5;
 
         @media (max-width: 767px) {
+            padding: .5rem;
             top: 16px;
             right: 16px;
         }
 
-        &:hover {
-            fill: $secondColor;
+        svg {
+            &:hover {
+                fill: $secondColor;
+            }
         }
     }
 

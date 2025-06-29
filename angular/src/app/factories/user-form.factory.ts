@@ -9,7 +9,6 @@ export class UserFormFactory {
   constructor() {
     this.formGroupCreate = new FormGroup({
       imageName: new FormControl<string>(''),
-      imageData: new FormControl<string>(''),
       username: new FormControl<string>(''),
       email: new FormControl<string>(''),
       password: new FormControl<string>(''),

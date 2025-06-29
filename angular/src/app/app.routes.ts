@@ -11,9 +11,6 @@ import { ProfileFavoritesPageComponent } from './pages/profile-favorites-page/pr
 import { ProfileRecipesPageComponent } from './pages/profile-recipes-page/profile-recipes-page.component';
 import { EditRecipePageComponent } from './pages/edit-recipe-page/edit-recipe-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
-import { AdminPageComponent } from './pages/admin-page/admin-page.component';
-import { AdminFavoritesPageComponent } from './pages/admin-favorites-page/admin-favorites-page.component';
-import { AdminRecipesPageComponent } from './pages/admin-recipes-page/admin-recipes-page.component';
 import {accountGuardGuard} from './guards/account-guard.guard';
 import {UnauthorizedComponent} from './pages/unauthorized/unauthorized.component';
 import {RecipeCommentPageComponent} from './pages/recipe-comment-page/recipe-comment-page.component';
@@ -23,9 +20,6 @@ export const routes: Routes = [
   { path: 'recettes/commentaire', component: RecipeCommentPageComponent },
   /*{ path: 'recettes/:id/commentaire', component: RecipeCommentPageComponent },*/
 
-  { path: 'admin/mes-recettes', component: AdminRecipesPageComponent },
-  { path: 'admin/mes-favoris', component: AdminFavoritesPageComponent },
-  { path: 'admin/mes-infos', component: AdminPageComponent },
   { path: 'profil/creer-une-recette', component: CreateRecipesComponent },
   {
     path: 'recettes/commentaire',

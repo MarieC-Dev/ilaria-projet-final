@@ -170,7 +170,6 @@ export class CreateEditRecipeFormComponent implements OnInit{
   buildFormDataFormGroup(formGroup: FormGroup, file: File| any): FormData {
     const formData = new FormData();
 
-    // Champs simples
     formData.append('name', formGroup.get('name')?.value);
     formData.append('description', formGroup.get('description')?.value);
     formData.append('cuisineType', formGroup.get('cuisineType')?.value);

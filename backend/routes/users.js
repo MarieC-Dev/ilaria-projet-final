@@ -3,8 +3,9 @@ const router = express.Router();
 const db = require("../middlewares/db_connection");
 const authMiddleware = require("../middlewares/authMiddleware");
 const bcrypt = require("bcryptjs")
+const {id} = require("nodemon");
 
-router.get('/', async (req, res) => {
+exports.getAllUsers = async (req, res) => {
     try {
         const [usersRows] = await db.query('SELECT * FROM User');
         console.log(usersRows);
@@ -12,20 +13,22 @@ router.get('/', async (req, res) => {
     } catch (error) {
         res.status(500).json({ msg: 'Something went wrong : ' + error });
     }
-})
+};
 
-router.get('/:id', authMiddleware, async (req, res) => {
+exports.getOneUser = async (req, res) => {
+    const userId = req.params.id;
+    console.log(userId)
+
     try {
-        const [sessionRows] = db.execute('SELECT * FROM Session');
-        const session = JSON.parse(sessionRows[0].data);
+        const [userRows] = await db.execute('SELECT * FROM User WHERE id = ?', [userId]);
 
-        return res.status(200).json({ profile: session });
+        return res.status(200).json({ profile: userRows });
     } catch (error) {
         return res.status(500).json({ errorProfile: 'Utilisateur introuvable ' + error })
     }
-});
+}
 
-router.post('/', async (req, res) => {
+exports.createUser = async (req, res) => {
     let { imageName, imageData, username, email, password } = req.body;
 
     if(!username || !email || !password) {
@@ -52,6 +55,4 @@ router.post('/', async (req, res) => {
         .catch(error => {
             console.log('Failed to hash password', error)
         })
-});
-
-module.exports = router;
+}

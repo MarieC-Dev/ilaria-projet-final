@@ -14,14 +14,14 @@ export class UsersApiService {
     return this.http.get(`${this.API_URL}/users`);
   }
 
-  getUser(id: number): Observable<any> {
-    return this.http.get(`${this.API_URL}/users/${id}`);
-  }
-
   createUser(user: any): Observable<any> {
     return this.http.post(`${this.API_URL}/users`, user, {
       withCredentials: true
     })
+  }
+
+  getOneUser(id: number): Observable<any> {
+    return this.http.get(`${this.API_URL}/users/${id}`);
   }
 
   login(user: any): Observable<any> {

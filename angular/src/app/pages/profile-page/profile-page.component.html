@@ -6,44 +6,58 @@
     <section class="profileSection">
         <h2>Mon profil</h2>
 
-        <form method="post">
+        <div>{{ userData | json }}</div>
+
+        <form method="post" [formGroup]="userForm.formGroupCreate">
             <div class="headerProfile">
                 <!-- Photo -->
                 <div class="wrapperProfileImage">
                     <img src="user-regular.svg" alt="photo de profil">
                 </div>
+
                 <label for="profileImageInput">Toto le cuisto</label>
-                <input type="file" name="profileImageInput" id="profileImageInput" [required]="false">
+
+                <input type="file" name="profileImageInput" id="profileImageInput" >
             </div>
-            <!-- Username -->
-            <app-form-input
-                label="Username"
-                id="profileUsername"
-                type="text"
-                inputId="profileUsernameInput"
-                value="Toto le cuisto"
-                [required]="true" />
 
-            <!-- Email -->
-            <app-form-input
-                label="Email"
-                id="profileEmail"
-                type="email"
-                inputId="profileEmailInput"
-                value="toto-le-cuisto@email.com"
-                [required]="true" />
+            <div class="formInputDiv" id="profileUsernameInputDiv">
+                <label for="profileUsernameInput">
+                    Username :
+                </label>
 
-            <!-- Password -->
-            <app-form-input
-                label="Mot de passe"
-                id="profilePassword"
-                type="password"
-                inputId="profilePasswordInput"
-                value="azertyuiop12345"
-                [required]="true" />
+                <input type="text"
+                       id="profileUsernameInput"
+                       name="profileUsernameInput"
+                       placeholder="Username"
+                        required/>
+            </div>
+
+            <div class="formInputDiv" id="profileEmailInputDiv">
+                <label for="profileEmailInput">
+                    Email :
+                </label>
+
+                <input type="text"
+                       id="profileEmailInput"
+                       name="profileEmailInput"
+                       placeholder="Email"
+                        required/>
+            </div>
+
+            <div class="formInputDiv" id="profilePasswordInputDiv">
+                <label for="profileEmailInput">
+                    Mot de passe :
+                </label>
+
+                <input type="password"
+                       id="profilePasswordInput"
+                       name="profilePasswordInput"
+                       placeholder="Mot de passe"
+                        required/>
+            </div>
 
             <!-- Si une valeur d'un input a changé -> disabled = false -->
-            <button type="submit"
+            <button type="button"
                 class="btn-bg-red btn-disabled"
                 disabled="disabled">
                 Modifier

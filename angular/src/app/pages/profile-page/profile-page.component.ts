@@ -1,26 +1,29 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
 import { FormInputComponent } from "../../components/form-components/form-input/form-input.component";
-import { RecipeItemComponent } from "../../components/recipe-item/recipe-item.component";
 import { RECIPE_LIST } from '../../lists/recipe-list.fake';
 import { RecipeAverageService } from '../../services/recipe-average.service';
 import {RouterOutlet, RouterLink, RouterLinkActive, ActivatedRoute} from '@angular/router';
-import { ProfileIconComponent } from '../../components/icons/profile-icon/profile-icon.component';
-import { HeartIconComponent } from '../../components/icons/heart-icon/heart-icon.component';
-import { RecipeIconComponent } from '../../components/icons/recipe-icon/recipe-icon.component';
 import {HeaderProfileComponent} from '../../layout/header-profile/header-profile.component';
 import {UsersApiService} from '../../services/users-api.service';
-import {JsonPipe, NgIf} from '@angular/common';
+import {AsyncPipe, JsonPipe, NgIf} from '@angular/common';
 import {UserFormFactory} from '../../factories/user-form.factory';
 import {FormArray, FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+
+interface User {
+  id: number,
+  imageName: string,
+  username: string,
+  email: string,
+  password: string
+}
 
 @Component({
   selector: 'app-profile-page',
   imports: [
     JsonPipe,
     HeaderProfileComponent,
-    FormInputComponent,
     ReactiveFormsModule,
-    NgIf
+    AsyncPipe
   ],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.scss'
@@ -28,31 +31,39 @@ import {FormArray, FormControl, FormGroup, ReactiveFormsModule} from '@angular/f
 export class ProfilePageComponent implements OnInit {
   userForm!: UserFormFactory;
   recipesList = signal(RECIPE_LIST);
-  userData: any[] = []
+  userData!: User;
   lastRecipe = this.recipesList().slice(-1)[0];
   recipeAverage = inject(RecipeAverageService);
   userImage: File | null = null;
 
   constructor(private userApi: UsersApiService, private route: ActivatedRoute) {
+    this.userForm = new UserFormFactory();
   }
 
   ngOnInit(): void {
     const userId: number = Number(this.route.snapshot.paramMap.get('id'));
+
     this.userApi.getOneUser(userId).subscribe({
-      next: (result) => this.userData = result,
+      next: (result) => {
+        //this.userData = result.profile[0];
+        const data = result.profile[0];
+        this.userData = {
+          id: data.id,
+          imageName: data.imageName,
+          username: data.username,
+          email: data.email,
+          password: data.password
+        }
+      },
       error: (error) => console.log('Erreur get user data', error)
     });
 
-    if(this.userData.length > 0) {
-      this.userData.forEach((user) => {
-        this.userForm.formGroupCreate.patchValue({
-          imageName: user.imageName,
-          username: user.username,
-          email: user.email,
-          password: user.password,
-        })
-      })
-    }
+    /*this.userForm.formGroupCreate.patchValue({
+          imageName: result.profile[0].imageName,
+          username: result.profile[0].username,
+          email: result.profile[0].email,
+          password: result.profile[0].password,
+        });*/
   }
 
   onFileSelected(event: Event) {
@@ -88,6 +99,6 @@ export class ProfilePageComponent implements OnInit {
   }
 
   onSubmit() {
-
+    const userId: number = Number(this.route.snapshot.paramMap.get('id'));
   }
 }

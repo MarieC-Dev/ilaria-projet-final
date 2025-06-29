@@ -29,4 +29,10 @@ export class UsersApiService {
       withCredentials: true
     });
   }
+
+  updateUser(id: number, user: any): Observable<any> {
+    return this.http.put(`${this.API_URL}/users/${id}`, user, {
+      withCredentials: true
+    })
+  }
 }

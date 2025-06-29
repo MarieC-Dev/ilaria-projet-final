@@ -29,7 +29,7 @@ exports.getOneUser = async (req, res) => {
 }
 
 exports.createUser = async (req, res) => {
-    let { imageName, imageData, username, email, password } = req.body;
+    let { imageName, username, email, password } = req.body;
 
     if(!username || !email || !password) {
         res.status(400).json({ error: "Le nom, le mail et le mot de passe sont requis" });
@@ -39,9 +39,9 @@ exports.createUser = async (req, res) => {
 
     bcrypt.hash(password, 10)
         .then(pwdHash => {
-            const insertIntoUser = 'INSERT INTO User (imageName, imageData, username, email, password, roleId) VALUES (?, ?, ?, ?, ?, ?)';
+            const insertIntoUser = 'INSERT INTO User (imageName, username, email, password, roleId) VALUES (?, ?, ?, ?, ?)';
             const userQueries = [
-                imageName, imageData, username, email, pwdHash, usersRows.length === 0 ? 1 : 3
+                imageName, username, email, pwdHash, usersRows.length === 0 ? 1 : 3
             ];
 
             db.query(insertIntoUser, userQueries, (err, result) => {
@@ -55,4 +55,19 @@ exports.createUser = async (req, res) => {
         .catch(error => {
             console.log('Failed to hash password', error)
         })
+}
+
+exports.updateUser = async (req, res) => {
+    const userId = req.params.id;
+    const { imageName, username, email, password } = req.body;
+
+    const userSql = 'UPDATE User SET imageName = ?, username = ?, email = ?, password = ? WHERE id = ?';
+    const userValues = [imageName, username, email, password, userId];
+
+    await db.execute(userSql, userValues, (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'User update error :', err });
+        }
+        res.json({ message: 'User is updated ' + result });
+    })
 }

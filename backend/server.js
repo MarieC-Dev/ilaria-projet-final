@@ -14,7 +14,7 @@ const usersRoute = require("./routes/users");
 const { getAllRecipes, createRecipe, updateRecipe, deleteRecipe, getOneRecipe } = require("./routes/recipes");
 const { addFavorite, getAllFavorites, getOneFavorite} = require('./routes/favorite-recipe');
 const login = require("./routes/login");
-const {getAllUsers, getOneUser, createUser} = require("./routes/users");
+const {getAllUsers, getOneUser, createUser, updateUser} = require("./routes/users");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -76,6 +76,7 @@ const uploadImg = multer({ storage: storage });
 app.get('/users', getAllUsers);
 app.get('/users/:id', getOneUser);
 app.post('/users', uploadImg.single('user-image'), createUser);
+app.put('/users/:id', uploadImg.single('user-image'), updateUser);
 
 // RECIPES
 app.get('/recipes', getAllRecipes);

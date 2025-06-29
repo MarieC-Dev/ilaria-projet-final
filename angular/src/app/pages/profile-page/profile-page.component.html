@@ -6,9 +6,7 @@
     <section class="profileSection">
         <h2>Mon profil</h2>
 
-        <div>{{ userData | json }}</div>
-
-        <form method="post" [formGroup]="userForm.formGroupCreate">
+        <form method="post" enctype="multipart/form-data">
             <div class="headerProfile">
                 <!-- Photo -->
                 <div class="wrapperProfileImage">
@@ -17,7 +15,11 @@
 
                 <label for="profileImageInput">Toto le cuisto</label>
 
-                <input type="file" name="profileImageInput" id="profileImageInput" >
+                <p>{{ !userData.imageName ? 'Aucune image' : userData.imageName }}</p>
+                <input type="file"
+                       name="user-image"
+                       id="profileImageInput"
+                       (change)="onFileSelected($event)">
             </div>
 
             <div class="formInputDiv" id="profileUsernameInputDiv">
@@ -29,6 +31,7 @@
                        id="profileUsernameInput"
                        name="profileUsernameInput"
                        placeholder="Username"
+                       [value]="userData.username"
                         required/>
             </div>
 
@@ -41,6 +44,7 @@
                        id="profileEmailInput"
                        name="profileEmailInput"
                        placeholder="Email"
+                       [value]="userData.email"
                         required/>
             </div>
 
@@ -53,13 +57,12 @@
                        id="profilePasswordInput"
                        name="profilePasswordInput"
                        placeholder="Mot de passe"
+                       [value]="userData.password"
                         required/>
             </div>
 
             <!-- Si une valeur d'un input a changé -> disabled = false -->
-            <button type="button"
-                class="btn-bg-red btn-disabled"
-                disabled="disabled">
+            <button type="button" class="btn-bg-red" (click)="onSubmit()">
                 Modifier
             </button>
         </form>

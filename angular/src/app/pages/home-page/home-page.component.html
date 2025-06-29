@@ -31,7 +31,9 @@
                         [name]="recipe.name"
                         [average]="0"
                         [numberOfVotes]="0"
-                        [authorName]="getRecipeUsername()[$index]"
+                        [authorName]="getRecipeUser()[$index].username"
+                        [recipeId]="recipe.id"
+                        [userId]="getRecipeUser()[$index].id"
                     />
                 }
             </div>
@@ -44,7 +46,7 @@
             <h2>Dernière vidéo</h2>
 
             <!-- <app-sort-by-select selectId="sortVideos" /> -->
-            <a href="/accueil" class="btn-bg-red">
+            <a href="https://www.youtube.com/@ChefEtchebest" class="btn-bg-red">
                 <app-play-icon />
                 Voir toutes les vidéos
             </a>
@@ -55,12 +57,12 @@
         </div>
     </section>
 
-    <section class="newsletterSection">
+    <!--<section class="newsletterSection">
         <h2>Soyez le premier informé des nouvelles recettes tendance et plus encore !</h2>
 
         <form method="post">
             <input type="text" name="newsletterEmail" email="newsletterEmail" placeholder="Adresse mail" required>
             <button type="submit">Recevoir la newsletter</button>
         </form>
-    </section>
+    </section>-->
 </div>

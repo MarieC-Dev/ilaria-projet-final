@@ -55,11 +55,11 @@ export class HomePageComponent implements OnInit {
     });
   }
 
-  getRecipeUsername() {
+  getRecipeUser() {
     let array: any[] = [];
     this.getAllRecipes.map((recipe) => {
       const find = this.getAllUsers.find((user) => user.id === recipe.authorId);
-      array.push(find.username);
+      array.push(find);
     })
     return array;
   }

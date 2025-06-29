@@ -1,5 +1,6 @@
-import { Component, input } from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import { HeartIconComponent } from "../icons/heart-icon/heart-icon.component";
+import {FavoriteApiService} from '../../services/favorite-api.service';
 
 @Component({
   selector: 'app-recipe-item',
@@ -14,8 +15,23 @@ export class RecipeItemComponent {
   average = input<any>();
   numberOfVotes = input<number|undefined>();
   authorName = input<string>();
+  recipeId = input<number>();
+  userId = input<number>();
+
+  constructor(private favoriteApi: FavoriteApiService) {
+  }
 
   handleFavorite(event: Event) {
     event.preventDefault();
+
+    const favorite = {
+      recipeId: this.recipeId(),
+      userId: this.userId()
+    }
+
+    this.favoriteApi.addFavorite(favorite).subscribe({
+      next: (result) => console.log(result),
+      error: (err) => console.log('POST favorite error', err)
+    })
   }
 }

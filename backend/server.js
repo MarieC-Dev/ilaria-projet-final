@@ -10,8 +10,9 @@ require("dotenv").config();
 
 const PORT = 3000;
 const db = require('./middlewares/db_connection.js');
-const { getAllRecipes, createRecipe, updateRecipe, deleteRecipe, getOneRecipe} = require("./routes/recipes");
 const usersRoute = require("./routes/users");
+const { getAllRecipes, createRecipe, updateRecipe, deleteRecipe, getOneRecipe } = require("./routes/recipes");
+const { addFavorite, getAllFavorites} = require('./routes/favorite-recipe');
 const login = require("./routes/login");
 
 app.use(express.json());
@@ -70,14 +71,21 @@ const storage = multer.diskStorage({
 // Initialisation de multer
 const uploadImg = multer({ storage: storage });
 
+// USERS
 app.use('/users', usersRoute);
 
+// RECIPES
 app.get('/recipes', getAllRecipes);
 app.get('/recipes/:id', getOneRecipe);
 app.post('/recipes', uploadImg.single('recipe-image'), createRecipe);
 app.put('/recipes/:id', uploadImg.single('recipe-image'), updateRecipe);
 app.delete('/recipes/:id', deleteRecipe);
 
+// FAVORITE
+app.get('/favorite', getAllFavorites);
+app.post('/favorite', addFavorite);
+
+// LOGIN
 app.use('/login', login);
 
 sessionStore.onReady().then(() => {

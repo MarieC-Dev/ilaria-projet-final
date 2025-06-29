@@ -64,8 +64,6 @@ export class CreateEditRecipeFormComponent implements OnInit{
     this.recipeForm.formGroup.statusChanges.subscribe((status) =>
       this.recipeFormStatus.set(status)
     );
-
-    //console.log(this.recipeForm.formGroup.get('authorId')?.value);
   }
 
   getCheckboxValue(value: string) {
@@ -169,7 +167,7 @@ export class CreateEditRecipeFormComponent implements OnInit{
     }
   }
 
-  buildFormDataFromFormGroup(formGroup: FormGroup, file: File| any): FormData {
+  buildFormDataFormGroup(formGroup: FormGroup, file: File| any): FormData {
     const formData = new FormData();
 
     // Champs simples
@@ -186,6 +184,8 @@ export class CreateEditRecipeFormComponent implements OnInit{
       formData.append('recipe-image', file); // ce nom doit correspondre à multer.single('recipe-image')
       formData.append('imageName', file.name);
     }
+
+    console.log(file)
 
     // servingNumber
     const servingNumber = formGroup.get('servingNumber') as FormGroup;
@@ -230,7 +230,7 @@ export class CreateEditRecipeFormComponent implements OnInit{
       }
     });
 
-    const formData = this.buildFormDataFromFormGroup(this.recipeForm.formGroup, this.selectedImage);
+    const formData = this.buildFormDataFormGroup(this.recipeForm.formGroup, this.selectedImage);
 
     for (const pair of formData.entries()) {
       console.log(`${pair[0]}:`, pair[1]);

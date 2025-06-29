@@ -25,8 +25,10 @@ exports.createRecipe = async (req, res) => {
         name, description, imageName, imageData, cuisineType, cookingType, servingNumber, difficulty, recipeTime, ingredientsList, stepsList, authorId, created
     } = req.body;*/
     let {
-        name, description, imageName, imageData, cuisineType, cookingType, difficulty, ingredientsList, stepsList, authorId, created
+        name, description, imageData, cuisineType, cookingType, difficulty, ingredientsList, stepsList, authorId, created
     } = req.body;
+
+    let imageName = req.file.filename;
 
     const servingNumber = {
         number: req.body['servingNumber.number'],

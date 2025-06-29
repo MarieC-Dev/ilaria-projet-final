@@ -3,8 +3,7 @@
     method="post"
     class="createRecipeForm"
     enctype="multipart/form-data"
-    [formGroup]="recipeForm.formGroup"
-    (ngSubmit)="onSubmit()">
+    [formGroup]="recipeForm.formGroup" >
     <!-- Title -->
     <div class="formInputDiv" id="createRecipeTitleDiv">
         <label for="createRecipeTitle">
@@ -317,7 +316,8 @@
     <hr class="createRecipeLine">
 
     <button
-        type="submit"
+        type="button"
+        (click)="onSubmit()"
         [class]="recipeFormStatus() === 'INVALID' ? 'btn-disabled btn-bg-red' : 'btn-bg-red'"
         [disabled]="recipeFormStatus() === 'INVALID'">
         Soumettre

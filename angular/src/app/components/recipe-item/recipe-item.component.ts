@@ -14,4 +14,8 @@ export class RecipeItemComponent {
   average = input<any>();
   numberOfVotes = input<number|undefined>();
   authorName = input<string>();
+
+  handleFavorite(event: Event) {
+    event.preventDefault();
+  }
 }

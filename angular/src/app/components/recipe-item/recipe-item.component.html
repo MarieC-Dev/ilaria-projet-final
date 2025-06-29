@@ -1,12 +1,15 @@
-<div class="recipeItem" [id]="id()">
-    <div>
-        <div class="wrapperImg">
-            <img [src]="picture()" alt="recipe picture">
-        </div>
-        <app-heart-icon />
-    </div>
+<a href="/recettes">
+    <div class="recipeItem" [id]="id()">
+        <div>
+            <div class="wrapperImg">
+                <img [src]="picture()" alt="recipe picture">
+            </div>
 
-    <a href="/recettes">
+            <button type="button" (click)="handleFavorite($event)">
+                <app-heart-icon />
+            </button>
+        </div>
+
         <h4>{{ name() }}</h4>
 
         <ul>
@@ -18,5 +21,6 @@
                 by {{ authorName() }}
             </li>
         </ul>
-    </a>
 </div>
+</a>
+

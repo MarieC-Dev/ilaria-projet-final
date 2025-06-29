@@ -23,20 +23,30 @@
         <app-sort-by-select selectId="sortRecipes" />
 
         <div class="recipesContainer">
+            <!--<div>{{ getAllRecipes | json }}</div>-->
+
             <div class="recipesList">
-                @for (recipe of recipesList(); track recipe.id;) {
+                @for (recipe of getAllRecipes; track recipe.id;) {
                     <app-recipe-item
                         [id]="recipe.id"
-                        [picture]="recipe.image" 
-                        [name]="recipe.title" 
-                        [average]="getRecipeAverage(recipe.id)" 
+                        [picture]="recipe.imageName"
+                        [name]="recipe.name"
+                        [average]="0"
+                        [numberOfVotes]="0"
+                        [authorName]="'Toto'"
+                    />
+                }
+                <!--@for (recipe of recipesList(); track recipe.id;) {
+                    <app-recipe-item
+                        [id]="recipe.id"
+                        [picture]="recipe.image"
+                        [name]="recipe.title"
+                        [average]="getRecipeAverage(recipe.id)"
                         [numberOfVotes]="recipe.opinions?.length"
                         [authorName]="recipe.author.username"
                     />
-                }
+                }-->
             </div>
-
-            <app-page-slider />
         </div>
 
     </section>

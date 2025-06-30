@@ -14,8 +14,6 @@
         </ul>
 
         <div class="navigationRight">
-            <app-search-icon />
-
             @if ((userStatus | async)?.isAuthenticated) {
                 <a
                     class="btn-bg-red"
@@ -70,12 +68,6 @@
             </li>
             <li class="navigationItem">
                 <a
-                    routerLink="/recettes"
-                    routerLinkActive="active"
-                    ariaCurrentWhenActive="page">Recettes</a>
-            </li>
-            <li class="navigationItem">
-                <a
                     routerLink="/rechercher"
                     routerLinkActive="active"
                     ariaCurrentWhenActive="page">Rechercher</a>
@@ -85,20 +77,6 @@
                     routerLink="/contact"
                     routerLinkActive="active"
                     ariaCurrentWhenActive="page">Contact</a>
-            </li>
-            <li>
-                <a
-                    class="btn-transparent"
-                    routerLink="/connexion"
-                    routerLinkActive="active"
-                    ariaCurrentWhenActive="page">Connexion</a>
-            </li>
-            <li>
-                <a
-                    class="btn-transparent"
-                    routerLink="/inscription"
-                    routerLinkActive="active"
-                    ariaCurrentWhenActive="page">Inscription</a>
             </li>
         </ul>
 

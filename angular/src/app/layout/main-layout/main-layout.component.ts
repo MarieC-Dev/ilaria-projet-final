@@ -33,11 +33,11 @@ export class MainLayoutComponent {
       id: this.index++,
       link: '/accueil',
       name: 'Accueil'
-    }, {
+    }, /*{
       id: this.index++,
       link: '/recettes',
       name: 'Recettes'
-    }, {
+    }, */{
       id: this.index++,
       link: '/rechercher',
       name: 'Rechercher'

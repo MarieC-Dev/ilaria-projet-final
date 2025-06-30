@@ -76,6 +76,29 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
     return favoriteRecipes.flat();
   }
 
+  getUserRecipes() {
+    const userRecipes: any = [];
+
+    this.recipesListApi.map((recipe) => {
+      if(this.userId === recipe.authorId) {
+        userRecipes.push(recipe);
+      }
+    });
+
+    return userRecipes;
+  }
+
+  deleteUserRecipe(id: number) {
+    this.recipeApi.deteteRecipe(id).subscribe({
+      next: (result) => {
+        const resultId = this.recipesListApi.findIndex((recipe) => recipe.id === id);
+        this.recipesListApi.splice(resultId, 1);
+        console.log('Front Recipe has been deleted', result)
+      },
+      error: (err) => console.log('Front delete recipe error : ', err)
+    })
+  }
+
   getAverage(id: number, array: RecipeList) {
     return this.average.getRecipeAverage(id, array);
   }

@@ -1,19 +1,6 @@
 <section class="myfavorites-myrecipes">
     <h2>{{ title() }}</h2>
 
-    <!--<form *ngIf="isFavorites()">
-        <div class="searchMyfavoritesMyrecipesDiv">
-            <input
-                type="text"
-                name="searchMyfavorites"
-                id="searchMyfavorites"
-                placeholder="Rechercher parmi les favoris">
-            <button type="button">
-                <app-search-icon />
-            </button>
-        </div>
-    </form>-->
-
     <!-- @If FAVORITES : -->
     <div *ngIf="isFavorites()" class="myFavoritesDiv">
         <div class="myFavoritesItems">
@@ -35,8 +22,8 @@
     <table *ngIf="isRecipes()" class="myRecipesTable">
         <thead>
             <tr>
-                <th class="myrecipeCheckbox">
-                    <input type="checkbox" name="recipesSelectAll" id="recipesSelectAll">
+                <th>
+                    ID
                 </th>
                 <th class="myrecipeName">Nom de la recette</th>
                 <th class="myrecipeCreationDate">Date de création</th>
@@ -46,26 +33,30 @@
         </thead>
 
         <tbody>
-            <tr>
-                <td class="myrecipeCheckbox">
-                    <input type="checkbox" name="" id="">
-                </td>
-                <td class="myrecipeName">
-                    <a href="/recettes">Salade César façon provençale</a>
-                </td>
-                <td class="myrecipeCreationDate">Créée le 16 novembre 2025</td>
-                <td class="myrecipeOpinion">3,6(125 notes)</td>
-                <td class="myrecipeButtons">
-                    <button type="button">
-                        <a href="profil/mes-recettes/modifier">
-                            <app-modify-icon />
+            @for (recipe of getUserRecipes(); track recipe.id) {
+                <tr>
+                    <td>{{ recipe.id }}</td>
+                    <td class="myrecipeName">
+                        <a [routerLink]="'/recettes/' + recipe.id">
+                            {{ recipe.name }}
                         </a>
-                    </button>
-                    <button type="button">
-                        <app-delete-icon />
-                    </button>
-                </td>
-            </tr>
+                    </td>
+                    <td class="myrecipeCreationDate">
+                        {{ recipe.created }}
+                    </td>
+                    <td class="myrecipeOpinion">0(0 notes)</td>
+                    <td class="myrecipeButtons">
+                        <button type="button">
+                            <a href="profil/mes-recettes/modifier">
+                                <app-modify-icon />
+                            </a>
+                        </button>
+                        <button type="button">
+                            <app-delete-icon />
+                        </button>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 

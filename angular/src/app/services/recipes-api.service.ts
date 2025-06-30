@@ -14,6 +14,10 @@ export class RecipesApiService {
     return this.http.get<any[]>(`${this.API_URL}/recipes`);
   }
 
+  getOneRecipe(id: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.API_URL}/recipes/${id}`);
+  }
+
   createRecipe(recipe: any): Observable<any> {
     return this.http.post(`${this.API_URL}/recipes`, recipe).pipe(
       catchError((error) => {
@@ -21,5 +25,9 @@ export class RecipesApiService {
         return throwError(() => error);
       })
     );
+  }
+
+  deteteRecipe(id: number): Observable<any> {
+    return this.http.delete(`${this.API_URL}/recipes/${id}`);
   }
 }

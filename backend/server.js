@@ -12,7 +12,7 @@ const PORT = 3000;
 const db = require('./middlewares/db_connection.js');
 const usersRoute = require("./routes/users");
 const { getAllRecipes, createRecipe, updateRecipe, deleteRecipe, getOneRecipe } = require("./routes/recipes");
-const { addFavorite, getAllFavorites, getOneFavorite} = require('./routes/favorite-recipe');
+const { addFavorite, getAllFavorites } = require('./routes/favorite-recipe');
 const login = require("./routes/login");
 const {getAllUsers, getOneUser, createUser, updateUser} = require("./routes/users");
 
@@ -86,9 +86,9 @@ app.put('/recipes/:id', uploadImg.single('recipe-image'), updateRecipe);
 app.delete('/recipes/:id', deleteRecipe);
 
 // FAVORITE
-app.get('/favorite', getAllFavorites);
-app.get('/favorite/:id', getOneFavorite);
-app.post('/favorite', addFavorite);
+app.get('/users/:id/favorite', getAllFavorites);
+//app.get('/users/:id/favorite', getAllUserFavorites);
+app.post('/users/:id/favorite', addFavorite);
 
 // LOGIN
 app.use('/login', login);

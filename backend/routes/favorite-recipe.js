@@ -1,27 +1,26 @@
 const db = require('../middlewares/db_connection');
-const {id} = require("nodemon");
 
 exports.getAllFavorites = async (req, res) => {
     try {
         const [rows] = await db.execute('SELECT * FROM FavoritesList');
         console.log(rows)
-        res.status(200).json({ message: 'Favorites : ' + rows[0] })
+        res.status(200).json({ message: 'Get favorites ', rows })
     } catch (err) {
         res.status(500).json({ error: 'Get all favorites error ' + err })
     }
 }
-
-exports.getOneFavorite = async (req, res) => {
-    const favoriteId = req.params.id;
+/*
+exports.getAllUserFavorites = async (req, res) => {
+    const userId = req.params.id;
 
     try {
-        const [rows] = await db.execute('SELECT * FROM FavoritesList WHERE id = ?', [favoriteId]);
-        console.log(rows)
-        res.status(200).json({ message: 'Favorites : ' + rows[0] })
+        const [rows] = await db.execute('SELECT * FROM FavoritesList WHERE id = ?', [userId]);
+        console.log(rows);
+        return res.status(200).json({ message: rows })
     } catch (err) {
         res.status(500).json({ error: 'Get all favorites error ' + err })
     }
-}
+}*/
 
 exports.addFavorite = async (req, res) => {
     const { recipeId, userId } = req.body;
@@ -33,7 +32,7 @@ exports.addFavorite = async (req, res) => {
     try {
         const favoriteSql = 'INSERT INTO FavoritesList (recipeId, userId) VALUES (?, ?)';
 
-        db.execute(favoriteSql, [recipeId, userId], (err, result) => {
+        await db.execute(favoriteSql, [recipeId, userId], (err, result) => {
             if(err) {
                 return res.status(500).json({ error: 'Back add favorite error : ' + err })
             }
@@ -50,7 +49,7 @@ exports.deleteOneFavorite = async (req, res) => {
     try {
         const favoriteSql = 'DELETE FROM FavoritesList WHERE id = ?';
 
-        db.execute(favoriteSql, [favoriteId], (err, result) => {
+        await db.execute(favoriteSql, [favoriteId], (err, result) => {
             if(err) {
                 return res.status(500).json({ error: 'Suppression du favoris ' + err })
             }

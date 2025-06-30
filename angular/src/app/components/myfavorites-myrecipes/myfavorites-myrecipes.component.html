@@ -1,7 +1,7 @@
 <section class="myfavorites-myrecipes">
     <h2>{{ title() }}</h2>
 
-    <form *ngIf="isFavorites()">
+    <!--<form *ngIf="isFavorites()">
         <div class="searchMyfavoritesMyrecipesDiv">
             <input
                 type="text"
@@ -12,19 +12,19 @@
                 <app-search-icon />
             </button>
         </div>
-    </form>
+    </form>-->
 
     <!-- @If FAVORITES : -->
     <div *ngIf="isFavorites()" class="myFavoritesDiv">
         <div class="myFavoritesItems">
-            @for (fav of favoritesArray(); track fav.id) {
+            @for (fav of getUserFavorites(); track fav.id) {
                 <app-recipe-item
                     [id]="fav.id"
-                    [picture]="fav.image"
-                    [name]="fav.title"
-                    [average]="getAverage(fav.id, favoritesArray())"
-                    [numberOfVotes]="fav.opinions?.length"
-                    [authorName]="fav.author.username" />
+                    [picture]="fav.imageName"
+                    [name]="fav.name"
+                    [average]="0"
+                    [numberOfVotes]="0"
+                    [authorName]="username" />
             }
         </div>
     </div>

@@ -14,7 +14,9 @@ const usersRoute = require("./routes/users");
 const { getAllRecipes, createRecipe, updateRecipe, deleteRecipe, getOneRecipe } = require("./routes/recipes");
 const { addFavorite, getAllFavorites } = require('./routes/favorite-recipe');
 const login = require("./routes/login");
-const {getAllUsers, getOneUser, createUser, updateUser} = require("./routes/users");
+const { getAllUsers, getOneUser, createUser, updateUser } = require("./routes/users");
+const { getAllIngredients, getAllIngredientsList, getAllSteps, getAllStepsList} = require("./routes/ingredients-steps");
+const { getAllServingNumber, getOneServingNumber } = require('./routes/serving-data');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -87,8 +89,17 @@ app.delete('/recipes/:id', deleteRecipe);
 
 // FAVORITE
 app.get('/users/:id/favorite', getAllFavorites);
-//app.get('/users/:id/favorite', getAllUserFavorites);
 app.post('/users/:id/favorite', addFavorite);
+
+// INGREDIENTS & STEPS
+app.get('/ingredients', getAllIngredients);
+app.get('/ingredientsList', getAllIngredientsList);
+app.get('/steps', getAllSteps);
+app.get('/stepsList', getAllStepsList);
+
+// SERVING NUMBER
+app.get('/serving-number', getAllServingNumber);
+app.get('/serving-number/:id', getOneServingNumber);
 
 // LOGIN
 app.use('/login', login);

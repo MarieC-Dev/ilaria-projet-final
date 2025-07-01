@@ -1,10 +1,11 @@
 import {Component, input, output} from '@angular/core';
 import { HeartIconComponent } from "../icons/heart-icon/heart-icon.component";
 import {FavoriteApiService} from '../../services/favorite-api.service';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-recipe-item',
-  imports: [HeartIconComponent],
+  imports: [HeartIconComponent, RouterLink],
   templateUrl: './recipe-item.component.html',
   styleUrl: '../../../styles.scss'
 })

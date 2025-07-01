@@ -1,6 +1,82 @@
 <div class="recipePage">
     <!-- SECTION : Recipe presentation -->
+    <div>{{ recipeArray[0] | json }}</div>
+    <!--<section class="recipePresentation">
+        <div class="recipePresentationLeft">
+            <div class="wrapperImage">
+                <img [src]="recipeArray[0].imageName" alt="recipe picture">
+            </div>
+
+            <div class="recipeCuisineType">
+                <p>Cuisine <span>Française</span></p>
+            </div>
+
+            <ul>
+                <li>
+                    <p>Créé par <span>{{ 'TOTO' }}</span></p>
+                </li>
+                <li>
+                    <p>{{ 'authorRecipesNumber()' }} recettes</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="recipeDescription">
+            <h2>{{ recipeArray[0].name }}</h2>
+
+            <p>{{ recipeArray[0].description }}</p>
+        </div>
+
+        <div class="recipeTime">
+            &lt;!&ndash;<ng-content />&ndash;&gt;
+
+            <app-recipe-item-time
+                [makingHours]="recipeArray[0].making.hours || 0"
+                [makingMinutes]="recipeArray[0].making.minutes || 0"
+                [cookingTime]="true"
+                [cookingHours]="recipeArray[0].cooking?.hours || 0"
+                [cookingMinutes]="recipeArray[0].cooking?.minutes || 0"
+                [pauseTime]="true"
+                [pauseHours]="recipeArray[0].pause?.hours || 0"
+                [pauseMinutes]="recipeArray[0].pause?.minutes || 0"
+                [servingNumber]="4"
+                servingUnit="personnes" />
+        </div>
+    </section>-->
+
     <app-recipe-presentation
+        [image]="'../../../../../backend/uploads/' + recipeArray[0].imageName"
+        [title]="recipeArray[0].name"
+        [description]="recipeArray[0].description"
+        [authorName]="recipeArray[0].authorId"
+        [authorRecipesNumber]="12"
+        [cuisineTypeId]="2"
+        [cuisineTypeName]="recipeArray[0].cuisineType">
+        <!--
+        recipeArray[0].author.numberOfRecipes
+        recipeArray[0].cuisineType.id
+        -->
+
+        <!--<app-recipe-item-time
+            [makingHours]="recipeArray[0].makingTime.hours || 0"
+            [makingMinutes]="recipeArray[0].makingTime.minutes || 0"
+            [cookingTime]="true"
+            [cookingHours]="recipeArray[0].cookingTime?.hours || 0"
+            [cookingMinutes]="recipeArray[0].cookingTime?.minutes || 0"
+            [pauseTime]="true"
+            [pauseHours]="recipeArray[0].pauseTime?.hours || 0"
+            [pauseMinutes]="recipeArray[0].pauseTime?.minutes || 0"
+            [servingNumber]="4"
+            servingUnit="personnes" />-->
+
+    </app-recipe-presentation>
+
+
+    <section class="recipeSectionBorder">
+        <hr class="recipeBorder" />
+    </section>
+
+    <!--<app-recipe-presentation
         [image]="recipe.image"
         [title]="recipe.title"
         [description]="recipe.description"
@@ -21,7 +97,7 @@
             [servingNumber]="4"
             servingUnit="personnes" />
 
-    </app-recipe-presentation>
+    </app-recipe-presentation>-->
     <!-- ########## -->
 
     <!-- SECTION : Recipe details -->
@@ -37,3 +113,4 @@
     <app-other-recipes [recipe]="recipe" [recipeId]="recipe.id" />
     <!-- ########## -->
 </div>
+

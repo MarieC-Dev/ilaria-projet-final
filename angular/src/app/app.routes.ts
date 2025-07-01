@@ -16,7 +16,6 @@ import {UnauthorizedComponent} from './pages/unauthorized/unauthorized.component
 import {RecipeCommentPageComponent} from './pages/recipe-comment-page/recipe-comment-page.component';
 
 export const routes: Routes = [
-  /* { path: '/recipe/:id', component: RecipeDetailsPage }, */
   { path: 'recettes/commentaire', component: RecipeCommentPageComponent },
   /*{ path: 'recettes/:id/commentaire', component: RecipeCommentPageComponent },*/
 
@@ -39,6 +38,7 @@ export const routes: Routes = [
       { path: 'mes-infos', component: ProfilePageComponent },
     ],
   },
+  { path: 'recettes/:id', component: RecipeDetailsPage },
   { path: 'accueil', component: HomePageComponent },
   { path: 'recettes', component: RecipeDetailsPage },
   { path: 'connexion', component: SigninPageComponent },

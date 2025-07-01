@@ -1,13 +1,54 @@
 <section class="recipePresentation">
     <div class="recipePresentationLeft">
         <div class="wrapperImage">
+            <img [src]="recipeData[0].imageName" alt="recipe picture">
+        </div>
+
+        <div class="recipeCuisineType">
+            <p>Cuisine <span>Française</span></p>
+        </div>
+
+        <ul>
+            <li>
+                <p>Créé par <span>{{ 'TOTO' }}</span></p>
+            </li>
+            <li>
+                <p>{{ 'authorRecipesNumber()' }} recettes</p>
+            </li>
+        </ul>
+    </div>
+
+    <div class="recipeDescription">
+        <h2>{{ recipeData[0].name }}</h2>
+
+        <p>{{ recipeData[0].description }}</p>
+    </div>
+
+    <div class="recipeTime">
+        <app-recipe-item-time
+            [makingHours]="recipeData[0].making.hours || 0"
+            [makingMinutes]="recipeData[0].making.minutes || 0"
+            [cookingTime]="true"
+            [cookingHours]="recipeData[0].cooking?.hours || 0"
+            [cookingMinutes]="recipeData[0].cooking?.minutes || 0"
+            [pauseTime]="true"
+            [pauseHours]="recipeData[0].pause?.hours || 0"
+            [pauseMinutes]="recipeData[0].pause?.minutes || 0"
+            [servingNumber]="4"
+            servingUnit="personnes" />
+    </div>
+</section>
+
+<!--<section class="recipePresentation">
+    <div class="recipePresentationLeft">
+        <div class="wrapperImage">
             <img [src]="image()" alt="recipe picture">
         </div>
 
         <div class="recipeCuisineType">
             <p>Cuisine <span>Française</span></p>
         </div>
-    
+
         <div class="recipeAuthor">
             <ul>
                 <li>
@@ -17,7 +58,7 @@
                     <p>{{ authorRecipesNumber() }} recettes</p>
                 </li>
             </ul>
-    
+
             <ul>
                 <li>
                     <img src="plus-solid.svg" alt="add recipe">
@@ -38,7 +79,7 @@
     <div class="recipeTime">
         <ng-content />
     </div>
-</section>
+</section>-->
 
 <section class="recipeSectionBorder">
     <hr class="recipeBorder" />

@@ -1,6 +1,6 @@
 <div class="recipePage">
     <!-- SECTION : Recipe presentation -->
-    <div>{{ recipeArray[0] | json }}</div>
+
     <!--<section class="recipePresentation">
         <div class="recipePresentationLeft">
             <div class="wrapperImage">
@@ -44,33 +44,7 @@
         </div>
     </section>-->
 
-    <app-recipe-presentation
-        [image]="'../../../../../backend/uploads/' + recipeArray[0].imageName"
-        [title]="recipeArray[0].name"
-        [description]="recipeArray[0].description"
-        [authorName]="recipeArray[0].authorId"
-        [authorRecipesNumber]="12"
-        [cuisineTypeId]="2"
-        [cuisineTypeName]="recipeArray[0].cuisineType">
-        <!--
-        recipeArray[0].author.numberOfRecipes
-        recipeArray[0].cuisineType.id
-        -->
-
-        <!--<app-recipe-item-time
-            [makingHours]="recipeArray[0].makingTime.hours || 0"
-            [makingMinutes]="recipeArray[0].makingTime.minutes || 0"
-            [cookingTime]="true"
-            [cookingHours]="recipeArray[0].cookingTime?.hours || 0"
-            [cookingMinutes]="recipeArray[0].cookingTime?.minutes || 0"
-            [pauseTime]="true"
-            [pauseHours]="recipeArray[0].pauseTime?.hours || 0"
-            [pauseMinutes]="recipeArray[0].pauseTime?.minutes || 0"
-            [servingNumber]="4"
-            servingUnit="personnes" />-->
-
-    </app-recipe-presentation>
-
+    <app-recipe-presentation [recipeId]="recipeId" />
 
     <section class="recipeSectionBorder">
         <hr class="recipeBorder" />

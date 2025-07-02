@@ -31,9 +31,9 @@
                         [name]="recipe.name"
                         [average]="0"
                         [numberOfVotes]="0"
-                        [authorName]="getRecipeUser()[$index].username"
+                        [authorName]="getUser()[$index].username"
                         [recipeId]="recipe.id"
-                        [userId]="getRecipeUser()[$index].id"
+                        [userId]="recipe.authorId"
                     />
                 }
             </div>

@@ -41,14 +41,6 @@ export class RecipeDetailsPage implements OnInit {
 
   ngOnInit(): void {
     this.recipeId = Number(this.route.snapshot.paramMap.get('id'));
-    this.recipeApi.getOneRecipe(this.recipeId).subscribe({
-      next: (result) => {
-        console.log(result[0])
-        this.recipeArray.push(result[0]);
-      },
-      error: (err) => console.log('Front get one recipe error : ', err)
-    })
-    //Number(this.route.snapshot.paramMap.get('id'));
   }
 
   getRecipeDetail() {

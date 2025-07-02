@@ -5,12 +5,12 @@
         </div>
 
         <div class="recipeCuisineType">
-            <p>Cuisine <span>Française</span></p>
+            <p>Cuisine <span>{{ recipeData[0].cuisineType }}</span></p>
         </div>
 
         <ul>
             <li>
-                <p>Créé par <span>{{ 'TOTO' }}</span></p>
+                <p>Créé par <span>{{ getRecipeAuthor(recipeData[0].authorId).username }}</span></p>
             </li>
             <li>
                 <p>{{ 'authorRecipesNumber()' }} recettes</p>
@@ -24,7 +24,9 @@
         <p>{{ recipeData[0].description }}</p>
     </div>
 
-    <div class="recipeTime">
+    <div>{{ recipeData[0] | json }}</div>
+
+    <!--<div class="recipeTime">
         <app-recipe-item-time
             [makingHours]="recipeData[0].making.hours || 0"
             [makingMinutes]="recipeData[0].making.minutes || 0"
@@ -36,7 +38,7 @@
             [pauseMinutes]="recipeData[0].pause?.minutes || 0"
             [servingNumber]="4"
             servingUnit="personnes" />
-    </div>
+    </div>-->
 </section>
 
 <!--<section class="recipePresentation">

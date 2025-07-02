@@ -1,7 +1,6 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
 import { YouTubePlayer } from '@angular/youtube-player';
 
-import { PageSliderComponent } from '../../components/page-slider/page-slider.component';
 import { RecipesFilterComponent } from '../../components/recipes-filter/recipes-filter.component';
 import { RECIPE_LIST } from '../../lists/recipe-list.fake';
 import { RecipeItemComponent } from '../../components/recipe-item/recipe-item.component';
@@ -17,7 +16,6 @@ import {UsersApiService} from '../../services/users-api.service';
 @Component({
   selector: 'app-home-page',
   imports: [
-    PageSliderComponent,
     RecipesFilterComponent,
     RecipeItemComponent,
     SearchIconComponent,
@@ -36,8 +34,6 @@ export class HomePageComponent implements OnInit {
   getAllUsers: any[] = [];
   recipeAverage = inject(RecipeAverageService);
 
-  index: number = 0;
-
   constructor(
     private recipeApi: RecipesApiService,
     private userApi: UsersApiService) {
@@ -55,7 +51,7 @@ export class HomePageComponent implements OnInit {
     });
   }
 
-  getRecipeUser() {
+  getUser() {
     let array: any[] = [];
     this.getAllRecipes.map((recipe) => {
       const find = this.getAllUsers.find((user) => user.id === recipe.authorId);

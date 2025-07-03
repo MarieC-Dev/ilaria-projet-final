@@ -17,6 +17,7 @@ const login = require("./routes/login");
 const { getAllUsers, getOneUser, createUser, updateUser } = require("./routes/users");
 const { getAllIngredients, getAllIngredientsList, getAllSteps, getAllStepsList} = require("./routes/ingredients-steps");
 const { getAllServingNumber, getOneServingNumber } = require('./routes/serving-data');
+const { getAllRecipeTime, getOneRecipeTime } = require('./routes/recipe-time');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -100,6 +101,10 @@ app.get('/stepsList', getAllStepsList);
 // SERVING NUMBER
 app.get('/serving-number', getAllServingNumber);
 app.get('/serving-number/:id', getOneServingNumber);
+
+// RECIPE TIME
+app.get('/recipe-time', getAllRecipeTime);
+app.get('/recipe-time/:id', getOneRecipeTime);
 
 // LOGIN
 app.use('/login', login);

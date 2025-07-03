@@ -9,7 +9,7 @@ import { ModifyIconComponent } from "../icons/modify-icon/modify-icon.component"
 import { DeleteIconComponent } from "../icons/delete-icon/delete-icon.component";
 import { SearchIconComponent } from "../icons/search-icon/search-icon.component";
 import {ActivatedRoute, RouterLink} from '@angular/router';
-import {FavoritesApiService} from '../../services/favorites-api.service';
+import {FavoriteApiService} from '../../services/favorite-api.service';
 import {RecipesApiService} from '../../services/recipes-api.service';
 import {UsersApiService} from '../../services/users-api.service';
 
@@ -34,7 +34,7 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private favoritesApi: FavoritesApiService,
+    private favoriteApi: FavoriteApiService,
     private recipeApi: RecipesApiService,
     private userApi: UsersApiService) {
   }
@@ -42,7 +42,7 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
   ngOnInit(): void {
     this.userId = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.favoritesApi.getAllUserFavorites(this.userId).subscribe({
+    this.favoriteApi.getAllUserFavorites(this.userId).subscribe({
       next: (result) => {
         this.userFavoritesList = result.rows;
       },

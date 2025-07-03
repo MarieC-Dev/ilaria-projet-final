@@ -10,24 +10,7 @@
             <li class="recipeLineTime">
                 <hr class="recipeItemVerticalBorder" />
             </li>
-        
-            @if (cookingTime()) {
-                <li class="recipeItemTime recipeItemTime__cooking">
-                    <img src="cooking-time.svg" alt="Icon">
-                    <h4>Cuisson</h4>
-                    <p>{{ getHours(cookingHours()) }} {{ getMinutes(cookingMinutes()) }}</p>
-                </li>
-            } @else {
-                <li class="recipeItemTime recipeItemTime__cooking">
-                    <img src="not-solid.svg" alt="Icon">
-                    <h4>Pas de cuisson</h4>
-                </li>
-            }
-        
-            <li class="recipeLineTime">
-                <hr class="recipeItemVerticalBorder" />
-            </li>
-        
+
             @if (pauseTime()) {
                 <li class="recipeItemTime recipeItemTime__pause">
                     <img src="pause-time.svg" alt="Icon">
@@ -40,13 +23,30 @@
                     <h4>Pas de repos</h4>
                 </li>
             }
+
+            <li class="recipeLineTime">
+                <hr class="recipeItemVerticalBorder" />
+            </li>
+
+            @if (cookingTime()) {
+                <li class="recipeItemTime recipeItemTime__cooking">
+                    <img src="cooking-time.svg" alt="Icon">
+                    <h4>Cuisson</h4>
+                    <p>{{ getHours(cookingHours()) }} {{ getMinutes(cookingMinutes()) }}</p>
+                </li>
+            } @else {
+                <li class="recipeItemTime recipeItemTime__cooking">
+                    <img src="not-solid.svg" alt="Icon">
+                    <h4>Pas de cuisson</h4>
+                </li>
+            }
         </ul>
     </li>
 
     <li>
         <hr class="recipeItemHorizontalBorder">
     </li>
-    
+
     <li class="recipeItemTime recipeItemTime__totalTime">
         <img src="total-time.svg" alt="Icon">
         <h4>Temps total</h4>
@@ -60,6 +60,16 @@
 
     <li class="timesWrapper">
         <ul>
+            @if(cookingTime()) {
+                <li class="recipeItemTime recipeItemTime__cookingType">
+                    <app-recipe-cooking-type-item [cookingType]="cookingType()" />
+                </li>
+
+                <li class="recipeLineTime">
+                    <hr class="recipeItemVerticalBorder" />
+                </li>
+            }
+
             <li class="recipeItemTime recipeItemTime__servingNumber">
                 <img src="users.svg" alt="Icon">
                 <h4>Portions</h4>
@@ -73,7 +83,7 @@
             <li class="recipeItemTime recipeItemTime__difficultyLevel">
                 <img src="difficulty.svg" alt="Icon">
                 <h4>Difficulté</h4>
-                <p>{{ 'Facile' }}</p>
+                <p>{{ difficulty() }}</p>
             </li>
         </ul>
     </li>

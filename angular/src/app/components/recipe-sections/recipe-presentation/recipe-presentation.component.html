@@ -5,7 +5,7 @@
         </div>
 
         <div class="recipeCuisineType">
-            <p>Cuisine <span>{{ recipeData[0].cuisineType }}</span></p>
+            <p>Cuisine <span>{{ recipeDetailService.getCuisineLabel(recipeData[0].cuisineType) }}</span></p>
         </div>
 
         <ul>
@@ -13,7 +13,7 @@
                 <p>Créé par <span>{{ getRecipeAuthor(recipeData[0].authorId).username }}</span></p>
             </li>
             <li>
-                <p>{{ 'authorRecipesNumber()' }} recettes</p>
+                <p>{{ getRecipesUser(recipeData[0].authorId).length }} recettes</p>
             </li>
         </ul>
     </div>
@@ -24,65 +24,36 @@
         <p>{{ recipeData[0].description }}</p>
     </div>
 
-    <div>{{ recipeData[0] | json }}</div>
-
-    <!--<div class="recipeTime">
-        <app-recipe-item-time
-            [makingHours]="recipeData[0].making.hours || 0"
-            [makingMinutes]="recipeData[0].making.minutes || 0"
-            [cookingTime]="true"
-            [cookingHours]="recipeData[0].cooking?.hours || 0"
-            [cookingMinutes]="recipeData[0].cooking?.minutes || 0"
-            [pauseTime]="true"
-            [pauseHours]="recipeData[0].pause?.hours || 0"
-            [pauseMinutes]="recipeData[0].pause?.minutes || 0"
-            [servingNumber]="4"
-            servingUnit="personnes" />
-    </div>-->
-</section>
-
-<!--<section class="recipePresentation">
-    <div class="recipePresentationLeft">
-        <div class="wrapperImage">
-            <img [src]="image()" alt="recipe picture">
-        </div>
-
-        <div class="recipeCuisineType">
-            <p>Cuisine <span>Française</span></p>
-        </div>
-
-        <div class="recipeAuthor">
-            <ul>
-                <li>
-                    <p>Créé par <span>{{ authorName() }}</span></p>
-                </li>
-                <li>
-                    <p>{{ authorRecipesNumber() }} recettes</p>
-                </li>
-            </ul>
-
-            <ul>
-                <li>
-                    <img src="plus-solid.svg" alt="add recipe">
-                </li>
-                <li>
-                    <img src="print-solid.svg" alt="print recipe">
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="recipeDescription">
-        <h2>{{ title() }}</h2>
-
-        <p>{{ description() }}</p>
-    </div>
-
     <div class="recipeTime">
-        <ng-content />
-    </div>
-</section>-->
+        <app-recipe-item-time
+            [makingHours]="getRecipeTime(recipeData[0].recipeTimeId).makingH"
+            [makingMinutes]="getRecipeTime(recipeData[0].recipeTimeId).makingMin"
 
-<section class="recipeSectionBorder">
-    <hr class="recipeBorder" />
+            [pauseTime]="
+                showRecipeTime(
+                    getRecipeTime(recipeData[0].recipeTimeId).pauseH,
+                    getRecipeTime(recipeData[0].recipeTimeId).pauseMin)
+            "
+
+            [pauseHours]="getRecipeTime(recipeData[0].recipeTimeId).pauseH"
+            [pauseMinutes]="getRecipeTime(recipeData[0].recipeTimeId).pauseMin"
+
+            [cookingTime]="
+                showRecipeTime(
+                    getRecipeTime(recipeData[0].recipeTimeId).cookingH,
+                    getRecipeTime(recipeData[0].recipeTimeId).cookingMin)
+            "
+
+            [cookingHours]="getRecipeTime(recipeData[0].recipeTimeId).cookingH"
+            [cookingMinutes]="getRecipeTime(recipeData[0].recipeTimeId).cookingMin"
+            [cookingType]="recipeData[0].cookingType"
+
+            [servingNumber]="getServingNumberData(recipeData[0].servingNumberId).number"
+            [servingUnit]="
+                recipeDetailService.getUnitLabel(
+                getServingNumberData(recipeData[0].servingNumberId).servingType
+            )"
+            [difficulty]="recipeDetailService.getDifficultyLabel(recipeData[0].difficulty)"
+        />
+    </div>
 </section>

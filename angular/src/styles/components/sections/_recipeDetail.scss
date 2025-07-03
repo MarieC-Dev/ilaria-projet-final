@@ -66,7 +66,7 @@ div.recipePage {
         }
 
         .wrapperImage {
-            width: 100%;
+            width: auto;
             height: $sizeImgRecipe;
             display: flex;
             justify-content: center;
@@ -79,8 +79,8 @@ div.recipePage {
             }
 
             img {
-                width: auto;
-                height: $sizeImgRecipe;
+                min-width: 550px;
+                min-height: $sizeImgRecipe;
             }
         }
 

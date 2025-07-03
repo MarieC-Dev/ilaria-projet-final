@@ -15,4 +15,8 @@ export class FavoriteApiService {
       withCredentials: true
     })
   }
+
+  getAllUserFavorites(userId: number): Observable<any> {
+    return this.http.get(`${this.API_URL}/users/${userId}/favorite`);
+  }
 }

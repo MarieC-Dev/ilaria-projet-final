@@ -1,77 +1,11 @@
 <div class="recipePage">
     <!-- SECTION : Recipe presentation -->
-
-    <!--<section class="recipePresentation">
-        <div class="recipePresentationLeft">
-            <div class="wrapperImage">
-                <img [src]="recipeArray[0].imageName" alt="recipe picture">
-            </div>
-
-            <div class="recipeCuisineType">
-                <p>Cuisine <span>Française</span></p>
-            </div>
-
-            <ul>
-                <li>
-                    <p>Créé par <span>{{ 'TOTO' }}</span></p>
-                </li>
-                <li>
-                    <p>{{ 'authorRecipesNumber()' }} recettes</p>
-                </li>
-            </ul>
-        </div>
-
-        <div class="recipeDescription">
-            <h2>{{ recipeArray[0].name }}</h2>
-
-            <p>{{ recipeArray[0].description }}</p>
-        </div>
-
-        <div class="recipeTime">
-            &lt;!&ndash;<ng-content />&ndash;&gt;
-
-            <app-recipe-item-time
-                [makingHours]="recipeArray[0].making.hours || 0"
-                [makingMinutes]="recipeArray[0].making.minutes || 0"
-                [cookingTime]="true"
-                [cookingHours]="recipeArray[0].cooking?.hours || 0"
-                [cookingMinutes]="recipeArray[0].cooking?.minutes || 0"
-                [pauseTime]="true"
-                [pauseHours]="recipeArray[0].pause?.hours || 0"
-                [pauseMinutes]="recipeArray[0].pause?.minutes || 0"
-                [servingNumber]="4"
-                servingUnit="personnes" />
-        </div>
-    </section>-->
-
     <app-recipe-presentation [recipeId]="recipeId" />
 
     <section class="recipeSectionBorder">
         <hr class="recipeBorder" />
     </section>
 
-    <!--<app-recipe-presentation
-        [image]="recipe.image"
-        [title]="recipe.title"
-        [description]="recipe.description"
-        [authorName]="recipe.author.username"
-        [authorRecipesNumber]="recipe.author.numberOfRecipes"
-        [cuisineTypeId]="recipe.cuisineType.id"
-        [cuisineTypeName]="recipe.cuisineType.name">
-
-        <app-recipe-item-time
-            [makingHours]="recipe.makingTime.hours || 0"
-            [makingMinutes]="recipe.makingTime.minutes || 0"
-            [cookingTime]="true"
-            [cookingHours]="recipe.cookingTime?.hours || 0"
-            [cookingMinutes]="recipe.cookingTime?.minutes || 0"
-            [pauseTime]="true"
-            [pauseHours]="recipe.pauseTime?.hours || 0"
-            [pauseMinutes]="recipe.pauseTime?.minutes || 0"
-            [servingNumber]="4"
-            servingUnit="personnes" />
-
-    </app-recipe-presentation>-->
     <!-- ########## -->
 
     <!-- SECTION : Recipe details -->

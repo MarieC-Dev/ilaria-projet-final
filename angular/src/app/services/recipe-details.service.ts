@@ -79,4 +79,36 @@ export class RecipeDetailsService {
         return 'Inconnu';
     }
   }
+
+  getUnitIngredientLabel(unit: string) {
+    switch (unit) {
+      case 'tablespoon':
+        return 'cuillère à soupe';
+      case 'teaspoon':
+        return 'cuillère à café';
+      case 'kilogram':
+        return 'kilogrammes (kg)';
+      case 'gram':
+        return 'grammes (g)';
+      case 'milligram':
+        return 'milligrammes (mg)';
+      case 'liter':
+        return 'litres (L)';
+      case 'milliliter':
+        return 'millilitres (ml)';
+      case 'pot':
+        return 'pot(s) de yaourt';
+      case 'pinch':
+        return 'pincée';
+      case 'bottle':
+        return 'bouteille';
+      case 'box':
+        return 'boîte';
+      case 'piece':
+        return 'morceaux';
+      default:
+        return '';
+    }
+  }
+
 }

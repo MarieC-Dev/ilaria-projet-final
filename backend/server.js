@@ -94,9 +94,9 @@ app.post('/users/:id/favorite', addFavorite);
 
 // INGREDIENTS & STEPS
 app.get('/ingredients', getAllIngredients);
-app.get('/ingredientsList', getAllIngredientsList);
+app.get('/ingredients-list', getAllIngredientsList);
 app.get('/steps', getAllSteps);
-app.get('/stepsList', getAllStepsList);
+app.get('/steps-list', getAllStepsList);
 
 // SERVING NUMBER
 app.get('/serving-number', getAllServingNumber);

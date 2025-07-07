@@ -1,20 +1,19 @@
 import {CanActivateChildFn, provideRouter, Router} from '@angular/router';
 import {inject} from '@angular/core';
-import {AccountAccessService} from '../services/account-access.service';
+import {IsLoggedInService} from '../services/isLoggedIn.service';
 import {tap, map} from "rxjs";
 
 export const accountGuardGuard: CanActivateChildFn = (
   childRoute,
   state
 ) => {
-  const accountAccess: AccountAccessService = inject(AccountAccessService);
-  let authenticated: boolean = false;
+  const isLoggedIn: IsLoggedInService = inject(IsLoggedInService);
   const router = inject(Router);
   let childRouteId = Number(childRoute.paramMap.get('id'));
 
-  return accountAccess.isLoggedIn().pipe(
+  return isLoggedIn.isLoggedIn().pipe(
     tap(result => {
-      if(childRouteId !== 0 && childRouteId !== null) { //console.log(childRouteId);
+      if(childRouteId !== 0 && childRouteId !== null) {
         if(!result.isAuthenticated || result.user.id !== childRouteId) {
           router.navigate(['/unauthorized']);
         }

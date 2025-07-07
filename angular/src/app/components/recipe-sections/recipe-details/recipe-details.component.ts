@@ -1,22 +1,20 @@
-import {Component, inject, Input, input, InputSignal, OnInit, signal} from '@angular/core';
+import {Component, Input, OnInit, signal} from '@angular/core';
 import { RecipeStepComponent } from '../../recipe-step/recipe-step.component';
-import { RecipeCommentComponent } from '../../recipe-comment-component/recipe-comment.component';
 import { SocialNetworksComponent } from '../../social-networks/social-networks.component';
-import { Ingredient, RecipeComment, RecipeStep, RecipeTag } from '../../../models/recipe.model';
-import { RecipeAverageService } from '../../../services/recipe-average.service';
-import { RECIPE_LIST } from '../../../lists/recipe-list.fake';
 import { commonSocial } from '../../../lists/social-networks-list';
 import { CommonModule } from '@angular/common';
 import {RouterLink} from '@angular/router';
 import {RecipesApiService} from '../../../services/recipes-api.service';
 import {IngredientsStepsApiService} from '../../../services/ingredients-steps-api.service';
 import {RecipeDetailsService} from '../../../services/recipe-details.service';
+import {CommentApiService} from '../../../services/comment-api.service';
+import {UsersApiService} from '../../../services/users-api.service';
+import {IsLoggedInService} from '../../../services/isLoggedIn.service';
 
 @Component({
   selector: 'app-recipe-details',
   imports: [
     RecipeStepComponent,
-    RecipeCommentComponent,
     SocialNetworksComponent,
     CommonModule,
     RouterLink
@@ -26,27 +24,24 @@ import {RecipeDetailsService} from '../../../services/recipe-details.service';
 })
 export class RecipeDetailsComponent implements OnInit {
   @Input() recipeId!: number;
+
   ingredientsList!: any[];
   ingredients!: any[];
   stepsList!: any[];
   steps!: any[];
-
-  recipeAverage = inject(RecipeAverageService);
-  recipesList = signal(RECIPE_LIST);
-  recipe = this.recipesList()[0];
-
-  recipeOpinions = input<RecipeComment[]>();
-  recipeAuthorName = input.required<string>();
-
-  recipeIngredientsList = input.required<Ingredient[]>();
-
-  recipeTags = input.required<RecipeTag[]>();
+  commentsList: any[] = [];
+  usersList!: any[];
+  userConnected!: any;
 
   socialNetworksList = signal(commonSocial);
 
   constructor(
     private ingredientsStepsApi: IngredientsStepsApiService,
-    protected recipeDetailService: RecipeDetailsService
+    private commentApi: CommentApiService,
+    private usersApi: UsersApiService,
+    protected recipeDetailService: RecipeDetailsService,
+
+    private isLoggedInApi: IsLoggedInService
   ) { }
 
   ngOnInit(): void {
@@ -73,6 +68,27 @@ export class RecipeDetailsComponent implements OnInit {
       next: (result) => this.steps = result.rows,
       error: (err) => console.log(err)
     });
+
+    this.commentApi.getAllComments().subscribe({
+      next: (result) => {
+        this.commentsList = result.rows;
+      },
+      error: (err) => console.log(err)
+    });
+
+    this.usersApi.getAllUsers().subscribe({
+      next: (result) => {
+        this.usersList = result.rows;
+      },
+      error: (err) => console.log(err)
+    });
+
+    this.isLoggedInApi.isLoggedIn().subscribe({
+      next: (result) => {
+        this.userConnected = result;
+      },
+      error: (err) => console.log(err)
+    })
   }
 
   getIngredientsData(recipeId: number) {
@@ -91,28 +107,8 @@ export class RecipeDetailsComponent implements OnInit {
     });
   }
 
-
-
-
-  getNumberStep(id: number, steps: RecipeStep[]) {
-    const filterById = steps.filter((step: any) => step.id === id);
-    return filterById[0].id + 1;
+  getRecipeComments() {
+    const recipeComments = this.commentsList.filter((comment) => comment.recipeId === this.recipeId);
+    return recipeComments;
   }
-
-  getClassComment(recipeAuthorName: string, answerAuthorName?: string) {
-    if(answerAuthorName) { // [answer] existe -> ANSWER
-      if(recipeAuthorName !== answerAuthorName) { // ANSWER user
-        return 'recipeComment isAnswer userAnswer';
-      } else { // ANSWER author
-        return 'recipeComment isAnswer authorAnswer';
-      }
-    } else { // COMMENT
-      return 'recipeComment';
-    }
-  }
-
-  getAverage(id: number) {
-    this.recipeAverage.getRecipeAverage(id, this.recipesList());
-  }
-
 }

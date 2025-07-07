@@ -18,6 +18,7 @@ const { getAllUsers, getOneUser, createUser, updateUser } = require("./routes/us
 const { getAllIngredients, getAllIngredientsList, getAllSteps, getAllStepsList} = require("./routes/ingredients-steps");
 const { getAllServingNumber, getOneServingNumber } = require('./routes/serving-data');
 const { getAllRecipeTime, getOneRecipeTime } = require('./routes/recipe-time');
+const { getAllUserComments, createComment } = require("./routes/comments");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -25,7 +26,7 @@ app.use('/uploads', express.static('uploads'));
 
 app.use(cors({
   origin: 'http://localhost:4200',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
   preflightContinue: false,
@@ -62,16 +63,6 @@ const storage = multer.diskStorage({
   }
 });
 
-// Filtrage des fichiers (optionnel)
-/*const fileFilter = (req, file, cb) => {
-  // Accepte uniquement les fichiers images
-  if (file.mimetype.startsWith('image/')) {
-    cb(null, true);
-  } else {
-    cb(new Error('Seules les images sont autorisées !'), false);
-  }
-};*/
-
 // Initialisation de multer
 const uploadImg = multer({ storage: storage });
 
@@ -81,12 +72,19 @@ app.get('/users/:id', getOneUser);
 app.post('/users', uploadImg.single('user-image'), createUser);
 app.put('/users/:id', uploadImg.single('user-image'), updateUser);
 
+// LOGIN
+app.use('/login', login);
+
 // RECIPES
 app.get('/recipes', getAllRecipes);
 app.get('/recipes/:id', getOneRecipe);
 app.post('/recipes', uploadImg.single('recipe-image'), createRecipe);
 app.put('/recipes/:id', uploadImg.single('recipe-image'), updateRecipe);
 app.delete('/recipes/:id', deleteRecipe);
+
+// COMMENTS
+app.get('/comments', getAllUserComments);
+app.post('/comments', createComment)
 
 // FAVORITE
 app.get('/users/:id/favorite', getAllFavorites);
@@ -105,9 +103,6 @@ app.get('/serving-number/:id', getOneServingNumber);
 // RECIPE TIME
 app.get('/recipe-time', getAllRecipeTime);
 app.get('/recipe-time/:id', getOneRecipeTime);
-
-// LOGIN
-app.use('/login', login);
 
 sessionStore.onReady().then(() => {
   console.log('✅ MySQLStore ready');

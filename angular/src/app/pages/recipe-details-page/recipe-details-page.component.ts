@@ -20,11 +20,7 @@ import {ActivatedRoute} from '@angular/router';
   styleUrl: './recipe-details-page.component.scss'
 })
 export class RecipeDetailsPage implements OnInit {
-  recipesList = signal(RECIPE_LIST);
-  recipe = this.recipesList()[0];
-
   recipeId: number = 0;
-  recipeAverage = inject(RecipeAverageService);
 
   constructor(
     private route: ActivatedRoute
@@ -33,5 +29,4 @@ export class RecipeDetailsPage implements OnInit {
   ngOnInit(): void {
     this.recipeId = Number(this.route.snapshot.paramMap.get('id'));
   }
-
 }

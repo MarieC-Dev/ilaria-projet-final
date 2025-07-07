@@ -33,8 +33,7 @@
                                    placeholder="Titre de la recette"
                                    [value]="noteItem.value"
                                    [checked]="noteItem.checked"
-                                   (click)="handleCheckbox($event)"
-                            />
+                                   (click)="handleCheckbox($event)" />
                         </button>
                     }
                 </div>
@@ -44,7 +43,7 @@
                 <label>
                     Commentez :
                 </label>
-                <textarea name="" id="" rows="5"></textarea>
+                <textarea name="commentText" id="commentText" rows="5" formControlName="commentText"></textarea>
             </div>
 
             <button
@@ -56,6 +55,3 @@
         </form>
     </section>
 </div>
-
-
-

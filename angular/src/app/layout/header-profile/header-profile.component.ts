@@ -4,7 +4,7 @@ import {HeartIconComponent} from "../../components/icons/heart-icon/heart-icon.c
 import {ProfileIconComponent} from "../../components/icons/profile-icon/profile-icon.component";
 import {RecipeIconComponent} from "../../components/icons/recipe-icon/recipe-icon.component";
 import {RouterLink, RouterLinkActive} from "@angular/router";
-import {AccountAccessService} from '../../services/account-access.service';
+import {IsLoggedInService} from '../../services/isLoggedIn.service';
 
 @Component({
   selector: 'app-header-profile',
@@ -20,6 +20,6 @@ import {AccountAccessService} from '../../services/account-access.service';
   styleUrl: './header-profile.component.scss'
 })
 export class HeaderProfileComponent {
-  accountAccess: AccountAccessService = inject(AccountAccessService);
+  accountAccess: IsLoggedInService = inject(IsLoggedInService);
   userLoggedIn = this.accountAccess.isLoggedIn();
 }

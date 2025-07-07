@@ -4,7 +4,7 @@ import { SocialNetworksComponent } from '../../components/social-networks/social
 import { commonSocial } from '../../lists/social-networks-list';
 import { SearchIconComponent } from "../../components/icons/search-icon/search-icon.component";
 import { BurgerMenuDirective } from '../../directives/burger-menu.directive';
-import { AccountAccessService } from '../../services/account-access.service';
+import { IsLoggedInService } from '../../services/isLoggedIn.service';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
@@ -24,7 +24,7 @@ import { AsyncPipe } from '@angular/common';
 export class MainLayoutComponent {
   @ViewChild(BurgerMenuDirective) appBurgerMenu!: BurgerMenuDirective;
   socialNetworksList = signal(commonSocial);
-  accountAccess: AccountAccessService = inject(AccountAccessService);
+  accountAccess: IsLoggedInService = inject(IsLoggedInService);
   userStatus = this.accountAccess.isLoggedIn();
 
   index: number = 0;

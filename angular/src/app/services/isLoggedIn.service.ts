@@ -6,14 +6,13 @@ import {Router} from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class AccountAccessService {
+export class IsLoggedInService {
   private API_URL: string = 'http://localhost:3000';
-  private loginStatus = new BehaviorSubject<boolean>(false);
-  isConnected = this.loginStatus.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
   isLoggedIn(): Observable<any> {
-    return this.http.get(`${this.API_URL}/login/user`, { responseType: "json", withCredentials: true });
+    return this.http.get(`${this.API_URL}/login/user`,
+      { responseType: "json", withCredentials: true });
   }
 }

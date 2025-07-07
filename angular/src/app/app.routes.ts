@@ -11,21 +11,17 @@ import { ProfileFavoritesPageComponent } from './pages/profile-favorites-page/pr
 import { ProfileRecipesPageComponent } from './pages/profile-recipes-page/profile-recipes-page.component';
 import { EditRecipePageComponent } from './pages/edit-recipe-page/edit-recipe-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
-import {accountGuardGuard} from './guards/account-guard.guard';
-import {UnauthorizedComponent} from './pages/unauthorized/unauthorized.component';
-import {RecipeCommentPageComponent} from './pages/recipe-comment-page/recipe-comment-page.component';
+import { accountGuardGuard } from './guards/account-guard.guard';
+import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
+import { RecipeCommentPageComponent } from './pages/recipe-comment-page/recipe-comment-page.component';
+import { pagesAccessGuard } from './guards/pages-access.guard';
 
 export const routes: Routes = [
-  { path: 'recettes/commentaire', component: RecipeCommentPageComponent },
-  /*{ path: 'recettes/:id/commentaire', component: RecipeCommentPageComponent },*/
-
-  { path: 'profil/creer-une-recette', component: CreateRecipesComponent },
   {
-    path: 'recettes/commentaire',
+    path: 'recettes/:id/commentaire',
     component: RecipeCommentPageComponent,
-    canActivate: [accountGuardGuard]
+    canActivate: [pagesAccessGuard]
   },
-  /*{ path: 'recettes/:id/commentaire', component: RecipeCommentPageComponent },*/
   {
     path: 'profil/:id',
     canActivate: [accountGuardGuard],
@@ -38,6 +34,7 @@ export const routes: Routes = [
       { path: 'mes-infos', component: ProfilePageComponent },
     ],
   },
+
   { path: 'recettes/:id', component: RecipeDetailsPage },
   { path: 'accueil', component: HomePageComponent },
   { path: 'recettes', component: RecipeDetailsPage },

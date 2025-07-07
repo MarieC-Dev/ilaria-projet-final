@@ -17,7 +17,7 @@ import {CommonModule} from '@angular/common';
 import {TableListComponent} from '../form-components/table-list/table-list.component';
 import {HttpEventType} from '@angular/common/http';
 import {DatetimeService} from '../../services/datetime.service';
-import {AccountAccessService} from '../../services/account-access.service';
+import {IsLoggedInService} from '../../services/isLoggedIn.service';
 import {switchMap, tap} from 'rxjs';
 
 @Component({
@@ -49,7 +49,7 @@ export class CreateEditRecipeFormComponent implements OnInit{
   createdDate = inject(DatetimeService);
   selectedImage: File | null = null;
 
-  constructor(private accountAccess: AccountAccessService, private recipesApiService: RecipesApiService) {
+  constructor(private accountAccess: IsLoggedInService, private recipesApiService: RecipesApiService) {
     this.accountAccess.isLoggedIn().subscribe({
       next: (result) => this.authorIdValue = result.user.id,
       error: (err) => console.log(err)

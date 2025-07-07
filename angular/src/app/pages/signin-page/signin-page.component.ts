@@ -5,7 +5,7 @@ import { SIGNIN } from '../../lists/signin-signup-list';
 import {UserFormFactory} from '../../factories/user-form.factory';
 import {ReactiveFormsModule} from '@angular/forms';
 import {UsersApiService} from '../../services/users-api.service';
-import {AccountAccessService} from '../../services/account-access.service';
+import {IsLoggedInService} from '../../services/isLoggedIn.service';
 import {JsonPipe} from '@angular/common';
 import {Router} from '@angular/router';
 
@@ -23,7 +23,7 @@ export class SigninPageComponent implements OnInit {
   constructor(
     private router: Router,
     private usersApiService: UsersApiService,
-    private acountAccess: AccountAccessService
+    private acountAccess: IsLoggedInService
   ) { }
 
   ngOnInit(): void {

@@ -36,7 +36,7 @@
             </ul>
         </div>
 
-        <div class="recipeTags recipeTags__desktop">
+        <!--<div class="recipeTags recipeTags__desktop">
             <h3>Tags</h3>
 
             <ul class="tagList">
@@ -44,7 +44,7 @@
                     <li class="tag"> {{ tag.name }}</li>
                 }
             </ul>
-        </div>
+        </div>-->
 
         <div class="recipeShare recipeShare__desktop">
             <h3>Partager la recette</h3>
@@ -60,7 +60,7 @@
         </div>
 
         <div class="wrapperNavImage"
-             *ngIf="recipe.steps.length >= 5 && recipeOpinions()!.length > 1">
+             *ngIf="getStepsData(recipeId).flat().length"> <!--*ngIf="recipe.steps.length >= 5 && recipeOpinions()!.length > 1">-->
             <img src="recipe-detail-image.jpg" alt="détail de la recette image">
         </div>
     </nav>
@@ -70,9 +70,10 @@
     <div class="recipeComments">
         <h3>Commentaires</h3>
 
-        <a routerLink="commentaire" class="btn-bg-yellow">Écrire un commentaire</a>
-
-        <div class="commentsContainer" *ngIf="recipeOpinions()!.length > 0">
+        @if (userConnected.isAuthenticated) {
+            <a routerLink="commentaire" class="btn-bg-yellow">Écrire un commentaire</a>
+        }
+        <!--<div class="commentsContainer" *ngIf="recipeOpinions()!.length > 0">
             @for (opinion of recipeOpinions(); track opinion.id) {
                 <div class="commentAndAnswers">
                     <app-recipe-comment
@@ -85,22 +86,23 @@
                         [text]="opinion.text" />
                 </div>
             }
-        </div>
+        </div>-->
 
-        <div class="noCommentsContainer" *ngIf="recipeOpinions()!.length === 0">
+        <div>{{ commentsList | json }}</div>
+
+        <div class="noCommentsContainer" *ngIf="commentsList.length === 0">
             <p>Cette recette n'a pas encore été notée. Soyez le premier à laisser un commentaires !</p>
-            <button class="btn-bg-red" type="button">Noter la recette</button>
         </div>
     </div>
 
     <div class="recipeTags recipeTags__mobile">
         <h3>Tags</h3>
 
-        <ul class="tagList">
+        <!--<ul class="tagList">
             @for (tag of recipeTags(); track tag.id) {
                 <li class="tag"> {{ tag.name }}</li>
             }
-        </ul>
+        </ul>-->
     </div>
 
     <div class="recipeShare recipeShare__mobile">

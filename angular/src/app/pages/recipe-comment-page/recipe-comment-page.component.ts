@@ -1,9 +1,13 @@
 import {Component, ElementRef, OnChanges, OnInit, signal, SimpleChanges, ViewChild} from '@angular/core';
-import {Location} from "@angular/common";
-import {ReactiveFormsModule} from "@angular/forms";
+import {JsonPipe, Location} from "@angular/common";
+import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CommentFormFactory} from '../../factories/comment-form.factory';
 import {StarIconComponent} from '../../components/icons/star-icon/star-icon.component';
 import {StarBorderIconComponent} from '../../components/icons/star-border-icon/star-border-icon.component';
+import {CommentApiService} from '../../services/comment-api.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {UsersApiService} from '../../services/users-api.service';
+import {IsLoggedInService} from '../../services/isLoggedIn.service';
 
 @Component({
   selector: 'app-recipe-comment-page',
@@ -11,13 +15,13 @@ import {StarBorderIconComponent} from '../../components/icons/star-border-icon/s
     ReactiveFormsModule,
     StarIconComponent,
     StarBorderIconComponent,
+    JsonPipe
   ],
   templateUrl: './recipe-comment-page.component.html',
   styleUrl: './recipe-comment-page.component.scss'
 })
 export class RecipeCommentPageComponent implements OnInit {
   commentForm!: CommentFormFactory;
-  //@ViewChild('checkboxList') checkboxList!: ElementRef;
   index: number = 1;
 
   noteCheckboxItem = [
@@ -44,10 +48,24 @@ export class RecipeCommentPageComponent implements OnInit {
     },
   ]
 
-  constructor(private location: Location) { }
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location,
+    private commentApi: CommentApiService,
+    private isLoggedIn: IsLoggedInService
+  ) { }
 
   ngOnInit(): void {
     this.commentForm = new CommentFormFactory();
+    this.commentForm.formGroup.get('recipeId')?.setValue(
+      Number(this.route.snapshot.paramMap.get('id'))
+    );
+    this.isLoggedIn.isLoggedIn().subscribe({
+      next: (result) => {
+        this.commentForm.formGroup.get('userId')?.setValue(result.user.id)
+      },
+      error: (err) => console.log(err)
+    });
   }
 
   goBack() {
@@ -69,9 +87,14 @@ export class RecipeCommentPageComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('Comment is submit')
-
-    // Si note est = 0 -> Error
+    console.log('submit');
+    //console.log(this.commentForm.formGroup.value)
+    this.commentApi.createComment(this.commentForm.formGroup.value).subscribe({
+      next: (result) => this.location.back(),
+      error: (err) => console.log(err),
+      complete: () => {
+        console.log('ℹ️ Requête terminée');
+      }
+    })
   }
-
 }

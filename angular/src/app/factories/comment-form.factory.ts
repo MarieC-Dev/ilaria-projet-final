@@ -7,6 +7,8 @@ export class CommentFormFactory {
 
   constructor() {
     this.formGroup = new FormGroup({
+      recipeId: new FormControl<number>(0, Validators.required),
+      userId: new FormControl<number>(0, Validators.required),
       note: new FormControl<number>(0, [Validators.required, Validators.min(1)]),
       commentText: new FormControl<string>('')
     });

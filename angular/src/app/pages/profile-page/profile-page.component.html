@@ -13,7 +13,7 @@
                     <img src="user-regular.svg" alt="photo de profil">
                 </div>
 
-                <label for="profileImageInput">Toto le cuisto</label>
+                <label for="profileImageInput">{{ userData.username }}</label>
 
                 <p>{{ !userData.imageName ? 'Aucune image' : userData.imageName }}</p>
                 <input type="file"

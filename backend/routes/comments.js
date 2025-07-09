@@ -10,30 +10,26 @@ exports.getAllUserComments = async (req, res) => {
 }
 
 exports.createComment = async (req, res) => {
-    const { recipeId, userId, note, commentText } = req.body;
+    const { recipeId, userId, note, commentText, created } = req.body;
 
-    console.log("Requête reçue : ", req.body);  // Log pour vérifier ce que tu reçois
+    console.log("Requête reçue : ", req.body);
 
     if (recipeId === 0 || userId === 0 || recipeId === null || userId === null) {
-        console.log("Identifiants incorrects");  // Log pour la validation des IDs
+        console.log("Identifiants incorrects");
         return res.status(401).json({ error: 'Recipe ID or User ID is incorrect' });
     }
 
     try {
         console.log("Tentative d'insertion dans la base de données...");
 
-        const commentSql = 'INSERT INTO Comments (recipeId, userId, note, commentText) VALUES (?, ?, ?, ?)';
-        const commentQueries = [recipeId, userId, note, commentText];
+        const commentSql = 'INSERT INTO Comments (recipeId, userId, note, commentText, created) VALUES (?, ?, ?, ?, ?)';
+        const commentQueries = [recipeId, userId, note, commentText, created];
 
-        // Utilisation de la promesse native avec db.execute
-        const [result] = await db.execute(commentSql, commentQueries);  // Cela devrait fonctionner avec un client qui retourne une promesse.
-
-        console.log('Insertion réussie dans la DB:', result);  // Log pour insertion réussie
-        console.log('Réponse envoyée au client');
+        const [result] = await db.execute(commentSql, commentQueries);
         return res.status(201).json({ msg: 'Back post comment success', result });
 
     } catch (err) {
-        console.error('Erreur dans la requête:', err);  // Log pour les erreurs globales
+        console.error('Erreur dans la requête:', err);
         return res.status(500).json({ error: 'Back comment error ' + err });
     }
 };

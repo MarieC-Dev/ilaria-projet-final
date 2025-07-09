@@ -3,13 +3,13 @@ import { RecipeStepComponent } from '../../recipe-step/recipe-step.component';
 import { SocialNetworksComponent } from '../../social-networks/social-networks.component';
 import { commonSocial } from '../../../lists/social-networks-list';
 import { CommonModule } from '@angular/common';
-import {RouterLink} from '@angular/router';
-import {RecipesApiService} from '../../../services/recipes-api.service';
-import {IngredientsStepsApiService} from '../../../services/ingredients-steps-api.service';
-import {RecipeDetailsService} from '../../../services/recipe-details.service';
-import {CommentApiService} from '../../../services/comment-api.service';
-import {UsersApiService} from '../../../services/users-api.service';
-import {IsLoggedInService} from '../../../services/isLoggedIn.service';
+import { RouterLink } from '@angular/router';
+import { RecipeCommentComponent } from '../../recipe-comment-component/recipe-comment.component';
+import { IngredientsStepsApiService } from '../../../services/ingredients-steps-api.service';
+import { RecipeDetailsService } from '../../../services/recipe-details.service';
+import { CommentApiService } from '../../../services/comment-api.service';
+import { UsersApiService } from '../../../services/users-api.service';
+import { IsLoggedInService } from '../../../services/isLoggedIn.service';
 
 @Component({
   selector: 'app-recipe-details',
@@ -17,7 +17,8 @@ import {IsLoggedInService} from '../../../services/isLoggedIn.service';
     RecipeStepComponent,
     SocialNetworksComponent,
     CommonModule,
-    RouterLink
+    RouterLink,
+    RecipeCommentComponent
   ],
   templateUrl: './recipe-details.component.html',
   styleUrl: './recipe-details.component.scss'
@@ -78,7 +79,7 @@ export class RecipeDetailsComponent implements OnInit {
 
     this.usersApi.getAllUsers().subscribe({
       next: (result) => {
-        this.usersList = result.rows;
+        this.usersList = result;
       },
       error: (err) => console.log(err)
     });

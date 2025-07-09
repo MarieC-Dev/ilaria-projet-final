@@ -2,14 +2,12 @@
 
 $imgSize: 72px;
 
-.recipeComment {
-    background-color: white;
+.commentsItem {
     overflow: hidden;
 
     .headerComment {
         display: flex;
         align-items: center;
-        margin-bottom: 2rem;
 
         #wrapperUserPicture {
             width: $imgSize;
@@ -20,7 +18,7 @@ $imgSize: 72px;
             margin-right: 2rem;
             border-radius: 3rem;
             overflow: hidden;
-    
+
             #userPicture {
                 height: $imgSize;
             }
@@ -53,7 +51,7 @@ $imgSize: 72px;
                     margin: 4px 0 8px 0;
                     color: $mediumGrey;
                 }
-                
+
                 img {
                     height: 18px;
                     margin-right: 5px;
@@ -63,6 +61,7 @@ $imgSize: 72px;
     }
 
     & > p {
+        margin-top: 2rem;
         color: $darkGrey;
         line-height: 1.5;
     }
@@ -89,7 +88,7 @@ $imgSize: 72px;
             transition: transform .2s ease-in-out;
         }
     }
-    
+
 }
 
 .answersList {
@@ -119,15 +118,17 @@ $imgSize: 72px;
     }
 }
 
+app-recipe-comment {
+    padding: 2rem;
+}
+
 app-recipe-comment:first-child {
-    margin-top: 2rem;
-
-    @media only screen and (max-width: 767px) {
-        margin-top: 1rem;
-    }
-
-    .authorAnswer {
-        padding-top: 0;
-    }
+    padding-top: 0;
+}
+app-recipe-comment:nth-child(even) {
+    background-color: $lightGrey;
+}
+app-recipe-comment:nth-child(odd) {
+    background-color: white;
 }
 

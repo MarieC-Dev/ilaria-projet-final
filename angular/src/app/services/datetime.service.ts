@@ -60,7 +60,7 @@ export class DatetimeService {
 
   get datetime() {
     let date = `${this.formatDate(this.newDate.getDate())}/${this.formatDate(this.newDate.getMonth() + 1)}/${this.formatDate(this.newDate.getFullYear())}`;
-    let schedules = `${this.formatDate(this.newDate.getUTCHours())}:${this.formatDate(this.newDate.getUTCMinutes())}:${this.formatDate(this.newDate.getUTCMinutes())}`;
+    let schedules = `${this.formatDate(this.newDate.getHours())}:${this.formatDate(this.newDate.getMinutes())}:${this.formatDate(this.newDate.getSeconds())}`;
     return date + ' - ' + schedules;
   }
 }

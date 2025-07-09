@@ -8,6 +8,7 @@ import {CommentApiService} from '../../services/comment-api.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UsersApiService} from '../../services/users-api.service';
 import {IsLoggedInService} from '../../services/isLoggedIn.service';
+import {DatetimeService} from '../../services/datetime.service';
 
 @Component({
   selector: 'app-recipe-comment-page',
@@ -52,7 +53,8 @@ export class RecipeCommentPageComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private commentApi: CommentApiService,
-    private isLoggedIn: IsLoggedInService
+    private isLoggedIn: IsLoggedInService,
+    private dateService: DatetimeService
   ) { }
 
   ngOnInit(): void {
@@ -87,10 +89,10 @@ export class RecipeCommentPageComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('submit');
-    //console.log(this.commentForm.formGroup.value)
+    this.commentForm.formGroup.get('created')?.setValue(this.dateService.datetime);
+
     this.commentApi.createComment(this.commentForm.formGroup.value).subscribe({
-      next: (result) => this.location.back(),
+      next: (result) => window.location.reload(),
       error: (err) => console.log(err),
       complete: () => {
         console.log('ℹ️ Requête terminée');

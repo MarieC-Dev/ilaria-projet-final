@@ -73,22 +73,17 @@
         @if (userConnected.isAuthenticated) {
             <a routerLink="commentaire" class="btn-bg-yellow">Écrire un commentaire</a>
         }
-        <!--<div class="commentsContainer" *ngIf="recipeOpinions()!.length > 0">
-            @for (opinion of recipeOpinions(); track opinion.id) {
-                <div class="commentAndAnswers">
-                    <app-recipe-comment
-                        [classes]="getClassComment(recipe.author.username)"
-                        [ids]="'commentId' + opinion.id"
-                        [picture]="opinion.author.picture"
-                        [username]="opinion.author.username"
-                        [date]="opinion.created"
-                        [note]="opinion.starScore"
-                        [text]="opinion.text" />
-                </div>
-            }
-        </div>-->
 
-        <div>{{ commentsList | json }}</div>
+        <div class="commentsContainer" *ngIf="getRecipeComments()!.length > 0">
+            @for (comment of getRecipeComments(); track $index) {
+                <app-recipe-comment
+                    [userId]="comment.userId"
+                    [date]="comment.created"
+                    [note]="comment.note"
+                    [text]="comment.commentText"
+                />
+            }
+        </div>
 
         <div class="noCommentsContainer" *ngIf="commentsList.length === 0">
             <p>Cette recette n'a pas encore été notée. Soyez le premier à laisser un commentaires !</p>

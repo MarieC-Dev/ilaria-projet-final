@@ -1,11 +1,20 @@
-<div [class]="showAnswers() ? classes() + ' show' : classes()" [id]="ids()">
+<div class="commentsItem">
     <div class="headerComment">
         <div id="wrapperUserPicture">
-            <img id="userPicture" [src]="picture()" alt="user profile image">
+            <img id="userPicture"
+                 [src]="userData[0].imageName"
+                 [alt]="'Photo de profil de ' + userData[0].username"
+                 onerror="
+                     this.src='user-regular.svg';
+                     this.style.border='4px solid #848484';
+                     this.style.borderRadius='5rem';
+                     this.style.width='72px';
+                     this.style.height='72px';
+                 " >
         </div>
         <ul>
             <li>
-                <h4>{{ username() }}</h4>
+                <h4>{{ userData[0].username }}</h4>
             </li>
             <li>
                 <p>{{ date() }}</p>
@@ -16,19 +25,5 @@
             </li>
         </ul>
     </div>
-    <p>{{ text() }}</p>
-
-    <!--@if(answersArray() > 0) {
-        <button
-            [id]="ids()"
-            [class]="showAnswers() ? 'showAnswersBtn show' : 'showAnswersBtn'"
-            (click)="setShowAnswers()"
-            [appShowCommentAnswers]="{
-                targetId: this.ids().replace('commentId', 'answersList'),
-                checkBool: this.showAnswers()
-              }">
-            <p>Afficher les réponses ({{answersArray()}})</p>
-            <img src="chevron-down.svg" alt="chevron icon">
-        </button>
-    }-->
+    <p *ngIf="text()">{{ text() }}</p>
 </div>

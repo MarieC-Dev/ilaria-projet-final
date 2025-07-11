@@ -20,8 +20,10 @@
                 <p>{{ date() }}</p>
             </li>
             <li>
-                <img *ngFor="let i of getStars(true)" src="star.svg" alt="star icon">
-                <img *ngFor="let i of getStars(false)" src="star-border.svg" alt="star icon">
+                @for (star of getStars(note()); track $index) {
+                    <img *ngIf="star" src="star.svg" alt="star icon">
+                    <img *ngIf="!star" src="star-border.svg" alt="star icon">
+                }
             </li>
         </ul>
     </div>

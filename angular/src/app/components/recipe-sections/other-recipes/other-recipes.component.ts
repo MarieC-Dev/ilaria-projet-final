@@ -18,7 +18,7 @@ export class OtherRecipesComponent {
 
   recipe = input.required<Recipe>();
   recipeId = input.required<number>();
-  
+
   getOtherRecipesList() {
     const array = [];
 
@@ -43,7 +43,7 @@ export class OtherRecipesComponent {
     }
   }
 
-  getAverage(id: number) {
+  /*getAverage(id: number) {
     this.recipeAverage.getRecipeAverage(id, this.recipesList());
-  }
+  }*/
 }

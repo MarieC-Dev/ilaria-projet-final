@@ -4,12 +4,12 @@
         @for (recipe of getOtherRecipesList(); track recipe.id;) {
             <app-recipe-item
                 [id]="recipe.id"
-                [picture]="recipe.image" 
-                [name]="recipe.title" 
-                [average]="getAverage(recipe.id)" 
+                [picture]="recipe.image"
+                [name]="recipe.title"
                 [numberOfVotes]="recipe.opinions?.length"
                 [authorName]="recipe.author.username"
             />
+            <!--[average]="getAverage(recipe.id)"-->
         }
     </div>
 </section>

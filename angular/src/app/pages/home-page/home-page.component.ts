@@ -60,8 +60,8 @@ export class HomePageComponent implements OnInit {
     return array;
   }
 
-  getRecipeAverage(id: number) {
+  /*getRecipeAverage(id: number) {
     return this.recipeAverage.getRecipeAverage(id, this.recipesList());
-  }
+  }*/
 
 }

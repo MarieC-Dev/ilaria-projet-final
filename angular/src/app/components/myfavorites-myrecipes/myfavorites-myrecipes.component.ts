@@ -99,9 +99,9 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
     })
   }
 
-  getAverage(id: number, array: RecipeList) {
+  /*getAverage(id: number, array: RecipeList) {
     return this.average.getRecipeAverage(id, array);
-  }
+  }*/
 
 
 

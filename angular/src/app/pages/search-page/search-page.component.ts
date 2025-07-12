@@ -15,7 +15,7 @@ export class SearchPageComponent {
   recipesList = signal(RECIPE_LIST);
   averageService = inject(RecipeAverageService);
 
-  getRecipeAverage(id: number) {
+  /*getRecipeAverage(id: number) {
     return this.averageService.getRecipeAverage(id, this.recipesList());
-  }
+  }*/
 }

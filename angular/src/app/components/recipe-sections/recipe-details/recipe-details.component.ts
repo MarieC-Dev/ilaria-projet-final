@@ -10,6 +10,7 @@ import { RecipeDetailsService } from '../../../services/recipe-details.service';
 import { CommentApiService } from '../../../services/comment-api.service';
 import { UsersApiService } from '../../../services/users-api.service';
 import { IsLoggedInService } from '../../../services/isLoggedIn.service';
+import {RecipeAverageService} from '../../../services/recipe-average.service';
 
 @Component({
   selector: 'app-recipe-details',
@@ -39,6 +40,7 @@ export class RecipeDetailsComponent implements OnInit {
   constructor(
     private ingredientsStepsApi: IngredientsStepsApiService,
     private commentApi: CommentApiService,
+    private recipeAverage: RecipeAverageService,
     private usersApi: UsersApiService,
     protected recipeDetailService: RecipeDetailsService,
 
@@ -109,7 +111,10 @@ export class RecipeDetailsComponent implements OnInit {
   }
 
   getRecipeComments() {
-    const recipeComments = this.commentsList.filter((comment) => comment.recipeId === this.recipeId);
-    return recipeComments;
+    return this.commentsList.filter((comment) => comment.recipeId === this.recipeId);
+  }
+
+  getRecipeAverage() {
+    return this.recipeAverage.getRecipeAverage(Number(this.recipeId), this.getRecipeComments())
   }
 }

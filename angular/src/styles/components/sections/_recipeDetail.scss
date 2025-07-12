@@ -435,6 +435,17 @@ section.recipeSectionBorder {
             grid-row: 4/5;
         }
 
+        .recipeAverage {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+
+            img {
+                height: 20px;
+                margin-right: .5rem;
+            }
+        }
+
         a {
             margin: auto auto 3rem 0;
         }

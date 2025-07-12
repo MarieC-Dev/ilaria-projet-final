@@ -70,6 +70,11 @@
     <div class="recipeComments">
         <h3>Commentaires</h3>
 
+        <div class="recipeAverage">
+            <img src="star.svg" alt="Icone étoile">
+            <p>{{ getRecipeAverage() }} ({{ getRecipeComments().length }} avis)</p>
+        </div>
+
         @if (userConnected.isAuthenticated) {
             <a routerLink="commentaire" class="btn-bg-yellow">Écrire un commentaire</a>
         }

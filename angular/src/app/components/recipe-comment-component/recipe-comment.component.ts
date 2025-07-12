@@ -5,7 +5,7 @@ import {UsersApiService} from '../../services/users-api.service';
 
 @Component({
   selector: 'app-recipe-comment',
-  imports: [CommonModule, ShowCommentAnswersDirective],
+  imports: [CommonModule],
   templateUrl: './recipe-comment.component.html',
   styleUrl: './recipe-comment.component.scss'
 })
@@ -36,7 +36,6 @@ export class RecipeCommentComponent implements OnInit {
     const noteNb = Number(note);
 
     for (let i = 0; i < note; i++) {
-      console.log(i)
       stars.push(true);
     }
 
@@ -49,24 +48,4 @@ export class RecipeCommentComponent implements OnInit {
     return stars;
   }
 
-  /*getStars(solid: boolean) {
-    const lastChar: string = String(this.note).charAt(String(this.note).length - 2);
-    const nb: number = parseInt(lastChar);
-
-    if(nb > 0 && nb <= 5) {
-      const array = [];
-
-      for(let i = 0; i < nb; i++) {
-        array.push(`${i}`);
-      }
-
-      if(solid) {
-        return array;
-      } else {
-        return array.splice(0, 5 - array.length);
-      }
-    } else {
-      return;
-    }
-  }*/
 }

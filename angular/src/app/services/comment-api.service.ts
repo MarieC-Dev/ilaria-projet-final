@@ -21,6 +21,11 @@ export class CommentApiService {
     return this.http.get(`${this.API_URL}/comments`);
   }
 
+  getCommentsByRecipeId(id: number): Observable<any> {
+    return this.http.get(`${this.API_URL}/recipe/${id}/comments`);
+    // /recipe/:id/comments
+  }
+
   createComment(comment: Comment): Observable<any> {
     return this.http.post<Comment>(`${this.API_URL}/comments`, comment, {
       withCredentials: true,

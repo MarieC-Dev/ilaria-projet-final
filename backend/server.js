@@ -18,7 +18,7 @@ const { getAllUsers, getOneUser, createUser, updateUser } = require("./routes/us
 const { getAllIngredients, getAllIngredientsList, getAllSteps, getAllStepsList} = require("./routes/ingredients-steps");
 const { getAllServingNumber, getOneServingNumber } = require('./routes/serving-data');
 const { getAllRecipeTime, getOneRecipeTime } = require('./routes/recipe-time');
-const { getAllUserComments, createComment } = require("./routes/comments");
+const { getAllUserComments, createComment, getCommentsByRecipeId} = require("./routes/comments");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -82,9 +82,11 @@ app.post('/recipes', uploadImg.single('recipe-image'), createRecipe);
 app.put('/recipes/:id', uploadImg.single('recipe-image'), updateRecipe);
 app.delete('/recipes/:id', deleteRecipe);
 
+app.get('/recipe/:id/comments', getCommentsByRecipeId);
+
 // COMMENTS
 app.get('/comments', getAllUserComments);
-app.post('/comments', createComment)
+app.post('/comments', createComment);
 
 // FAVORITE
 app.get('/users/:id/favorite', getAllFavorites);

@@ -9,6 +9,16 @@ exports.getAllUserComments = async (req, res) => {
     }
 }
 
+exports.getCommentsByRecipeId = async (req, res) => {
+    const recipeId = req.params.id;
+    try {
+        const [rows] = await db.execute('SELECT * FROM Comments WHERE recipeId = ?', [recipeId]);
+        return res.status(200).json({message: 'All comments by recipe ID', rows})
+    } catch (error) {
+        return res.status(500).json({ error: 'Error get all user comments' });
+    }
+}
+
 exports.createComment = async (req, res) => {
     const { recipeId, userId, note, commentText, created } = req.body;
 

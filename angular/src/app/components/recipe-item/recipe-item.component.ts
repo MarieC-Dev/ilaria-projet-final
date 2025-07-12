@@ -1,15 +1,18 @@
-import {Component, input, output} from '@angular/core';
+import {Component, input, OnInit, output} from '@angular/core';
 import { HeartIconComponent } from "../icons/heart-icon/heart-icon.component";
 import {FavoriteApiService} from '../../services/favorite-api.service';
 import {RouterLink} from '@angular/router';
+import {CommentApiService} from '../../services/comment-api.service';
+import {RecipeAverageService} from '../../services/recipe-average.service';
+import {JsonPipe} from '@angular/common';
 
 @Component({
   selector: 'app-recipe-item',
-  imports: [HeartIconComponent, RouterLink],
+  imports: [HeartIconComponent, RouterLink, JsonPipe],
   templateUrl: './recipe-item.component.html',
   styleUrl: '../../../styles.scss'
 })
-export class RecipeItemComponent {
+export class RecipeItemComponent implements OnInit {
   id = input<number>();
   picture = input<string>();
   name = input<string>();
@@ -19,7 +22,21 @@ export class RecipeItemComponent {
   recipeId = input<number>();
   userId = input<number>();
 
-  constructor(private favoriteApi: FavoriteApiService) {
+  recipeComments!: any[];
+
+  constructor(
+    private favoriteApi: FavoriteApiService,
+    private commentsApi: CommentApiService,
+    private recipeAverage: RecipeAverageService
+  ) { }
+
+  ngOnInit(): void {
+    this.commentsApi.getCommentsByRecipeId(Number(this.recipeId())).subscribe({
+      next: (result) => {
+        this.recipeComments = result.rows;
+      },
+      error: (err) => console.log(err)
+    });
   }
 
   handleFavorite(event: Event) {
@@ -34,5 +51,9 @@ export class RecipeItemComponent {
       next: (result) => console.log(result),
       error: (err) => console.log('POST favorite error', err)
     })
+  }
+
+  getNoteAverage() {
+    return this.recipeAverage.getRecipeAverage(Number(this.recipeId()), this.recipeComments);
   }
 }

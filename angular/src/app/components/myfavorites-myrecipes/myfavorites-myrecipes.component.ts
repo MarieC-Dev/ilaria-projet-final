@@ -1,17 +1,16 @@
 import { CommonModule, JsonPipe } from '@angular/common';
-import {Component, inject, input, OnInit, signal} from '@angular/core';
+import {Component, inject, input, OnInit} from '@angular/core';
 import { RecipeItemComponent } from '../recipe-item/recipe-item.component';
 import { RecipeAverageService } from '../../services/recipe-average.service';
 import { RecipeList } from '../../models/recipe.model';
-import { ChevronDownIconComponent } from "../icons/chevron-down-icon/chevron-down-icon.component";
-import { COLORS } from '../icons/colors';
 import { ModifyIconComponent } from "../icons/modify-icon/modify-icon.component";
 import { DeleteIconComponent } from "../icons/delete-icon/delete-icon.component";
-import { SearchIconComponent } from "../icons/search-icon/search-icon.component";
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {FavoriteApiService} from '../../services/favorite-api.service';
 import {RecipesApiService} from '../../services/recipes-api.service';
 import {UsersApiService} from '../../services/users-api.service';
+import {CommentApiService} from '../../services/comment-api.service';
+import {switchMap} from 'rxjs';
 
 @Component({
   selector: 'app-myfavorites-myrecipes',
@@ -37,12 +36,14 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
   username: string = '';
   favoritesList!: any[];
   recipesListApi: any[] = [];
+  recipesComments!: any[];
   average = inject(RecipeAverageService);
 
   constructor(
     private route: ActivatedRoute,
     private favoriteApi: FavoriteApiService,
     private recipeApi: RecipesApiService,
+    private commentApi: CommentApiService,
     private userApi: UsersApiService) {
   }
 
@@ -57,12 +58,14 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
       error: (err) => console.log('get favotites list error ' + err)
     });
 
-    this.recipeApi.getAllRecipes().subscribe({
-      next: (result) => {
-        this.recipesListApi = result;
-      },
-      error: (err) => console.log('get recipes list error ' + err)
-    });
+    this.recipeApi.getAllRecipes().pipe(
+      switchMap((recipe) => {
+        this.recipesListApi = recipe;
+        return this.commentApi.getAllComments();
+      })
+    ).subscribe((comment) => {
+      this.recipesComments = comment.rows;
+    })
 
     this.userApi.getOneUser(this.userId).subscribe({
       next: (result) => {
@@ -108,9 +111,15 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
     })
   }
 
-  /*getAverage(id: number, array: RecipeList) {
-    return this.average.getRecipeAverage(id, array);
-  }*/
+  getRecipeComments(recipeId: number) {
+    const recipeComments = this.recipesComments.filter((comment) => comment.recipeId === recipeId);
+    return recipeComments;
+  }
+
+  getAverage(recipeId: number) {
+    const recipeComments = this.recipesComments.filter((comment) => comment.recipeId === recipeId);
+    return this.average.getRecipeAverage(recipeId, this.getRecipeComments(recipeId));
+  }
 
 
 

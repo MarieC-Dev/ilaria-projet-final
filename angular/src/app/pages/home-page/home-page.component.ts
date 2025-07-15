@@ -61,8 +61,16 @@ export class HomePageComponent implements OnInit {
     return array;
   }
 
-  /*getRecipeAverage(id: number) {
-    return this.recipeAverage.getRecipeAverage(id, this.recipesList());
-  }*/
+  /*
+    getRecipeComments(recipeId: number) {
+    const recipeComments = this.recipesComments.filter((comment) => comment.recipeId === recipeId);
+    return recipeComments;
+  }
+
+  getAverage(recipeId: number) {
+    const recipeComments = this.recipesComments.filter((comment) => comment.recipeId === recipeId);
+    return this.average.getRecipeAverage(recipeId, this.getRecipeComments(recipeId));
+  }
+  * */
 
 }

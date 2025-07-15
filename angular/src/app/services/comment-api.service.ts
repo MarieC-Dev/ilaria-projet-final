@@ -23,7 +23,6 @@ export class CommentApiService {
 
   getCommentsByRecipeId(id: number): Observable<any> {
     return this.http.get(`${this.API_URL}/recipe/${id}/comments`);
-    // /recipe/:id/comments
   }
 
   createComment(comment: Comment): Observable<any> {

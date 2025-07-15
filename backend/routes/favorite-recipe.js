@@ -3,27 +3,16 @@ const db = require('../middlewares/db_connection');
 exports.getAllFavorites = async (req, res) => {
     try {
         const [rows] = await db.execute('SELECT * FROM FavoritesList');
-        console.log(rows)
         res.status(200).json({ message: 'Get favorites ', rows })
     } catch (err) {
         res.status(500).json({ error: 'Get all favorites error ' + err })
     }
 }
-/*
-exports.getAllUserFavorites = async (req, res) => {
-    const userId = req.params.id;
-
-    try {
-        const [rows] = await db.execute('SELECT * FROM FavoritesList WHERE id = ?', [userId]);
-        console.log(rows);
-        return res.status(200).json({ message: rows })
-    } catch (err) {
-        res.status(500).json({ error: 'Get all favorites error ' + err })
-    }
-}*/
 
 exports.addFavorite = async (req, res) => {
     const { recipeId, userId } = req.body;
+
+    console.log(req.body)
 
     if(!recipeId || !userId) {
         return res.status(404).json({ error: 'Favorite data is missing' })

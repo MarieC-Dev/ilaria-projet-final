@@ -18,7 +18,6 @@ export class RecipeAverageService {
       recipeComments.map((comment) => {
         notes.push(comment.note)
       })
-      // console.log(`${recipeId} ---> ${notes}`);
 
       const sum: number = notes.reduce(averageFn) / recipeComments.length;
       const round = Math.round(sum * 10) / 10;

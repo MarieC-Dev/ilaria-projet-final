@@ -1,14 +1,17 @@
-import {Component, input, OnInit, output} from '@angular/core';
+import {Component, EventEmitter, Input, input, OnInit, Output, output, signal} from '@angular/core';
 import { HeartIconComponent } from "../icons/heart-icon/heart-icon.component";
 import {FavoriteApiService} from '../../services/favorite-api.service';
 import {RouterLink} from '@angular/router';
 import {CommentApiService} from '../../services/comment-api.service';
 import {RecipeAverageService} from '../../services/recipe-average.service';
 import {JsonPipe} from '@angular/common';
+import {HeartBorderIconComponent} from '../icons/heart-border-icon/heart-border-icon.component';
+import {IsLoggedInService} from '../../services/isLoggedIn.service';
+import {switchMap} from 'rxjs';
 
 @Component({
   selector: 'app-recipe-item',
-  imports: [HeartIconComponent, RouterLink, JsonPipe],
+  imports: [HeartIconComponent, RouterLink, JsonPipe, HeartBorderIconComponent],
   templateUrl: './recipe-item.component.html',
   styleUrl: '../../../styles.scss'
 })
@@ -21,39 +24,82 @@ export class RecipeItemComponent implements OnInit {
   authorName = input<string>();
   recipeId = input<number>();
   userId = input<number>();
+  isFavorite = signal(false);
 
+  userLoggedInData!: any;
+  favorites!: any[];
   recipeComments!: any[];
+  noteAverage!: number;
+  numberOfNote!: number;
 
   constructor(
-    private favoriteApi: FavoriteApiService,
     private commentsApi: CommentApiService,
-    private recipeAverage: RecipeAverageService
+    private favoriteApi: FavoriteApiService,
+    private recipeAverage: RecipeAverageService,
+    private userLoggedIn: IsLoggedInService
   ) { }
 
   ngOnInit(): void {
-    this.commentsApi.getCommentsByRecipeId(Number(this.recipeId())).subscribe({
-      next: (result) => {
-        this.recipeComments = result.rows;
-      },
-      error: (err) => console.log(err)
-    });
-  }
+    this.userLoggedIn.isLoggedIn().pipe(
+      switchMap((res1) => {
+        this.userLoggedInData = res1.user;
+        return this.commentsApi.getCommentsByRecipeId(Number(this.recipeId()))
+      }),
+      switchMap((res2) => {
+        this.recipeComments = res2.rows;
+        this.noteAverage = this.recipeAverage.getRecipeAverage(
+          Number(this.recipeId()), res2.rows
+        );
+        this.numberOfNote = res2.rows.length;
 
-  handleFavorite(event: Event) {
-    event.preventDefault();
+        return this.favoriteApi.getAllFavorites();
+      })
+    ).subscribe((res3) => {
+      this.favorites = res3.rows;
 
-    const favorite = {
-      recipeId: this.recipeId(),
-      userId: this.userId()
-    }
+      const findUserFavorite = this.favorites.some(
+        (fav) =>
+          fav.userId === this.userLoggedInData?.id &&
+          fav.recipeId === Number(this.recipeId())
+      );
 
-    this.favoriteApi.addFavorite(favorite).subscribe({
-      next: (result) => console.log(result),
-      error: (err) => console.log('POST favorite error', err)
+      this.isFavorite.set(findUserFavorite);
     })
   }
 
-  getNoteAverage() {
-    return this.recipeAverage.getRecipeAverage(Number(this.recipeId()), this.recipeComments);
+  addFavorite() {
+    const favoriteData = {
+      userId: this.userLoggedInData.id,
+      recipeId: Number(this.recipeId())
+    };
+
+    this.favoriteApi.addFavorite(favoriteData).subscribe({
+      next: (result) => {
+        this.favorites = [...this.favorites, result.rows];
+        this.isFavorite.set(true);
+      },
+      error: (err) => {
+        console.log('POST favorite error', err);
+      }
+    })
   }
+
+  deleteFavorite() {
+    const fav = this.favorites.find(
+      (f) =>
+        f.userId === this.userLoggedInData.id &&
+        f.recipeId === Number(this.recipeId())
+    );
+
+    if (!fav) return;
+
+    this.favoriteApi.deleteFavorite(fav.id).subscribe({
+      next: () => {
+        this.favorites = this.favorites.filter((f) => f.id !== fav.id);
+        this.isFavorite.set(false); // ✅ mise à jour directe
+      },
+      error: (err) => console.log('DELETE favorite error', err)
+    });
+  }
+
 }

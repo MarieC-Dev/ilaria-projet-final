@@ -12,6 +12,7 @@ import { PlayIconComponent } from "../../components/icons/play-icon/play-icon.co
 import {RecipesApiService} from '../../services/recipes-api.service';
 import {JsonPipe} from '@angular/common';
 import {UsersApiService} from '../../services/users-api.service';
+import {FavoriteApiService} from '../../services/favorite-api.service';
 
 @Component({
   selector: 'app-home-page',
@@ -36,8 +37,8 @@ export class HomePageComponent implements OnInit {
 
   constructor(
     private recipeApi: RecipesApiService,
-    private userApi: UsersApiService) {
-  }
+    private userApi: UsersApiService,
+  ) { }
 
   ngOnInit(): void {
     this.recipeApi.getAllRecipes().subscribe({

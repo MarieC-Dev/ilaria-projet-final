@@ -10,13 +10,21 @@ export class FavoriteApiService {
 
   constructor(private http: HttpClient) { }
 
-  addFavorite(favorite: any): Observable<any> {
-    return this.http.post(`${this.API_URL}/favorite`, favorite, {
-      withCredentials: true
-    })
+  getAllFavorites(): Observable<any> {
+    return this.http.get(`${this.API_URL}/favorite`);
   }
 
   getAllUserFavorites(userId: number): Observable<any> {
     return this.http.get(`${this.API_URL}/users/${userId}/favorite`);
+  }
+
+  addFavorite(favorite: any): Observable<any> {
+    return this.http.post(`${this.API_URL}/users/${favorite.userId}/favorite`, favorite, {
+      withCredentials: true
+    })
+  }
+
+  deleteFavorite(userId: number): Observable<any> {
+    return this.http.delete(`${this.API_URL}/users/${userId}/favorite`);
   }
 }

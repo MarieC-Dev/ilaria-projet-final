@@ -1,13 +1,19 @@
+<div class="favoriteButton">
+    <button type="button" [class]="isFavorite() ? 'addFavoriteBtn hide' : 'addFavoriteBtn show'" (click)="addFavorite()">
+        <app-heart-border-icon />
+    </button>
+
+    <button type="button" [class]="isFavorite() ? 'removeFavoriteBtn show' : 'removeFavoriteBtn hide'" (click)="deleteFavorite()">
+        <app-heart-icon />
+    </button>
+</div>
+
 <a [routerLink]="'/recettes/' + id()">
     <div class="recipeItem" [id]="id()">
         <div>
             <div class="wrapperImg">
                 <img [src]="picture()" alt="recipe picture">
             </div>
-
-            <button type="button" (click)="handleFavorite($event)">
-                <app-heart-icon />
-            </button>
         </div>
 
         <h4>{{ name() }}</h4>
@@ -15,7 +21,7 @@
         <ul>
             <li>
                 <img src="star.svg" alt="icon star">
-                <p>{{ getNoteAverage() }}({{ recipeComments.length }})</p>
+                <p>{{ noteAverage }}({{ numberOfNote }})</p>
             </li>
             <li>
                 by {{ authorName() }}

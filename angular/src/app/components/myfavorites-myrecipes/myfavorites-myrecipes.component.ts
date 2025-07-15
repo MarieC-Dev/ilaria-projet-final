@@ -15,7 +15,13 @@ import {UsersApiService} from '../../services/users-api.service';
 
 @Component({
   selector: 'app-myfavorites-myrecipes',
-  imports: [CommonModule, RecipeItemComponent, ChevronDownIconComponent, JsonPipe, ModifyIconComponent, DeleteIconComponent, SearchIconComponent, RouterLink],
+  imports: [
+    CommonModule,
+    RecipeItemComponent,
+    ModifyIconComponent,
+    DeleteIconComponent,
+    RouterLink
+  ],
   templateUrl: './myfavorites-myrecipes.component.html',
   styleUrl: './myfavorites-myrecipes.component.scss'
 })
@@ -27,8 +33,9 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
   recipesArray = input<Array<any>>([]);
 
   userId!: number;
+  userData!: any[];
   username: string = '';
-  userFavoritesList: any[] = [];
+  favoritesList!: any[];
   recipesListApi: any[] = [];
   average = inject(RecipeAverageService);
 
@@ -42,9 +49,10 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
   ngOnInit(): void {
     this.userId = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.favoriteApi.getAllUserFavorites(this.userId).subscribe({
+    this.favoriteApi.getAllFavorites().subscribe({
       next: (result) => {
-        this.userFavoritesList = result.rows;
+        const userFavorites = result.rows.filter((favorite: any) => favorite.userId === this.userId);
+        this.favoritesList = userFavorites
       },
       error: (err) => console.log('get favotites list error ' + err)
     });
@@ -58,6 +66,7 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
 
     this.userApi.getOneUser(this.userId).subscribe({
       next: (result) => {
+        this.userData = result.profile[0];
         this.username = result.profile[0].username;
       },
       error: (err) => console.log('get user data error ' + err)
@@ -66,7 +75,7 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
 
   getUserFavorites() {
     const favoriteRecipes: any[] = [];
-    const favoriteIds = this.userFavoritesList.filter((item) => item.userId === this.userId);
+    const favoriteIds = this.favoritesList.filter((item) => item.userId === this.userId);
 
     favoriteIds.map((fav) => {
       const recipes = this.recipesListApi.filter((recipe) => recipe.id === fav.recipeId);

@@ -4,20 +4,23 @@
     <!-- @If FAVORITES : -->
     <div *ngIf="isFavorites()" class="myFavoritesDiv">
         <div class="myFavoritesItems">
-            @for (fav of getUserFavorites(); track fav.id) {
+            @for (recipe of getUserFavorites(); track recipe.id) {
                 <app-recipe-item
-                    [id]="fav.id"
-                    [picture]="fav.imageName"
-                    [name]="fav.name"
+                    [id]="recipe.id"
+                    [picture]="recipe.imageName"
+                    [name]="recipe.name"
                     [average]="0"
                     [numberOfVotes]="0"
-                    [authorName]="username" />
+                    [authorName]="username"
+                    [recipeId]="recipe.id"
+                    [userId]="recipe.authorId"
+                />
             }
         </div>
     </div>
 
     <!-- @If RECIPES : -->
-    <a class="btn-bg-yellow" routerLink="creer">Créer une recette</a>
+    <a *ngIf="isRecipes()" class="btn-bg-yellow" routerLink="creer">Créer une recette</a>
 
     <table *ngIf="isRecipes()" class="myRecipesTable">
         <thead>

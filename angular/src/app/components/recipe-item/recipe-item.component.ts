@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, input, OnInit, Output, output, signal} from '@angular/core';
+import {Component, input, OnInit, signal} from '@angular/core';
 import { HeartIconComponent } from "../icons/heart-icon/heart-icon.component";
 import {FavoriteApiService} from '../../services/favorite-api.service';
 import {RouterLink} from '@angular/router';

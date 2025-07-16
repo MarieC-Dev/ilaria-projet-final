@@ -235,31 +235,36 @@ exports.updateRecipe = async (req, res) => {
 exports.deleteRecipe = async (req, res) => {
     const recipeId = req.params.id;
 
-    const recipeDataSql = 'DELETE FROM RecipeData WHERE id = ?'
-    const ingredientsListSql = 'DELETE FROM IngredientsList WHERE id = ?'
-    const stepsListSql = 'DELETE FROM StepsList WHERE id = ?'
+    const recipeDataSql = 'DELETE FROM RecipeData WHERE id = ?';
+    const ingredientsListSql = 'DELETE FROM IngredientsList WHERE recipeId = ?';
+    const stepsListSql = 'DELETE FROM StepsList WHERE recipeId = ?';
 
-    await db.query(recipeDataSql, [recipeId], (err, result) => {
+    /*
+    * "BACK Erreur lors de la suppression de la recette Error: Cannot delete or update a parent row: a foreign key constraint fails
+    * (`recipesite`.`ingredientslist`, CONSTRAINT `ingredientslist_ibfk_1` FOREIGN KEY (`recipeId`) REFERENCES `recipedata` (`id`))"
+    * */
+
+    db.execute(ingredientsListSql, [recipeId], (err, result) => {
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Liste des ingrédients non trouvé' });
+        }
+
+        res.json({message: 'Liste des ingrédients supprimée'});
+    })
+
+    db.execute(stepsListSql, [recipeId], (err, result) => {
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Liste des étapes non trouvé' });
+        }
+
+        res.json({message: 'Liste des étapes supprimée'})
+    })
+
+    await db.execute(recipeDataSql, [recipeId], (err, result) => {
         if (result.affectedRows === 0) {
             return res.status(404).json({ message: 'Recette non trouvé' });
         }
 
-        db.query(ingredientsListSql, [recipeId], (err, result) => {
-            if (result.affectedRows === 0) {
-                return res.status(404).json({ message: 'Liste des ingrédients non trouvé' });
-            }
-
-            res.json({message: 'Liste des ingrédients supprimée'});
-        })
-
-        db.query(stepsListSql, [recipeId], (err, result) => {
-            if (result.affectedRows === 0) {
-                return res.status(404).json({ message: 'Liste des étapes non trouvé' });
-            }
-
-            res.json({message: 'Liste des étapes supprimée'})
-        })
-
         res.json({message: 'Recette supprimée'});
-    })
+    });
 }

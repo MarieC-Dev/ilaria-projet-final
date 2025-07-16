@@ -47,14 +47,16 @@
                     <td class="myrecipeCreationDate">
                         {{ recipe.created }}
                     </td>
-                    <td class="myrecipeOpinion">0(0 notes)</td>
+                    <td class="myrecipeOpinion">
+                        {{ getAverage(recipe.id) }} ({{ getRecipeComments(recipe.id).length }} notes)
+                    </td>
                     <td class="myrecipeButtons">
                         <button type="button">
                             <a href="profil/mes-recettes/modifier">
                                 <app-modify-icon />
                             </a>
                         </button>
-                        <button type="button">
+                        <button type="button" (click)="deleteUserRecipe(recipe.id)">
                             <app-delete-icon />
                         </button>
                     </td>

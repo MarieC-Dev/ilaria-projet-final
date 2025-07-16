@@ -27,6 +27,15 @@ export class RecipesApiService {
     );
   }
 
+  updateRecipe(id: number, recipe: any): Observable<any> {
+    return this.http.put(`${this.API_URL}/recipes/${id}`, recipe).pipe(
+      catchError((error) => {
+        console.log('recipe api put error :', error);
+        return throwError(() => error);
+      })
+    );
+  }
+
   deteteRecipe(id: number): Observable<any> {
     return this.http.delete(`${this.API_URL}/recipes/${id}`);
   }

@@ -8,7 +8,6 @@ const {id} = require("nodemon");
 exports.getAllUsers = async (req, res) => {
     try {
         const [usersRows] = await db.query('SELECT * FROM User');
-        console.log(usersRows);
         res.status(200).json(usersRows);
     } catch (error) {
         res.status(500).json({ msg: 'Something went wrong : ' + error });
@@ -17,7 +16,6 @@ exports.getAllUsers = async (req, res) => {
 
 exports.getOneUser = async (req, res) => {
     const userId = req.params.id;
-    console.log(userId)
 
     try {
         const [userRows] = await db.execute('SELECT * FROM User WHERE id = ?', [userId]);

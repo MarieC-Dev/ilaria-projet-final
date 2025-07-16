@@ -56,8 +56,6 @@ router.post('/',  async (req, res) => {
 })
 
 router.get('/user', async (req, res) => {
-    //console.log('USER LOGIN', req.session);
-
     if(req.session.user) {
         return res.json({ isAuthenticated: true, user: req.session.user });
     } else {

@@ -1,14 +1,16 @@
-<div class="wrapperPopUp" *ngIf="isShow()">
+<div class="wrapperPopUp" *ngIf="isShow">
     <div class="popUp">
-        <h3>Êtes-vous sûr de vouloir supprimer {{ labelName() }} ? </h3>
+        <h3>Êtes-vous sûr de vouloir supprimer {{ labelName }} ? </h3>
         <ul>
             <li>
-                <button type="button" (click)="deleteFunction()">
+                <button type="button" (click)="onDelete()">
                     Oui
                 </button>
             </li>
             <li>
-                <button type="button">Non</button>
+                <button type="button" (click)="onCancel()">
+                    Non
+                </button>
             </li>
         </ul>
     </div>

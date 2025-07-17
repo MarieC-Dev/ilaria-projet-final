@@ -1,5 +1,5 @@
 import { CommonModule, JsonPipe } from '@angular/common';
-import {Component, inject, input, OnInit} from '@angular/core';
+import {Component, inject, input, OnInit, signal} from '@angular/core';
 import { RecipeItemComponent } from '../recipe-item/recipe-item.component';
 import { RecipeAverageService } from '../../services/recipe-average.service';
 import { RecipeList } from '../../models/recipe.model';
@@ -11,6 +11,7 @@ import {RecipesApiService} from '../../services/recipes-api.service';
 import {UsersApiService} from '../../services/users-api.service';
 import {CommentApiService} from '../../services/comment-api.service';
 import {switchMap} from 'rxjs';
+import {PopUpComponent} from '../pop-up/pop-up.component';
 
 @Component({
   selector: 'app-myfavorites-myrecipes',
@@ -19,7 +20,8 @@ import {switchMap} from 'rxjs';
     RecipeItemComponent,
     ModifyIconComponent,
     DeleteIconComponent,
-    RouterLink
+    RouterLink,
+    PopUpComponent
   ],
   templateUrl: './myfavorites-myrecipes.component.html',
   styleUrl: './myfavorites-myrecipes.component.scss'
@@ -30,6 +32,7 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
   favoritesArray = input<RecipeList>([]);
   isRecipes = input.required<boolean>();
   recipesArray = input<Array<any>>([]);
+  showPopUp = signal(false);
 
   userId!: number;
   userData!: any[];
@@ -100,7 +103,7 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
     return userRecipes;
   }
 
-  deleteUserRecipe(id: number) {
+  deleteUserRecipe(id: number): any {
     this.recipeApi.deteteRecipe(id).subscribe({
       next: (result) => {
         const resultId = this.recipesListApi.findIndex((recipe) => recipe.id === id);
@@ -121,6 +124,14 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
     return this.average.getRecipeAverage(recipeId, this.getRecipeComments(recipeId));
   }
 
+  showPopUpTrue() {
+    this.showPopUp.set(true);
+    return this.showPopUp();
+  }
 
+  showPopUpFalse() {
+    this.showPopUp.set(false);
+    return this.showPopUp();
+  }
 
 }

@@ -51,14 +51,39 @@
                         {{ getAverage(recipe.id) }} ({{ getRecipeComments(recipe.id).length }} notes)
                     </td>
                     <td class="myrecipeButtons">
-                        <button type="button">
+                        <button type="button" class="modifyRecipe">
                             <a href="profil/mes-recettes/modifier">
                                 <app-modify-icon />
                             </a>
                         </button>
-                        <button type="button" (click)="deleteUserRecipe(recipe.id)">
+                        <button type="button" class="deleteRecipe" (click)="showPopUpTrue()">
                             <app-delete-icon />
                         </button>
+
+                        <app-pop-up
+                            [isShow]="showPopUp()"
+                            labelName="la recette"
+                            (deleteFunction)="deleteUserRecipe(recipe.id)"
+                            (cancelFunction)="showPopUpFalse()"
+                        />
+
+                        <!--<div class="wrapperPopUp" *ngIf="showPopUp()">
+                            <div class="popUp">
+                                <h3>Êtes-vous sûr de vouloir supprimer la recette ? </h3>
+                                <ul>
+                                    <li>
+                                        <button type="button" (click)="deleteUserRecipe(recipe.id)">
+                                            Oui
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" (click)="showPopUpFalse()">
+                                            Non
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>-->
                     </td>
                 </tr>
             }

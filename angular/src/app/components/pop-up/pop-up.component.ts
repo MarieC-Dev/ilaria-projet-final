@@ -1,13 +1,24 @@
-import {Component, input} from '@angular/core';
+import {Component, Output, Input, EventEmitter} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RecipesApiService} from '../../services/recipes-api.service';
 
 @Component({
   selector: 'app-pop-up',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './pop-up.component.html',
   styleUrl: './pop-up.component.scss'
 })
 export class PopUpComponent {
-  labelName = input<string>();
-  deleteFunction = input<any>();
-  isShow = input<boolean>(false);
+  @Input() labelName!: string;
+  @Input() isShow!: boolean;
+  @Output() deleteFunction = new EventEmitter<void>();
+  @Output() cancelFunction = new EventEmitter<void>();
+
+  onDelete() {
+    this.deleteFunction.emit();
+  }
+
+  onCancel() {
+    this.cancelFunction.emit()
+  }
 }

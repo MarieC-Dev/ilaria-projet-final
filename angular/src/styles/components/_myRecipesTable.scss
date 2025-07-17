@@ -45,7 +45,7 @@
         width: 15%;
         justify-content: center;
     }
-    
+
     .myrecipeButtons {
         width: 10%;
         display: flex;
@@ -58,16 +58,12 @@
             margin-left: 1rem;
         }
 
-        &__modify--body {
-            button:hover svg {
-                fill: $secondColor;
-            }
+        .modifyRecipe:hover svg {
+            fill: $secondColor;
         }
 
-        &__delete--body {            
-            button:hover svg {
-                fill: $firstColor;
-            }
+        .deleteRecipe:hover svg {
+            fill: $firstColor;
         }
     }
 }
@@ -120,7 +116,7 @@
                     margin: 0 1rem 0 0;
                 }
             }
-            
+
         }
     }
 }

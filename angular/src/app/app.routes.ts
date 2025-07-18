@@ -18,21 +18,22 @@ import { pagesAccessGuard } from './guards/pages-access.guard';
 
 export const routes: Routes = [
   {
-    path: 'recettes/:id/commentaire',
-    component: RecipeCommentPageComponent,
-    canActivate: [pagesAccessGuard]
-  },
-  {
     path: 'profil/:id',
     canActivate: [accountGuardGuard],
     canActivateChild: [accountGuardGuard],
     children: [
-      { path: 'mes-recettes/modifier', component: EditRecipePageComponent },
+      { path: 'mes-recettes/:recipeId/modifier', component: EditRecipePageComponent },
       { path: 'mes-recettes/creer', component: CreateRecipesComponent },
       { path: 'mes-recettes', component: ProfileRecipesPageComponent },
       { path: 'mes-favoris', component: ProfileFavoritesPageComponent },
       { path: 'mes-infos', component: ProfilePageComponent },
     ],
+  },
+
+  {
+    path: 'recettes/:id/commentaire',
+    component: RecipeCommentPageComponent,
+    canActivate: [pagesAccessGuard]
   },
 
   { path: 'recettes/:id', component: RecipeDetailsPage },

@@ -52,7 +52,7 @@
                     </td>
                     <td class="myrecipeButtons">
                         <button type="button" class="modifyRecipe">
-                            <a href="profil/mes-recettes/modifier">
+                            <a [routerLink]="[recipe.id, 'modifier']">
                                 <app-modify-icon />
                             </a>
                         </button>
@@ -66,24 +66,6 @@
                             (deleteFunction)="deleteUserRecipe(recipe.id)"
                             (cancelFunction)="showPopUpFalse()"
                         />
-
-                        <!--<div class="wrapperPopUp" *ngIf="showPopUp()">
-                            <div class="popUp">
-                                <h3>Êtes-vous sûr de vouloir supprimer la recette ? </h3>
-                                <ul>
-                                    <li>
-                                        <button type="button" (click)="deleteUserRecipe(recipe.id)">
-                                            Oui
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button type="button" (click)="showPopUpFalse()">
-                                            Non
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>-->
                     </td>
                 </tr>
             }

@@ -12,12 +12,8 @@ exports.getOneRecipeTime = async (req, res) => {
     const recipeTimeId = req.params.id;
 
     try {
-        await db.execute('SELECT * FROM ServingNumber WHERE id = ?', [recipeTimeId], (err, result) => {
-            if(err) {
-                return res.status(500).json({ msg: 'BackGet one recipe time ' + err })
-            }
-            return res.status(200).json({ msg: 'Back Get one recipe time error', result });
-        });
+        const [result] = await db.execute('SELECT * FROM TimeTable WHERE id = ?', [recipeTimeId]);
+        return res.status(200).json({ msg: 'Back Get one recipe time error', result });
     } catch (err) {
         return res.status(500).json({ msg: 'Back Get all recipe time error', err });
     }

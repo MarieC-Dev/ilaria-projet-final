@@ -1,6 +1,5 @@
 import {Component, Output, Input, EventEmitter} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {RecipesApiService} from '../../services/recipes-api.service';
 
 @Component({
   selector: 'app-pop-up',

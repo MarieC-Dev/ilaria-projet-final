@@ -66,7 +66,10 @@
     </app-multiple-inputs>
 
     <!-- Types de cuisson -->
-    <app-cooking-type (checkboxValue)="getCheckboxValue($event)" [ifInvalidControl]="arrayInvalidControl" />
+    <app-cooking-type
+        [recipeId]="recipeDataId"
+        (checkboxValue)="getCheckboxValue($event)"
+        [ifInvalidControl]="arrayInvalidControl" />
 
     <!-- Nombre de portions -->
     <app-multiple-inputs

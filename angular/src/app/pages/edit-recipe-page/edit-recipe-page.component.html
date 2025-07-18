@@ -1,13 +1,11 @@
 <div class="profilePage editRecipeHeader">
-    <section class="profileLinksSection">
-        <a href="/profil/mes-infos" class="btn-bg-darkGrey btn-bg-darkGrey__profile">Mon profil</a>
-        <a href="/profil/mes-favoris" class="btn-bg-darkGrey btn-bg-darkGrey__profile">Mes favoris</a>
-        <a href="/profil/mes-recettes" class="btn-bg-darkGrey btn-bg-darkGrey__profile">Mes recettes</a>
-    </section>
-
     <section class="createEditRecipe">
+        <button type="button" class="btn-bg-yellow" (click)="goBack()">
+            Retour
+        </button>
+
         <h2>Modifier la recette</h2>
-    
-        <app-create-edit-recipe-form />
+
+        <app-create-edit-recipe-form [updateRecipe]="true" />
     </section>
 </div>

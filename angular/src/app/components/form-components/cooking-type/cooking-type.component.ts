@@ -1,7 +1,7 @@
 import {
   Component,
   ElementRef, EventEmitter,
-  Input, Output,
+  Input, OnInit, Output,
   signal,
   ViewChild,
 } from '@angular/core';
@@ -14,6 +14,7 @@ import {
   ReactiveFormsModule
 } from '@angular/forms';
 import {NgIf} from '@angular/common';
+import {RecipesApiService} from '../../../services/recipes-api.service';
 
 @Component({
   selector: 'app-cooking-type',
@@ -22,20 +23,30 @@ import {NgIf} from '@angular/common';
   styleUrl: './cooking-type.component.scss',
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
-export class CookingTypeComponent {
+export class CookingTypeComponent implements OnInit {
   cookingTypeList = signal(COOKING_TYPE_LIST);
-  //@Input() controlName!: string;
+  @Input() recipeId!: number;
   @Input() ifInvalidControl!: string[];
   @Output() checkboxValue = new EventEmitter<string>();
-  @ViewChild('checkboxList') checkboxList!: ElementRef;
+
+  constructor(private recipeApi: RecipesApiService) { }
+
+  ngOnInit(): void {
+    this.recipeApi.getOneRecipe(this.recipeId).subscribe((recipe) => {
+      if(recipe[0].cookingType) {
+        const findType = this.cookingTypeList().find((type) => type.value === recipe[0].cookingType)!;
+        findType.checked = true;
+      }
+    })
+  }
 
   onCheckBtn(type: any) {
     type.checked = !type.checked;
 
     const findOtherElm = this.cookingTypeList().filter(elm => elm.inputId !== type.inputId);
 
-    for (let j = 0; j < findOtherElm.length; j++) {
-      findOtherElm[j].checked = false;
+    for (let i = 0; i < findOtherElm.length; i++) {
+      findOtherElm[i].checked = false;
     }
 
     this.checkboxValue.emit(type.value);

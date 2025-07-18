@@ -1,4 +1,4 @@
-import {Component, effect, inject, OnInit, signal} from '@angular/core';
+import {Component, effect, inject, Input, OnInit, signal} from '@angular/core';
 import { CookingTypeComponent } from '../form-components/cooking-type/cooking-type.component';
 import { DifficultyComponent } from '../form-components/difficulty/difficulty.component';
 import { MultipleInputsComponent } from '../form-components/multiple-inputs/multiple-inputs.component';
@@ -19,6 +19,7 @@ import {HttpEventType} from '@angular/common/http';
 import {DatetimeService} from '../../services/datetime.service';
 import {IsLoggedInService} from '../../services/isLoggedIn.service';
 import {switchMap, tap} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-create-edit-recipe-form',
@@ -34,22 +35,32 @@ import {switchMap, tap} from 'rxjs';
   templateUrl: './create-edit-recipe-form.component.html',
   styleUrl: './create-edit-recipe-form.component.scss'
 })
-export class CreateEditRecipeFormComponent implements OnInit{
+export class CreateEditRecipeFormComponent implements OnInit {
+  @Input() updateRecipe: boolean = false;
   recipeForm!: RecipeFormFactory;
-  cuisineTypeList = signal(CUISINE_TYPE);
+  recipeFormStatus = signal('');
+  recipeDataId!: number;
+
   isCooking = false;
   isPause = false;
+
+  cuisineTypeList = signal(CUISINE_TYPE);
   tableHeadIngredient: string[] = ['Quantité', 'Unités', 'Ingrédients'];
   tableHeadStep: string[] = ['N°', 'Description'];
-  errorAddIngredient = signal('');
-  errorAddStep = signal('');
-  recipeFormStatus = signal('');
+  createdDate = inject(DatetimeService);
+
   arrayInvalidControl: string[] = [];
   authorIdValue: number = 0;
-  createdDate = inject(DatetimeService);
   selectedImage: File | null = null;
 
-  constructor(private accountAccess: IsLoggedInService, private recipesApiService: RecipesApiService) {
+  errorAddIngredient = signal('');
+  errorAddStep = signal('');
+
+  constructor(
+    private accountAccess: IsLoggedInService,
+    private recipesApiService: RecipesApiService,
+    private route: ActivatedRoute
+  ) {
     this.accountAccess.isLoggedIn().subscribe({
       next: (result) => this.authorIdValue = result.user.id,
       error: (err) => console.log(err)
@@ -57,6 +68,9 @@ export class CreateEditRecipeFormComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    const recipeId: number = Number(this.route.snapshot.paramMap.get('recipeId'));
+    this.recipeDataId = recipeId;
+
     this.recipeForm = new RecipeFormFactory();
 
     this.recipeFormStatus.set(this.recipeForm.formGroup.status);
@@ -64,6 +78,25 @@ export class CreateEditRecipeFormComponent implements OnInit{
     this.recipeForm.formGroup.statusChanges.subscribe((status) =>
       this.recipeFormStatus.set(status)
     );
+
+    if(this.updateRecipe) {
+      this.recipesApiService.getOneRecipe(recipeId).subscribe((recipe) => {
+        this.recipeForm.formGroup.patchValue({
+          authorId: recipe[0].authorId,
+          cookingType: recipe[0].cookingType,
+          created: recipe[0].created,
+          cuisineType: recipe[0].cuisineType,
+          description: recipe[0].description,
+          difficulty: recipe[0].difficulty,
+          imageName: recipe[0].imageName,
+          name: recipe[0].name,
+          recipeTimeId: recipe[0].recipeTimeId,
+          servingNumberId: recipe[0].servingNumberId,
+        });
+
+        console.log(this.recipeForm.formGroup.value)
+      })
+    }
   }
 
   getCheckboxValue(value: string) {

@@ -2,7 +2,7 @@
     labelTitle="Type de cuisson :"
     inputId="cookingTypeInputs"
     [required]="true">
-    <ul class="cookingTypeInputs" #checkboxList>
+    <ul class="cookingTypeInputs">
         @for (type of cookingTypeList(); track type.id) {
             <li [class]="type.checked ? 'liTypeCooking selectedType' : 'liTypeCooking'">
                 <label>

@@ -27,6 +27,7 @@ interface User {
 export class ProfilePageComponent implements OnInit {
   userForm!: UserFormFactory;
   recipesList = signal(RECIPE_LIST);
+  userId!: number;
   userData!: User;
   userImage: File | null = null;
 
@@ -35,9 +36,9 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const userId: number = Number(this.route.snapshot.paramMap.get('id'));
+    this.userId = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.userApi.getOneUser(userId).subscribe({
+    this.userApi.getOneUser(this.userId).subscribe({
       next: (result) => {
         const data = result.profile[0];
         this.userData = {
@@ -47,6 +48,7 @@ export class ProfilePageComponent implements OnInit {
           email: data.email,
           password: data.password
         }
+        console.log(this.userData)
       },
       error: (error) => console.log('Erreur get user data', error)
     });
@@ -84,6 +86,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   onSubmit() {
-    const userId: number = Number(this.route.snapshot.paramMap.get('id'));
+    console.log('update')
+    //const userId: number = Number(this.route.snapshot.paramMap.get('id'));
   }
 }

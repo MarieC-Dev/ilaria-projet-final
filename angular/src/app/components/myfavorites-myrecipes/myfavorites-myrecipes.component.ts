@@ -53,10 +53,17 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
   ngOnInit(): void {
     this.userId = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.favoriteApi.getAllFavorites().subscribe({
+    this.userApi.getOneUser(this.userId).pipe(
+      switchMap((user) => {
+        this.userData = user.profile[0];
+        this.username = user.profile[0].username;
+
+        return this.favoriteApi.getAllFavorites();
+      })
+    ).subscribe({
       next: (result) => {
         const userFavorites = result.rows.filter((favorite: any) => favorite.userId === this.userId);
-        this.favoritesList = userFavorites
+        this.favoritesList = userFavorites;
       },
       error: (err) => console.log('get favotites list error ' + err)
     });
@@ -68,14 +75,6 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
       })
     ).subscribe((comment) => {
       this.recipesComments = comment.rows;
-    })
-
-    this.userApi.getOneUser(this.userId).subscribe({
-      next: (result) => {
-        this.userData = result.profile[0];
-        this.username = result.profile[0].username;
-      },
-      error: (err) => console.log('get user data error ' + err)
     })
   }
 

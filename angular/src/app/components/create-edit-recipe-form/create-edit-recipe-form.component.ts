@@ -1,4 +1,4 @@
-import {Component, effect, inject, Input, OnInit, signal} from '@angular/core';
+import {Component, inject, Input, OnInit, signal} from '@angular/core';
 import { CookingTypeComponent } from '../form-components/cooking-type/cooking-type.component';
 import { DifficultyComponent } from '../form-components/difficulty/difficulty.component';
 import { MultipleInputsComponent } from '../form-components/multiple-inputs/multiple-inputs.component';
@@ -11,15 +11,16 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import {COOKING_TYPE_LIST} from '../../lists/cooking-type-list';
 import {RecipeFormFactory} from '../../factories/recipe-form.factory';
 import {CommonModule} from '@angular/common';
 import {TableListComponent} from '../form-components/table-list/table-list.component';
-import {HttpEventType} from '@angular/common/http';
 import {DatetimeService} from '../../services/datetime.service';
 import {IsLoggedInService} from '../../services/isLoggedIn.service';
-import {switchMap, tap} from 'rxjs';
+import {switchMap} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
+import {ServingNumberApiService} from '../../services/serving-number-api.service';
+import {RecipeTimeApiService} from '../../services/recipe-time-api.service';
+import {IngredientsStepsApiService} from '../../services/ingredients-steps-api.service';
 
 @Component({
   selector: 'app-create-edit-recipe-form',
@@ -39,7 +40,11 @@ export class CreateEditRecipeFormComponent implements OnInit {
   @Input() updateRecipe: boolean = false;
   recipeForm!: RecipeFormFactory;
   recipeFormStatus = signal('');
+  recipeData!: any;
   recipeDataId!: number;
+
+  recipeIngredientsList!: any[];
+  recipeStepsList!: any[];
 
   isCooking = false;
   isPause = false;
@@ -59,6 +64,9 @@ export class CreateEditRecipeFormComponent implements OnInit {
   constructor(
     private accountAccess: IsLoggedInService,
     private recipesApiService: RecipesApiService,
+    private servingNumberApi: ServingNumberApiService,
+    private recipeTimeApi: RecipeTimeApiService,
+    private ingredientsStepsApi: IngredientsStepsApiService,
     private route: ActivatedRoute
   ) {
     this.accountAccess.isLoggedIn().subscribe({
@@ -80,21 +88,109 @@ export class CreateEditRecipeFormComponent implements OnInit {
     );
 
     if(this.updateRecipe) {
-      this.recipesApiService.getOneRecipe(recipeId).subscribe((recipe) => {
-        this.recipeForm.formGroup.patchValue({
-          authorId: recipe[0].authorId,
-          cookingType: recipe[0].cookingType,
-          created: recipe[0].created,
-          cuisineType: recipe[0].cuisineType,
-          description: recipe[0].description,
-          difficulty: recipe[0].difficulty,
-          imageName: recipe[0].imageName,
-          name: recipe[0].name,
-          recipeTimeId: recipe[0].recipeTimeId,
-          servingNumberId: recipe[0].servingNumberId,
-        });
+      this.recipesApiService.getOneRecipe(recipeId).pipe(
+        switchMap((recipe: any[]) => {
+          this.recipeData = recipe[0];
 
-        console.log(this.recipeForm.formGroup.value)
+          this.recipeForm.formGroup.patchValue({
+            name: recipe[0].name,
+            description: recipe[0].description,
+            imageName: recipe[0].imageName,
+            cuisineType: recipe[0].cuisineType,
+            cookingType: recipe[0].cookingType,
+            difficulty: recipe[0].difficulty,
+            authorId: recipe[0].authorId,
+            created: recipe[0].created,
+          });
+
+          return this.servingNumberApi.getOneServingNumber(this.recipeData.servingNumberId);
+        }),
+        switchMap((serving: any) => {
+          this.recipeForm.formGroup.get('servingNumber')?.patchValue({
+            number: serving.result[0].number,
+            type: serving.result[0].servingType
+          })
+
+          return this.recipeTimeApi.getOneRecipeTime(this.recipeData.recipeTimeId);
+        }),
+        switchMap((time) => {
+          this.recipeForm.formGroup.get('recipeTime')?.patchValue({
+            making: {
+              hours: time.result[0].makingH,
+              minutes: time.result[0].makingMin
+            },
+            pause: {
+              hours: time.result[0].pauseH,
+              minutes: time.result[0].pauseMin
+            },
+            cooking: {
+              hours: time.result[0].cookingH,
+              minutes: time.result[0].cookingMin
+            },
+          });
+
+          return this.ingredientsStepsApi.getIngredientsList();
+        }),
+        switchMap((ingredientsList) => {
+          const ingredientResult = ingredientsList.rows;
+
+          const ingredientsListFilter = ingredientResult.filter((ingredient: any) => {
+            return ingredient.recipeId === this.recipeData.id
+          });
+          this.recipeIngredientsList = ingredientsListFilter;
+
+          return this.ingredientsStepsApi.getAllIngredients();
+        }),
+        switchMap((ingredient) => {
+          const ingredientsResult = ingredient.rows;
+          const fieldsFormControl = ['quantity', 'unit', 'name'];
+          let formControl: { [key: string]: FormControl } = {};
+
+          this.recipeIngredientsList.map((elmList) => {
+            const ingredientArray = ingredientsResult.filter((elm: any) => elm.id === elmList.ingredientId);
+
+            fieldsFormControl.forEach(field => {
+              formControl[field] = new FormControl<string>(ingredientArray[0][field]);
+            });
+
+            const formGroup = new FormGroup(formControl);
+
+            this.ingredientsList.push(formGroup);
+          });
+
+          return this.ingredientsStepsApi.getStepsList();
+        }),
+        switchMap((stepsList) => {
+          const stepResult = stepsList.rows;
+
+          const stepsListFilter = stepResult.filter((step: any) => {
+            return step.recipeId === this.recipeData.id
+          });
+          this.recipeStepsList = stepsListFilter;
+
+          return this.ingredientsStepsApi.getAllSteps();
+        }),
+        switchMap((step) => {
+          const stepsResult = step.rows;
+          const fieldsFormControl = ['stepName'];
+          let formControl: { [key: string]: FormControl } = {};
+
+          this.recipeStepsList.map((elmList) => {
+            const stepArray = stepsResult.filter((elm: any) => elm.id === elmList.stepId);
+
+            fieldsFormControl.forEach(field => {
+              formControl[field] = new FormControl<string>(stepArray[0][field]);
+            });
+
+            const formGroup = new FormGroup(formControl);
+
+            this.stepsList.push(formGroup);
+          });
+
+          return this.ingredientsStepsApi.getStepsList();
+        }),
+      ).subscribe(() => {
+        console.log('subscribe')
       })
     }
   }
@@ -216,8 +312,6 @@ export class CreateEditRecipeFormComponent implements OnInit {
       formData.append('recipe-image', file); // ce nom doit correspondre à multer.single('recipe-image')
       formData.append('imageName', file.name);
     }
-
-    console.log(file)
 
     // servingNumber
     const servingNumber = formGroup.get('servingNumber') as FormGroup;

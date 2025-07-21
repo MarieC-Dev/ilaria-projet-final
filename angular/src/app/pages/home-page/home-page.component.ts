@@ -42,7 +42,9 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.recipeApi.getAllRecipes().subscribe({
-      next: (result) => this.getAllRecipes = result,
+      next: (result) => {
+        this.getAllRecipes = result;
+      },
       error: (err) => console.log(err),
     });
 

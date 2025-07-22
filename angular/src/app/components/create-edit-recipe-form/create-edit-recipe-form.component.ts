@@ -5,6 +5,7 @@ import { MultipleInputsComponent } from '../form-components/multiple-inputs/mult
 import { CUISINE_TYPE } from '../../lists/cuisine-type-list';
 import {RecipesApiService} from '../../services/recipes-api.service';
 import {
+  Form,
   FormArray,
   FormControl,
   FormGroup,
@@ -141,26 +142,26 @@ export class CreateEditRecipeFormComponent implements OnInit {
 
           return this.ingredientsStepsApi.getAllIngredients();
         }),
-        switchMap((ingredient) => {
+        switchMap((ingredient): any => {
           const ingredientsResult = ingredient.rows;
-          const fieldsFormControl = ['quantity', 'unit', 'name'];
-          let formControl: { [key: string]: FormControl } = {};
 
-          this.recipeIngredientsList.map((elmList) => {
-            const ingredientArray = ingredientsResult.filter((elm: any) => elm.id === elmList.ingredientId);
+          const list = this.recipeIngredientsList.map((elmList) => {
+            return ingredientsResult.filter((elm: any) => elm.id === elmList.ingredientId);
+          })
 
-            fieldsFormControl.forEach(field => {
-              formControl[field] = new FormControl<string>(ingredientArray[0][field]);
-            });
-
-            const formGroup = new FormGroup(formControl);
-
-            this.ingredientsList.push(formGroup);
-          });
+          list.map((item: any) => {
+            this.ingredientsList.push(
+              new FormGroup({
+                quantity: new FormControl<string>(item[0].quantity),
+                unit: new FormControl<string>(item[0].unit),
+                name: new FormControl<string>(item[0].name),
+              })
+            )
+          })
 
           return this.ingredientsStepsApi.getStepsList();
         }),
-        switchMap((stepsList) => {
+        switchMap((stepsList: any) => {
           const stepResult = stepsList.rows;
 
           const stepsListFilter = stepResult.filter((step: any) => {
@@ -191,6 +192,10 @@ export class CreateEditRecipeFormComponent implements OnInit {
         }),
       ).subscribe(() => {
         console.log('subscribe')
+
+        for (let i = 0; i < this.ingredientsList.controls.length; i++) {
+          console.log(this.ingredientsList.controls[i].value)
+        }
       })
     }
   }
@@ -266,6 +271,10 @@ export class CreateEditRecipeFormComponent implements OnInit {
   /* INGREDIENTS */
   get ingredientsList(): FormArray {
     return this.recipeForm.formGroup.get('ingredientsList') as FormArray;
+  }
+
+  get ingredientsListGroups() {
+    return this.ingredientsList.controls as FormGroup[];
   }
   /* ===== */
 

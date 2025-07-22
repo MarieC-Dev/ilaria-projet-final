@@ -11,10 +11,10 @@
         </label>
 
         <input type="text"
-            id="createRecipeTitle"
-            name="createRecipeTitle"
-            placeholder="Titre de la recette"
-            formControlName="name"
+               id="createRecipeTitle"
+               name="createRecipeTitle"
+               placeholder="Titre de la recette"
+               formControlName="name"
         />
         <p class="formControlError" *ngIf="arrayInvalidControl.includes('name')">Le nom de la recette doit contenir au moins 4 caractères</p>
     </div>
@@ -43,10 +43,10 @@
         </label>
 
         <input type="file"
-            id="recipe-image"
-            name="recipe-image"
-            placeholder="Ajouter une image"
-            (change)="onFileSelected($event)" />
+               id="recipe-image"
+               name="recipe-image"
+               placeholder="Ajouter une image"
+               (change)="onFileSelected($event)" />
     </div>
 
     <!-- Types de cuisine -->
@@ -59,7 +59,7 @@
             formControlName="cuisineType">
             <option value="">---</option>
             @for (ct of cuisineTypeList(); track ct.id) {
-              <option [value]="ct.value">{{ ct.title }}</option>
+                <option [value]="ct.value">{{ ct.title }}</option>
             }
         </select>
         <p class="formControlError" *ngIf="arrayInvalidControl.includes('cuisineType')">Le type de cuisine est requis</p>
@@ -80,10 +80,10 @@
             <li>
                 <label for="servingNumber">
                     <input type="number"
-                        id="servingNumber"
-                        name="servingNumber"
-                        placeholder="Ex : 4"
-                        formControlName="number" />
+                           id="servingNumber"
+                           name="servingNumber"
+                           placeholder="Ex : 4"
+                           formControlName="number" />
                 </label>
             </li>
             <li>
@@ -263,8 +263,8 @@
             </li>
             <li>
                 <button type="button"
-                    class="btn-bg-red stepsIngredientsBtn"
-                    (click)="addDetails('ingredientDetail', ingredientsList, 'quantity', 'unit', 'name')">
+                        class="btn-bg-red stepsIngredientsBtn"
+                        (click)="addDetails('ingredientDetail', ingredientsList, 'quantity', 'unit', 'name')">
                     +
                 </button>
             </li>
@@ -272,11 +272,63 @@
 
         <p class="errorMessage" *ngIf="errorAddIngredient() !== ''">{{ errorAddIngredient() }}</p>
 
-        <app-table-list
+
+
+        @for(ingredient of ingredientsListGroups; track $index) {
+            <ul [formGroup]="ingredient">
+                <li>
+                    <label for="numberIngredient">
+                        <input type="number"
+                               [id]="'numberIngredient' + $index"
+                               name="numberIngredient"
+                               formControlName="quantity"
+                               placeholder="100" />
+                    </label>
+                </li>
+                <li>
+                    <label for="ingredientUnity">
+                        <select name="ingredientUnity" [id]="'ingredientUnity' + $index" formControlName="unit">
+                            <option value="">Unités</option>
+                            <option value="tablespoon">Cuillère à soupe</option>
+                            <option value="teaspoon">Cuillère à café</option>
+                            <option value="kilogram">Kilogrammes (kg)</option>
+                            <option value="gram">Grammes (g)</option>
+                            <option value="milligram">Milligrammes (mg)</option>
+                            <option value="liter">Litres (L)</option>
+                            <option value="milliliter">Millilitres (ml)</option>
+                            <option value="pot">Pot(s) de yaourt</option>
+                            <option value="pinch">Pincée</option>
+                            <option value="bottle">Bouteille</option>
+                            <option value="box">Boîte</option>
+                            <option value="piece">Morceaux</option>
+
+                            <option value="other">Autre (présicez à côté)</option>
+                        </select>
+                    </label>
+                </li>
+                <li>
+                    <label for="ingredientName">
+                        <input type="text"
+                               [id]="'ingredientName' + $index"
+                               name="ingredientName"
+                               formControlName="name"
+                               placeholder="Ex. : Chocolat en poudre"
+                               (keydown.enter)="addDetails('ingredientDetail', ingredientsList, 'quantity', 'unit', 'name')"
+                        />
+                    </label>
+                </li>
+            </ul>
+        }
+
+
+
+
+
+        <!--<app-table-list
             typeTable="ingredient"
             [headList]="tableHeadIngredient"
             [bodyList]="ingredientsList.controls"
-            (removeFunc)="removeRow($event, ingredientsList, 'ingredientIndex')" />
+            (removeFunc)="removeRow($event, ingredientsList, 'ingredientIndex')" />-->
 
         <p class="formControlError" *ngIf="arrayInvalidControl.includes('ingredientsList')">Renseignez au moins 2 ingrédients</p>
     </app-multiple-inputs>

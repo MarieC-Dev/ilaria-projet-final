@@ -272,63 +272,58 @@
 
         <p class="errorMessage" *ngIf="errorAddIngredient() !== ''">{{ errorAddIngredient() }}</p>
 
-
-
-        @for(ingredient of ingredientsListGroups; track $index) {
-            <ul [formGroup]="ingredient">
-                <li>
-                    <label for="numberIngredient">
-                        <input type="number"
-                               [id]="'numberIngredient' + $index"
-                               name="numberIngredient"
-                               formControlName="quantity"
-                               placeholder="100" />
-                    </label>
-                </li>
-                <li>
-                    <label for="ingredientUnity">
-                        <select name="ingredientUnity" [id]="'ingredientUnity' + $index" formControlName="unit">
-                            <option value="">Unités</option>
-                            <option value="tablespoon">Cuillère à soupe</option>
-                            <option value="teaspoon">Cuillère à café</option>
-                            <option value="kilogram">Kilogrammes (kg)</option>
-                            <option value="gram">Grammes (g)</option>
-                            <option value="milligram">Milligrammes (mg)</option>
-                            <option value="liter">Litres (L)</option>
-                            <option value="milliliter">Millilitres (ml)</option>
-                            <option value="pot">Pot(s) de yaourt</option>
-                            <option value="pinch">Pincée</option>
-                            <option value="bottle">Bouteille</option>
-                            <option value="box">Boîte</option>
-                            <option value="piece">Morceaux</option>
-
-                            <option value="other">Autre (présicez à côté)</option>
-                        </select>
-                    </label>
-                </li>
-                <li>
-                    <label for="ingredientName">
-                        <input type="text"
-                               [id]="'ingredientName' + $index"
-                               name="ingredientName"
-                               formControlName="name"
-                               placeholder="Ex. : Chocolat en poudre"
-                               (keydown.enter)="addDetails('ingredientDetail', ingredientsList, 'quantity', 'unit', 'name')"
-                        />
-                    </label>
-                </li>
+        <div class="ingredientsList">
+            <ul class="ingredientsListHeader">
+                <li>Quantité</li>
+                <li>Unité</li>
+                <li>Ingrédient</li>
             </ul>
-        }
+            @for(ingredient of ingredientsListGroups; track $index) {
+                <ul [formGroup]="ingredient">
+                    <li>
+                        <label for="numberIngredient">
+                            <input type="number"
+                                   [id]="'numberIngredient' + $index"
+                                   name="numberIngredient"
+                                   formControlName="quantity"
+                                   placeholder="100" />
+                        </label>
+                    </li>
+                    <li>
+                        <label for="ingredientUnity">
+                            <select name="ingredientUnity" [id]="'ingredientUnity' + $index" formControlName="unit">
+                                <option value="">Unités</option>
+                                <option value="tablespoon">Cuillère à soupe</option>
+                                <option value="teaspoon">Cuillère à café</option>
+                                <option value="kilogram">Kilogrammes (kg)</option>
+                                <option value="gram">Grammes (g)</option>
+                                <option value="milligram">Milligrammes (mg)</option>
+                                <option value="liter">Litres (L)</option>
+                                <option value="milliliter">Millilitres (ml)</option>
+                                <option value="pot">Pot(s) de yaourt</option>
+                                <option value="pinch">Pincée</option>
+                                <option value="bottle">Bouteille</option>
+                                <option value="box">Boîte</option>
+                                <option value="piece">Morceaux</option>
 
-
-
-
-
-        <!--<app-table-list
-            typeTable="ingredient"
-            [headList]="tableHeadIngredient"
-            [bodyList]="ingredientsList.controls"
-            (removeFunc)="removeRow($event, ingredientsList, 'ingredientIndex')" />-->
+                                <option value="other">Autre (présicez à côté)</option>
+                            </select>
+                        </label>
+                    </li>
+                    <li>
+                        <label for="ingredientName">
+                            <input type="text"
+                                   [id]="'ingredientName' + $index"
+                                   name="ingredientName"
+                                   formControlName="name"
+                                   placeholder="Ex. : Chocolat en poudre"
+                                   (keydown.enter)="addDetails('ingredientDetail', ingredientsList, 'quantity', 'unit', 'name')"
+                            />
+                        </label>
+                    </li>
+                </ul>
+            }
+        </div>
 
         <p class="formControlError" *ngIf="arrayInvalidControl.includes('ingredientsList')">Renseignez au moins 2 ingrédients</p>
     </app-multiple-inputs>

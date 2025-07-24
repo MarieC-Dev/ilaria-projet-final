@@ -5,7 +5,6 @@
     margin-bottom: 0;
 
     .multipleInputs {
-        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -57,10 +56,6 @@
             @include arrowsSelectStyle(white, $darkGrey, $isTall: true);
         }
 
-        /*#ingredientUnity {
-            width: 180px;
-        }*/
-
         #ingredientName {
             width: 300px;
         }
@@ -79,6 +74,45 @@
 
         .inputsTime {
             margin-top: 1rem;
+        }
+    }
+
+    .ingredientsList {
+        width: max-content;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 0 2rem 0;
+        margin-top: 1rem;
+        border-radius: 1rem;
+        overflow: hidden;
+        border: 2px solid $mediumGrey;
+
+        .ingredientsListHeader {
+            width: max-content;
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            margin-bottom: .5rem;
+            background-color: $mediumGrey;
+            color: white;
+
+            li:nth-child(1) {
+                width: 120px;
+            }
+
+            li:nth-child(2) {
+                width: 246px;
+            }
+
+            li:nth-child(3) {
+                width: 254px;
+            }
+
+            li {
+                text-align: center;
+                font-weight: 700;
+            }
         }
     }
 }

@@ -192,10 +192,7 @@ export class CreateEditRecipeFormComponent implements OnInit {
         }),
       ).subscribe(() => {
         console.log('subscribe')
-
-        for (let i = 0; i < this.ingredientsList.controls.length; i++) {
-          console.log(this.ingredientsList.controls[i].value)
-        }
+        console.log(this.recipeForm.formGroup.value)
       })
     }
   }

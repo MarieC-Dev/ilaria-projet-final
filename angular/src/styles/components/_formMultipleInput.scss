@@ -61,7 +61,7 @@
         }
 
         #stepDescription {
-            width: 500px;
+            width: 700px;
         }
 
         .stepsIngredientsBtn {
@@ -77,42 +77,108 @@
         }
     }
 
-    .ingredientsList {
+    .ingredientsList, .stepsList {
         width: max-content;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 0 0 2rem 0;
+        padding: 0 0 1rem 0;
         margin-top: 1rem;
         border-radius: 1rem;
         overflow: hidden;
         border: 2px solid $mediumGrey;
 
-        .ingredientsListHeader {
-            width: max-content;
+        .ingredientsListHeader, .stepsListHeader {
+            width: 100%;
             display: flex;
             justify-content: space-between;
             padding: 1rem;
             margin-bottom: .5rem;
             background-color: $mediumGrey;
             color: white;
-
-            li:nth-child(1) {
-                width: 120px;
-            }
-
-            li:nth-child(2) {
-                width: 246px;
-            }
-
-            li:nth-child(3) {
-                width: 254px;
-            }
+            text-align: center;
 
             li {
-                text-align: center;
-                font-weight: 700;
+                margin: 0 1rem;
+            }
+        }
+
+        .listBody {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+
+            li {
+                margin: .5rem 1rem;
+
+                input, select {
+                    margin: 0;
+                }
+            }
+
+            li:last-child {
+                display: flex;
+                align-items: center;
+
+                button {
+                    margin: 0 auto;
+                }
+
+                app-delete-icon {
+                    width: 32px;
+                    height: max-content;
+                }
             }
         }
     }
+
+    /* Ingredients */
+    .ingredientsListHeader {
+        li {
+            text-align: center;
+            font-weight: 700;
+        }
+    }
+
+    .ingredientsListHeader li:nth-child(1),
+    .ingredientsList .listBody li:nth-child(1) {
+        width: 110px;
+    }
+
+    .ingredientsListHeader li:nth-child(2),
+    .ingredientsList .listBody li:nth-child(2) {
+        width: 246px;
+    }
+
+    .ingredientsListHeader li:nth-child(3),
+    .ingredientsList .listBody li:nth-child(3) {
+        width: 350px;
+    }
+
+    .ingredientsListHeader li:nth-child(4),
+    .ingredientsList .listBody li:nth-child(4) {
+        width: 32px;
+    }
+    /* ===== */
+
+    /* Steps */
+    .stepsListHeader li:nth-child(1),
+    .stepsList .listBody li:nth-child(1) {
+        width: 24px;
+        text-align: center;
+    }
+
+    .stepsListHeader li:nth-child(2),
+    .stepsList .listBody li:nth-child(2),
+    .stepsList .listBody li:nth-child(2) input {
+        width: 650px;
+    }
+
+    .stepsListHeader li:nth-child(3),
+    .stepsList .listBody li:nth-child(3) {
+        width: 32px;
+    }
+    /* ===== */
 }

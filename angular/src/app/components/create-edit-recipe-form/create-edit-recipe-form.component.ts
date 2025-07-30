@@ -14,7 +14,6 @@ import {
 } from '@angular/forms';
 import {RecipeFormFactory} from '../../factories/recipe-form.factory';
 import {CommonModule} from '@angular/common';
-import {TableListComponent} from '../form-components/table-list/table-list.component';
 import {DatetimeService} from '../../services/datetime.service';
 import {IsLoggedInService} from '../../services/isLoggedIn.service';
 import {switchMap} from 'rxjs';
@@ -22,6 +21,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ServingNumberApiService} from '../../services/serving-number-api.service';
 import {RecipeTimeApiService} from '../../services/recipe-time-api.service';
 import {IngredientsStepsApiService} from '../../services/ingredients-steps-api.service';
+import {DeleteIconComponent} from '../icons/delete-icon/delete-icon.component';
 
 @Component({
   selector: 'app-create-edit-recipe-form',
@@ -32,7 +32,7 @@ import {IngredientsStepsApiService} from '../../services/ingredients-steps-api.s
     DifficultyComponent,
     FormsModule,
     ReactiveFormsModule,
-    TableListComponent,
+    DeleteIconComponent,
   ],
   templateUrl: './create-edit-recipe-form.component.html',
   styleUrl: './create-edit-recipe-form.component.scss'
@@ -147,7 +147,7 @@ export class CreateEditRecipeFormComponent implements OnInit {
 
           const list = this.recipeIngredientsList.map((elmList) => {
             return ingredientsResult.filter((elm: any) => elm.id === elmList.ingredientId);
-          })
+          });
 
           list.map((item: any) => {
             this.ingredientsList.push(
@@ -157,7 +157,7 @@ export class CreateEditRecipeFormComponent implements OnInit {
                 name: new FormControl<string>(item[0].name),
               })
             )
-          })
+          });
 
           return this.ingredientsStepsApi.getStepsList();
         }),
@@ -173,19 +173,18 @@ export class CreateEditRecipeFormComponent implements OnInit {
         }),
         switchMap((step) => {
           const stepsResult = step.rows;
-          const fieldsFormControl = ['stepName'];
-          let formControl: { [key: string]: FormControl } = {};
 
-          this.recipeStepsList.map((elmList) => {
-            const stepArray = stepsResult.filter((elm: any) => elm.id === elmList.stepId);
+          const list = this.recipeStepsList.map((elmList) => {
+            return stepsResult.filter((elm: any) => elm.id === elmList.stepId);
+          });
 
-            fieldsFormControl.forEach(field => {
-              formControl[field] = new FormControl<string>(stepArray[0][field]);
-            });
-
-            const formGroup = new FormGroup(formControl);
-
-            this.stepsList.push(formGroup);
+          list.map((item: any, index: number) => {
+            this.stepsList.push(
+              new FormGroup({
+                number: new FormControl<string>(String(index + 1)),
+                stepName: new FormControl<string>(item[0].stepName),
+              })
+            )
           });
 
           return this.ingredientsStepsApi.getStepsList();
@@ -260,7 +259,7 @@ export class CreateEditRecipeFormComponent implements OnInit {
 
   removeRow(event: Event, arrayList: FormArray, dataIndex: string) { // dataIndex = ingredientIndex (ingredient-index) || stepIndex (step-index)
     const element = event.target as HTMLElement;
-    const indexElement = element.closest('tr')!.dataset[dataIndex];
+    const indexElement: string = element.closest('ul')!.dataset[dataIndex]!;
 
     arrayList.removeAt(Number(indexElement));
   }
@@ -278,6 +277,10 @@ export class CreateEditRecipeFormComponent implements OnInit {
   /* STEPS */
   get stepsList() {
     return this.recipeForm.formGroup.get('stepsList') as FormArray;
+  }
+
+  get stepsListGroups() {
+    return this.stepsList.controls as FormGroup[];
   }
 
   get sortedStepsList() {

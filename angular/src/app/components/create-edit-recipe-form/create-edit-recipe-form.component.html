@@ -277,21 +277,23 @@
                 <li>Quantité</li>
                 <li>Unité</li>
                 <li>Ingrédient</li>
+                <li></li>
             </ul>
+
             @for(ingredient of ingredientsListGroups; track $index) {
-                <ul [formGroup]="ingredient">
+                <ul class="listBody" [formGroup]="ingredient" [attr.data-ingredient-index]="$index">
                     <li>
-                        <label for="numberIngredient">
+                        <label [for]="'numberIngredient' + $index">
                             <input type="number"
                                    [id]="'numberIngredient' + $index"
-                                   name="numberIngredient"
+                                   [name]="'numberIngredient' + $index"
                                    formControlName="quantity"
                                    placeholder="100" />
                         </label>
                     </li>
                     <li>
-                        <label for="ingredientUnity">
-                            <select name="ingredientUnity" [id]="'ingredientUnity' + $index" formControlName="unit">
+                        <label [for]="'ingredientUnity' + $index">
+                            <select [name]="'ingredientUnity' + $index" [id]="'ingredientUnity' + $index" formControlName="unit">
                                 <option value="">Unités</option>
                                 <option value="tablespoon">Cuillère à soupe</option>
                                 <option value="teaspoon">Cuillère à café</option>
@@ -311,15 +313,19 @@
                         </label>
                     </li>
                     <li>
-                        <label for="ingredientName">
+                        <label [for]="'ingredientName' + $index">
                             <input type="text"
                                    [id]="'ingredientName' + $index"
-                                   name="ingredientName"
+                                   [name]="'ingredientName' + $index"
                                    formControlName="name"
                                    placeholder="Ex. : Chocolat en poudre"
-                                   (keydown.enter)="addDetails('ingredientDetail', ingredientsList, 'quantity', 'unit', 'name')"
                             />
                         </label>
+                    </li>
+                    <li>
+                        <button type="button" (click)="removeRow($event, ingredientsList, 'ingredientIndex')">
+                            <app-delete-icon />
+                        </button>
                     </li>
                 </ul>
             }
@@ -357,12 +363,35 @@
 
         <p class="errorMessage" *ngIf="errorAddStep() !== ''">{{ errorAddStep() }}</p>
 
-        <app-table-list
-            class="stepsTable"
-            typeTable="step"
-            [headList]="tableHeadStep"
-            [bodyList]="sortedStepsList"
-            (removeFunc)="removeRow($event, stepsList, 'stepIndex')" />
+        <div class="stepsList">
+            <ul class="stepsListHeader">
+                <li>N°</li>
+                <li>Description</li>
+                <li></li>
+            </ul>
+
+            @for(step of stepsListGroups; track $index) {
+                <ul class="listBody" [formGroup]="step" [attr.data-step-index]="$index">
+                    <li>
+                        <p>{{ $index + 1 }}</p>
+                    </li>
+                    <li>
+                        <label for="stepDescription">
+                            <input type="text"
+                                   [id]="'stepDescription' + $index"
+                                   [name]="'stepDescription' + $index"
+                                   placeholder="Ex. : Ajouter le beurre fondue à la préparation"
+                                   formControlName="stepName" />
+                        </label>
+                    </li>
+                    <li>
+                        <button type="button" (click)="removeRow($event, stepsList, 'stepIndex')">
+                            <app-delete-icon />
+                        </button>
+                    </li>
+                </ul>
+            }
+        </div>
 
         <p class="formControlError" *ngIf="arrayInvalidControl.includes('stepsList')">Renseignez au moins 2 étapes de la recette</p>
     </app-multiple-inputs>

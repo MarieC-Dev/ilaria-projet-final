@@ -239,14 +239,9 @@ exports.deleteRecipe = async (req, res) => {
     const ingredientsListSql = 'DELETE FROM IngredientsList WHERE recipeId = ?';
     const stepsListSql = 'DELETE FROM StepsList WHERE recipeId = ?';
 
-    /*
-    * "BACK Erreur lors de la suppression de la recette Error: Cannot delete or update a parent row: a foreign key constraint fails
-    * (`recipesite`.`ingredientslist`, CONSTRAINT `ingredientslist_ibfk_1` FOREIGN KEY (`recipeId`) REFERENCES `recipedata` (`id`))"
-    * */
-
     db.execute(ingredientsListSql, [recipeId], (err, result) => {
         if (result.affectedRows === 0) {
-            return res.status(404).json({ message: 'Liste des ingrédients non trouvé' });
+            return res.status(404).json({ message: 'Liste des ingrédients introuvable' });
         }
 
         res.json({message: 'Liste des ingrédients supprimée'});
@@ -254,7 +249,7 @@ exports.deleteRecipe = async (req, res) => {
 
     db.execute(stepsListSql, [recipeId], (err, result) => {
         if (result.affectedRows === 0) {
-            return res.status(404).json({ message: 'Liste des étapes non trouvé' });
+            return res.status(404).json({ message: 'Liste des étapes introuvable' });
         }
 
         res.json({message: 'Liste des étapes supprimée'})
@@ -262,7 +257,7 @@ exports.deleteRecipe = async (req, res) => {
 
     await db.execute(recipeDataSql, [recipeId], (err, result) => {
         if (result.affectedRows === 0) {
-            return res.status(404).json({ message: 'Recette non trouvé' });
+            return res.status(404).json({ message: 'Recette introuvable' });
         }
 
         res.json({message: 'Recette supprimée'});

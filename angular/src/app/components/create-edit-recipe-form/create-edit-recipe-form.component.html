@@ -281,7 +281,9 @@
             </ul>
 
             @for(ingredient of ingredientsListGroups; track $index) {
-                <ul class="listBody" [formGroup]="ingredient" [attr.data-ingredient-index]="$index">
+                <ul class="listBody"
+                    [formGroup]="ingredient"
+                    [attr.data-ingredient-index]="ingredient.value.id">
                     <li>
                         <label [for]="'numberIngredient' + $index">
                             <input type="number"
@@ -323,7 +325,7 @@
                         </label>
                     </li>
                     <li>
-                        <button type="button" (click)="removeRow($event, ingredientsList, 'ingredientIndex')">
+                        <button type="button" (click)="removeRow($event, ingredientsList, 'ingredientIndex', ingredient.value.id)">
                             <app-delete-icon />
                         </button>
                     </li>
@@ -371,7 +373,9 @@
             </ul>
 
             @for(step of stepsListGroups; track $index) {
-                <ul class="listBody" [formGroup]="step" [attr.data-step-index]="$index">
+                <ul class="listBody"
+                    [formGroup]="step"
+                    [attr.data-step-index]="step.value.id">
                     <li>
                         <p>{{ $index + 1 }}</p>
                     </li>
@@ -385,7 +389,7 @@
                         </label>
                     </li>
                     <li>
-                        <button type="button" (click)="removeRow($event, stepsList, 'stepIndex')">
+                        <button type="button" (click)="removeRow($event, stepsList, 'stepIndex', step.value.id)">
                             <app-delete-icon />
                         </button>
                     </li>

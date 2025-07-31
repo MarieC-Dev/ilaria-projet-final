@@ -152,6 +152,7 @@ export class CreateEditRecipeFormComponent implements OnInit {
           list.map((item: any) => {
             this.ingredientsList.push(
               new FormGroup({
+                id: new FormControl<string>(item[0].id),
                 quantity: new FormControl<string>(item[0].quantity),
                 unit: new FormControl<string>(item[0].unit),
                 name: new FormControl<string>(item[0].name),
@@ -181,6 +182,7 @@ export class CreateEditRecipeFormComponent implements OnInit {
           list.map((item: any, index: number) => {
             this.stepsList.push(
               new FormGroup({
+                id: new FormControl<string>(item[0].id),
                 number: new FormControl<string>(String(index + 1)),
                 stepName: new FormControl<string>(item[0].stepName),
               })
@@ -257,11 +259,24 @@ export class CreateEditRecipeFormComponent implements OnInit {
     }
   }
 
-  removeRow(event: Event, arrayList: FormArray, dataIndex: string) { // dataIndex = ingredientIndex (ingredient-index) || stepIndex (step-index)
+  removeRow(event: Event, arrayList: FormArray, dataIndex: string, id: number) {
+    // dataIndex = ingredientIndex (ingredient-index) || stepIndex (step-index)
     const element = event.target as HTMLElement;
     const indexElement: string = element.closest('ul')!.dataset[dataIndex]!;
 
-    arrayList.removeAt(Number(indexElement));
+    if(dataIndex === 'ingredientIndex') {
+      console.log(id)
+      this.ingredientsStepsApi.deleteOneIngredient(id).subscribe(() => {
+        arrayList.removeAt(Number(indexElement) - 1);
+      });
+    }
+
+    if(dataIndex === 'stepIndex') {
+      console.log(id)
+      this.ingredientsStepsApi.deleteOneStep(id).subscribe(() => {
+        arrayList.removeAt(Number(indexElement) - 1);
+      });
+    }
   }
 
   /* INGREDIENTS */

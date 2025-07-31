@@ -15,7 +15,7 @@ const { getAllRecipes, createRecipe, updateRecipe, deleteRecipe, getOneRecipe } 
 const { addFavorite, getAllFavorites, deleteOneFavorite} = require('./routes/favorite-recipe');
 const login = require("./routes/login");
 const { getAllUsers, getOneUser, createUser, updateUser } = require("./routes/users");
-const { getAllIngredients, getAllIngredientsList, getAllSteps, getAllStepsList} = require("./routes/ingredients-steps");
+const { getAllIngredients, getAllIngredientsList, getAllSteps, getAllStepsList, deleteOneIngredient, deleteOneStep} = require("./routes/ingredients-steps");
 const { getAllServingNumber, getOneServingNumber } = require('./routes/serving-data');
 const { getAllRecipeTime, getOneRecipeTime } = require('./routes/recipe-time');
 const { getAllUserComments, createComment, getCommentsByRecipeId} = require("./routes/comments");
@@ -96,8 +96,10 @@ app.delete('/users/:id/favorite', deleteOneFavorite);
 // INGREDIENTS & STEPS
 app.get('/ingredients', getAllIngredients);
 app.get('/ingredients-list', getAllIngredientsList);
+app.delete('/ingredients/:id', deleteOneIngredient);
 app.get('/steps', getAllSteps);
 app.get('/steps-list', getAllStepsList);
+app.delete('/steps/:id', deleteOneStep);
 
 // SERVING NUMBER
 app.get('/serving-number', getAllServingNumber);

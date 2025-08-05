@@ -193,7 +193,7 @@ export class CreateEditRecipeFormComponent implements OnInit {
         }),
       ).subscribe(() => {
         console.log('subscribe')
-        console.log(this.recipeForm.formGroup.value)
+        console.log(this.recipeFormStatus())
       })
     }
   }
@@ -386,10 +386,17 @@ export class CreateEditRecipeFormComponent implements OnInit {
       console.log(`${pair[0]}:`, pair[1]);
     }
 
-    this.recipesApiService.createRecipe(formData).subscribe({
-      next: (result) => window.location.reload(),
-      error: (err) => console.log('Err Front create recipe', err)
-    });
-
+    if(this.updateRecipe) {
+      console.log({type: typeof this.recipeDataId, id: this.recipeDataId})
+      this.recipesApiService.updateRecipe(this.recipeDataId, formData).subscribe({
+        next: (result) => window.location.reload(),
+        error: (err) => console.log('Err Front update recipe', err)
+      });
+    } else {
+      this.recipesApiService.createRecipe(formData).subscribe({
+        next: (result) => window.location.reload(),
+        error: (err) => console.log('Err Front create recipe', err)
+      });
+    }
   }
 }

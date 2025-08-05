@@ -21,7 +21,7 @@ export class RecipesApiService {
   createRecipe(recipe: any): Observable<any> {
     return this.http.post(`${this.API_URL}/recipes`, recipe).pipe(
       catchError((error) => {
-        console.log('recipe api post error :', error);
+        console.log('Recipe api post error :', error);
         return throwError(() => error);
       })
     );
@@ -30,7 +30,7 @@ export class RecipesApiService {
   updateRecipe(id: number, recipe: any): Observable<any> {
     return this.http.put(`${this.API_URL}/recipes/${id}`, recipe).pipe(
       catchError((error) => {
-        console.log('recipe api put error :', error);
+        console.log('Recipe api put error :', error);
         return throwError(() => error);
       })
     );

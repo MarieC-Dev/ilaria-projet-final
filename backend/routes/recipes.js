@@ -166,32 +166,46 @@ exports.createRecipe = async (req, res) => {
 exports.updateRecipe = async (req, res) => {
     const recipeId = req.params.id;
     let {
-        name, description, imageName, imageData, cuisineType, cookingType, servingNumber, difficulty, recipeTime, ingredientsList, stepsList, authorId, created
+        name, description, imageName, cuisineType, cookingType, difficulty, ingredientsList, stepsList, authorId, created
     } = req.body;
+
+    const servingNumber = req.body['servingNumber.number'];
+    const servingType = req.body['servingNumber.type'];
+
+    const makingTimeType = req.body['recipeTime.making.type'];
+    const makingTimeHours = req.body['recipeTime.making.hours'];
+    const makingTimeMinutes = req.body['recipeTime.making.minutes'];
+
+    const pauseTimeType = req.body['recipeTime.pause.type'];
+    const pauseTimeHours = req.body['recipeTime.pause.hours'];
+    const pauseTimeMinutes = req.body['recipeTime.pause.minutes'];
+
+    const cookingTimeType = req.body['recipeTime.cooking.type'];
+    const cookingTimeHours = req.body['recipeTime.cooking.hours'];
+    const cookingTimeMinutes = req.body['recipeTime.cooking.minutes'];
 
     try {
         if(
-            !name || !cuisineType || !cookingType || !servingNumber.number || !servingNumber.type || !difficulty ||
-            !recipeTime.making.type || !recipeTime.cooking.type || !recipeTime.pause.type ||
-            ingredientsList === [] || stepsList === []
+            !name || !cuisineType || !cookingType || !servingNumber || !servingType || !difficulty ||
+            !makingTimeType || !pauseTimeType || !cookingTimeType || ingredientsList === [] || stepsList === []
         ) {
             return res.status(404).json({msg: 'recipe time data not found'})
         }
 
         /* 1. SERVING NUMBER & RECIPE TIME creation */
         const recipeTimeQueries = [
-            recipeTime.making.type, Number(recipeTime.making.hours), Number(recipeTime.making.minutes),
-            recipeTime.pause.type, Number(recipeTime.pause.hours), Number(recipeTime.pause.minutes),
-            recipeTime.cooking.type, Number(recipeTime.cooking.hours), Number(recipeTime.cooking.minutes),
+            makingTimeType, Number(makingTimeHours), Number(makingTimeMinutes),
+            pauseTimeType, Number(pauseTimeHours), Number(pauseTimeMinutes),
+            cookingTimeType, Number(cookingTimeHours), Number(cookingTimeMinutes),
             recipeId
         ];
 
-        await db.query(
+        db.query(
             'UPDATE ServingNumber SET number = ?, servingType = ? WHERE id = ?',
-            [servingNumber.number, servingNumber.type, recipeId]
+            [servingNumber, servingType, recipeId]
         );
 
-        await db.query(
+        db.query(
             'UPDATE TimeTable SET typeMaking = ?, makingH = ?, makingMin = ?, typePause = ?, pauseH = ?, pauseMin = ?, typeCooking = ?, cookingH = ?, cookingMin = ? WHERE id = ?',
             recipeTimeQueries
         );
@@ -199,36 +213,72 @@ exports.updateRecipe = async (req, res) => {
 
         /* 2. RECIPE DATA creation - get servingNumber & recipeTime IDs */
         const recipeDataQueries = [
-            name, description, imageName, imageData, cuisineType, cookingType, difficulty, authorId, created, recipeId
+            name, description, imageName, cuisineType, cookingType, difficulty, authorId, created, recipeId
         ];
         await db.query(
-            'UPDATE RecipeData SET name = ?, description = ?, imageName = ?, imageData = ?, cuisineType = ?, cookingType = ?, difficulty = ?, authorId = ?, created = ? WHERE id = ?',
+            'UPDATE RecipeData SET name = ?, description = ?, imageName = ?, cuisineType = ?, cookingType = ?, difficulty = ?, authorId = ?, created = ? WHERE id = ?',
             recipeDataQueries
         );
         /* ===== */
 
         /* 3. INGREDIENTS LIST & STEPS LIST creation - both get recipeData ID */
-        const ingredientQueries = ingredientsList.map((item) => [item.quantity, item.unit, item.name, recipeId]);
+        db.execute('DELETE FROM IngredientsList WHERE recipeId = ?', [recipeId]);
 
-        await db.query(
-            'UPDATE Ingredient SET quantity = ?, unit = ?, name = ? WHERE id = ?',
+        const ingredientQueries = ingredientsList.map((item) => [item.quantity, item.unit, item.name]);
+
+        const [ingredientResult] = await db.query(
+            'INSERT INTO Ingredient (quantity, unit, name) VALUES ?',
             [ingredientQueries]
         );
 
-        // steps
-        const stepQueries = stepsList.map((item) => [item.stepName, recipeId]);
+        let ingredientId = ingredientResult.insertId;
 
-        await db.query(
-            'INSERT INTO Step (stepName) VALUES ?',
-            [stepQueries]
+        const ingredientsIdsArray = [];
+
+        for(let i = 0; i < ingredientQueries.length; i++) {
+            ingredientsIdsArray.push(ingredientId++);
+        }
+
+        const [ingredientsListResult] = await db.query(
+            'INSERT INTO IngredientsList (recipeId, ingredientId) VALUES ?',
+            [ingredientsIdsArray.map((id) => [recipeId, id])]
         );
+
+        const ingredientsListId = ingredientsListResult.insertId;
+
+        // steps
+        db.execute('DELETE FROM StepsList WHERE recipeId = ?', [recipeId]);
+
+        const stepQueries = stepsList.map((item) => [item.stepName]);
+
+        console.log(stepQueries);
+
+        const [stepResult] = await db.query(
+            'INSERT INTO Step (stepName) VALUES ?', [stepQueries]
+        );
+
+        let stepId = stepResult.insertId;
+
+        const stepsIdsArray = [];
+
+        for(let i = 0; i < stepQueries.length; i++) {
+            stepsIdsArray.push(stepId++);
+        }
+
+        const [stepsListResult] = await db.query(
+            'INSERT INTO StepsList (recipeId, stepId) VALUES ?',
+            [stepsIdsArray.map((id) => [recipeId, id])]
+        );
+
+        const stepsListId = stepsListResult.insertId;
         /* ===== */
 
         /* 4. RESULT - creation new recipe */
         return res.status(201).json({ msg: 'The recipe is update !', recipeId });
         /* ===== */
+
     } catch (error) {
-        res.status(500).json({ recipeErr: 'BACK Erreur lors de la création de la recette ' + error })
+        res.status(500).json({ recipeErr: 'BACK Erreur lors de la màj de la recette ' + error })
     }
 }
 

@@ -21,11 +21,8 @@ exports.getOneRecipe = async (req, res) => {
 }
 
 exports.createRecipe = async (req, res) => {
-    /*let {
-        name, description, imageName, imageData, cuisineType, cookingType, servingNumber, difficulty, recipeTime, ingredientsList, stepsList, authorId, created
-    } = req.body;*/
     let {
-        name, description, imageData, cuisineType, cookingType, difficulty, ingredientsList, stepsList, authorId, created
+        name, description, cuisineType, cookingType, difficulty, ingredientsList, stepsList, authorId, created
     } = req.body;
 
     let imageName = req.file.filename;
@@ -54,9 +51,6 @@ exports.createRecipe = async (req, res) => {
     };
 
     const result = [];
-
-    console.log('BODY : ', req.body);
-    console.log('FILE response : ', req.file);
 
     try {
         if(
@@ -90,10 +84,10 @@ exports.createRecipe = async (req, res) => {
 
         /* 2. RECIPE DATA creation - get servingNumber & recipeTime IDs */
         const recipeDataQueries = [
-            name, description, imageName, imageData, cuisineType, cookingType, servingNumberId, difficulty, authorId, recipeTimeId, created
+            name, description, imageName, cuisineType, cookingType, servingNumberId, difficulty, authorId, recipeTimeId, created
         ];
         const [recipeDataResult] = await db.query(
-            'INSERT INTO RecipeData (name, description, imageName, imageData, cuisineType, cookingType, servingNumberId, difficulty, authorId, recipeTimeId, created) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            'INSERT INTO RecipeData (name, description, imageName, cuisineType, cookingType, servingNumberId, difficulty, authorId, recipeTimeId, created) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
             recipeDataQueries
         );
 
@@ -166,8 +160,10 @@ exports.createRecipe = async (req, res) => {
 exports.updateRecipe = async (req, res) => {
     const recipeId = req.params.id;
     let {
-        name, description, imageName, cuisineType, cookingType, difficulty, ingredientsList, stepsList, authorId, created
+        name, description, cuisineType, cookingType, difficulty, ingredientsList, stepsList, authorId, created
     } = req.body;
+
+    let imageName = req.file.filename;
 
     const servingNumber = req.body['servingNumber.number'];
     const servingType = req.body['servingNumber.type'];

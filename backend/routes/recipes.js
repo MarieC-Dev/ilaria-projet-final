@@ -163,7 +163,7 @@ exports.updateRecipe = async (req, res) => {
         name, description, cuisineType, cookingType, difficulty, ingredientsList, stepsList, authorId, created
     } = req.body;
 
-    let imageName = req.file.filename;
+    let imageName = req?.file?.filename;
 
     const servingNumber = req.body['servingNumber.number'];
     const servingType = req.body['servingNumber.type'];
@@ -208,13 +208,28 @@ exports.updateRecipe = async (req, res) => {
         /* ===== */
 
         /* 2. RECIPE DATA creation - get servingNumber & recipeTime IDs */
-        const recipeDataQueries = [
-            name, description, imageName, cuisineType, cookingType, difficulty, authorId, created, recipeId
-        ];
-        await db.query(
-            'UPDATE RecipeData SET name = ?, description = ?, imageName = ?, cuisineType = ?, cookingType = ?, difficulty = ?, authorId = ?, created = ? WHERE id = ?',
-            recipeDataQueries
-        );
+        console.log(imageName);
+
+        if(imageName) {
+            const recipeDataQueries = [
+                name, description, imageName, cuisineType, cookingType, difficulty, authorId, created, recipeId
+            ];
+
+            await db.query(
+                'UPDATE RecipeData SET name = ?, description = ?, imageName = ?, cuisineType = ?, cookingType = ?, difficulty = ?, authorId = ?, created = ? WHERE id = ?',
+                recipeDataQueries
+            );
+        } else {
+            const recipeDataQueries = [
+                name, description, cuisineType, cookingType, difficulty, authorId, created, recipeId
+            ];
+
+            await db.query(
+                'UPDATE RecipeData SET name = ?, description = ?, cuisineType = ?, cookingType = ?, difficulty = ?, authorId = ?, created = ? WHERE id = ?',
+                recipeDataQueries
+            );
+        }
+
         /* ===== */
 
         /* 3. INGREDIENTS LIST & STEPS LIST creation - both get recipeData ID */
@@ -241,6 +256,12 @@ exports.updateRecipe = async (req, res) => {
         );
 
         const ingredientsListId = ingredientsListResult.insertId;
+
+        /*
+            TypeError: Cannot read properties of undefined (reading &#39;filename&#39;)<br> &nbsp; &nbsp;at exports.updateRecipe
+            (/Users/mariecosta/Desktop/ILARIA/Projet final/final-project/backend/routes/recipes.js:166:30)
+            "<!DOCTYPE html>
+        */
 
         // steps
         db.execute('DELETE FROM StepsList WHERE recipeId = ?', [recipeId]);

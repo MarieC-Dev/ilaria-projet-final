@@ -387,7 +387,6 @@ export class CreateEditRecipeFormComponent implements OnInit {
     }
 
     if(this.updateRecipe) {
-      console.log({type: typeof this.recipeDataId, id: this.recipeDataId})
       this.recipesApiService.updateRecipe(this.recipeDataId, formData).subscribe({
         next: (result) => window.location.reload(),
         error: (err) => console.log('Err Front update recipe', err)

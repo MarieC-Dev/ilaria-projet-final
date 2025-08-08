@@ -259,24 +259,8 @@ export class CreateEditRecipeFormComponent implements OnInit {
     }
   }
 
-  removeRow(event: Event, arrayList: FormArray, dataIndex: string, id: number) {
-    // dataIndex = ingredientIndex (ingredient-index) || stepIndex (step-index)
-    const element = event.target as HTMLElement;
-    const indexElement: string = element.closest('ul')!.dataset[dataIndex]!;
-
-    if(dataIndex === 'ingredientIndex') {
-      console.log(id)
-      this.ingredientsStepsApi.deleteOneIngredient(id).subscribe(() => {
-        arrayList.removeAt(Number(indexElement) - 1);
-      });
-    }
-
-    if(dataIndex === 'stepIndex') {
-      console.log(id)
-      this.ingredientsStepsApi.deleteOneStep(id).subscribe(() => {
-        arrayList.removeAt(Number(indexElement) - 1);
-      });
-    }
+  removeRow(arrayList: FormArray, id: number) {
+    arrayList.removeAt(id);
   }
 
   /* INGREDIENTS */
@@ -296,12 +280,6 @@ export class CreateEditRecipeFormComponent implements OnInit {
 
   get stepsListGroups() {
     return this.stepsList.controls as FormGroup[];
-  }
-
-  get sortedStepsList() {
-    const mapList = this.stepsList.controls.map(ctrl => ctrl.value);
-    const sortedList = mapList.sort((a, b) => a.number - b.number);
-    return sortedList;
   }
   /* ===== */
 
@@ -398,4 +376,6 @@ export class CreateEditRecipeFormComponent implements OnInit {
       });
     }
   }
+
+  protected readonly Number = Number;
 }

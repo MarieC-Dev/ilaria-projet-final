@@ -283,7 +283,7 @@
             @for(ingredient of ingredientsListGroups; track $index) {
                 <ul class="listBody"
                     [formGroup]="ingredient"
-                    [attr.data-ingredient-index]="ingredient.value.id">
+                    [attr.data-ingredient-index]="$index">
                     <li>
                         <label [for]="'numberIngredient' + $index">
                             <input type="number"
@@ -325,7 +325,7 @@
                         </label>
                     </li>
                     <li>
-                        <button type="button" (click)="removeRow($event, ingredientsList, 'ingredientIndex', ingredient.value.id)">
+                        <button type="button" (click)="removeRow(ingredientsList, $index)">
                             <app-delete-icon />
                         </button>
                     </li>
@@ -333,7 +333,10 @@
             }
         </div>
 
-        <p class="formControlError" *ngIf="arrayInvalidControl.includes('ingredientsList')">Renseignez au moins 2 ingrédients</p>
+        <p class="formControlError"
+           *ngIf="arrayInvalidControl.includes('ingredientsList')">
+            Renseignez au moins 2 ingrédients
+        </p>
     </app-multiple-inputs>
 
     <hr class="createRecipeLine">
@@ -351,7 +354,7 @@
                            name="stepDescription"
                            placeholder="Ex. : Ajouter le beurre fondue à la préparation"
                            formControlName="stepName"
-                           (keydown.enter)="addDetails('stepDetail', stepsList, 'stepName')" />
+                           (keydown.enter)="addDetails('stepDetail', stepsList, 'id', 'stepName')" />
                 </label>
             </li>
             <li>
@@ -375,7 +378,7 @@
             @for(step of stepsListGroups; track $index) {
                 <ul class="listBody"
                     [formGroup]="step"
-                    [attr.data-step-index]="step.value.id">
+                    [attr.data-step-index]="$index + 1">
                     <li>
                         <p>{{ $index + 1 }}</p>
                     </li>
@@ -389,7 +392,8 @@
                         </label>
                     </li>
                     <li>
-                        <button type="button" (click)="removeRow($event, stepsList, 'stepIndex', step.value.id)">
+                        <button type="button"
+                                (click)="removeRow(stepsList, $index)">
                             <app-delete-icon />
                         </button>
                     </li>

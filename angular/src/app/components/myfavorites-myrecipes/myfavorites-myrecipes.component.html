@@ -3,6 +3,9 @@
 
     <!-- @If FAVORITES : -->
     <div *ngIf="isFavorites()" class="myFavoritesDiv">
+        <p class="withoutFavorites" *ngIf="getUserFavorites.length === 0">
+            Vous n'avez aucune recette dans vos favoris
+        </p>
         <div class="myFavoritesItems">
             @for (recipe of getUserFavorites(); track recipe.id) {
                 <app-recipe-item

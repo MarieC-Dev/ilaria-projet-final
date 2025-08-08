@@ -1,11 +1,11 @@
 @use '../utils/variables' as *;
 
-.wrapperCreateRecipe, .wrapperRecipeCommentForm {
+.wrapperCreateRecipe, .wrapperEditRecipe, .wrapperRecipeCommentForm {
     padding: 5rem 0;
     background-color: $lightGrey;
 
     button.btn-bg-yellow {
-        margin: 0 auto 3rem auto;
+        margin: 0 auto 2rem auto;
     }
 }
 

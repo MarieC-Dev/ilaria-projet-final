@@ -5,21 +5,14 @@ import {HeaderProfileComponent} from '../../layout/header-profile/header-profile
 import {UsersApiService} from '../../services/users-api.service';
 import { UserFormFactory } from '../../factories/user-form.factory';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-
-interface User {
-  id: number,
-  imageName: string,
-  username: string,
-  email: string,
-  password: string,
-  role: number
-}
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-profile-page',
   imports: [
     HeaderProfileComponent,
     ReactiveFormsModule,
+    NgIf,
   ],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.scss'
@@ -29,6 +22,7 @@ export class ProfilePageComponent implements OnInit {
   recipesList = signal(RECIPE_LIST);
   userId!: number;
   userImage: File | null = null;
+  isUpdated = signal(false);
 
   constructor(private userApi: UsersApiService, private route: ActivatedRoute) {
     this.userForm = new UserFormFactory();
@@ -105,7 +99,7 @@ export class ProfilePageComponent implements OnInit {
       formData.append('imageName', file.name);
     }
 
-    console.log(file);
+    console.log({img: file});
     return formData;
   }
 
@@ -113,7 +107,7 @@ export class ProfilePageComponent implements OnInit {
     const formData = this.buildFormDataFormGroup(this.userForm.formGroupCreate, this.userImage);
 
     this.userApi.updateUser(this.userId, formData).subscribe({
-      next: (result) => window.location.reload(),
+      next: (result) => this.isUpdated.set(true),
       error: (err) => console.log('Err Front update profile', err)
     });
   }

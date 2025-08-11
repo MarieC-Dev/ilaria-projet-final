@@ -71,6 +71,8 @@
                        required/>
             </div>
 
+            <p *ngIf="isUpdated()">Votre profil a été mis à jour avec succès</p>
+
             <!-- Si une valeur d'un input a changé -> disabled = false -->
             <button type="submit" class="btn-bg-red" (click)="onSubmit()">
                 Modifier

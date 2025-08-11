@@ -38,7 +38,6 @@ export class SignupPageComponent implements OnInit {
 
     this.userForm.formGroupCreate.patchValue({
       imageName: '',
-      imageData: '',
       username: '',
       email: '',
       password: '',

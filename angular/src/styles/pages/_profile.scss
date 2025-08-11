@@ -116,10 +116,25 @@
                 .wrapperProfileImage {
                     width: 88px;
                     height: 88px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                     padding: 20px;
                     margin: 0 auto 1rem auto;
                     border: 4px solid $mediumGrey;
                     border-radius: 3rem;
+                    overflow: hidden;
+
+                    &__userImage {
+                        padding: 0;
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            display: block;
+                            object-fit: cover;
+                        }
+                    }
                 }
 
                 label {

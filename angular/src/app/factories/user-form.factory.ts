@@ -12,6 +12,7 @@ export class UserFormFactory {
       username: new FormControl<string>(''),
       email: new FormControl<string>(''),
       password: new FormControl<string>(''),
+      role: new FormControl<number>(3),
       created: new FormControl<string>('')
     });
 

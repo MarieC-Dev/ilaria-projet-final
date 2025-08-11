@@ -1,6 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RECIPE_LIST } from '../../lists/recipe-list.fake';
-import { RecipeAverageService } from '../../services/recipe-average.service';
 import { ActivatedRoute } from '@angular/router';
 import {HeaderProfileComponent} from '../../layout/header-profile/header-profile.component';
 import {UsersApiService} from '../../services/users-api.service';
@@ -12,7 +11,8 @@ interface User {
   imageName: string,
   username: string,
   email: string,
-  password: string
+  password: string,
+  role: number
 }
 
 @Component({
@@ -28,7 +28,6 @@ export class ProfilePageComponent implements OnInit {
   userForm!: UserFormFactory;
   recipesList = signal(RECIPE_LIST);
   userId!: number;
-  userData!: User;
   userImage: File | null = null;
 
   constructor(private userApi: UsersApiService, private route: ActivatedRoute) {
@@ -38,7 +37,20 @@ export class ProfilePageComponent implements OnInit {
   ngOnInit(): void {
     this.userId = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.userApi.getOneUser(this.userId).subscribe({
+    this.userApi.getOneUser(this.userId).subscribe((res) => {
+      const data = res.profile[0];
+      this.userForm.formGroupCreate.patchValue({
+        imageName: data.imageName,
+        username: data.username,
+        email: data.email,
+        password: data.password,
+        role: data.roleId,
+      });
+
+      console.log(this.userForm.formGroupCreate.value);
+    });
+
+    /*this.userApi.getOneUser(this.userId).subscribe({
       next: (result) => {
         const data = result.profile[0];
         this.userData = {
@@ -46,12 +58,25 @@ export class ProfilePageComponent implements OnInit {
           imageName: data.imageName,
           username: data.username,
           email: data.email,
-          password: data.password
+          password: data.password,
+          role: data.role
         }
-        console.log(this.userData)
+        console.log(this.userData);
       },
       error: (error) => console.log('Erreur get user data', error)
-    });
+    });*/
+  }
+
+  get username(): string {
+    return this.userForm.formGroupCreate.get('username')?.value;
+  }
+
+  get profileImage(): string {
+    return this.userForm.formGroupCreate.get('imageName')?.value;
+  }
+
+  removeProfileImage() {
+    this.userForm.formGroupCreate.get('imageName')?.setValue('');
   }
 
   onFileSelected(event: Event) {
@@ -81,12 +106,15 @@ export class ProfilePageComponent implements OnInit {
     }
 
     console.log(file);
-
     return formData;
   }
 
   onSubmit() {
-    console.log('update')
-    //const userId: number = Number(this.route.snapshot.paramMap.get('id'));
+    const formData = this.buildFormDataFormGroup(this.userForm.formGroupCreate, this.userImage);
+
+    this.userApi.updateUser(this.userId, formData).subscribe({
+      next: (result) => window.location.reload(),
+      error: (err) => console.log('Err Front update profile', err)
+    });
   }
 }

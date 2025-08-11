@@ -257,12 +257,6 @@ exports.updateRecipe = async (req, res) => {
 
         const ingredientsListId = ingredientsListResult.insertId;
 
-        /*
-            TypeError: Cannot read properties of undefined (reading &#39;filename&#39;)<br> &nbsp; &nbsp;at exports.updateRecipe
-            (/Users/mariecosta/Desktop/ILARIA/Projet final/final-project/backend/routes/recipes.js:166:30)
-            "<!DOCTYPE html>
-        */
-
         // steps
         db.execute('DELETE FROM StepsList WHERE recipeId = ?', [recipeId]);
 

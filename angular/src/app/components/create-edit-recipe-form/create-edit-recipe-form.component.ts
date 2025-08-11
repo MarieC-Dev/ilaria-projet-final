@@ -292,7 +292,6 @@ export class CreateEditRecipeFormComponent implements OnInit {
       //console.log('Image sélectionnée :', this.selectedImage);
 
       this.recipeForm.formGroup.get('imageName')?.setValue(this.selectedImage.name);
-      this.recipeForm.formGroup.get('imageData')?.setValue([this.selectedImage]);
 
       formData.append('recipe-image', this.selectedImage);
     }
@@ -376,6 +375,4 @@ export class CreateEditRecipeFormComponent implements OnInit {
       });
     }
   }
-
-  protected readonly Number = Number;
 }

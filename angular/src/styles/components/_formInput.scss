@@ -28,3 +28,19 @@
     margin-top: 1rem;
     color: red;
 }
+
+input[type=file] {
+    padding: .75rem 1rem;
+    border: 2px solid $mediumGrey;
+    border-radius: 3rem;
+}
+
+input[type=file]::file-selector-button {
+    padding: .5rem 1.5rem;
+    margin-right: 1rem;
+    background: $mediumGrey;
+    color: #fff;
+    border: none;
+    border-radius: 2rem;
+    cursor: pointer;
+}

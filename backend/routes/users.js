@@ -28,7 +28,6 @@ exports.getOneUser = async (req, res) => {
 exports.createUser = async (req, res) => {
     let { username, email, password, created } = req.body;
     let imageName = req.file?.filename;
-    console.log(req.body);
 
     if(!imageName || !username || !email || !password) {
         return res.status(400).json({ error: "Le nom, le mail et le mot de passe sont requis" });

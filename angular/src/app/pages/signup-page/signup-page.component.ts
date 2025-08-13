@@ -32,7 +32,6 @@ export class SignupPageComponent implements OnInit {
     if (input.files && input.files.length > 0) {
       const formData = new FormData();
       this.selectedImage = input.files[0];
-      console.log('Image sélectionnée :', this.selectedImage);
 
       this.userForm.formGroupCreate.get('imageName')?.setValue(this.selectedImage.name);
 
@@ -58,10 +57,7 @@ export class SignupPageComponent implements OnInit {
   onSubmit() {
     this.userForm.formGroupCreate.get('created')?.setValue(this.createdDate.datetime);
 
-    const formData = this.buildFormDataFormGroup(this.userForm.formGroupCreate, this.selectedImage)
-
-    console.log(this.userForm.formGroupCreate.value);
-    console.log(formData);
+    const formData = this.buildFormDataFormGroup(this.userForm.formGroupCreate, this.selectedImage);
 
     this.usersApiService.createUser(formData).subscribe({
       next: (response) => {

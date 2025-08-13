@@ -5,7 +5,6 @@ import { MultipleInputsComponent } from '../form-components/multiple-inputs/mult
 import { CUISINE_TYPE } from '../../lists/cuisine-type-list';
 import {RecipesApiService} from '../../services/recipes-api.service';
 import {
-  Form,
   FormArray,
   FormControl,
   FormGroup,
@@ -289,7 +288,6 @@ export class CreateEditRecipeFormComponent implements OnInit {
     if (input.files && input.files.length > 0) {
       const formData = new FormData();
       this.selectedImage = input.files[0];
-      //console.log('Image sélectionnée :', this.selectedImage);
 
       this.recipeForm.formGroup.get('imageName')?.setValue(this.selectedImage.name);
 

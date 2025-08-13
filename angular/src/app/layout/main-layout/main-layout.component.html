@@ -20,6 +20,12 @@
                     [routerLink]="'/profil/' + (userStatus | async)?.user.id + '/mes-infos'"
                     routerLinkActive="active"
                     ariaCurrentWhenActive="page">Mon profil</a>
+
+                <button type="button"
+                        class="btn-bg-red btn-bg-red__underline"
+                        (click)="logout()">
+                    Déconnexion
+                </button>
             } @else {
                 <a
                     class="btn-transparent"

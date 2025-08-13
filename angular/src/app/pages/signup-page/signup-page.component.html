@@ -26,7 +26,7 @@
                     id="signup-add-picture"
                     name="signup-add-picture"
                     placeholder="Choisissez une photo de profil"
-                    formControlName="imageName"
+                    (change)="onFileSelected($event)"
                 />
             </div>
 

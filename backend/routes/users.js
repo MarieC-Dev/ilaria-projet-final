@@ -3,7 +3,6 @@ const router = express.Router();
 const db = require("../middlewares/db_connection");
 const authMiddleware = require("../middlewares/authMiddleware");
 const bcrypt = require("bcryptjs")
-const {id} = require("nodemon");
 
 exports.getAllUsers = async (req, res) => {
     try {
@@ -27,20 +26,21 @@ exports.getOneUser = async (req, res) => {
 }
 
 exports.createUser = async (req, res) => {
-    let { username, email, password } = req.body;
-    let imageName = req.file.filename;
+    let { username, email, password, created } = req.body;
+    let imageName = req.file?.filename;
+    console.log(req.body);
 
-    if(!username || !email || !password) {
-        res.status(400).json({ error: "Le nom, le mail et le mot de passe sont requis" });
+    if(!imageName || !username || !email || !password) {
+        return res.status(400).json({ error: "Le nom, le mail et le mot de passe sont requis" });
     }
 
     const [usersRows] = await db.execute('SELECT * FROM User');
 
     bcrypt.hash(password, 10)
         .then(pwdHash => {
-            const insertIntoUser = 'INSERT INTO User (imageName, username, email, password, roleId) VALUES (?, ?, ?, ?, ?)';
+            const insertIntoUser = 'INSERT INTO User (imageName, username, email, password, roleId, created) VALUES (?, ?, ?, ?, ?, ?)';
             const userQueries = [
-                imageName, username, email, pwdHash, usersRows.length === 0 ? 1 : 3
+                imageName, username, email, pwdHash, usersRows.length === 0 ? 1 : 3, created
             ];
 
             db.query(insertIntoUser, userQueries, (err, result) => {

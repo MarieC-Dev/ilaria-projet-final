@@ -1,4 +1,13 @@
 -- 1. Tables de base
+CREATE TABLE Comments (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    recipeId    INT NOT NULL,
+    userId INT NOT NULL,
+    note INT NOT NULL,
+    commentText LONGTEXT,
+    created VARCHAR(255) NOT NULL
+);
+
 CREATE TABLE Roles (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     type ENUM('admin', 'moderator', 'user') NOT NULL UNIQUE
@@ -46,14 +55,6 @@ CREATE TABLE Tag (
     tag VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE NoteComment (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    userId INT NOT NULL,
-    note INT NOT NULL,
-    comment LONGTEXT,
-    FOREIGN KEY (userId) REFERENCES User(id)
-);
-
 -- 2. Table principale : RecipeData
 CREATE TABLE RecipeData (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -89,14 +90,6 @@ CREATE TABLE StepsList (
     stepId INT NOT NULL,
     FOREIGN KEY (recipeId) REFERENCES RecipeData(id),
     FOREIGN KEY (stepId) REFERENCES Step(id)
-);
-
-CREATE TABLE NoteCommentList (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    recipeId INT NOT NULL,
-    noteCommentId INT NOT NULL,
-    FOREIGN KEY (recipeId) REFERENCES RecipeData(id),
-    FOREIGN KEY (noteCommentId) REFERENCES NoteComment(id)
 );
 
 CREATE TABLE TagList (

@@ -20,10 +20,6 @@ const { getAllServingNumber, getOneServingNumber } = require('./routes/serving-d
 const { getAllRecipeTime, getOneRecipeTime } = require('./routes/recipe-time');
 const { getAllUserComments, createComment, getCommentsByRecipeId} = require("./routes/comments");
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use('/uploads', express.static('uploads'));
-
 app.use(cors({
   origin: 'http://localhost:4200',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -33,10 +29,11 @@ app.use(cors({
   optionsSuccessStatus: 204,
 }));
 
+app.use(cookieParser());
+
 // Session store
 const sessionStore = new MySQLStore({}, db);
 
-app.use(cookieParser());
 app.use(session({
   name: 'session_cookie',
   secret: process.env.SESSION_SECRET_KEY,
@@ -49,6 +46,10 @@ app.use(session({
     sameSite: "lax",
   },
 }));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/uploads', express.static('uploads'));
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -74,6 +75,18 @@ app.put('/users/:id', uploadImg.single('user-image'), updateUser);
 
 // LOGIN
 app.use('/login', login);
+app.post('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.status(500).json({ msg: "Erreur lors de la déconnexion" });
+        }
+
+        sessionStore.close();
+        res.clearCookie('session_cookie');
+
+        return res.json({ msg: "Déconnexion réussie" });
+    });
+});
 
 // RECIPES
 app.get('/recipes', getAllRecipes);

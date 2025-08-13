@@ -34,21 +34,27 @@ router.post('/',  async (req, res) => {
                 { expiresIn: '7d' }
             );
 
-            req.session.user = {
-                id: userLogin.id,
-                username: userLogin.username,
-                email: userLogin.email,
-                pwd: userLogin.password,
-                roleId: userLogin.roleId
-            }
-            req.session.token = token;
-
-            req.session.save(err => {
-                if (err) {
-                    return res.status(500).json({ session: 'Erreur de sauvegarde de la session' });
+            req.session.regenerate(regenerateErr => {
+                if (regenerateErr) {
+                    return res.status(500).json({ msg: 'Erreur lors de la création de la session' });
                 }
-                return res.json({ msg: 'Login OK', token, user: req.session.user });
-            });
+
+                req.session.user = {
+                    id: userLogin.id,
+                    username: userLogin.username,
+                    email: userLogin.email,
+                    pwd: userLogin.password,
+                    roleId: userLogin.roleId
+                }
+                req.session.token = token;
+
+                req.session.save(err => {
+                    if (err) {
+                        return res.status(500).json({ session: 'Erreur de sauvegarde de la session' });
+                    }
+                    return res.json({ msg: 'Login OK', token, user: req.session.user });
+                });
+            })
         })
         .catch(error => {
             console.log("Erreur bcrypt compare login : ", error);
@@ -61,6 +67,6 @@ router.get('/user', async (req, res) => {
     } else {
         return res.json({ isAuthenticated: false, msg: 'User not connected' })
     }
-})
+});
 
 module.exports = router;

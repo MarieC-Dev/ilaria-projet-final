@@ -43,14 +43,14 @@ table {
 
             td {
                 button {
-                    margin: 0 !important;
-    
+                    //margin: 0 !important;
+
                     svg {
                         width: 32px;
                         height: 40px;
                         fill: $darkGrey;
                     }
-    
+
                     &:hover svg {
                         fill: $firstColor;
                     }

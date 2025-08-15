@@ -23,4 +23,23 @@
         <app-recipe-icon />
         <p>Mes recettes</p>
     </a>
+
+    @if (userLoggedIn.user.roleId === 1) {
+        <a
+            class="btn-bg-darkGrey btn-bg-darkGrey__profile"
+            [routerLink]="'/profil/' + userLoggedIn.user.id + '/admin/utilisateurs'"
+            routerLinkActive="btn-bg-darkGrey__profile--active"
+            ariaCurrentWhenActive="page">
+            <app-users-icon />
+            <p>Utilisateurs</p>
+        </a>
+        <a
+            class="btn-bg-darkGrey btn-bg-darkGrey__profile"
+            [routerLink]="'/profil/' + userLoggedIn.user.id + '/admin/recettes'"
+            routerLinkActive="btn-bg-darkGrey__profile--active"
+            ariaCurrentWhenActive="page">
+            <app-recipe-icon />
+            <p>Recettes</p>
+        </a>
+    }
 </div>

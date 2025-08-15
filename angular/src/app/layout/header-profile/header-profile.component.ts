@@ -4,16 +4,18 @@ import {ProfileIconComponent} from "../../components/icons/profile-icon/profile-
 import {RecipeIconComponent} from "../../components/icons/recipe-icon/recipe-icon.component";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {IsLoggedInService} from '../../services/isLoggedIn.service';
+import {UsersIconComponent} from '../../components/icons/users-icon/users-icon.component';
 
 @Component({
   selector: 'app-header-profile',
-    imports: [
-      RouterLink,
-      HeartIconComponent,
-      ProfileIconComponent,
-      RecipeIconComponent,
-      RouterLinkActive
-    ],
+  imports: [
+    RouterLink,
+    HeartIconComponent,
+    ProfileIconComponent,
+    RecipeIconComponent,
+    RouterLinkActive,
+    UsersIconComponent
+  ],
   templateUrl: './header-profile.component.html',
   styleUrl: './header-profile.component.scss'
 })

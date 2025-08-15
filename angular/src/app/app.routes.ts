@@ -15,6 +15,10 @@ import { accountGuardGuard } from './guards/account-guard.guard';
 import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
 import { RecipeCommentPageComponent } from './pages/recipe-comment-page/recipe-comment-page.component';
 import { pagesAccessGuard } from './guards/pages-access.guard';
+import {adminGuard} from './guards/admin.guard';
+import {
+  ProfileAdminAllusersPageComponent
+} from './pages/profile-admin-allusers-page/profile-admin-allusers-page.component';
 
 export const routes: Routes = [
   {
@@ -27,6 +31,16 @@ export const routes: Routes = [
       { path: 'mes-recettes', component: ProfileRecipesPageComponent },
       { path: 'mes-favoris', component: ProfileFavoritesPageComponent },
       { path: 'mes-infos', component: ProfilePageComponent },
+    ],
+  },
+
+  {
+    path: 'profil/:id/admin',
+    canActivate: [adminGuard],
+    canActivateChild: [adminGuard],
+    children: [
+      { path: 'utilisateurs', component: ProfileAdminAllusersPageComponent },
+      /*{ path: 'recettes', component: CreateRecipesComponent },*/
     ],
   },
 

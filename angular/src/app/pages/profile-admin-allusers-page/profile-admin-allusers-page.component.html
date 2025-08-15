@@ -1,0 +1,61 @@
+<div class="profilePage">
+    <section class="profileLinksSection">
+        <app-header-profile />
+    </section>
+
+    <section class="profileSection profileSection__adminAllUsers">
+        <h2>Utilisateurs du site</h2>
+
+        <table class="myRecipesTable">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Rôle</th>
+                <th>Date de création</th>
+                <th class="userButtons"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+                @for (user of usersList; track user.id) {
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>
+                            {{ user.username }}
+                        </td>
+                        <td>
+                            {{ user.email }}
+                        </td>
+
+                        <td>
+                            @if (user.roleId === 3) {
+                                User
+                            } @else {
+                                Admin
+                            }
+                        </td>
+
+                        <td>{{ user.created }}</td>
+
+                        <td>
+                            <button type="button" class="btn-bg-darkGrey modifyUser">Modifier</button>
+                            <button type="button" class="deleteRecipe" (click)="showPopUpTrue()">
+                                <app-delete-icon />
+                            </button>
+
+                            <app-pop-up
+                                [isShow]="showPopUp()"
+                                labelName="la recette"
+
+                            />
+                            <!--(deleteFunction)="deleteUserRecipe(recipe.id)"
+                            (cancelFunction)="showPopUpFalse()"-->
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+</div>

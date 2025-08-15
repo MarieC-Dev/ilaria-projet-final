@@ -41,10 +41,14 @@
             padding: 1rem;
         }
 
+        app-header-profile {
+            width: 100%;
+        }
+
         .profileLinksList {
             display: flex;
             flex-direction: row;
-            justify-content: center;
+            justify-content: space-between;
 
             @media screen and (max-width: 767px) {
                 width: 100%;
@@ -56,7 +60,8 @@
                 width: max-content;
                 display: flex;
                 align-items: center;
-                margin: 0 2rem;
+                padding: 1rem 2rem;
+                //margin: 0 2rem;
 
                 @media screen and (max-width: 767px) {
                     width: 64px;
@@ -167,11 +172,54 @@
                 border-color: $thirdColor;
             }
         }
+
+        &__adminAllUsers {
+            table {
+                th, td {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                }
+
+                th:nth-child(1),
+                td:nth-child(1) {
+                    max-width: 24px;
+                    margin-right: .5rem;
+                }
+
+                th:nth-child(4),
+                td:nth-child(4) {
+                    max-width: 80px;
+                }
+
+                th:nth-child(5),
+                td:nth-child(5) {
+                    max-width: 190px;
+                }
+
+                th:nth-child(6),
+                td:nth-child(6) {
+                    max-width: 190px;
+                    margin-left: .5rem;
+
+                    button {
+                        margin: 0 .5rem;
+                    }
+                }
+
+                .modifyUser {
+                    padding: .5rem 1.5rem;
+                }
+            }
+        }
     }
 }
 
 app-profile-icon,
 app-heart-icon,
-app-recipe-icon {
+app-recipe-icon,
+app-users-icon {
     display: flex;
 }

@@ -98,6 +98,10 @@
             padding: 2rem;
         }
 
+        button.btn-goBack {
+            margin-bottom: 2rem;
+        }
+
         h2 {
             margin-bottom: 2rem;
         }
@@ -185,8 +189,30 @@
 
                 th:nth-child(1),
                 td:nth-child(1) {
-                    max-width: 24px;
+                    max-width: 46px;
+                    padding: 0;
                     margin-right: .5rem;
+
+                    div {
+                        width: 46px;
+                        height: 46px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        overflow: hidden;
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            display: block;
+                            object-fit: cover;
+                        }
+                    }
+                }
+
+                th:nth-child(2),
+                td:nth-child(2) {
+                    width: 60%;
                 }
 
                 th:nth-child(4),

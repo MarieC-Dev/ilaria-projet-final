@@ -19,6 +19,7 @@ import {adminGuard} from './guards/admin.guard';
 import {
   ProfileAdminAllusersPageComponent
 } from './pages/profile-admin-allusers-page/profile-admin-allusers-page.component';
+import {AdminEditUserPageComponent} from './pages/admin-edit-user-page/admin-edit-user-page.component';
 
 export const routes: Routes = [
   {
@@ -39,7 +40,13 @@ export const routes: Routes = [
     canActivate: [adminGuard],
     canActivateChild: [adminGuard],
     children: [
+      { path: 'mes-recettes/:recipeId/modifier', component: EditRecipePageComponent },
+      { path: 'mes-recettes/creer', component: CreateRecipesComponent },
+      { path: 'utilisateurs/:userId', component: AdminEditUserPageComponent },
       { path: 'utilisateurs', component: ProfileAdminAllusersPageComponent },
+      { path: 'mes-recettes', component: ProfileRecipesPageComponent },
+      { path: 'mes-favoris', component: ProfileFavoritesPageComponent },
+      { path: 'mes-infos', component: ProfilePageComponent },
       /*{ path: 'recettes', component: CreateRecipesComponent },*/
     ],
   },

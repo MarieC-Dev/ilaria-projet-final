@@ -40,7 +40,11 @@
                         <td>{{ user.created }}</td>
 
                         <td>
-                            <button type="button" class="btn-bg-darkGrey modifyUser">Modifier</button>
+                            <button
+                                type="button"
+                                class="btn-bg-darkGrey modifyUser"
+                                [routerLink]="user.id"
+                            >Modifier</button>
                             <button type="button" class="deleteRecipe" (click)="showPopUpTrue()">
                                 <app-delete-icon />
                             </button>

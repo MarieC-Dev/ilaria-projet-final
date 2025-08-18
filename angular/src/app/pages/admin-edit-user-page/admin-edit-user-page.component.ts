@@ -1,35 +1,39 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { RECIPE_LIST } from '../../lists/recipe-list.fake';
-import { ActivatedRoute } from '@angular/router';
-import {HeaderProfileComponent} from '../../layout/header-profile/header-profile.component';
+import {Component, OnInit, signal} from '@angular/core';
+import {HeaderProfileComponent} from "../../layout/header-profile/header-profile.component";
+import {Location, NgIf} from '@angular/common';
+import {FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {UserFormFactory} from '../../factories/user-form.factory';
+import {RECIPE_LIST} from '../../lists/recipe-list.fake';
 import {UsersApiService} from '../../services/users-api.service';
-import { UserFormFactory } from '../../factories/user-form.factory';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import {NgIf} from '@angular/common';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'app-profile-page',
+  selector: 'app-admin-edit-user-page',
   imports: [
     HeaderProfileComponent,
-    ReactiveFormsModule,
     NgIf,
+    ReactiveFormsModule
   ],
-  templateUrl: './profile-page.component.html',
-  styleUrl: './profile-page.component.scss'
+  templateUrl: './admin-edit-user-page.component.html',
+  styleUrl: './admin-edit-user-page.component.scss'
 })
-export class ProfilePageComponent implements OnInit {
+export class AdminEditUserPageComponent implements OnInit {
   userForm!: UserFormFactory;
   recipesList = signal(RECIPE_LIST);
   userId!: number;
   userImage: File | null = null;
   isUpdated = signal(false);
 
-  constructor(private userApi: UsersApiService, private route: ActivatedRoute) {
+  constructor(
+    private userApi: UsersApiService,
+    private route: ActivatedRoute,
+    private location: Location
+  ) {
     this.userForm = new UserFormFactory();
   }
 
   ngOnInit(): void {
-    this.userId = Number(this.route.snapshot.paramMap.get('id'));
+    this.userId = Number(this.route.snapshot.paramMap.get('userId'));
 
     this.userApi.getOneUser(this.userId).subscribe((res) => {
       const data = res.profile[0];
@@ -43,6 +47,10 @@ export class ProfilePageComponent implements OnInit {
 
       console.log(this.userForm.formGroupCreate.value);
     });
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   get username(): string {

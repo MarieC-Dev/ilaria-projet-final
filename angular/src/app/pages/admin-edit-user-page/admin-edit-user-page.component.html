@@ -1,0 +1,85 @@
+<div class="profilePage">
+    <section class="profileLinksSection">
+        <app-header-profile />
+    </section>
+
+    <section class="profileSection profileSection__adminEditUser">
+        <button type="button" class="btn-bg-yellow btn-goBack" (click)="goBack()">
+            Retour
+        </button>
+
+        <form method="post" enctype="multipart/form-data" [formGroup]="userForm.formGroupCreate" (ngSubmit)="onSubmit()">
+            <div class="headerProfile">
+                <!-- Photo -->
+                @if (profileImage) {
+                    <div class="wrapperProfileImage wrapperProfileImage__userImage">
+                        <img [src]="profileImage" [alt]="'photo de profil de ' + username">
+                    </div>
+                    <!--<p>{{ profileImage }}</p>-->
+                    <button
+                        type="button"
+                        class="btn-bg-darkGrey"
+                        (click)="removeProfileImage()">
+                        Changer la photo
+                    </button>
+                } @else {
+                    <div class="wrapperProfileImage">
+                        <img src="user-regular.svg" alt="photo de profil">
+                    </div>
+
+                    <input type="file"
+                           name="user-image"
+                           id="profileImageInput"
+                           (change)="onFileSelected($event)">
+                }
+            </div>
+
+            <div class="formInputDiv" id="profileUsernameInputDiv">
+                <label for="profileUsernameInput">
+                    Username :
+                </label>
+
+                <input type="text"
+                       id="profileUsernameInput"
+                       name="profileUsernameInput"
+                       placeholder="Username"
+                       formControlName="username"
+                       required/>
+            </div>
+
+            <div class="formInputDiv" id="profileEmailInputDiv">
+                <label for="profileEmailInput">
+                    Email :
+                </label>
+
+                <input type="text"
+                       id="profileEmailInput"
+                       name="profileEmailInput"
+                       placeholder="Email"
+                       formControlName="email"
+                       required/>
+            </div>
+
+            <div class="formInputDiv" id="profilePasswordInputDiv">
+                <label for="profileEmailInput">
+                    Mot de passe :
+                </label>
+
+                <input type="password"
+                       id="profilePasswordInput"
+                       name="profilePasswordInput"
+                       placeholder="Mot de passe"
+                       formControlName="password"
+                       required/>
+            </div>
+
+            <p *ngIf="isUpdated()">Votre profil a été mis à jour avec succès</p>
+
+            <!-- Si une valeur d'un input a changé -> disabled = false -->
+            <button type="submit" class="btn-bg-red" (click)="onSubmit()">
+                Modifier
+            </button>
+        </form>
+
+    </section>
+</div>

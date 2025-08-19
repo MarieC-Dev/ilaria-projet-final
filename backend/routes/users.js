@@ -30,6 +30,7 @@ exports.createUser = async (req, res) => {
     let imageName = req.file?.filename;
 
     if(!imageName || !username || !email || !password) {
+        console.log('il manque des infos...')
         return res.status(400).json({ error: "Le nom, le mail et le mot de passe sont requis" });
     }
 

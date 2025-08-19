@@ -28,6 +28,8 @@
                     placeholder="Choisissez une photo de profil"
                     (change)="onFileSelected($event)"
                 />
+
+                <p class="msgError" *ngIf="imageNameExist()">La photo de profil est requise</p>
             </div>
 
             <div class="formInputDiv" id="container-signup-username">
@@ -42,6 +44,8 @@
                     formControlName="username"
                     required
                 />
+
+                <p class="msgError" *ngIf="usernameExist()">Le nom d'utilisateur est requis</p>
             </div>
 
             <div class="formInputDiv" id="container-signup-email">
@@ -56,6 +60,8 @@
                     formControlName="email"
                     required
                 />
+
+                <p class="msgError" *ngIf="emailExist()">Le mail est requis</p>
             </div>
 
             <div class="formInputDiv" id="container-signup-password">
@@ -70,6 +76,8 @@
                     formControlName="password"
                     required
                 />
+
+                <p class="msgError" *ngIf="passwordExist()">Le mot de passe est requis</p>
             </div>
 
             <a href="">Mot de passe oublié ?</a>

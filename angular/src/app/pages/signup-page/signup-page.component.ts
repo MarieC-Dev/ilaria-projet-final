@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-signup-page',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, NgIf],
   templateUrl: './signup-page.component.html',
   styleUrl: './signup-page.component.scss'
 })
@@ -19,6 +19,10 @@ export class SignupPageComponent implements OnInit {
   createdDate = inject(DatetimeService);
   data: any[] = [];
   selectedImage: File | null = null;
+  imageNameExist = signal(false);
+  usernameExist = signal(false);
+  emailExist = signal(false);
+  passwordExist = signal(false);
 
   constructor(
     private usersApiService: UsersApiService,
@@ -58,6 +62,13 @@ export class SignupPageComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.userForm.formGroupCreate.value);
+
+    this.userForm.formGroupCreate.get('imageName')?.value ? this.imageNameExist.set(false) : this.imageNameExist.set(true);
+    this.userForm.formGroupCreate.get('username')?.value ? this.usernameExist.set(false) : this.usernameExist.set(true);
+    this.userForm.formGroupCreate.get('email')?.value ? this.emailExist.set(false) : this.emailExist.set(true);
+    this.userForm.formGroupCreate.get('password')?.value ? this.passwordExist.set(false) : this.passwordExist.set(true);
+
     this.userForm.formGroupCreate.get('created')?.setValue(this.createdDate.datetime);
 
     const formData = this.buildFormDataFormGroup(this.userForm.formGroupCreate, this.selectedImage);

@@ -28,7 +28,7 @@ $sizeWrapperIcon: 64px;
             margin: 1.5rem 0;
         }
     }
-    
+
     .leftContainer {
         display: flex;
         flex-direction: column;
@@ -155,7 +155,7 @@ $sizeWrapperIcon: 64px;
             }
         }
     }
-    
+
     .rightContainer {
         display: flex;
         flex-direction: column;
@@ -203,7 +203,7 @@ $sizeWrapperIcon: 64px;
             input[type=file] {
                 width: max-content;
                 padding: 1rem 2rem;
-                margin: .5rem auto 2rem auto;
+                margin: .5rem auto 0 auto;
                 background-color: $darkGrey;
                 color: white;
                 border-radius: 1rem;
@@ -214,7 +214,7 @@ $sizeWrapperIcon: 64px;
                 }
             }
 
-            input[type=file]::file-selector-button {             
+            input[type=file]::file-selector-button {
                 margin-right: 1rem;
                 border: 0;
                 border-radius: .5rem;
@@ -233,4 +233,9 @@ $sizeWrapperIcon: 64px;
             }
         }
     }
+}
+
+.signInSection .msgError, .signUpSection .msgError {
+    margin-top: 1rem;
+    color: red;
 }

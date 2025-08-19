@@ -6,15 +6,13 @@ import {DeleteIconComponent} from '../../components/icons/delete-icon/delete-ico
 import {ModifyIconComponent} from '../../components/icons/modify-icon/modify-icon.component';
 import {PopUpComponent} from '../../components/pop-up/pop-up.component';
 import {UsersApiService} from '../../services/users-api.service';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-profile-admin-allusers-page',
   imports: [
     HeaderProfileComponent,
     ReactiveFormsModule,
-    JsonPipe,
-    ModifyIconComponent,
     DeleteIconComponent,
     PopUpComponent,
     RouterLink
@@ -23,20 +21,39 @@ import {RouterLink} from '@angular/router';
   styleUrl: './profile-admin-allusers-page.component.scss'
 })
 export class ProfileAdminAllusersPageComponent implements OnInit {
-    usersList!: any[];
-    showPopUp = signal(false)
+  usersList = signal<any[]>([]);
 
-    constructor(private usersApi: UsersApiService) {
-    }
+  showPopUp = signal(false)
+
+    constructor(
+      private usersApi: UsersApiService,
+      private router: Router
+    ) { }
 
     ngOnInit(): void {
-        this.usersApi.getAllUsers().subscribe((res) => {
-          this.usersList = res;
-        });
+      this.usersApi.getAllUsers().subscribe((res) => {
+        this.usersList.set(res)
+      });
     }
 
     showPopUpTrue() {
-      this.showPopUp.update((bool) => bool === !bool);
+      this.showPopUp.set(true);
+      return this.showPopUp();
+    }
+
+    showPopUpFalse() {
+      this.showPopUp.set(false);
+      console.log(this.showPopUp());
+      return this.showPopUp();
+    }
+
+    deleteUser(id: number) {
+      console.log('Avant suppression')
+      this.usersApi.deleteUser(id).subscribe(() => {
+        this.showPopUpFalse();
+        this.usersList.update(users => users.filter(u => u.id !== id));
+        console.log('end');
+      })
     }
 
 }

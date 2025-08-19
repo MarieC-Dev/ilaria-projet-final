@@ -23,7 +23,7 @@ export class SigninPageComponent implements OnInit {
   constructor(
     private router: Router,
     private usersApiService: UsersApiService,
-    private acountAccess: IsLoggedInService
+    private acountAccess: IsLoggedInService,
   ) { }
 
   ngOnInit(): void {
@@ -34,9 +34,9 @@ export class SigninPageComponent implements OnInit {
     this.usersApiService.login(this.userLogin.formGroupLogin.value).subscribe({
       next: (res) => {
         console.log(res);
-        window.location.reload();
       },
-      error: (err) => console.log('Login front error ', err)
+      error: (err) => console.log('Login front error ', err),
+      complete: () => this.router.navigate([this.router.url])
     })
 
     if(this.acountAccess.isLoggedIn()) {

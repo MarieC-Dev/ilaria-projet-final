@@ -14,7 +14,7 @@ const usersRoute = require("./routes/users");
 const { getAllRecipes, createRecipe, updateRecipe, deleteRecipe, getOneRecipe } = require("./routes/recipes");
 const { addFavorite, getAllFavorites, deleteOneFavorite} = require('./routes/favorite-recipe');
 const login = require("./routes/login");
-const { getAllUsers, getOneUser, createUser, updateUser } = require("./routes/users");
+const { getAllUsers, getOneUser, createUser, updateUser, deleteUser} = require("./routes/users");
 const { getAllIngredients, getAllIngredientsList, getAllSteps, getAllStepsList, deleteOneIngredient, deleteOneStep} = require("./routes/ingredients-steps");
 const { getAllServingNumber, getOneServingNumber } = require('./routes/serving-data');
 const { getAllRecipeTime, getOneRecipeTime } = require('./routes/recipe-time');
@@ -72,6 +72,7 @@ app.get('/users', getAllUsers);
 app.get('/users/:id', getOneUser);
 app.post('/users', uploadImg.single('user-image'), createUser);
 app.put('/users/:id', uploadImg.single('user-image'), updateUser);
+app.delete('/users/:id', deleteUser);
 
 // LOGIN
 app.use('/login', login);

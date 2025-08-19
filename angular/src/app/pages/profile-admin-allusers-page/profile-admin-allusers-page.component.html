@@ -6,6 +6,8 @@
     <section class="profileSection profileSection__adminAllUsers">
         <h2>Utilisateurs du site</h2>
 
+        <a href="/inscription">Ajouter un utilisateur</a>
+
         <table class="myRecipesTable">
             <thead>
             <tr>
@@ -19,7 +21,7 @@
             </thead>
 
             <tbody>
-                @for (user of usersList; track user.id) {
+                @for (user of usersList(); track user.id) {
                     <tr>
                         <td>{{ user.id }}</td>
                         <td>
@@ -51,8 +53,9 @@
 
                             <app-pop-up
                                 [isShow]="showPopUp()"
-                                labelName="la recette"
-
+                                labelName="l'utilisateur"
+                                (deleteFunction)="deleteUser(user.id)"
+                                (cancelFunction)="showPopUpFalse()"
                             />
                             <!--(deleteFunction)="deleteUserRecipe(recipe.id)"
                             (cancelFunction)="showPopUpFalse()"-->

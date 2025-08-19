@@ -20,7 +20,10 @@ export class SignupPageComponent implements OnInit {
   data: any[] = [];
   selectedImage: File | null = null;
 
-  constructor(private usersApiService: UsersApiService, private router: Router) { }
+  constructor(
+    private usersApiService: UsersApiService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.userForm = new UserFormFactory()
@@ -39,7 +42,7 @@ export class SignupPageComponent implements OnInit {
     }
   }
 
-  buildFormDataFormGroup(formGroup: FormGroup, file: File| any): FormData {
+  buildFormDataFormGroup(formGroup: FormGroup, file: File | any): FormData {
     const formData = new FormData();
 
     formData.append('username', formGroup.get('username')?.value);
@@ -59,20 +62,15 @@ export class SignupPageComponent implements OnInit {
 
     const formData = this.buildFormDataFormGroup(this.userForm.formGroupCreate, this.selectedImage);
 
-    this.usersApiService.createUser(formData).subscribe({
-      next: (response) => {
-        console.log('Utilisateur créé :', response)
-        this.router.navigate(['/admin/mes-infos'])
-      },
-      error: (err) => console.error('Erreur FRONT :', err)
+    this.usersApiService.createUser(formData).subscribe(() => {
+      this.userForm.formGroupCreate.patchValue({
+        imageName: '',
+        username: '',
+        email: '',
+        password: '',
+        created: ''
+      });
+      console.log('success');
     });
-
-    this.userForm.formGroupCreate.patchValue({
-      imageName: '',
-      username: '',
-      email: '',
-      password: '',
-      created: ''
-    })
   }
 }

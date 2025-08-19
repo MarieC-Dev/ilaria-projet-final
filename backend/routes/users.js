@@ -34,25 +34,22 @@ exports.createUser = async (req, res) => {
     }
 
     const [usersRows] = await db.execute('SELECT * FROM User');
+    const pwdHash = await bcrypt.hash(password, 10);
 
-    bcrypt.hash(password, 10)
-        .then(pwdHash => {
-            const insertIntoUser = 'INSERT INTO User (imageName, username, email, password, roleId, created) VALUES (?, ?, ?, ?, ?, ?)';
-            const userQueries = [
-                imageName, username, email, pwdHash, usersRows.length === 0 ? 1 : 3, created
-            ];
+    const insertIntoUser = 'INSERT INTO User (imageName, username, email, password, roleId, created) VALUES (?, ?, ?, ?, ?, ?)';
+    const userQueries = [
+        imageName, username, email, pwdHash, usersRows.length === 0 ? 1 : 3, created
+    ];
 
-            db.query(insertIntoUser, userQueries, (err, result) => {
-                if(err) {
-                    res.status(500).json({ msg: 'Error create user : ' + err });
-                }
+    const [result] = await db.query(insertIntoUser, userQueries, (err, result) => {
+        if(err) {
+            res.status(500).json({ msg: 'Error create user : ' + err });
+        } else {
+            console.log('User created successfully');
+        }
+    });
 
-                return res.status(201).json(result);
-            });
-        })
-        .catch(error => {
-            console.log('Failed to hash password', error)
-        })
+    return res.status(201).json(result);
 }
 
 exports.updateUser = async (req, res) => {
@@ -90,3 +87,21 @@ exports.updateUser = async (req, res) => {
             console.log('Failed to hash password', error)
         })
 }
+
+exports.deleteUser = async (req, res) => {
+    const userId = req.params.id;
+    const userSql = 'DELETE FROM User WHERE id = ?';
+
+    try {
+        const [result] = await db.execute(userSql, [userId]);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Utilisateur non trouvé' });
+        }
+
+        return res.status(204).send(); // ✅ connexion terminée
+    } catch (err) {
+        console.error('Erreur lors de la suppression:', err);
+        return res.status(500).json({ error: 'Erreur serveur' });
+    }
+};

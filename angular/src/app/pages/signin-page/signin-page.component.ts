@@ -36,7 +36,6 @@ export class SigninPageComponent implements OnInit {
         console.log(res);
       },
       error: (err) => console.log('Login front error ', err),
-      complete: () => this.router.navigate([this.router.url])
     })
 
     if(this.acountAccess.isLoggedIn()) {

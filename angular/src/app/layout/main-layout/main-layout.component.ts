@@ -1,4 +1,4 @@
-import {Component, inject, signal, ViewChild} from '@angular/core';
+import {Component, inject, OnInit, signal, ViewChild} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import { SocialNetworksComponent } from '../../components/social-networks/social-networks.component';
 import { commonSocial } from '../../lists/social-networks-list';
@@ -16,18 +16,17 @@ import {UsersApiService} from '../../services/users-api.service';
     RouterLink,
     RouterLinkActive,
     SocialNetworksComponent,
-    SearchIconComponent,
     BurgerMenuDirective,
     AsyncPipe
   ],
   templateUrl: './main-layout.component.html',
   styleUrl: '../../../styles.scss'
 })
-export class MainLayoutComponent {
+export class MainLayoutComponent implements OnInit {
   @ViewChild(BurgerMenuDirective) appBurgerMenu!: BurgerMenuDirective;
   socialNetworksList = signal(commonSocial);
-  accountAccess: IsLoggedInService = inject(IsLoggedInService);
-  userStatus = this.accountAccess.isLoggedIn();
+  userIsLogged = signal(false);
+  userData!: {id?: number, username?: string, email?: string, pwd?: string, roleId?: number};
 
   index: number = 0;
   headerNav = [
@@ -46,13 +45,31 @@ export class MainLayoutComponent {
     },
   ];
 
-  constructor(private userApi: UsersApiService, private router: Router) { }
+  constructor(
+    private userApi: UsersApiService,
+    private accountAccess: IsLoggedInService,
+    private router: Router
+  ) { }
+
+  ngOnInit(): void {
+    this.accountAccess.isLoggedIn().subscribe(isLoggedIn => {
+      this.userIsLogged.set(isLoggedIn.isAuthenticated);
+      this.userData = isLoggedIn.user;
+    });
+  }
 
   logout() {
     return this.userApi.logout().subscribe({
       next: () => {
         localStorage.removeItem('token');
         sessionStorage.clear();
+
+        this.accountAccess.isLoggedIn().subscribe(isLoggedIn => {
+          this.userIsLogged.set(isLoggedIn.isAuthenticated);
+          this.userData = {};
+        });
+
+        this.router.navigate(['/connexion']);
       },
       error: (err) => console.log(err)
     })

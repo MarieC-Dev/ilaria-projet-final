@@ -74,19 +74,24 @@ app.post('/users', uploadImg.single('user-image'), createUser);
 app.put('/users/:id', uploadImg.single('user-image'), updateUser);
 app.delete('/users/:id', deleteUser);
 
-// LOGIN
+// LOGIN - LOGOUT
 app.use('/login', login);
-app.post('/logout', (req, res) => {
-    req.session.destroy(err => {
-        if (err) {
-            return res.status(500).json({ msg: "Erreur lors de la déconnexion" });
-        }
+app.post('/logout', async (req, res) => {
+    try {
+        req.session.destroy(err => {
+            if (err) {
+                console.error("Erreur lors de la déconnexion :", err);
+                return res.status(500).json({ msg: "Erreur lors de la déconnexion" });
+            }
 
-        sessionStore.close();
-        res.clearCookie('session_cookie');
+            res.clearCookie('session_cookie');
 
-        return res.json({ msg: "Déconnexion réussie" });
-    });
+            return res.status(200).json({ msg: "Déconnexion réussie" });
+        });
+    } catch (error) {
+        console.error("Erreur serveur :", error);
+        return res.status(500).json({ msg: "Erreur serveur" });
+    }
 });
 
 // RECIPES

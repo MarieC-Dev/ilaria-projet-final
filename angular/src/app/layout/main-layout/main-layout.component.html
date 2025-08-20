@@ -14,10 +14,10 @@
         </ul>
 
         <div class="navigationRight">
-            @if ((userStatus | async)?.isAuthenticated) {
+            @if (userIsLogged()) {
                 <a
                     class="btn-bg-red"
-                    [routerLink]="'/profil/' + (userStatus | async)?.user.id + '/mes-infos'"
+                    [routerLink]="'/profil/' + userData.id + '/mes-infos'"
                     routerLinkActive="active"
                     ariaCurrentWhenActive="page">Mon profil</a>
 

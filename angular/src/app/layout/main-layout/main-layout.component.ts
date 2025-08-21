@@ -8,6 +8,8 @@ import { IsLoggedInService } from '../../services/isLoggedIn.service';
 import { AsyncPipe } from '@angular/common';
 import {HttpClient} from '@angular/common/http';
 import {UsersApiService} from '../../services/users-api.service';
+import {AuthStateService} from '../../services/auth-state.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-main-layout',
@@ -25,7 +27,7 @@ import {UsersApiService} from '../../services/users-api.service';
 export class MainLayoutComponent implements OnInit {
   @ViewChild(BurgerMenuDirective) appBurgerMenu!: BurgerMenuDirective;
   socialNetworksList = signal(commonSocial);
-  userIsLogged = signal(false);
+  userIsLogged!: Observable<boolean>;
   userData!: {id?: number, username?: string, email?: string, pwd?: string, roleId?: number};
 
   index: number = 0;
@@ -48,28 +50,27 @@ export class MainLayoutComponent implements OnInit {
   constructor(
     private userApi: UsersApiService,
     private accountAccess: IsLoggedInService,
-    private router: Router
+    private router: Router,
+    private authState: AuthStateService
   ) { }
 
   ngOnInit(): void {
-    this.accountAccess.isLoggedIn().subscribe(isLoggedIn => {
-      this.userIsLogged.set(isLoggedIn.isAuthenticated);
-      this.userData = isLoggedIn.user;
-    });
+    this.userIsLogged = this.authState.isLoggedIn;
+    console.log(this.userIsLogged);
+
+    /*this.accountAccess.isLoggedIn().subscribe(isLoggedIn => {
+      console.log(isLoggedIn);
+    });*/
   }
 
   logout() {
     return this.userApi.logout().subscribe({
-      next: () => {
+      next: (res) => {
         localStorage.removeItem('token');
         sessionStorage.clear();
 
-        this.accountAccess.isLoggedIn().subscribe(isLoggedIn => {
-          this.userIsLogged.set(isLoggedIn.isAuthenticated);
-          this.userData = {};
-        });
-
-        this.router.navigate(['/connexion']);
+        //console.log(res);
+        this.authState.logout();
       },
       error: (err) => console.log(err)
     })

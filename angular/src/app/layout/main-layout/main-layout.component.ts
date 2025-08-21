@@ -52,8 +52,6 @@ export class MainLayoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.userIsLogged = this.authState.isLoggedIn;
-    console.log(this.userIsLogged);
-
   }
 
   logout() {

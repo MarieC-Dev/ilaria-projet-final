@@ -50,8 +50,6 @@ export class CreateEditRecipeFormComponent implements OnInit {
   isPause = false;
 
   cuisineTypeList = signal(CUISINE_TYPE);
-  tableHeadIngredient: string[] = ['Quantité', 'Unités', 'Ingrédients'];
-  tableHeadStep: string[] = ['N°', 'Description'];
   createdDate = inject(DatetimeService);
 
   arrayInvalidControl: string[] = [];
@@ -363,12 +361,12 @@ export class CreateEditRecipeFormComponent implements OnInit {
 
     if(this.updateRecipe) {
       this.recipesApiService.updateRecipe(this.recipeDataId, formData).subscribe({
-        next: (result) => window.location.reload(),
+        next: () => window.location.reload(),
         error: (err) => console.log('Err Front update recipe', err)
       });
     } else {
       this.recipesApiService.createRecipe(formData).subscribe({
-        next: (result) => window.location.reload(),
+        next: () => window.location.reload(),
         error: (err) => console.log('Err Front create recipe', err)
       });
     }

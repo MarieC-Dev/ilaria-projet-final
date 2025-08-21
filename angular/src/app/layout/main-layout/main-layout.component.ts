@@ -1,12 +1,10 @@
-import {Component, inject, OnInit, signal, ViewChild} from '@angular/core';
+import {Component, OnInit, signal, ViewChild} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import { SocialNetworksComponent } from '../../components/social-networks/social-networks.component';
 import { commonSocial } from '../../lists/social-networks-list';
-import { SearchIconComponent } from "../../components/icons/search-icon/search-icon.component";
 import { BurgerMenuDirective } from '../../directives/burger-menu.directive';
 import { IsLoggedInService } from '../../services/isLoggedIn.service';
 import { AsyncPipe } from '@angular/common';
-import {HttpClient} from '@angular/common/http';
 import {UsersApiService} from '../../services/users-api.service';
 import {AuthStateService} from '../../services/auth-state.service';
 import {Observable} from 'rxjs';
@@ -49,8 +47,6 @@ export class MainLayoutComponent implements OnInit {
 
   constructor(
     private userApi: UsersApiService,
-    private accountAccess: IsLoggedInService,
-    private router: Router,
     private authState: AuthStateService
   ) { }
 
@@ -58,9 +54,6 @@ export class MainLayoutComponent implements OnInit {
     this.userIsLogged = this.authState.isLoggedIn;
     console.log(this.userIsLogged);
 
-    /*this.accountAccess.isLoggedIn().subscribe(isLoggedIn => {
-      console.log(isLoggedIn);
-    });*/
   }
 
   logout() {
@@ -69,7 +62,6 @@ export class MainLayoutComponent implements OnInit {
         localStorage.removeItem('token');
         sessionStorage.clear();
 
-        //console.log(res);
         this.authState.logout();
       },
       error: (err) => console.log(err)

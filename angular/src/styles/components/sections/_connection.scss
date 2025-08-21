@@ -235,7 +235,13 @@ $sizeWrapperIcon: 64px;
     }
 }
 
-.signInSection .msgError, .signUpSection .msgError {
+.signUpSection .msgError {
     margin-top: 1rem;
     color: red;
+}
+
+.signInSection .msgError {
+    margin-bottom: 1.5rem;
+    color: red;
+    text-align: center;
 }

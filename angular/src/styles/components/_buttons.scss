@@ -25,10 +25,15 @@ $mobilePadding: .75rem 1.5rem;
     &__border {
         background-color: white;
         color: $firstColor;
-        border-color: white;
+        border-color: $firstColor;
 
         &:hover:not(.btn-disabled) {
-            border: 2px solid $firstColor;
+            background-color: $firstColor;
+            color: white;
+        }
+
+        &--header {
+            margin-left: 2rem;
         }
     }
 

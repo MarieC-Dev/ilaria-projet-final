@@ -47,11 +47,16 @@ export class MainLayoutComponent implements OnInit {
 
   constructor(
     private userApi: UsersApiService,
-    private authState: AuthStateService
+    private authState: AuthStateService,
+    private loggedIn: IsLoggedInService
   ) { }
 
   ngOnInit(): void {
     this.userIsLogged = this.authState.isLoggedIn;
+
+    this.loggedIn.isLoggedIn().subscribe((res) => {
+      this.userData = res.user;
+    });
   }
 
   logout() {

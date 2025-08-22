@@ -40,8 +40,6 @@ export class ProfilePageComponent implements OnInit {
         password: data.password,
         role: data.roleId,
       });
-
-      console.log(this.userForm.formGroupCreate.value);
     });
   }
 

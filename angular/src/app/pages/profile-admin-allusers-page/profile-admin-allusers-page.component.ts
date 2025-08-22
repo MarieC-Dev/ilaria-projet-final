@@ -43,7 +43,6 @@ export class ProfileAdminAllusersPageComponent implements OnInit {
 
     showPopUpFalse() {
       this.showPopUp.set(false);
-      console.log(this.showPopUp());
       return this.showPopUp();
     }
 
@@ -52,7 +51,7 @@ export class ProfileAdminAllusersPageComponent implements OnInit {
       this.usersApi.deleteUser(id).subscribe(() => {
         this.showPopUpFalse();
         this.usersList.update(users => users.filter(u => u.id !== id));
-        console.log('end');
+        console.log(id);
       })
     }
 

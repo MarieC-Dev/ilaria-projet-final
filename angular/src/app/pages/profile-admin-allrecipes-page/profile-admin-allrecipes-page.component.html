@@ -3,25 +3,24 @@
         <app-header-profile />
     </section>
 
-    <section class="profileSection profileSection__adminAllUsers">
-        <h2>Utilisateurs du site</h2>
+    <section class="profileSection profileSection__adminAllRecipes">
+        <h2>Toutes les recettes du site</h2>
 
-        <a class="btn-bg-darkGrey" href="/inscription">Ajouter un utilisateur</a>
-
-        <table class="myRecipesTable adminAllUsersTable">
+        <table class="myRecipesTable adminAllRecipesTable">
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Rôle</th>
+                <th>Nom de la recette</th>
+                <th>Type de cuisine</th>
+                <th>Difficulté</th>
+                <th>Temps total</th>
                 <th>Date de création</th>
                 <th class="userButtons"></th>
             </tr>
             </thead>
 
             <tbody>
-                @for (user of usersList(); track user.id) {
+                <!--@for (user of usersList(); track user.id) {
                     <tr>
                         <td>{{ user.id }}</td>
                         <td>
@@ -44,10 +43,10 @@
                         <td>
                             <button
                                 type="button"
-                                class="btn-bg-darkGrey modifyUser"
+                                class="btn-bg-darkGrey modifyRecipe"
                                 [routerLink]="user.id"
                             >Modifier</button>
-                            <button type="button" class="deleteUser" (click)="showPopUpTrue()">
+                            <button type="button" class="deleteRecipe" (click)="showPopUpTrue()">
                                 <app-delete-icon />
                             </button>
 
@@ -57,11 +56,11 @@
                                 (deleteFunction)="deleteUser(user.id)"
                                 (cancelFunction)="showPopUpFalse()"
                             />
-                            <!--(deleteFunction)="deleteUserRecipe(recipe.id)"
-                            (cancelFunction)="showPopUpFalse()"-->
+                            &lt;!&ndash;(deleteFunction)="deleteUserRecipe(recipe.id)"
+                            (cancelFunction)="showPopUpFalse()"&ndash;&gt;
                         </td>
                     </tr>
-                }
+                }-->
             </tbody>
         </table>
     </section>

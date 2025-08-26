@@ -47,6 +47,17 @@
                        required/>
             </div>
 
+            <div class="formInputDiv" id="profileRoleInputDiv">
+                <label for="profileRole">
+                    Rôle :
+                </label>
+
+                <select name="profileRole" id="profileRole" formControlName="role">
+                    <option value="1">Admin</option>
+                    <option value="3">User</option>
+                </select>
+            </div>
+
             <div class="formInputDiv" id="profileEmailInputDiv">
                 <label for="profileEmailInput">
                     Email :
@@ -72,8 +83,6 @@
                        formControlName="password"
                        required/>
             </div>
-
-            <p *ngIf="isUpdated()">Votre profil a été mis à jour avec succès</p>
 
             <!-- Si une valeur d'un input a changé -> disabled = false -->
             <button type="submit" class="btn-bg-red" (click)="onSubmit()">

@@ -129,6 +129,10 @@ $mobilePadding: .75rem 1.5rem;
             }
         }
     }
+
+    &__header {
+        margin-left: 2rem;
+    }
 }
 
 button.btn-disabled {

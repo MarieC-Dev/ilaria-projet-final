@@ -22,23 +22,18 @@
                     ariaCurrentWhenActive="page">Mon profil</a>
 
                 <button type="button"
-                        class="btn-bg-red btn-bg-red__border btn-bg-red__border--header"
+                        class="btn-bg-darkGrey btn-bg-darkGrey__header"
                         (click)="logout()">
                     Déconnexion
                 </button>
             } @else {
                 <a
-                    class="btn-transparent"
+                    class="btn-bg-red"
                     routerLink="/connexion"
                     routerLinkActive="active"
                     ariaCurrentWhenActive="page"
                     appBurgerMenu
                     (click)="appBurgerMenu.closeMenu()">Connexion</a>
-                <a
-                    class="btn-bg-red btn-bg-red__border btn-bg-red__border--header"
-                    routerLink="/inscription"
-                    routerLinkActive="active"
-                    ariaCurrentWhenActive="page">Inscription</a>
             }
 
             <button type="button"

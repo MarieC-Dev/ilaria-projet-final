@@ -22,6 +22,7 @@ import {Router, RouterLink} from '@angular/router';
 })
 export class ProfileAdminAllusersPageComponent implements OnInit {
   usersList = signal<any[]>([]);
+  selectedUserIdToDelete = signal<number>(-1);
 
   showPopUp = signal(false)
 
@@ -36,8 +37,10 @@ export class ProfileAdminAllusersPageComponent implements OnInit {
       });
     }
 
-    showPopUpTrue() {
+    showPopUpTrue(id: number) {
       this.showPopUp.set(true);
+      this.selectedUserIdToDelete.set(id);
+      console.log(this.selectedUserIdToDelete())
       return this.showPopUp();
     }
 
@@ -47,12 +50,12 @@ export class ProfileAdminAllusersPageComponent implements OnInit {
     }
 
     deleteUser(id: number) {
-      console.log('Avant suppression')
       this.usersApi.deleteUser(id).subscribe(() => {
         this.showPopUpFalse();
-        this.usersList.update(users => users.filter(u => u.id !== id));
+        this.usersList.update(users =>
+          users.filter(user => user.id !== id)
+        );
         console.log(id);
       })
     }
-
 }

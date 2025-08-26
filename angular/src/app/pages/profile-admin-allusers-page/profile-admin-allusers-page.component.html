@@ -47,18 +47,16 @@
                                 class="btn-bg-darkGrey modifyUser"
                                 [routerLink]="user.id"
                             >Modifier</button>
-                            <button type="button" class="deleteUser" (click)="showPopUpTrue()">
+                            <button type="button" class="deleteUser" (click)="showPopUpTrue(user.id)">
                                 <app-delete-icon />
                             </button>
 
                             <app-pop-up
                                 [isShow]="showPopUp()"
                                 labelName="l'utilisateur"
-                                (deleteFunction)="deleteUser(user.id)"
+                                (deleteFunction)="deleteUser(selectedUserIdToDelete())"
                                 (cancelFunction)="showPopUpFalse()"
                             />
-                            <!--(deleteFunction)="deleteUserRecipe(recipe.id)"
-                            (cancelFunction)="showPopUpFalse()"-->
                         </td>
                     </tr>
                 }

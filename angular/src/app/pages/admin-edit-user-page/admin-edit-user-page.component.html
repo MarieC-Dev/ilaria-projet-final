@@ -53,8 +53,9 @@
                 </label>
 
                 <select name="profileRole" id="profileRole" formControlName="role">
-                    <option value="1">Admin</option>
-                    <option value="3">User</option>
+                    <option [value]="1">Admin</option>
+                    <option [value]="2">Moderator</option>
+                    <option [value]="3">User</option>
                 </select>
             </div>
 

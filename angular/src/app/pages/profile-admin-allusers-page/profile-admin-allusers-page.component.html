@@ -34,8 +34,12 @@
                         <td>
                             @if (user.roleId === 3) {
                                 User
-                            } @else {
+                            } @else if (user.roleId === 2) {
+                                Moderator
+                            } @else if (user.roleId === 1) {
                                 Admin
+                            } @else {
+                                Aucun rôle défini
                             }
                         </td>
 

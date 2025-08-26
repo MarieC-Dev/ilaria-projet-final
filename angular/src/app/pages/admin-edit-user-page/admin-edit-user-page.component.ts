@@ -22,7 +22,6 @@ export class AdminEditUserPageComponent implements OnInit {
   recipesList = signal(RECIPE_LIST);
   userId!: number;
   userImage: File | null = null;
-  isUpdated = signal(false);
 
   constructor(
     private userApi: UsersApiService,
@@ -44,8 +43,6 @@ export class AdminEditUserPageComponent implements OnInit {
         password: data.password,
         role: data.roleId,
       });
-
-      console.log(this.userForm.formGroupCreate.value);
     });
   }
 
@@ -83,6 +80,7 @@ export class AdminEditUserPageComponent implements OnInit {
 
     formData.append('imageName', formGroup.get('imageName')?.value);
     formData.append('username', formGroup.get('username')?.value);
+    formData.append('role', formGroup.get('role')?.value);
     formData.append('email', formGroup.get('email')?.value);
     formData.append('password', formGroup.get('password')?.value);
 

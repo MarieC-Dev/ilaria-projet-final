@@ -65,7 +65,7 @@ exports.updateUser = async (req, res) => {
     if(imageName) {
         const userSql = 'UPDATE User SET imageName = ? WHERE id = ?';
 
-        db.execute(userSql, [imageName, userId], (err, result) => {
+        await db.query(userSql, [imageName, userId], (err, result) => {
             if (err) {
                 return res.status(500).json({ error: 'User image name error :', err });
             }
@@ -73,20 +73,22 @@ exports.updateUser = async (req, res) => {
         });
     }
 
-    bcrypt.hash(password, 10)
-        .then(pwdHash => {
-            const userSql = 'UPDATE User SET username = ?, email = ?, password = ? WHERE id = ?';
+    const userSql = 'UPDATE User SET username = ?, email = ?, password = ? WHERE id = ?';
+    const pwdHash = await bcrypt.hash(password, 10);
 
-            db.execute(userSql, [username, email, pwdHash, userId], (err, result) => {
-                if (err) {
-                    return res.status(500).json({ error: 'User update error :', err });
-                }
-                res.json({ message: 'User is updated ' + result });
-            });
-        })
-        .catch(error => {
-            console.log('Failed to hash password', error)
-        })
+    console.log({username, email, pwdHash, userId})
+
+    const [result] = await db.query(userSql, [username, email, pwdHash, userId], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'User update error :', err });
+        } else {
+            console.log('User has been updated !')
+        }
+    });
+
+    console.log(result)
+
+    return res.json({ message: 'User : ' + result });
 }
 
 exports.deleteUser = async (req, res) => {

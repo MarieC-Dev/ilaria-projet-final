@@ -91,7 +91,6 @@ export class AdminEditUserPageComponent implements OnInit {
       formData.append('imageName', file.name);
     }
 
-    console.log({img: file});
     return formData;
   }
 
@@ -99,7 +98,7 @@ export class AdminEditUserPageComponent implements OnInit {
     const formData = this.buildFormDataFormGroup(this.userForm.formGroupCreate, this.userImage);
 
     this.userApi.updateUser(this.userId, formData).subscribe({
-      next: (result) => this.isUpdated.set(true),
+      next: (result) => window.location.reload(),
       error: (err) => console.log('Err Front update profile', err)
     });
   }

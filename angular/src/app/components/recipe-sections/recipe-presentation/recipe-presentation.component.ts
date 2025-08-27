@@ -6,6 +6,7 @@ import {UsersApiService} from '../../../services/users-api.service';
 import {RecipeTimeApiService} from '../../../services/recipe-time-api.service';
 import {RecipeDetailsService} from '../../../services/recipe-details.service';
 import {ServingNumberApiService} from '../../../services/serving-number-api.service';
+import {switchMap} from 'rxjs';
 
 @Component({
   selector: 'app-recipe-presentation',
@@ -16,7 +17,7 @@ import {ServingNumberApiService} from '../../../services/serving-number-api.serv
 export class RecipePresentationComponent implements OnInit {
   recipeId = input<number>();
   allRecipeData: any[] = [];
-  recipeData: any[] = [];
+  recipeData!: any;
   usersArray!: any[];
   recipesUser: any[] = [];
   recipeTime!: any[];
@@ -38,9 +39,34 @@ export class RecipePresentationComponent implements OnInit {
       error: (err) => console.log('Front get one recipe error : ', err)
     });
 
-    this.recipeApi.getOneRecipe(Number(this.recipeId())).subscribe({
+    this.userApi.getAllUsers().subscribe({
+      next: (result) => {
+        this.usersArray = result;
+      },
+      error: (err) => console.log('Front get users error : ', err)
+    });
+
+    this.recipeApi.getOneRecipe(Number(this.recipeId())).pipe(
+      switchMap((result: any[]) => {
+        this.recipeData = result[0];
+        return this.servingNumberApi.getOneServingNumber(result[0].servingNumberId);
+      }),
+      switchMap((allServing) => {
+        const allServingNumber = allServing.result;
+        this.servingNumber = allServingNumber.filter((serving: any) => serving.id === this.recipeData.servingNumberId)[0];
+
+        return this.recipeTimeApi.getAllRecipeTime();
+      }),
+    ).subscribe((result) => {
+      const allRecipeTimes = result.rows;
+      this.recipeTime = allRecipeTimes.filter((time: any) => time.recipeId === Number(this.recipeId()));
+      console.log(this.recipeTime);
+    })
+
+    /*this.recipeApi.getOneRecipe(Number(this.recipeId())).subscribe({
       next: (result) => {
         this.recipeData.push(result[0]);
+        console.log({recipe: this.recipeData})
       },
       error: (err) => console.log('Front get one recipe error : ', err)
     });
@@ -55,6 +81,7 @@ export class RecipePresentationComponent implements OnInit {
     this.recipeTimeApi.getAllRecipeTime().subscribe({
       next: (result) => {
         this.recipeTime = result.rows;
+        console.log({time: this.recipeTime})
       },
       error: (err) => console.log('Front get recipes times error : ', err)
     })
@@ -62,9 +89,10 @@ export class RecipePresentationComponent implements OnInit {
     this.servingNumberApi.getAllServingNumber().subscribe({
       next: (result) => {
         this.servingNumber = result.rows;
+        console.log({serving: this.servingNumber})
       },
       error: (err) => console.log('Front get serving number error : ', err)
-    })
+    })*/
   }
 
   getRecipeAuthor(id: number) {

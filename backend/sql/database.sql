@@ -1,101 +1,177 @@
--- 1. Tables de base
-CREATE TABLE Comments (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    recipeId    INT NOT NULL,
-    userId INT NOT NULL,
-    note INT NOT NULL,
-    commentText LONGTEXT,
-    created VARCHAR(255) NOT NULL
+create table Comments
+(
+    id          int auto_increment
+        primary key,
+    recipeId    int          not null,
+    userId      int          not null,
+    note        int          not null,
+    commentText longtext     null,
+    created     varchar(255) not null
 );
 
-CREATE TABLE Roles (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    type ENUM('admin', 'moderator', 'user') NOT NULL UNIQUE
+create table Ingredient
+(
+    id         int auto_increment
+        primary key,
+    quantity   int          not null,
+    unit       varchar(100) not null,
+    ingredient varchar(100) not null
 );
 
-CREATE TABLE User (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    imageName VARCHAR(255),
-    imageData LONGBLOB,
-    username VARCHAR(100) NOT NULL UNIQUE,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(100),
-    roleId INT NOT NULL DEFAULT 3,
-    created DATETIME NOT NULL,
-    FOREIGN KEY (roleId) REFERENCES Roles(id)
+create table IngredientsList
+(
+    id           int auto_increment
+        primary key,
+    recipeId     int not null,
+    ingredientId int not null,
+    constraint ingredientslist_ibfk_1
+        foreign key (recipeId) references recipesite.RecipeData (id),
+    constraint ingredientslist_ibfk_2
+        foreign key (ingredientId) references recipesite.Ingredient (id)
 );
 
-CREATE TABLE Ingredient (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    quantity INT NOT NULL,
-    unit VARCHAR(100) NOT NULL,
-    ingredient VARCHAR(100) NOT NULL
+create index ingredientId
+    on IngredientsList (ingredientId);
+
+create index recipeId
+    on IngredientsList (recipeId);
+
+create table RecipeData
+(
+    id              int auto_increment
+        primary key,
+    name            varchar(100) not null,
+    description     longtext     null,
+    imageName       varchar(255) null,
+    cuisineType     varchar(100) not null,
+    cookingType     varchar(100) not null,
+    servingNumberId int          not null,
+    difficulty      varchar(20)  not null,
+    authorId        int          not null,
+    created         varchar(255) null,
+    constraint recipedata_ibfk_1
+        foreign key (authorId) references recipesite.User (id),
+    constraint recipedata_ibfk_2
+        foreign key (servingNumberId) references recipesite.ServingNumber (id)
 );
 
-CREATE TABLE TimeTable (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    type ENUM('making', 'cooking', 'pause') NOT NULL,
-    hours INT NOT NULL,
-    minutes INT NOT NULL
+create index authorId
+    on RecipeData (authorId);
+
+create index servingNumberId
+    on RecipeData (servingNumberId);
+
+create table Roles
+(
+    id   int auto_increment
+        primary key,
+    type enum ('admin', 'moderator', 'user') not null,
+    constraint type
+        unique (type)
 );
 
-CREATE TABLE ServingNumber (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    number INT NOT NULL,
-    servingType VARCHAR(100) NOT NULL
+create table ServingNumber
+(
+    id          int auto_increment
+        primary key,
+    number      int          not null,
+    servingType varchar(100) not null
 );
 
-CREATE TABLE Step (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    description LONGTEXT NOT NULL
+create table Session
+(
+    session_id varchar(128) not null
+        primary key,
+    expires    int          not null,
+    data       text         not null
 );
 
-CREATE TABLE Tag (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    tag VARCHAR(100) NOT NULL
+create table Step
+(
+    id       int auto_increment
+        primary key,
+    stepName longtext not null
 );
 
--- 2. Table principale : RecipeData
-CREATE TABLE RecipeData (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name VARCHAR(100) NOT NULL,
-    description LONGTEXT,
-    imageName VARCHAR(255),
-    imageData LONGBLOB,
-    cuisineType VARCHAR(100) NOT NULL,
-    cookingType VARCHAR(100) NOT NULL,
-    servingNumberId INT NOT NULL,
-    difficulty INT NOT NULL,
-    authorId INT NOT NULL,
-    recipeTimeId INT NOT NULL,
-    created DATETIME,
-
-    FOREIGN KEY (authorId) REFERENCES User(id),
-    FOREIGN KEY (servingNumberId) REFERENCES ServingNumber(id),
-    FOREIGN KEY (recipeTimeId) REFERENCES TimeTable(id)
+create table StepsList
+(
+    id       int auto_increment
+        primary key,
+    recipeId int not null,
+    stepId   int not null,
+    constraint stepslist_ibfk_1
+        foreign key (recipeId) references recipesite.RecipeData (id),
+    constraint stepslist_ibfk_2
+        foreign key (stepId) references recipesite.Step (id)
 );
 
--- 3. Tables de liaison
-CREATE TABLE IngredientsList (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    recipeId INT NOT NULL,
-    ingredientId INT NOT NULL,
-    FOREIGN KEY (recipeId) REFERENCES RecipeData(id),
-    FOREIGN KEY (ingredientId) REFERENCES Ingredient(id)
+create index recipeId
+    on StepsList (recipeId);
+
+create index stepId
+    on StepsList (stepId);
+
+create table Tag
+(
+    id  int auto_increment
+        primary key,
+    tag varchar(100) not null
 );
 
-CREATE TABLE StepsList (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    recipeId INT NOT NULL,
-    stepId INT NOT NULL,
-    FOREIGN KEY (recipeId) REFERENCES RecipeData(id),
-    FOREIGN KEY (stepId) REFERENCES Step(id)
+create table TagList
+(
+    id       int auto_increment
+        primary key,
+    recipeId int not null,
+    tagId    int not null,
+    constraint taglist_ibfk_1
+        foreign key (recipeId) references recipesite.RecipeData (id),
+    constraint taglist_ibfk_2
+        foreign key (tagId) references recipesite.Tag (id)
 );
 
-CREATE TABLE TagList (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    recipeId INT NOT NULL,
-    tagId INT NOT NULL,
-    FOREIGN KEY (recipeId) REFERENCES RecipeData(id),
-    FOREIGN KEY (tagId) REFERENCES Tag(id)
+create index recipeId
+    on TagList (recipeId);
+
+create index tagId
+    on TagList (tagId);
+
+create table TimeTable
+(
+    id       int auto_increment
+        primary key,
+    type     enum ('making', 'cooking', 'pause') not null,
+    hours    int                                 not null,
+    minutes  int                                 not null,
+    recipeId int                                 not null
 );
+
+create table User
+(
+    id        int auto_increment
+        primary key,
+    imageName varchar(255)  null,
+    username  varchar(100)  not null,
+    email     varchar(100)  not null,
+    password  varchar(100)  null,
+    roleId    int default 3 not null,
+    created   varchar(255)  not null,
+    constraint email
+        unique (email),
+    constraint username
+        unique (username),
+    constraint user_ibfk_1
+        foreign key (roleId) references recipesite.Roles (id)
+);
+
+create index roleId
+    on User (roleId);
+
+create table sessions
+(
+    session_id varchar(128) collate utf8mb4_bin not null
+        primary key,
+    expires    int unsigned                     not null,
+    data       mediumtext collate utf8mb4_bin   null
+);
+

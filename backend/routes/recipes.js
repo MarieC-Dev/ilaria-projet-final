@@ -38,16 +38,16 @@ exports.createRecipe = async (req, res) => {
             hours: req.body['recipeTime.making.hours'],
             minutes: req.body['recipeTime.making.minutes'],
         },
+        pause: {
+            type: req.body['recipeTime.pause.type'],
+            hours: req.body['recipeTime.pause.hours'],
+            minutes: req.body['recipeTime.pause.minutes'],
+        },
         cooking: {
             type: req.body['recipeTime.cooking.type'],
             hours: req.body['recipeTime.cooking.hours'],
             minutes: req.body['recipeTime.cooking.minutes'],
         },
-        pause: {
-            type: req.body['recipeTime.pause.type'],
-            hours: req.body['recipeTime.pause.hours'],
-            minutes: req.body['recipeTime.pause.minutes'],
-        }
     };
 
     const result = [];
@@ -61,33 +61,21 @@ exports.createRecipe = async (req, res) => {
             return res.status(404).json({msg: 'recipe time data not found'})
         }
 
-        /* 1. SERVING NUMBER & RECIPE TIME creation */
-        const recipeTimeQueries = [
-            recipeTime.making.type, Number(recipeTime.making.hours), Number(recipeTime.making.minutes),
-            recipeTime.pause.type, Number(recipeTime.pause.hours), Number(recipeTime.pause.minutes),
-            recipeTime.cooking.type, Number(recipeTime.cooking.hours), Number(recipeTime.cooking.minutes),
-        ];
-
+        /* 1. SERVING NUMBER creation */
         const [servingNumberResult] = await db.query(
             'INSERT INTO ServingNumber (number, servingType) VALUES (?, ?)',
             [servingNumber.number, servingNumber.type]
         );
 
-        const [recipeTypeResult] = await db.query(
-            'INSERT INTO TimeTable (typeMaking, makingH, makingMin, typePause, pauseH, pauseMin, typeCooking, cookingH, cookingMin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-            recipeTimeQueries
-        );
-
         const servingNumberId = servingNumberResult.insertId;
-        const recipeTimeId = recipeTypeResult.insertId;
         /* ===== */
 
         /* 2. RECIPE DATA creation - get servingNumber & recipeTime IDs */
         const recipeDataQueries = [
-            name, description, imageName, cuisineType, cookingType, servingNumberId, difficulty, authorId, recipeTimeId, created
+            name, description, imageName, cuisineType, cookingType, servingNumberId, difficulty, authorId, created
         ];
         const [recipeDataResult] = await db.query(
-            'INSERT INTO RecipeData (name, description, imageName, cuisineType, cookingType, servingNumberId, difficulty, authorId, recipeTimeId, created) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            'INSERT INTO RecipeData (name, description, imageName, cuisineType, cookingType, servingNumberId, difficulty, authorId, created) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
             recipeDataQueries
         );
 
@@ -95,11 +83,38 @@ exports.createRecipe = async (req, res) => {
         result.push(recipeDataResult);
         /* ===== */
 
+
+
+        const recipeTimeMakingQueries = [
+            recipeTime.making.type, Number(recipeTime.making.hours), Number(recipeTime.making.minutes), recipeDataId
+        ];
+        const recipeTimePauseQueries = [
+            recipeTime.pause.type, Number(recipeTime.pause.hours), Number(recipeTime.pause.minutes), recipeDataId
+        ];
+        const recipeTimeCookingQueries = [
+            recipeTime.cooking.type, Number(recipeTime.cooking.hours), Number(recipeTime.cooking.minutes), recipeDataId
+        ];
+
+        const [recipeTimeMaking] = await db.query(
+            'INSERT INTO TimeTable (type, hours, minutes, recipeId) VALUES (?, ?, ?, ?)',
+            recipeTimeMakingQueries
+        );
+        const [recipeTimePause] = await db.query(
+            'INSERT INTO TimeTable (type, hours, minutes, recipeId) VALUES (?, ?, ?, ?)',
+            recipeTimePauseQueries
+        );
+        const [recipeTimeCooking] = await db.query(
+            'INSERT INTO TimeTable (type, hours, minutes, recipeId) VALUES (?, ?, ?, ?)',
+            recipeTimeCookingQueries
+        );
+
+
+
         /* 3. INGREDIENTS LIST & STEPS LIST creation - both get recipeData ID */
         const ingredientQueries = ingredientsList.map((item) => [item.quantity, item.unit, item.name]);
 
         const [ingredientResult] = await db.query(
-            'INSERT INTO Ingredient (quantity, unit, name) VALUES ?',
+            'INSERT INTO Ingredient (quantity, unit, ingredient) VALUES ?',
             [ingredientQueries]
         );
 
@@ -146,7 +161,6 @@ exports.createRecipe = async (req, res) => {
         return res.status(201).json({
             msg: 'The recipe is created !',
             servingNumberId,
-            recipeTimeId,
             recipeDataId,
             ingredientsListId,
             stepsListId

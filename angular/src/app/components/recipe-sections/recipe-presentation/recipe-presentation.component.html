@@ -1,33 +1,34 @@
 <section class="recipePresentation">
     <div class="recipePresentationLeft">
         <div class="wrapperImage">
-            <img [src]="recipeData[0].imageName" alt="recipe picture">
+            <img [src]="recipeData.imageName" alt="recipe picture">
         </div>
 
         <div class="recipeCuisineType">
-            <p>Cuisine <span>{{ recipeDetailService.getCuisineLabel(recipeData[0].cuisineType) }}</span></p>
+            <p>Cuisine <span>{{ recipeDetailService.getCuisineLabel(recipeData.cuisineType) }}</span></p>
         </div>
 
         <ul>
             <li>
-                <p>Créé par <span>{{ getRecipeAuthor(recipeData[0].authorId).username }}</span></p>
+                <p>Créé par <span>{{ getRecipeAuthor(recipeData.authorId).username }}</span></p>
             </li>
             <li>
-                <p>{{ getRecipesUser(recipeData[0].authorId).length }} recettes</p>
+                <p>{{ getRecipesUser(recipeData.authorId).length }} recettes</p>
             </li>
         </ul>
     </div>
 
     <div class="recipeDescription">
-        <h2>{{ recipeData[0].name }}</h2>
+        <h2>{{ recipeData.name }}</h2>
 
-        <p>{{ recipeData[0].description }}</p>
+        <p>{{ recipeData.description }}</p>
     </div>
 
     <div class="recipeTime">
+        <!-- TODO HERE -->
         <app-recipe-item-time
-            [makingHours]="getRecipeTime(recipeData[0].recipeTimeId).makingH"
-            [makingMinutes]="getRecipeTime(recipeData[0].recipeTimeId).makingMin"
+            [makingHours]="recipeTime[0].hours"
+            [makingMinutes]="recipeTime[0].minutes"
 
             [pauseTime]="
                 showRecipeTime(

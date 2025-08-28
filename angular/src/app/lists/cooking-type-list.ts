@@ -2,7 +2,7 @@ import { CookingTypeList } from "../models/cooking-type.model";
 
 let index: number = 0;
 
-export const COOKING_TYPE_LIST: CookingTypeList = [
+export const COOKING_TYPE_LIST = [
     {
         id: index++,
         inputId: 'hot-plate',

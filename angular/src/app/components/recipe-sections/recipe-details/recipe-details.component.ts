@@ -11,6 +11,7 @@ import { CommentApiService } from '../../../services/comment-api.service';
 import { UsersApiService } from '../../../services/users-api.service';
 import { IsLoggedInService } from '../../../services/isLoggedIn.service';
 import {RecipeAverageService} from '../../../services/recipe-average.service';
+import {switchMap} from 'rxjs';
 
 @Component({
   selector: 'app-recipe-details',
@@ -27,11 +28,9 @@ import {RecipeAverageService} from '../../../services/recipe-average.service';
 export class RecipeDetailsComponent implements OnInit {
   @Input() recipeId!: number;
 
-  ingredientsList!: any[];
-  ingredients!: any[];
-  stepsList!: any[];
-  steps!: any[];
-  commentsList: any[] = [];
+  recipeIngredients!: any[];
+  recipeSteps!: any[];
+  commentsList!: any[];
   usersList!: any[];
   userConnected!: any;
 
@@ -48,36 +47,34 @@ export class RecipeDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.ingredientsStepsApi.getIngredientsList().subscribe({
-      next: (result) => {
-        this.ingredientsList = result.rows;
-      },
-      error: (err) => console.log(err)
+    this.ingredientsStepsApi.getIngredientsList().pipe(
+      switchMap((ingredientsList: any) => {
+        this.recipeIngredients = ingredientsList.rows.filter((list: any) => list.recipeId === this.recipeId);
+        return this.ingredientsStepsApi.getAllIngredients();
+      }),
+    ).subscribe((ingredients) => {
+      const ingredientsRows = ingredients.rows;
+      this.recipeIngredients = this.recipeIngredients.flatMap((list: any) => { // ingredientId
+        return ingredientsRows.filter((ingredient: any) => ingredient.id === list.ingredientId);
+      });
     });
 
-    this.ingredientsStepsApi.getAllIngredients().subscribe({
-      next: (result) => {
-        this.ingredients = result.rows;
-      },
-      error: (err) => console.log(err)
+    this.ingredientsStepsApi.getStepsList().pipe(
+      switchMap((stepsList: any) => {
+        this.recipeSteps = stepsList.rows.filter((list: any) => list.recipeId === this.recipeId);
+        return this.ingredientsStepsApi.getAllSteps();
+      }),
+    ).subscribe((steps) => {
+      const stepsRows = steps.rows;
+      this.recipeSteps = this.recipeSteps.flatMap((list: any) => { // ingredientId
+        return stepsRows.filter((step: any) => step.id === list.stepId);
+      });
     });
 
-    this.ingredientsStepsApi.getStepsList().subscribe({
-      next: (result) => this.stepsList = result.rows,
-      error: (err) => console.log(err)
-    });
-
-    this.ingredientsStepsApi.getAllSteps().subscribe({
-      next: (result) => this.steps = result.rows,
-      error: (err) => console.log(err)
-    });
-
-    this.commentApi.getAllComments().subscribe({
-      next: (result) => {
-        this.commentsList = result.rows;
-      },
-      error: (err) => console.log(err)
-    });
+    this.commentApi.getCommentsByRecipeId(this.recipeId).subscribe((result) => {
+      this.commentsList = result.rows;
+      console.log(this.commentsList.length);
+    })
 
     this.usersApi.getAllUsers().subscribe({
       next: (result) => {
@@ -94,27 +91,23 @@ export class RecipeDetailsComponent implements OnInit {
     })
   }
 
-  getIngredientsData(recipeId: number) {
+  /*getIngredientsData(recipeId: number) {
     const recipeItemList = this.ingredientsList.filter((list) => list.recipeId === recipeId);
 
-    return recipeItemList.map((list: any) => {
+    return recipeItemList.flatMap((list: any) => {
       return this.ingredients.filter((ingredient) => ingredient.id === list.ingredientId)
     });
-  }
+  }*/
 
-  getStepsData(recipeId: number) {
+  /*getStepsData(recipeId: number) {
     const recipeItemList = this.stepsList.filter((list) => list.recipeId === recipeId);
 
     return recipeItemList.map((list: any) => {
       return this.steps.filter((step) => step.id === list.stepId)
     });
-  }
-
-  getRecipeComments() {
-    return this.commentsList.filter((comment) => comment.recipeId === this.recipeId);
-  }
+  }*/
 
   getRecipeAverage() {
-    return this.recipeAverage.getRecipeAverage(Number(this.recipeId), this.getRecipeComments())
+    return this.recipeAverage.getRecipeAverage(Number(this.recipeId), this.commentsList)
   }
 }

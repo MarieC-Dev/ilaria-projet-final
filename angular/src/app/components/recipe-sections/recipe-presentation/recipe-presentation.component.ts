@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {Component, input, OnInit} from '@angular/core';
+import {Component, input, OnInit, signal} from '@angular/core';
 import {RecipesApiService} from '../../../services/recipes-api.service';
 import {RecipeItemTimeComponent} from '../../recipe-item-time/recipe-item-time.component';
 import {UsersApiService} from '../../../services/users-api.service';
@@ -7,6 +7,7 @@ import {RecipeTimeApiService} from '../../../services/recipe-time-api.service';
 import {RecipeDetailsService} from '../../../services/recipe-details.service';
 import {ServingNumberApiService} from '../../../services/serving-number-api.service';
 import {switchMap} from 'rxjs';
+import {Recipe} from '../../../models/recipe.model';
 
 @Component({
   selector: 'app-recipe-presentation',
@@ -17,10 +18,9 @@ import {switchMap} from 'rxjs';
 export class RecipePresentationComponent implements OnInit {
   recipeId = input<number>();
   allRecipeData: any[] = [];
-  recipeData!: any;
+  recipeData!: Recipe;
   usersArray!: any[];
-  recipesUser: any[] = [];
-  recipeTime!: any[];
+  recipeTime: any = {};
   servingNumber!: any;
 
   constructor(
@@ -49,6 +49,7 @@ export class RecipePresentationComponent implements OnInit {
     this.recipeApi.getOneRecipe(Number(this.recipeId())).pipe(
       switchMap((result: any[]) => {
         this.recipeData = result[0];
+
         return this.servingNumberApi.getOneServingNumber(result[0].servingNumberId);
       }),
       switchMap((allServing) => {
@@ -59,9 +60,10 @@ export class RecipePresentationComponent implements OnInit {
       }),
     ).subscribe((result) => {
       const allRecipeTimes = result.rows;
-      this.recipeTime = allRecipeTimes.filter((time: any) => time.recipeId === Number(this.recipeId()));
-      console.log(this.recipeData);
-      console.log(this.recipeTime);
+      const filterRecipeTime = allRecipeTimes.filter((time: any) => time.recipeId === Number(this.recipeId()));
+      this.recipeTime.making = filterRecipeTime.find((time: any) => time.type === 'making');
+      this.recipeTime.pause = filterRecipeTime.find((time: any) => time.type === 'pause');
+      this.recipeTime.cooking = filterRecipeTime.find((time: any) => time.type === 'cooking');
     });
   }
 
@@ -72,17 +74,5 @@ export class RecipePresentationComponent implements OnInit {
   getRecipesUser(id: number) {
     return this.allRecipeData[0].filter((recipe: any) => recipe.authorId === id);
   }
-
-  getRecipeTime(id: number) {
-    return this.recipeTime.flat().find((time) => time.id === id)
-  }
-
-  showRecipeTime(hour: number, min: number) {
-    return !(hour === 0 && min === 0);
-  }
-
-  /*getServingNumberData(id: number) {
-    return this.servingNumber.find((serving) => serving.id === id);
-  }*/
 
 }

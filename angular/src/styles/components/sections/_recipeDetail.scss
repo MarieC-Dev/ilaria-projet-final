@@ -296,7 +296,9 @@ section.recipeSectionBorder {
         }
 
         .wrapperNavImage {
-            height: 580px;
+            width: 100%;
+            height: max-content;
+            object-fit: cover;
             grid-column: 2/3;
             display: flex;
             justify-content: flex-end;
@@ -433,6 +435,10 @@ section.recipeSectionBorder {
         @media only screen and (max-width: 767px) {
             grid-column: 1/2;
             grid-row: 4/5;
+        }
+
+        .writeCommentBtn {
+            margin-top: 0;
         }
 
         .recipeAverage {

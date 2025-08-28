@@ -1,21 +1,21 @@
 <section class="recipeDetails">
-    <div class="recipeIngredients recipeIngredients__mobile">
+    <!--<div class="recipeIngredients recipeIngredients__mobile">
         <h3>Ingrédients</h3>
 
         <ul class="ingredientList">
-            @for (recipeIngr of getIngredientsData(recipeId).flat(); track recipeIngr.id) {
+            @for (recipeIngr of recipeIngredients; track recipeIngr.id) {
                 <li class="ingredient">
                     {{ recipeIngr.quantity }} {{ recipeDetailService.getUnitIngredientLabel(recipeIngr.unit) }} {{ recipeIngr.name.toLowerCase() }}
                 </li>
             }
         </ul>
-    </div>
+    </div>-->
 
     <div class="recipeSteps">
         <h3>Étapes de préparation</h3>
 
         <div class="stepsContainer">
-            @for (step of getStepsData(recipeId).flat(); track $index) {
+            @for (step of recipeSteps; track $index) {
                 <app-recipe-step
                     [nbStep]="$index + 1"
                     [description]="step.stepName" />
@@ -28,9 +28,9 @@
             <h3>Ingrédients</h3>
 
             <ul class="ingredientList">
-                @for (recipeIngr of getIngredientsData(recipeId).flat(); track recipeIngr.id) {
+                @for (ingredient of recipeIngredients; track ingredient.id) {
                     <li class="ingredient">
-                        {{ recipeIngr.quantity }} {{ recipeDetailService.getUnitIngredientLabel(recipeIngr.unit) }} {{ recipeIngr.name.toLowerCase() }}
+                        <strong>{{ ingredient.quantity }}</strong> {{ recipeDetailService.getUnitIngredientLabel(ingredient.unit) }} de {{ ingredient.ingredient.toLowerCase() }}
                     </li>
                 }
             </ul>
@@ -59,8 +59,7 @@
             </ul>
         </div>
 
-        <div class="wrapperNavImage"
-             *ngIf="getStepsData(recipeId).flat().length"> <!--*ngIf="recipe.steps.length >= 5 && recipeOpinions()!.length > 1">-->
+        <div class="wrapperNavImage" *ngIf="recipeSteps.length >= 5">
             <img src="recipe-detail-image.jpg" alt="détail de la recette image">
         </div>
     </nav>
@@ -72,15 +71,15 @@
 
         <div class="recipeAverage">
             <img src="star.svg" alt="Icone étoile">
-            <p>{{ getRecipeAverage() }} ({{ getRecipeComments().length }} avis)</p>
+            <p>{{ getRecipeAverage() }} ({{ commentsList.length }} avis)</p>
         </div>
 
         @if (userConnected.isAuthenticated) {
-            <a routerLink="commentaire" class="btn-bg-yellow">Écrire un commentaire</a>
+            <a routerLink="commentaire" class="btn-bg-yellow writeCommentBtn">Écrire un commentaire</a>
         }
 
-        <div class="commentsContainer" *ngIf="getRecipeComments()!.length > 0">
-            @for (comment of getRecipeComments(); track $index) {
+        <div class="commentsContainer" *ngIf="commentsList.length > 0">
+            @for (comment of commentsList; track $index) {
                 <app-recipe-comment
                     [userId]="comment.userId"
                     [date]="comment.created"

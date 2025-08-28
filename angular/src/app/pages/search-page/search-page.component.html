@@ -8,11 +8,16 @@
             @for (recipe of recipesList(); track recipe.id;) {
                 <app-recipe-item
                     [id]="recipe.id"
-                    [picture]="recipe.image"
-                    [name]="recipe.title"
-                    [numberOfVotes]="recipe.opinions?.length"
-                    [authorName]="recipe.author.username"
+                    [picture]="recipe.imageName"
+                    [name]="recipe.name"
+                    [numberOfVotes]="0"
+                    [authorName]="'totoEnTest'"
                 />
+                <!--
+                    [authorName]="recipe.authorId"
+                    [numberOfVotes]="recipe.opinions?.length"
+                -->
+
                 <!--[average]="getRecipeAverage(recipe.id)"-->
             }
         </div>

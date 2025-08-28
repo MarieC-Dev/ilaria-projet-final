@@ -1,8 +1,6 @@
 import { RecipeList } from "../models/recipe.model";
 import { COOKING_TYPE_LIST } from "./cooking-type-list";
 
-
-
 function getNewDate() {
     const newDate = new Date();
     let optionsDate: any = { day: '2-digit', month: '2-digit', year: 'numeric' };
@@ -70,7 +68,7 @@ const ingredientsList = [
         quantity: 1,
         unit: 'gousse',
         name: 'ail pelée'
-    }, 
+    },
 ];
 const steps = [
     {
@@ -88,7 +86,7 @@ const steps = [
     }, {
         id: 4,
         description: "Décorez de copeaux de parmesan, et servez."
-    }, 
+    },
 ];
 const tags = [
     {
@@ -222,20 +220,17 @@ const opinions = [
         text: "Peu mieux faire",
         answers: [],
         created: getNewDate(),
-    }, 
+    },
 ];
 
-export const RECIPE_LIST: RecipeList = [
+export const RECIPE_LIST: any = [
     {
         id: index++,
-        image: 'salade.jpg',
-        title: 'Salade César',
+        imageName: 'salade.jpg',
+        name: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: COOKING_TYPE_LIST,
-        cuisineType: {
-            id: 0,
-            name: 'française',
-        },
+        cuisineType: 'française',
 
         makingTime: {
             hours: 2,
@@ -257,7 +252,7 @@ export const RECIPE_LIST: RecipeList = [
             number: 4,
             unit: 'personnes'
         },
-        
+
         average: opinions.map((op) => op.starScore),
         numberOfVotes: opinions.length,
         author: {
@@ -267,7 +262,7 @@ export const RECIPE_LIST: RecipeList = [
             numberOfRecipes: 21,
             created: getNewDate()
         },
-    
+
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
@@ -275,14 +270,11 @@ export const RECIPE_LIST: RecipeList = [
         created: getNewDate(),
     }, {
         id: index++,
-        image: 'salade.jpg',
-        title: 'Salade César',
+        imageName: 'salade.jpg',
+        name: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: COOKING_TYPE_LIST,
-        cuisineType: {
-            id: 0,
-            name: 'française',
-        },
+        cuisineType: 'française',
 
         makingTime: {
             hours: 2,
@@ -304,7 +296,7 @@ export const RECIPE_LIST: RecipeList = [
             number: 4,
             unit: 'personnes'
         },
-        
+
         average: opinions.map((op) => op.starScore),
         numberOfVotes: opinions.length,
         author: {
@@ -314,7 +306,7 @@ export const RECIPE_LIST: RecipeList = [
             numberOfRecipes: 21,
             created: getNewDate()
         },
-    
+
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
@@ -322,14 +314,11 @@ export const RECIPE_LIST: RecipeList = [
         created: getNewDate(),
     }, {
         id: index++,
-        image: 'salade.jpg',
-        title: 'Salade César',
+        imageName: 'salade.jpg',
+        name: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: COOKING_TYPE_LIST,
-        cuisineType: {
-            id: 0,
-            name: 'française',
-        },
+        cuisineType: 'française',
 
         makingTime: {
             hours: 2,
@@ -351,7 +340,7 @@ export const RECIPE_LIST: RecipeList = [
             number: 4,
             unit: 'personnes'
         },
-        
+
         average: opinions.map((op) => op.starScore),
         numberOfVotes: opinions.length,
         author: {
@@ -361,7 +350,7 @@ export const RECIPE_LIST: RecipeList = [
             numberOfRecipes: 21,
             created: getNewDate()
         },
-    
+
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
@@ -369,14 +358,11 @@ export const RECIPE_LIST: RecipeList = [
         created: getNewDate(),
     }, {
         id: index++,
-        image: 'salade.jpg',
-        title: 'Salade César',
+        imageName: 'salade.jpg',
+        name: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: COOKING_TYPE_LIST,
-        cuisineType: {
-            id: 0,
-            name: 'française',
-        },
+        cuisineType: 'française',
 
         makingTime: {
             hours: 2,
@@ -398,7 +384,7 @@ export const RECIPE_LIST: RecipeList = [
             number: 4,
             unit: 'personnes'
         },
-        
+
         average: opinions.map((op) => op.starScore),
         numberOfVotes: opinions.length,
         author: {
@@ -408,7 +394,7 @@ export const RECIPE_LIST: RecipeList = [
             numberOfRecipes: 21,
             created: getNewDate()
         },
-    
+
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
@@ -416,14 +402,11 @@ export const RECIPE_LIST: RecipeList = [
         created: getNewDate(),
     }, {
         id: index++,
-        image: 'salade.jpg',
-        title: 'Salade César',
+        imageName: 'salade.jpg',
+        name: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: COOKING_TYPE_LIST,
-        cuisineType: {
-            id: 0,
-            name: 'française',
-        },
+        cuisineType: 'française',
 
         makingTime: {
             hours: 2,
@@ -445,7 +428,7 @@ export const RECIPE_LIST: RecipeList = [
             number: 4,
             unit: 'personnes'
         },
-        
+
         average: opinions.map((op) => op.starScore),
         numberOfVotes: opinions.length,
         author: {
@@ -455,7 +438,7 @@ export const RECIPE_LIST: RecipeList = [
             numberOfRecipes: 21,
             created: getNewDate()
         },
-    
+
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
@@ -463,14 +446,11 @@ export const RECIPE_LIST: RecipeList = [
         created: getNewDate(),
     }, {
         id: index++,
-        image: 'salade.jpg',
-        title: 'Salade César',
+        imageName: 'salade.jpg',
+        name: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: COOKING_TYPE_LIST,
-        cuisineType: {
-            id: 0,
-            name: 'française',
-        },
+        cuisineType: 'française',
 
         makingTime: {
             hours: 2,
@@ -492,7 +472,7 @@ export const RECIPE_LIST: RecipeList = [
             number: 4,
             unit: 'personnes'
         },
-        
+
         average: opinions.map((op) => op.starScore),
         numberOfVotes: opinions.length,
         author: {
@@ -502,7 +482,7 @@ export const RECIPE_LIST: RecipeList = [
             numberOfRecipes: 21,
             created: getNewDate()
         },
-    
+
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
@@ -510,14 +490,11 @@ export const RECIPE_LIST: RecipeList = [
         created: getNewDate(),
     }, {
         id: index++,
-        image: 'salade.jpg',
-        title: 'Salade César',
+        imageName: 'salade.jpg',
+        name: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: COOKING_TYPE_LIST,
-        cuisineType: {
-            id: 0,
-            name: 'française',
-        },
+        cuisineType: 'française',
 
         makingTime: {
             hours: 2,
@@ -539,7 +516,7 @@ export const RECIPE_LIST: RecipeList = [
             number: 4,
             unit: 'personnes'
         },
-        
+
         average: opinions.map((op) => op.starScore),
         numberOfVotes: opinions.length,
         author: {
@@ -549,7 +526,7 @@ export const RECIPE_LIST: RecipeList = [
             numberOfRecipes: 21,
             created: getNewDate()
         },
-    
+
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
@@ -557,14 +534,11 @@ export const RECIPE_LIST: RecipeList = [
         created: getNewDate(),
     }, {
         id: index++,
-        image: 'salade.jpg',
-        title: 'Salade César',
+        imageName: 'salade.jpg',
+        name: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: COOKING_TYPE_LIST,
-        cuisineType: {
-            id: 0,
-            name: 'française',
-        },
+        cuisineType: 'française',
 
         makingTime: {
             hours: 2,
@@ -586,7 +560,7 @@ export const RECIPE_LIST: RecipeList = [
             number: 4,
             unit: 'personnes'
         },
-        
+
         average: opinions.map((op) => op.starScore),
         numberOfVotes: opinions.length,
         author: {
@@ -596,7 +570,7 @@ export const RECIPE_LIST: RecipeList = [
             numberOfRecipes: 21,
             created: getNewDate()
         },
-    
+
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
@@ -604,14 +578,11 @@ export const RECIPE_LIST: RecipeList = [
         created: getNewDate(),
     }, {
         id: index++,
-        image: 'salade.jpg',
-        title: 'Salade César',
+        imageName: 'salade.jpg',
+        name: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: COOKING_TYPE_LIST,
-        cuisineType: {
-            id: 0,
-            name: 'française',
-        },
+        cuisineType: 'française',
 
         makingTime: {
             hours: 2,
@@ -633,7 +604,7 @@ export const RECIPE_LIST: RecipeList = [
             number: 4,
             unit: 'personnes'
         },
-        
+
         average: opinions.map((op) => op.starScore),
         numberOfVotes: opinions.length,
         author: {
@@ -643,7 +614,7 @@ export const RECIPE_LIST: RecipeList = [
             numberOfRecipes: 21,
             created: getNewDate()
         },
-    
+
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
@@ -651,14 +622,11 @@ export const RECIPE_LIST: RecipeList = [
         created: getNewDate(),
     }, {
         id: index++,
-        image: 'salade.jpg',
-        title: 'Salade César',
+        imageName: 'salade.jpg',
+        name: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: COOKING_TYPE_LIST,
-        cuisineType: {
-            id: 0,
-            name: 'française',
-        },
+        cuisineType: 'française',
 
         makingTime: {
             hours: 2,
@@ -680,7 +648,7 @@ export const RECIPE_LIST: RecipeList = [
             number: 4,
             unit: 'personnes'
         },
-        
+
         average: opinions.map((op) => op.starScore),
         numberOfVotes: opinions.length,
         author: {
@@ -690,7 +658,7 @@ export const RECIPE_LIST: RecipeList = [
             numberOfRecipes: 21,
             created: getNewDate()
         },
-    
+
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
@@ -698,14 +666,11 @@ export const RECIPE_LIST: RecipeList = [
         created: getNewDate(),
     }, {
         id: index++,
-        image: 'salade.jpg',
-        title: 'Salade César',
+        imageName: 'salade.jpg',
+        name: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: COOKING_TYPE_LIST,
-        cuisineType: {
-            id: 0,
-            name: 'française',
-        },
+        cuisineType: 'française',
 
         makingTime: {
             hours: 2,
@@ -727,7 +692,7 @@ export const RECIPE_LIST: RecipeList = [
             number: 4,
             unit: 'personnes'
         },
-        
+
         average: opinions.map((op) => op.starScore),
         numberOfVotes: opinions.length,
         author: {
@@ -737,7 +702,7 @@ export const RECIPE_LIST: RecipeList = [
             numberOfRecipes: 21,
             created: getNewDate()
         },
-    
+
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
@@ -745,14 +710,11 @@ export const RECIPE_LIST: RecipeList = [
         created: getNewDate(),
     }, {
         id: index++,
-        image: 'salade.jpg',
-        title: 'Salade César',
+        imageName: 'salade.jpg',
+        name: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: COOKING_TYPE_LIST,
-        cuisineType: {
-            id: 0,
-            name: 'française',
-        },
+        cuisineType: 'française',
 
         makingTime: {
             hours: 2,
@@ -774,7 +736,7 @@ export const RECIPE_LIST: RecipeList = [
             number: 4,
             unit: 'personnes'
         },
-        
+
         average: opinions.map((op) => op.starScore),
         numberOfVotes: opinions.length,
         author: {
@@ -784,7 +746,7 @@ export const RECIPE_LIST: RecipeList = [
             numberOfRecipes: 21,
             created: getNewDate()
         },
-    
+
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,
@@ -792,14 +754,11 @@ export const RECIPE_LIST: RecipeList = [
         created: getNewDate(),
     }, {
         id: index++,
-        image: 'salade.jpg',
-        title: 'Salade César',
+        imageName: 'salade.jpg',
+        name: 'Salade César',
         description: "La salade César est composée de la cuisine américaine à base de laitue romaine, œuf dur, croûtons, parmesan et de sauce César à base de parmesan râpé, huile d'olive, pâte d'anchois, ail, vinaigre de vin, moutarde, jaune d'œuf et sauce Worcestershire",
         cookingType: COOKING_TYPE_LIST,
-        cuisineType: {
-            id: 0,
-            name: 'française',
-        },
+        cuisineType: 'française',
 
         makingTime: {
             hours: 2,
@@ -821,7 +780,7 @@ export const RECIPE_LIST: RecipeList = [
             number: 4,
             unit: 'personnes'
         },
-        
+
         average: opinions.map((op) => op.starScore),
         numberOfVotes: opinions.length,
         author: {
@@ -831,7 +790,7 @@ export const RECIPE_LIST: RecipeList = [
             numberOfRecipes: 21,
             created: getNewDate()
         },
-    
+
         ingredientsList: ingredientsList,
         steps: steps,
         tags: tags,

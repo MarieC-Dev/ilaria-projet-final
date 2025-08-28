@@ -24,7 +24,7 @@ import {RecipesApiService} from '../../../services/recipes-api.service';
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
 export class CookingTypeComponent implements OnInit {
-  cookingTypeList = signal(COOKING_TYPE_LIST);
+  cookingTypeList = COOKING_TYPE_LIST;
   @Input() recipeId!: number;
   @Input() ifInvalidControl!: string[];
   @Output() checkboxValue = new EventEmitter<string>();
@@ -34,7 +34,7 @@ export class CookingTypeComponent implements OnInit {
   ngOnInit(): void {
     this.recipeApi.getOneRecipe(this.recipeId).subscribe((recipe) => {
       if(recipe[0].cookingType) {
-        const findType = this.cookingTypeList().find((type) => type.value === recipe[0].cookingType)!;
+        const findType = this.cookingTypeList.find((type) => type.value === recipe[0].cookingType)!;
         findType.checked = true;
       }
     })
@@ -43,7 +43,7 @@ export class CookingTypeComponent implements OnInit {
   onCheckBtn(type: any) {
     type.checked = !type.checked;
 
-    const findOtherElm = this.cookingTypeList().filter(elm => elm.inputId !== type.inputId);
+    const findOtherElm = this.cookingTypeList.filter(elm => elm.inputId !== type.inputId);
 
     for (let i = 0; i < findOtherElm.length; i++) {
       findOtherElm[i].checked = false;

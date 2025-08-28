@@ -1,7 +1,7 @@
-<section class="recipePresentation">
+<section class="recipePresentation" *ngIf="recipeData">
     <div class="recipePresentationLeft">
         <div class="wrapperImage">
-            <img [src]="recipeData.imageName" alt="recipe picture">
+            <img [src]="recipeData.imageName" [alt]="'Image de la recette de ' + recipeData.name">
         </div>
 
         <div class="recipeCuisineType">
@@ -24,18 +24,16 @@
         <p>{{ recipeData.description }}</p>
     </div>
 
-    <div class="recipeTime">
-        <!-- TODO HERE -->
-
+    <div class="recipeTime" *ngIf="recipeTime && servingNumber && recipeData"> <!-- les ngIf sont présent pour éviter les erreurs dans la console du navigateur -->
         <app-recipe-item-time
-            [makingHours]="recipeTime[0].hours"
-            [makingMinutes]="recipeTime[0].minutes"
+            [makingHours]="recipeTime.making?.hours"
+            [makingMinutes]="recipeTime.making?.minutes"
 
-            [pauseHours]="recipeTime[1].hours"
-            [pauseMinutes]="recipeTime[1].minutes"
+            [pauseHours]="recipeTime.pause?.hours"
+            [pauseMinutes]="recipeTime.pause?.minutes"
 
-            [cookingHours]="recipeTime[2].hours"
-            [cookingMinutes]="recipeTime[2].minutes"
+            [cookingHours]="recipeTime.cooking?.hours"
+            [cookingMinutes]="recipeTime.cooking?.minutes"
             [cookingType]="recipeData.cookingType"
 
             [servingNumber]="servingNumber.number"

@@ -3,7 +3,7 @@
     inputId="cookingTypeInputs"
     [required]="true">
     <ul class="cookingTypeInputs">
-        @for (type of cookingTypeList(); track type.id) {
+        @for (type of cookingTypeList; track type.id) {
             <li [class]="type.checked ? 'liTypeCooking selectedType' : 'liTypeCooking'">
                 <label>
                     <button type="button" (click)="onCheckBtn(type)">

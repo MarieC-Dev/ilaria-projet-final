@@ -11,7 +11,7 @@
                 <hr class="recipeItemVerticalBorder" />
             </li>
 
-            @if (pauseTime()) {
+            @if (pauseHours() !== 0 || pauseMinutes() !== 0) {
                 <li class="recipeItemTime recipeItemTime__pause">
                     <img src="pause-time.svg" alt="Icon">
                     <h4>Repos</h4>
@@ -28,7 +28,7 @@
                 <hr class="recipeItemVerticalBorder" />
             </li>
 
-            @if (cookingTime()) {
+            @if (cookingHours() !== 0 || cookingMinutes() !== 0) {
                 <li class="recipeItemTime recipeItemTime__cooking">
                     <img src="cooking-time.svg" alt="Icon">
                     <h4>Cuisson</h4>
@@ -60,7 +60,7 @@
 
     <li class="timesWrapper">
         <ul>
-            @if(cookingTime()) {
+            @if (cookingHours() !== 0 || cookingMinutes() !== 0) {
                 <li class="recipeItemTime recipeItemTime__cookingType">
                     <app-recipe-cooking-type-item [cookingType]="cookingType()" />
                 </li>
@@ -73,7 +73,7 @@
             <li class="recipeItemTime recipeItemTime__servingNumber">
                 <img src="users.svg" alt="Icon">
                 <h4>Portions</h4>
-                <p>{{ servingNumber() }} {{ servingUnit() }}</p>
+                <p>{{ servingNumber() }} {{ getServingType(servingUnit()) }}</p>
             </li>
 
             <li class="recipeLineTime">
@@ -83,7 +83,7 @@
             <li class="recipeItemTime recipeItemTime__difficultyLevel">
                 <img src="difficulty.svg" alt="Icon">
                 <h4>Difficulté</h4>
-                <p>{{ difficulty() }}</p>
+                <p>{{ getDifficulty(difficulty()) }}</p>
             </li>
         </ul>
     </li>

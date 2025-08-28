@@ -26,35 +26,21 @@
 
     <div class="recipeTime">
         <!-- TODO HERE -->
+
         <app-recipe-item-time
             [makingHours]="recipeTime[0].hours"
             [makingMinutes]="recipeTime[0].minutes"
 
-            [pauseTime]="
-                showRecipeTime(
-                    getRecipeTime(recipeData[0].recipeTimeId).pauseH,
-                    getRecipeTime(recipeData[0].recipeTimeId).pauseMin)
-            "
+            [pauseHours]="recipeTime[1].hours"
+            [pauseMinutes]="recipeTime[1].minutes"
 
-            [pauseHours]="getRecipeTime(recipeData[0].recipeTimeId).pauseH"
-            [pauseMinutes]="getRecipeTime(recipeData[0].recipeTimeId).pauseMin"
+            [cookingHours]="recipeTime[2].hours"
+            [cookingMinutes]="recipeTime[2].minutes"
+            [cookingType]="recipeData.cookingType"
 
-            [cookingTime]="
-                showRecipeTime(
-                    getRecipeTime(recipeData[0].recipeTimeId).cookingH,
-                    getRecipeTime(recipeData[0].recipeTimeId).cookingMin)
-            "
-
-            [cookingHours]="getRecipeTime(recipeData[0].recipeTimeId).cookingH"
-            [cookingMinutes]="getRecipeTime(recipeData[0].recipeTimeId).cookingMin"
-            [cookingType]="recipeData[0].cookingType"
-
-            [servingNumber]="getServingNumberData(recipeData[0].servingNumberId).number"
-            [servingUnit]="
-                recipeDetailService.getUnitLabel(
-                getServingNumberData(recipeData[0].servingNumberId).servingType
-            )"
-            [difficulty]="recipeDetailService.getDifficultyLabel(recipeData[0].difficulty)"
+            [servingNumber]="servingNumber.number"
+            [servingUnit]="servingNumber.servingType"
+            [difficulty]="recipeData.difficulty"
         />
     </div>
 </section>

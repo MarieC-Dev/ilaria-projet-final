@@ -21,7 +21,7 @@ export class RecipePresentationComponent implements OnInit {
   usersArray!: any[];
   recipesUser: any[] = [];
   recipeTime!: any[];
-  servingNumber!: any[];
+  servingNumber!: any;
 
   constructor(
     private recipeApi: RecipesApiService,
@@ -60,39 +60,9 @@ export class RecipePresentationComponent implements OnInit {
     ).subscribe((result) => {
       const allRecipeTimes = result.rows;
       this.recipeTime = allRecipeTimes.filter((time: any) => time.recipeId === Number(this.recipeId()));
+      console.log(this.recipeData);
       console.log(this.recipeTime);
-    })
-
-    /*this.recipeApi.getOneRecipe(Number(this.recipeId())).subscribe({
-      next: (result) => {
-        this.recipeData.push(result[0]);
-        console.log({recipe: this.recipeData})
-      },
-      error: (err) => console.log('Front get one recipe error : ', err)
     });
-
-    this.userApi.getAllUsers().subscribe({
-      next: (result) => {
-        this.usersArray = result;
-      },
-      error: (err) => console.log('Front get users error : ', err)
-    });
-
-    this.recipeTimeApi.getAllRecipeTime().subscribe({
-      next: (result) => {
-        this.recipeTime = result.rows;
-        console.log({time: this.recipeTime})
-      },
-      error: (err) => console.log('Front get recipes times error : ', err)
-    })
-
-    this.servingNumberApi.getAllServingNumber().subscribe({
-      next: (result) => {
-        this.servingNumber = result.rows;
-        console.log({serving: this.servingNumber})
-      },
-      error: (err) => console.log('Front get serving number error : ', err)
-    })*/
   }
 
   getRecipeAuthor(id: number) {
@@ -111,8 +81,8 @@ export class RecipePresentationComponent implements OnInit {
     return !(hour === 0 && min === 0);
   }
 
-  getServingNumberData(id: number) {
+  /*getServingNumberData(id: number) {
     return this.servingNumber.find((serving) => serving.id === id);
-  }
+  }*/
 
 }

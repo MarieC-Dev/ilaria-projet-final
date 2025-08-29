@@ -10,10 +10,20 @@
 
         <ul>
             <li>
-                <p>Créé par <span>{{ getRecipeAuthor(recipeData.authorId).username }}</span></p>
+                <ul>
+                    <li>
+                        <p>Créé par <span>{{ getRecipeAuthor(recipeData.authorId).username }}</span> </p>
+                    </li>
+                    <li>
+                        <p>{{ getRecipesUser(recipeData.authorId).length }} {{ getRecipesUser(recipeData.authorId).length <= 1 ? 'recette' : 'recettes' }}</p>
+                    </li>
+                </ul>
             </li>
             <li>
-                <p>{{ getRecipesUser(recipeData.authorId).length }} recettes</p>
+                <button (click)="window.print()">
+                    <img src="print-solid.svg" alt="Bouton pour imprimer la recette">
+                    Imprimer la recette
+                </button>
             </li>
         </ul>
     </div>

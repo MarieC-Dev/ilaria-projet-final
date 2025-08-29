@@ -8,19 +8,16 @@ header {
     padding: 2rem 5rem;
     background-color: white;
     border-bottom: 2px solid $mediumGrey;
-    position: sticky;
-    z-index: 10;
-    top: 0;
 
     @media only screen and (max-width: 767px) {
         flex-direction: column-reverse;
         justify-content: flex-end;
         padding: 0;
-        position: fixed;
+        /*position: fixed;
         z-index: 5;
         top: 0;
         right: 0;
-        left: 0;
+        left: 0;*/
 
         background-color: rgba($color: $darkGrey, $alpha: .7);
     }

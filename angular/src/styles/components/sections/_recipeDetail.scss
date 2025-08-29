@@ -105,52 +105,28 @@ div.recipePage {
             @include svgStyle(20px, $firstColor);
         }
 
-        .recipeAuthor {
+        & > ul {
             display: flex;
             justify-content: space-between;
 
-            @media only screen and (max-width: 767px) {
-                width: 100%;
-                margin-bottom: 2rem;
-            }
-
-            ul:first-child {
-                width: 50%;
-
-                li:last-child p {
-                    color: $darkGrey;
-                }
-
-                span {
-                    color: $firstColor;
-                }
-            }
-
-            ul:last-child {
-                width: 50%;
+            & > li:first-child ul {
+                height: 100%;
                 display: flex;
-                justify-content: flex-end;
-                align-items: center;
+                flex-direction: column;
+                justify-content: space-around;
+            }
 
-                img {
-                    height: 24px;
-                }
-
-                li {
-                    margin-left: 1rem;
-                }
-
-                li:first-child {
-                    width: 24px;
-                    height: 24px;
+            & > li:last-child {
+                button {
                     display: flex;
-                    justify-content: center;
                     align-items: center;
+                    padding: .75rem 1.5rem;
                     border: 2px solid $mediumGrey;
                     border-radius: 2rem;
 
                     img {
-                        height: 16px;
+                        height: 24px;
+                        margin-right: 1rem;
                     }
                 }
             }

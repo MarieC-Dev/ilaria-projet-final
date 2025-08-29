@@ -75,4 +75,5 @@ export class RecipePresentationComponent implements OnInit {
     return this.allRecipeData[0].filter((recipe: any) => recipe.authorId === id);
   }
 
+  protected readonly window = window;
 }

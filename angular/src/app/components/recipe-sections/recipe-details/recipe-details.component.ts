@@ -33,6 +33,7 @@ export class RecipeDetailsComponent implements OnInit {
   commentsList!: any[];
   usersList!: any[];
   userConnected!: any;
+  recipeTags!: any[];
 
   socialNetworksList = signal(commonSocial);
 
@@ -73,7 +74,6 @@ export class RecipeDetailsComponent implements OnInit {
 
     this.commentApi.getCommentsByRecipeId(this.recipeId).subscribe((result) => {
       this.commentsList = result.rows;
-      console.log(this.commentsList.length);
     })
 
     this.usersApi.getAllUsers().subscribe({
@@ -90,22 +90,6 @@ export class RecipeDetailsComponent implements OnInit {
       error: (err) => console.log(err)
     })
   }
-
-  /*getIngredientsData(recipeId: number) {
-    const recipeItemList = this.ingredientsList.filter((list) => list.recipeId === recipeId);
-
-    return recipeItemList.flatMap((list: any) => {
-      return this.ingredients.filter((ingredient) => ingredient.id === list.ingredientId)
-    });
-  }*/
-
-  /*getStepsData(recipeId: number) {
-    const recipeItemList = this.stepsList.filter((list) => list.recipeId === recipeId);
-
-    return recipeItemList.map((list: any) => {
-      return this.steps.filter((step) => step.id === list.stepId)
-    });
-  }*/
 
   getRecipeAverage() {
     return this.recipeAverage.getRecipeAverage(Number(this.recipeId), this.commentsList)

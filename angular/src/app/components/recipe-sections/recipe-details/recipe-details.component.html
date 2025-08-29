@@ -74,7 +74,7 @@
             <p>{{ getRecipeAverage() }} ({{ commentsList.length }} avis)</p>
         </div>
 
-        @if (userConnected.isAuthenticated) {
+        @if (userConnected.isAuthenticated && commentsList.length > 0) {
             <a routerLink="commentaire" class="btn-bg-yellow writeCommentBtn">Écrire un commentaire</a>
         }
 
@@ -90,19 +90,24 @@
         </div>
 
         <div class="noCommentsContainer" *ngIf="commentsList.length === 0">
-            <p>Cette recette n'a pas encore été notée. Soyez le premier à laisser un commentaires !</p>
+            <img src="comments-empty.svg" alt="Illustration pour les recettes sans commentaires">
+            <div>
+                <p>Cette recette n'a pas encore été notée. <br> Soyez le premier à laisser un commentaires !</p>
+                <a routerLink="commentaire" class="btn-bg-yellow writeCommentBtn">Noter la recette</a>
+            </div>
         </div>
     </div>
 
-    <!--<div class="recipeTags recipeTags__mobile">
+    <div class="recipeTags recipeTags__mobile">
         <h3>Tags</h3>
 
         <ul class="tagList">
-            @for (tag of recipeTags(); track tag.id) {
+            <li *ngIf="!recipeTags">Il n'y a pas de tags pour cette recette</li>
+            @for (tag of recipeTags; track tag.id) {
                 <li class="tag"> {{ tag.name }}</li>
             }
         </ul>
-    </div>-->
+    </div>
 
     <div class="recipeShare recipeShare__mobile">
         <h3>Partager la recette</h3>

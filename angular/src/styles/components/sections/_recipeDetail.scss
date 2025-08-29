@@ -245,7 +245,7 @@ section.recipeSectionBorder {
     div.recipeIngredients,
     div.recipeSteps,
     div.recipeComments,
-    div.recipeTags,
+    /*div.recipeTags,*/
     div.recipeShare {
         &__mobile {
             display: none !important;
@@ -457,6 +457,14 @@ section.recipeSectionBorder {
         }
 
         .noCommentsContainer {
+            display: flex;
+            align-items: center;
+
+            img {
+                height: 120px;
+                margin-right: 2rem;
+            }
+
             @media only screen and (max-width: 767px) {
                 display: flex;
                 flex-direction: column;

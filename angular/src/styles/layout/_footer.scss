@@ -6,6 +6,7 @@ footer {
     flex-direction: column;
     padding: 5rem;
     background-color: white;
+    border-top: 2px solid $mediumGrey;
 
     @media only screen and (max-width: 767px) {
         width: auto;

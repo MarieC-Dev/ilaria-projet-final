@@ -245,7 +245,7 @@ section.recipeSectionBorder {
     div.recipeIngredients,
     div.recipeSteps,
     div.recipeComments,
-    /*div.recipeTags,*/
+    div.recipeTags,
     div.recipeShare {
         &__mobile {
             display: none !important;
@@ -461,7 +461,7 @@ section.recipeSectionBorder {
             align-items: center;
 
             img {
-                height: 120px;
+                height: 180px;
                 margin-right: 2rem;
             }
 

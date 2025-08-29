@@ -1,15 +1,15 @@
 <section class="recipeDetails">
-    <!--<div class="recipeIngredients recipeIngredients__mobile">
+    <div class="recipeIngredients recipeIngredients__mobile">
         <h3>Ingrédients</h3>
 
         <ul class="ingredientList">
             @for (recipeIngr of recipeIngredients; track recipeIngr.id) {
                 <li class="ingredient">
-                    {{ recipeIngr.quantity }} {{ recipeDetailService.getUnitIngredientLabel(recipeIngr.unit) }} {{ recipeIngr.name.toLowerCase() }}
+                    {{ recipeIngr.quantity }} {{ recipeDetailService.getUnitIngredientLabel(recipeIngr.unit) }} {{ recipeIngr.ingredient.toLowerCase() }}
                 </li>
             }
         </ul>
-    </div>-->
+    </div>
 
     <div class="recipeSteps">
         <h3>Étapes de préparation</h3>
@@ -36,15 +36,16 @@
             </ul>
         </div>
 
-        <!--<div class="recipeTags recipeTags__desktop">
+        <div class="recipeTags recipeTags__desktop">
             <h3>Tags</h3>
 
             <ul class="tagList">
-                @for (tag of recipeTags(); track tag.id) {
+                <li *ngIf="!recipeTags">Il n'y a pas de tags pour cette recette</li>
+                @for (tag of recipeTags; track tag.id) {
                     <li class="tag"> {{ tag.name }}</li>
                 }
             </ul>
-        </div>-->
+        </div>
 
         <div class="recipeShare recipeShare__desktop">
             <h3>Partager la recette</h3>
@@ -59,7 +60,7 @@
             </ul>
         </div>
 
-        <div class="wrapperNavImage" *ngIf="recipeSteps.length >= 5">
+        <div class="wrapperNavImage" *ngIf="recipeSteps.length >= 10 && commentsList.length > 0">
             <img src="recipe-detail-image.jpg" alt="détail de la recette image">
         </div>
     </nav>
@@ -69,7 +70,7 @@
     <div class="recipeComments">
         <h3>Commentaires</h3>
 
-        <div class="recipeAverage">
+        <div class="recipeAverage" *ngIf="commentsList.length > 0">
             <img src="star.svg" alt="Icone étoile">
             <p>{{ getRecipeAverage() }} ({{ commentsList.length }} avis)</p>
         </div>

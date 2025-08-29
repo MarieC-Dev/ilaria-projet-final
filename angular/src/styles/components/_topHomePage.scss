@@ -1,61 +1,35 @@
+@use '../utils/variables' as *;
+
 .subHeader {
-    padding: 0 3rem;
-    margin-bottom: 5rem;
+    margin: 5rem 0;
 
     @media only screen and (max-width: 767px) {
         padding: 2rem 1rem;
-        margin-bottom: 1rem;
+        margin: 1rem 0;
     }
 
     .topHomePage {
-        height: 520px;
+        height: 600px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        padding: 3rem;
-        background-image: url('../../../public/header-image.jpg');
+        justify-content: flex-end;
+        padding: 5rem 3rem;
+        margin-top: -5rem;
+        background:
+            linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+            url('../../../public/header-image-2.jpg'),
+            no-repeat;
         background-size: cover;
-        background-position: top -30px left 0;
-        background-repeat: no-repeat;
         color: white;
-        border-radius: 1.5rem;
 
         @media only screen and (max-width: 767px) {
             padding: 2rem;
             background-position: top 0 center;
         }
-    
-        h1 {
-            width: 408px;
 
-            @media only screen and (max-width: 767px) {
-                width: auto;
-            }
-        }
-    
-        p {
-            width: 538px;
-            font-size: 20px;
-            line-height: 1.7;
-            margin: 2rem 0;
-
-            @media only screen and (max-width: 767px) {
-                width: auto;
-                margin: 1.5rem 0;
-                line-height: auto;
-            }
-        }
-    
-        button { 
-            display: flex;
-            align-items: flex-end;
-            color: white; 
-            font-size: 18px;
-    
-            img {
-                height: 16px;
-                margin-left: 1rem;
-            }
+        h3 {
+            margin-top: 1rem;
+            font-size: 24px;
         }
     }
 }

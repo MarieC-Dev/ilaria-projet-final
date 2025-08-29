@@ -1,25 +1,13 @@
 <div class="homePage">
     <section class="subHeader">
         <div class="topHomePage">
-            <h1>Choose from thousands of recipes</h1>
-            <p>Appropriately integrate technically sound value with scalable infomediaries negotiate sustainable strategic theme areas</p>
-            <button type="button" class="btn-transparent btn-bold btn-white">
-                Sign up today
-                <img src="arrow-right.svg" alt="arrow right">
-            </button>
+            <h1>Bienvenue sur Cook It !</h1>
+            <h3>Choisissez une recette parmi des milliers</h3>
         </div>
     </section>
 
     <section class="homeRecipesSection">
         <app-recipes-filter />
-        <form class="searchFormComponent recipesSearchForm">
-            <label for="recipesSearch">
-                <button type="button">
-                    <app-search-icon />
-                </button>
-                <input type="text" name="recipesSearch" id="recipesSearch" placeholder="Trouver une recette">
-            </label>
-        </form>
         <app-sort-by-select selectId="sortRecipes" />
 
         <div class="recipesContainer">
@@ -45,7 +33,6 @@
         <div class="videosTitle">
             <h2>Dernière vidéo</h2>
 
-            <!-- <app-sort-by-select selectId="sortVideos" /> -->
             <a href="https://www.youtube.com/@ChefEtchebest" class="btn-bg-red">
                 <app-play-icon />
                 Voir toutes les vidéos

@@ -20,7 +20,9 @@ $imgSize: 72px;
             overflow: hidden;
 
             #userPicture {
-                height: $imgSize;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
             }
         }
 
@@ -122,9 +124,6 @@ app-recipe-comment {
     padding: 2rem;
 }
 
-app-recipe-comment:first-child {
-    padding-top: 0;
-}
 app-recipe-comment:nth-child(even) {
     background-color: $lightGrey;
 }

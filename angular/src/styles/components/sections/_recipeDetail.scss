@@ -177,7 +177,7 @@ div.recipePage {
     }
 
     hr {
-        border: 1px solid $lightGrey;
+        border: 1px solid $mediumGrey;
     }
 }
 
@@ -188,7 +188,7 @@ section.recipeSectionBorder {
 
     .recipeBorder {
         width: 100%;
-        border: 1px solid $lightGrey;
+        border: 1px solid $mediumGrey;
 
         @media only screen and (max-width: 767px) {
             width: 100%;
@@ -392,7 +392,7 @@ section.recipeSectionBorder {
         grid-column: 1/2;
         grid-row: 2/3;
         margin: 0 auto;
-        border: 1px solid $lightGrey;
+        border: 1px solid $mediumGrey;
 
         @media only screen and (max-width: 767px) {
             grid-column: 1/2;
@@ -460,6 +460,7 @@ section.recipeSectionBorder {
         .commentsContainer {
             display: flex;
             flex-direction: column;
+            border: 2px solid $darkGrey;
 
             .commentAndAnswers {
                 overflow: hidden;

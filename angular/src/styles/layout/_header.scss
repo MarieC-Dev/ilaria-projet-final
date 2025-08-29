@@ -50,6 +50,10 @@ header {
         }
     }
 
+    & > img {
+        height: 48px;
+    }
+
     .navigationRight {
         display: flex;
         justify-content: space-between;

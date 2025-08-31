@@ -34,6 +34,41 @@
     label, textarea, input, button, select {
         font-size: 16px;
     }
+
+    .recipeImageContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        button {
+            margin-top: 0;
+        }
+
+        .wrapperRecipeImage {
+            margin-bottom: 1rem;
+            border-radius: 1rem;
+            overflow: hidden;
+
+            &__recipeImage {
+                width: 500px;
+                height: 320px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            &__icon {
+                width: 300px;
+                height: 180px;
+                display: flex;
+                justify-content: center;
+                border: 2px solid $mediumGrey;
+            }
+        }
+    }
 }
 
 .errorMessage, .formControlError {

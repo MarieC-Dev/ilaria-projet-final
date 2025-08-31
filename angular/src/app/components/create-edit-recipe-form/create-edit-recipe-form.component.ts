@@ -211,6 +211,14 @@ export class CreateEditRecipeFormComponent implements OnInit {
     }
   }
 
+  get recipeImageName() {
+    return this.recipeForm.formGroup.get('imageName')?.value;
+  }
+
+  removeRecipeImage() {
+    this.recipeForm.formGroup.get('imageName')?.setValue('');
+  }
+
   addRemovePauseTime() {
     this.isPause = !this.isPause;
 
@@ -402,16 +410,18 @@ export class CreateEditRecipeFormComponent implements OnInit {
 
     const formData = this.buildFormDataFormGroup(this.recipeForm.formGroup, this.selectedImage);
 
-    for (const pair of formData.entries()) {
+    /*for (const pair of formData.entries()) {
       console.log(`${pair[0]}:`, pair[1]);
-    }
+    }*/
 
     if(this.updateRecipe) {
+      console.log('CREEE UNE NOUVELLE RECETTE')
       this.recipesApiService.updateRecipe(this.recipeDataId, formData).subscribe({
         next: () => window.location.reload(),
         error: (err) => console.log('Err Front update recipe', err)
       });
     } else {
+      console.log('create')
       this.recipesApiService.createRecipe(formData).subscribe({
         next: () => window.location.reload(),
         error: (err) => console.log('Err Front create recipe', err)

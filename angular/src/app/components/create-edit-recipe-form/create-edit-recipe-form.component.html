@@ -42,11 +42,29 @@
             Ajouter une image : <span style="color: #EB4137">*</span>
         </label>
 
-        <input type="file"
-               id="recipe-image"
-               name="recipe-image"
-               placeholder="Ajouter une image"
-               (change)="onFileSelected($event)" />
+        <div class="recipeImageContainer">
+            @if (updateRecipe && recipeImageName && recipeImageName === recipeData.imageName) {
+                <div class="wrapperRecipeImage wrapperRecipeImage__recipeImage">
+                    <img [src]="recipeData.imageName" [alt]="'Image de la recette ' + recipeData.name">
+                </div>
+                <button
+                    type="button"
+                    class="btn-bg-darkGrey"
+                    (click)="removeRecipeImage()">
+                    Changer la photo
+                </button>
+            } @else {
+                <div class="wrapperRecipeImage wrapperRecipeImage__icon">
+                   <img src="question.svg" alt="Aucune photo pour cette recette">
+                </div>
+
+                <input type="file"
+                       id="recipe-image"
+                       name="recipe-image"
+                       placeholder="Ajouter une image"
+                       (change)="onFileSelected($event)" />
+            }
+        </div>
     </div>
 
     <!-- Types de cuisine -->

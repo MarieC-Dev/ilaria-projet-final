@@ -40,7 +40,7 @@ export class RecipeFormFactory {
       ingredientDetail: new FormGroup({
         quantity: new FormControl<string>(''),
         unit: new FormControl<string>(''),
-        name: new FormControl<string>(''),
+        ingredient: new FormControl<string>(''),
       }),
       ingredientsList: new FormArray([], [Validators.required, Validators.minLength(1)]),
 

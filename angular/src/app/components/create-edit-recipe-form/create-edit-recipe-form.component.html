@@ -146,7 +146,7 @@
             inputId="cookingTimeInput"
             [required]="false">
 
-            <button class="btn-bg-darkGrey" type="button" (click)="isCooking = !isCooking">
+            <button class="btn-bg-darkGrey" type="button" (click)="addRemoveCookingTime()">
                 {{ isCooking ? 'Supprimer' : 'Ajouter' }}
             </button>
 
@@ -181,7 +181,7 @@
             inputId="pauseTimeInput"
             [required]="false">
 
-            <button class="btn-bg-darkGrey" type="button" (click)="isPause = !isPause">
+            <button class="btn-bg-darkGrey" type="button" (click)="addRemovePauseTime()">
                 {{ isPause ? 'Supprimer' : 'Ajouter' }}
             </button>
 
@@ -255,16 +255,16 @@
                     <input type="text"
                            id="ingredientName"
                            name="ingredientName"
-                           formControlName="name"
+                           formControlName="ingredient"
                            placeholder="Ex. : Chocolat en poudre"
-                           (keydown.enter)="addDetails('ingredientDetail', ingredientsList, 'quantity', 'unit', 'name')"
+                           (keydown.enter)="addDetails('ingredientDetail', ingredientsList, 'quantity', 'unit', 'ingredient')"
                     />
                 </label>
             </li>
             <li>
                 <button type="button"
                         class="btn-bg-red stepsIngredientsBtn"
-                        (click)="addDetails('ingredientDetail', ingredientsList, 'quantity', 'unit', 'name')">
+                        (click)="addDetails('ingredientDetail', ingredientsList, 'quantity', 'unit', 'ingredient')">
                     +
                 </button>
             </li>
@@ -319,7 +319,7 @@
                             <input type="text"
                                    [id]="'ingredientName' + $index"
                                    [name]="'ingredientName' + $index"
-                                   formControlName="name"
+                                   formControlName="ingredient"
                                    placeholder="Ex. : Chocolat en poudre"
                             />
                         </label>

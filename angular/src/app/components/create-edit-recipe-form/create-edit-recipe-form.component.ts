@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnInit, signal} from '@angular/core';
+import {Component, inject, Input, OnInit, signal, WritableSignal} from '@angular/core';
 import { CookingTypeComponent } from '../form-components/cooking-type/cooking-type.component';
 import { DifficultyComponent } from '../form-components/difficulty/difficulty.component';
 import { MultipleInputsComponent } from '../form-components/multiple-inputs/multiple-inputs.component';
@@ -42,6 +42,8 @@ export class CreateEditRecipeFormComponent implements OnInit {
   recipeFormStatus = signal('');
   recipeData!: any;
   recipeDataId!: number;
+
+  recipeTime: any = {};
 
   recipeIngredientsList!: any[];
   recipeStepsList!: any[];
@@ -109,23 +111,37 @@ export class CreateEditRecipeFormComponent implements OnInit {
             type: serving.result[0].servingType
           })
 
-          return this.recipeTimeApi.getOneRecipeTime(this.recipeData.recipeTimeId);
+          return this.recipeTimeApi.getAllRecipeTime();
         }),
         switchMap((time) => {
+          const allRecipeTimes = time.rows;
+          const filterRecipeTime = allRecipeTimes.filter((time: any) => time.recipeId === this.recipeDataId);
+          this.recipeTime.making = filterRecipeTime.find((time: any) => time.type === 'making');
+          this.recipeTime.pause = filterRecipeTime.find((time: any) => time.type === 'pause');
+          this.recipeTime.cooking = filterRecipeTime.find((time: any) => time.type === 'cooking');
+
           this.recipeForm.formGroup.get('recipeTime')?.patchValue({
             making: {
-              hours: time.result[0].makingH,
-              minutes: time.result[0].makingMin
+              hours: this.recipeTime.making.hours,
+              minutes: this.recipeTime.making.minutes
             },
             pause: {
-              hours: time.result[0].pauseH,
-              minutes: time.result[0].pauseMin
+              hours: this.recipeTime.pause.hours,
+              minutes: this.recipeTime.pause.minutes
             },
             cooking: {
-              hours: time.result[0].cookingH,
-              minutes: time.result[0].cookingMin
+              hours: this.recipeTime.cooking.hours,
+              minutes: this.recipeTime.cooking.minutes
             },
           });
+
+          if(this.recipeTime.pause && this.recipeTime.pause.hours > 0 || this.recipeTime.pause.minutes > 0) {
+            this.isPause = true;
+          }
+
+          if(this.recipeTime.cooking && this.recipeTime.cooking.hours > 0 || this.recipeTime.cooking.minutes > 0) {
+            this.isCooking = true;
+          }
 
           return this.ingredientsStepsApi.getIngredientsList();
         }),
@@ -152,7 +168,7 @@ export class CreateEditRecipeFormComponent implements OnInit {
                 id: new FormControl<string>(item[0].id),
                 quantity: new FormControl<string>(item[0].quantity),
                 unit: new FormControl<string>(item[0].unit),
-                name: new FormControl<string>(item[0].name),
+                ingredient: new FormControl<string>(item[0].ingredient),
               })
             )
           });
@@ -189,9 +205,39 @@ export class CreateEditRecipeFormComponent implements OnInit {
           return this.ingredientsStepsApi.getStepsList();
         }),
       ).subscribe(() => {
-        console.log('subscribe')
-        console.log(this.recipeFormStatus())
+        console.log('subscribe');
+        console.log(this.recipeFormStatus());
       })
+    }
+  }
+
+  addRemovePauseTime() {
+    this.isPause = !this.isPause;
+
+    if(!this.isPause) {
+      this.recipeTime.pause.hours = 0;
+      this.recipeTime.pause.minutes = 0;
+      this.recipeForm.formGroup.get('recipeTime')?.patchValue({
+        pause: {
+          hours: this.recipeTime.pause.hours,
+          minutes: this.recipeTime.pause.minutes
+        },
+      });
+    }
+  }
+
+  addRemoveCookingTime() {
+    this.isCooking = !this.isCooking;
+
+    if(!this.isCooking) {
+      this.recipeTime.cooking.hours = 0;
+      this.recipeTime.cooking.minutes = 0;
+      this.recipeForm.formGroup.get('recipeTime')?.patchValue({
+        cooking: {
+          hours: this.recipeTime.cooking.hours,
+          minutes: this.recipeTime.cooking.minutes
+        },
+      });
     }
   }
 
@@ -211,18 +257,19 @@ export class CreateEditRecipeFormComponent implements OnInit {
     const detailsGroup = new FormGroup(newDetail);
 
     if(detailName === 'ingredientDetail') {
-      const ingredientValue = detailsGroup.value['name'].trim().toLowerCase();
+      console.log(detailsGroup.value)
+      const ingredientValue = detailsGroup.value['ingredient'].trim().toLowerCase();
       detailsGroup.patchValue({
-        name: detailsGroup.value['name'].toLowerCase().charAt(0).toUpperCase() + detailsGroup.value['name'].slice(1),
+        ingredient: detailsGroup.value['ingredient'].toLowerCase().charAt(0).toUpperCase() + detailsGroup.value['ingredient'].slice(1),
       });
 
       if(detailsGroup.value['quantity'] === '' ||
         detailsGroup.value['quantity'] === '0' ||
         detailsGroup.value['unit'] === '' ||
-        detailsGroup.value['name'] === '') {
+        detailsGroup.value['ingredient'] === '') {
         this.errorAddIngredient.set('Les 3 champs sont requis');
-      } else if (arrayList.value.find((elm: any) => elm.name.trim().toLowerCase() === ingredientValue)) {
-        this.errorAddIngredient.set(`L'ingrédient ${detailsGroup.value['name']} existe déjà`);
+      } else if (arrayList.value.find((elm: any) => elm.ingredient.trim().toLowerCase() === ingredientValue)) {
+        this.errorAddIngredient.set(`L'ingrédient ${detailsGroup.value['ingredient']} existe déjà`);
       } else {
         this.errorAddIngredient.set('');
 
@@ -329,7 +376,7 @@ export class CreateEditRecipeFormComponent implements OnInit {
     ingredientsList.controls.forEach((group: any, i) => {
       formData.append(`ingredientsList[${i}][quantity]`, group.get('quantity')?.value);
       formData.append(`ingredientsList[${i}][unit]`, group.get('unit')?.value);
-      formData.append(`ingredientsList[${i}][name]`, group.get('name')?.value);
+      formData.append(`ingredientsList[${i}][ingredient]`, group.get('ingredient')?.value);
     });
 
     // stepsList

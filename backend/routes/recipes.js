@@ -25,6 +25,8 @@ exports.createRecipe = async (req, res) => {
         name, description, cuisineType, cookingType, difficulty, ingredientsList, stepsList, authorId, created
     } = req.body;
 
+    console.log(req.body)
+
     let imageName = req.file.filename;
 
     const servingNumber = {
@@ -83,8 +85,6 @@ exports.createRecipe = async (req, res) => {
         result.push(recipeDataResult);
         /* ===== */
 
-
-
         const recipeTimeMakingQueries = [
             recipeTime.making.type, Number(recipeTime.making.hours), Number(recipeTime.making.minutes), recipeDataId
         ];
@@ -108,10 +108,8 @@ exports.createRecipe = async (req, res) => {
             recipeTimeCookingQueries
         );
 
-
-
         /* 3. INGREDIENTS LIST & STEPS LIST creation - both get recipeData ID */
-        const ingredientQueries = ingredientsList.map((item) => [item.quantity, item.unit, item.name]);
+        const ingredientQueries = ingredientsList.map((item) => [item.quantity, item.unit, item.ingredient]);
 
         const [ingredientResult] = await db.query(
             'INSERT INTO Ingredient (quantity, unit, ingredient) VALUES ?',
@@ -159,7 +157,7 @@ exports.createRecipe = async (req, res) => {
 
         /* 4. RESULT - creation new recipe */
         return res.status(201).json({
-            msg: 'The recipe is created !',
+            msg: 'The recipe has created !',
             servingNumberId,
             recipeDataId,
             ingredientsListId,
@@ -179,80 +177,93 @@ exports.updateRecipe = async (req, res) => {
 
     let imageName = req?.file?.filename;
 
-    const servingNumber = req.body['servingNumber.number'];
-    const servingType = req.body['servingNumber.type'];
+    const servingNumber = {
+        number: req.body['servingNumber.number'],
+        type: req.body['servingNumber.type'],
+    };
 
-    const makingTimeType = req.body['recipeTime.making.type'];
-    const makingTimeHours = req.body['recipeTime.making.hours'];
-    const makingTimeMinutes = req.body['recipeTime.making.minutes'];
+    const recipeTime = {
+        making: {
+            type: req.body['recipeTime.making.type'],
+            hours: req.body['recipeTime.making.hours'],
+            minutes: req.body['recipeTime.making.minutes'],
+        },
+        pause: {
+            type: req.body['recipeTime.pause.type'],
+            hours: req.body['recipeTime.pause.hours'],
+            minutes: req.body['recipeTime.pause.minutes'],
+        },
+        cooking: {
+            type: req.body['recipeTime.cooking.type'],
+            hours: req.body['recipeTime.cooking.hours'],
+            minutes: req.body['recipeTime.cooking.minutes'],
+        },
+    };
 
-    const pauseTimeType = req.body['recipeTime.pause.type'];
-    const pauseTimeHours = req.body['recipeTime.pause.hours'];
-    const pauseTimeMinutes = req.body['recipeTime.pause.minutes'];
-
-    const cookingTimeType = req.body['recipeTime.cooking.type'];
-    const cookingTimeHours = req.body['recipeTime.cooking.hours'];
-    const cookingTimeMinutes = req.body['recipeTime.cooking.minutes'];
+    const result = [];
 
     try {
         if(
-            !name || !cuisineType || !cookingType || !servingNumber || !servingType || !difficulty ||
-            !makingTimeType || !pauseTimeType || !cookingTimeType || ingredientsList === [] || stepsList === []
+            !name || !cuisineType || !cookingType || !servingNumber.number || !servingNumber.type || !difficulty ||
+            !recipeTime.making.type || !recipeTime.cooking.type || !recipeTime.pause.type ||
+            ingredientsList === [] || stepsList === []
         ) {
             return res.status(404).json({msg: 'recipe time data not found'})
         }
 
-        /* 1. SERVING NUMBER & RECIPE TIME creation */
-        const recipeTimeQueries = [
-            makingTimeType, Number(makingTimeHours), Number(makingTimeMinutes),
-            pauseTimeType, Number(pauseTimeHours), Number(pauseTimeMinutes),
-            cookingTimeType, Number(cookingTimeHours), Number(cookingTimeMinutes),
-            recipeId
-        ];
-
-        db.query(
-            'UPDATE ServingNumber SET number = ?, servingType = ? WHERE id = ?',
-            [servingNumber, servingType, recipeId]
+        /* 1. SERVING NUMBER */
+        const [servingNumberResult] = await db.query(
+            'INSERT INTO ServingNumber (number, servingType) VALUES (?, ?)',
+            [servingNumber.number, servingNumber.type]
         );
 
-        db.query(
-            'UPDATE TimeTable SET typeMaking = ?, makingH = ?, makingMin = ?, typePause = ?, pauseH = ?, pauseMin = ?, typeCooking = ?, cookingH = ?, cookingMin = ? WHERE id = ?',
-            recipeTimeQueries
-        );
+        const servingNumberId = servingNumberResult.insertId;
         /* ===== */
 
         /* 2. RECIPE DATA creation - get servingNumber & recipeTime IDs */
-        console.log(imageName);
+        const recipeDataQueries = [
+            name, description, imageName, cuisineType, cookingType, servingNumberId, difficulty, authorId, created
+        ];
+        const [recipeDataResult] = await db.query(
+            'INSERT INTO RecipeData (name, description, imageName, cuisineType, cookingType, servingNumberId, difficulty, authorId, created) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            recipeDataQueries
+        );
 
-        if(imageName) {
-            const recipeDataQueries = [
-                name, description, imageName, cuisineType, cookingType, difficulty, authorId, created, recipeId
-            ];
-
-            await db.query(
-                'UPDATE RecipeData SET name = ?, description = ?, imageName = ?, cuisineType = ?, cookingType = ?, difficulty = ?, authorId = ?, created = ? WHERE id = ?',
-                recipeDataQueries
-            );
-        } else {
-            const recipeDataQueries = [
-                name, description, cuisineType, cookingType, difficulty, authorId, created, recipeId
-            ];
-
-            await db.query(
-                'UPDATE RecipeData SET name = ?, description = ?, cuisineType = ?, cookingType = ?, difficulty = ?, authorId = ?, created = ? WHERE id = ?',
-                recipeDataQueries
-            );
-        }
+        const recipeDataId = recipeDataResult.insertId;
+        result.push(recipeDataResult);
 
         /* ===== */
+
+        const recipeTimeMakingQueries = [
+            recipeTime.making.type, Number(recipeTime.making.hours), Number(recipeTime.making.minutes), recipeDataId
+        ];
+        const recipeTimePauseQueries = [
+            recipeTime.pause.type, Number(recipeTime.pause.hours), Number(recipeTime.pause.minutes), recipeDataId
+        ];
+        const recipeTimeCookingQueries = [
+            recipeTime.cooking.type, Number(recipeTime.cooking.hours), Number(recipeTime.cooking.minutes), recipeDataId
+        ];
+
+        const [recipeTimeMaking] = await db.query(
+            'INSERT INTO TimeTable (type, hours, minutes, recipeId) VALUES (?, ?, ?, ?)',
+            recipeTimeMakingQueries
+        );
+        const [recipeTimePause] = await db.query(
+            'INSERT INTO TimeTable (type, hours, minutes, recipeId) VALUES (?, ?, ?, ?)',
+            recipeTimePauseQueries
+        );
+        const [recipeTimeCooking] = await db.query(
+            'INSERT INTO TimeTable (type, hours, minutes, recipeId) VALUES (?, ?, ?, ?)',
+            recipeTimeCookingQueries
+        );
 
         /* 3. INGREDIENTS LIST & STEPS LIST creation - both get recipeData ID */
         db.execute('DELETE FROM IngredientsList WHERE recipeId = ?', [recipeId]);
 
-        const ingredientQueries = ingredientsList.map((item) => [item.quantity, item.unit, item.name]);
+        const ingredientQueries = ingredientsList.map((item) => [item.quantity, item.unit, item.ingredient]);
 
         const [ingredientResult] = await db.query(
-            'INSERT INTO Ingredient (quantity, unit, name) VALUES ?',
+            'INSERT INTO Ingredient (quantity, unit, ingredient) VALUES ?',
             [ingredientQueries]
         );
 
@@ -298,8 +309,14 @@ exports.updateRecipe = async (req, res) => {
         const stepsListId = stepsListResult.insertId;
         /* ===== */
 
-        /* 4. RESULT - creation new recipe */
-        return res.status(201).json({ msg: 'The recipe is update !', recipeId });
+        /* 4. RESULT - update new recipe */
+        return res.status(201).json({
+            msg: 'The recipe has updated !',
+            servingNumberId,
+            recipeDataId,
+            ingredientsListId,
+            stepsListId
+        });
         /* ===== */
 
     } catch (error) {

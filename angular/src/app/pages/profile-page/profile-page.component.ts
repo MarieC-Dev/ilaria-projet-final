@@ -22,7 +22,7 @@ export class ProfilePageComponent implements OnInit {
   recipesList = signal(RECIPE_LIST);
   userId!: number;
   userImage: File | null = null;
-  isUpdated = signal(false);
+  editPassword = signal<boolean>(false);
 
   constructor(private userApi: UsersApiService, private route: ActivatedRoute) {
     this.userForm = new UserFormFactory();
@@ -38,7 +38,6 @@ export class ProfilePageComponent implements OnInit {
         username: data.username,
         email: data.email,
         password: data.password,
-        role: data.roleId,
       });
     });
   }
@@ -68,20 +67,26 @@ export class ProfilePageComponent implements OnInit {
     }
   }
 
+  editPasswordBoolFn() {
+    return this.editPassword.update((bool) => bool = !bool);
+  }
+
   buildFormDataFormGroup(formGroup: FormGroup, file: File| any): FormData {
     const formData = new FormData();
 
     formData.append('imageName', formGroup.get('imageName')?.value);
     formData.append('username', formGroup.get('username')?.value);
     formData.append('email', formGroup.get('email')?.value);
-    formData.append('password', formGroup.get('password')?.value);
+
+    if(this.editPassword() && formGroup.get('password')?.value) {
+      formData.append('password', formGroup.get('password')?.value);
+    }
 
     if (file) {
       formData.append('user-image', file);
       formData.append('imageName', file.name);
     }
 
-    console.log({img: file});
     return formData;
   }
 
@@ -89,7 +94,7 @@ export class ProfilePageComponent implements OnInit {
     const formData = this.buildFormDataFormGroup(this.userForm.formGroupCreate, this.userImage);
 
     this.userApi.updateUser(this.userId, formData).subscribe({
-      next: (result) => this.isUpdated.set(true),
+      next: (result) => window.location.reload(),
       error: (err) => console.log('Err Front update profile', err)
     });
   }

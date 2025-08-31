@@ -9,8 +9,7 @@ const db = require('./db_connection.js');
 router.use(cookieParser());
 
 module.exports = async (req, res, next) => {
-    const [rows] = await db.query('SELECT * FROM Session');
-    console.log('📌 SESSIONS :', rows);
+    const [rows] = await db.query('SELECT * FROM sessions');
 
     if(rows.length >= 1) {
         const session = {
@@ -18,8 +17,6 @@ module.exports = async (req, res, next) => {
             expires: rows[0].expires,
             data: JSON.parse(rows[0].data),
         }
-
-        console.log(session);
 
         if (!session || !session.data.token) {
             return res.status(401).json({ unauthorized: 'Accès refusé : session invalide' });

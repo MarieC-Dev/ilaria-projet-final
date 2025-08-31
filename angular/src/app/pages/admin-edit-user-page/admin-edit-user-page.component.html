@@ -77,15 +77,18 @@
                     Mot de passe :
                 </label>
 
-                <input type="password"
+                <button type="button" class="btn-bg-darkGrey" (click)="editPasswordBoolFn()">
+                    {{ editPassword() ? 'Annuler' : 'Changer le mot de passe' }}
+                </button>
+
+                <input *ngIf="editPassword()"
+                       type="password"
                        id="profilePasswordInput"
                        name="profilePasswordInput"
                        placeholder="Mot de passe"
-                       formControlName="password"
-                       required/>
+                       formControlName="password" />
             </div>
 
-            <!-- Si une valeur d'un input a changé -> disabled = false -->
             <button type="submit" class="btn-bg-red" (click)="onSubmit()">
                 Modifier
             </button>

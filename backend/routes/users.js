@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../middlewares/db_connection");
-const authMiddleware = require("../middlewares/authMiddleware");
 const bcrypt = require("bcryptjs")
 
 exports.getAllUsers = async (req, res) => {
@@ -58,7 +57,7 @@ exports.updateUser = async (req, res) => {
     const { username, role, email, password } = req.body;
     let imageName = req?.file?.filename;
 
-    console.log(req.body)
+    console.log(req.body);
 
     if(!username || !email || !password) {
         return res.status(400).json({ error: "Le nom, le mail et le mot de passe sont requis" });

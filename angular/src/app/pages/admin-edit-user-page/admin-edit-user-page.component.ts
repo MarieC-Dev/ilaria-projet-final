@@ -22,6 +22,7 @@ export class AdminEditUserPageComponent implements OnInit {
   recipesList = signal(RECIPE_LIST);
   userId!: number;
   userImage: File | null = null;
+  editPassword = signal<boolean>(false);
 
   constructor(
     private userApi: UsersApiService,
@@ -75,6 +76,10 @@ export class AdminEditUserPageComponent implements OnInit {
     }
   }
 
+  editPasswordBoolFn() {
+    return this.editPassword.update((bool) => bool = !bool);
+  }
+
   buildFormDataFormGroup(formGroup: FormGroup, file: File| any): FormData {
     const formData = new FormData();
 
@@ -82,7 +87,10 @@ export class AdminEditUserPageComponent implements OnInit {
     formData.append('username', formGroup.get('username')?.value);
     formData.append('role', formGroup.get('role')?.value);
     formData.append('email', formGroup.get('email')?.value);
-    formData.append('password', formGroup.get('password')?.value);
+
+    if(this.editPassword() && formGroup.get('password')?.value) {
+      formData.append('password', formGroup.get('password')?.value);
+    }
 
     if (file) {
       formData.append('user-image', file);

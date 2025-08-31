@@ -54,7 +54,7 @@ exports.createUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
     const userId = req.params.id;
-    const { username, role, email, password } = req.body;
+    const { username, roleId, email, password } = req.body;
     let imageName = req?.file?.filename;
 
     console.log(req.body);
@@ -74,20 +74,33 @@ exports.updateUser = async (req, res) => {
         });
     }
 
-    const userSql = 'UPDATE User SET username = ?, roleId = ?, email = ?, password = ? WHERE id = ?';
-    const pwdHash = await bcrypt.hash(password, 10);
+    if(roleId) {
+        const userSql = 'UPDATE User SET username = ?, roleId = ?, email = ?, password = ? WHERE id = ?';
+        const pwdHash = await bcrypt.hash(password, 10);
 
-    console.log({username, email, pwdHash, userId})
+        const [result] = await db.query(userSql, [username, roleId, email, pwdHash, userId], (err, result) => {
+            if (err) {
+                return res.status(500).json({ error: 'User update error :', err });
+            } else {
+                console.log('User has been updated !')
+            }
+        });
 
-    const [result] = await db.query(userSql, [username, role, email, pwdHash, userId], (err, result) => {
-        if (err) {
-            return res.status(500).json({ error: 'User update error :', err });
-        } else {
-            console.log('User has been updated !')
-        }
-    });
+        return res.json({ message: 'User : ' + result });
+    } else {
+        const userSql = 'UPDATE User SET username = ?, email = ?, password = ? WHERE id = ?';
+        const pwdHash = await bcrypt.hash(password, 10);
 
-    return res.json({ message: 'User : ' + result });
+        const [result] = await db.query(userSql, [username, email, pwdHash, userId], (err, result) => {
+            if (err) {
+                return res.status(500).json({ error: 'User update error :', err });
+            } else {
+                console.log('User has been updated !')
+            }
+        });
+
+        return res.json({ message: 'User : ' + result });
+    }
 }
 
 exports.deleteUser = async (req, res) => {

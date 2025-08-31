@@ -41,7 +41,6 @@ export class AdminEditUserPageComponent implements OnInit {
         imageName: data.imageName,
         username: data.username,
         email: data.email,
-        password: data.password,
         role: data.roleId,
       });
     });
@@ -90,6 +89,8 @@ export class AdminEditUserPageComponent implements OnInit {
 
     if(this.editPassword() && formGroup.get('password')?.value) {
       formData.append('password', formGroup.get('password')?.value);
+    } else {
+      formGroup.get('password')?.setValue('');
     }
 
     if (file) {

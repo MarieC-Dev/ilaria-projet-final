@@ -4,13 +4,13 @@
 footer {
     display: flex;
     flex-direction: column;
-    padding: 5rem;
+    padding: 4rem;
     background-color: white;
     border-top: 2px solid $mediumGrey;
 
     @media only screen and (max-width: 767px) {
         width: auto;
-        padding: 3rem 1rem;
+        padding: 2rem 1rem;
         position: relative;
         z-index: 0;
         top: 80px; // 80

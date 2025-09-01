@@ -98,6 +98,7 @@ export class CreateEditRecipeFormComponent implements OnInit {
             imageName: recipe[0].imageName,
             cuisineType: recipe[0].cuisineType,
             cookingType: recipe[0].cookingType,
+            servingNumberId: recipe[0].servingNumberId,
             difficulty: recipe[0].difficulty,
             authorId: recipe[0].authorId,
             created: recipe[0].created,
@@ -107,6 +108,7 @@ export class CreateEditRecipeFormComponent implements OnInit {
         }),
         switchMap((serving: any) => {
           this.recipeForm.formGroup.get('servingNumber')?.patchValue({
+            id: serving.result[0].id,
             number: serving.result[0].number,
             type: serving.result[0].servingType
           })
@@ -134,6 +136,12 @@ export class CreateEditRecipeFormComponent implements OnInit {
               minutes: this.recipeTime.cooking.minutes
             },
           });
+
+          if(this.updateRecipe) {
+            this.recipeForm.formGroup.get('recipeTime.making.id')?.setValue(this.recipeTime.making.id);
+            this.recipeForm.formGroup.get('recipeTime.pause.id')?.setValue(this.recipeTime.pause.id);
+            this.recipeForm.formGroup.get('recipeTime.cooking.id')?.setValue(this.recipeTime.cooking.id);
+          }
 
           if(this.recipeTime.pause && this.recipeTime.pause.hours > 0 || this.recipeTime.pause.minutes > 0) {
             this.isPause = true;
@@ -265,7 +273,6 @@ export class CreateEditRecipeFormComponent implements OnInit {
     const detailsGroup = new FormGroup(newDetail);
 
     if(detailName === 'ingredientDetail') {
-      console.log(detailsGroup.value)
       const ingredientValue = detailsGroup.value['ingredient'].trim().toLowerCase();
       detailsGroup.patchValue({
         ingredient: detailsGroup.value['ingredient'].toLowerCase().charAt(0).toUpperCase() + detailsGroup.value['ingredient'].slice(1),
@@ -367,6 +374,9 @@ export class CreateEditRecipeFormComponent implements OnInit {
 
     // servingNumber
     const servingNumber = formGroup.get('servingNumber') as FormGroup;
+    if(this.updateRecipe) {
+      formData.append('servingNumber.id', servingNumber.get('id')?.value);
+    }
     formData.append('servingNumber.number', servingNumber.get('number')?.value);
     formData.append('servingNumber.type', servingNumber.get('type')?.value);
 
@@ -374,6 +384,9 @@ export class CreateEditRecipeFormComponent implements OnInit {
     const recipeTime = formGroup.get('recipeTime') as FormGroup;
     ['making', 'cooking', 'pause'].forEach(section => {
       const timeGroup = recipeTime.get(section) as FormGroup;
+      if(this.updateRecipe) {
+        formData.append(`recipeTime.${section}.id`, timeGroup.get('id')?.value);
+      }
       formData.append(`recipeTime.${section}.type`, timeGroup.get('type')?.value);
       formData.append(`recipeTime.${section}.hours`, timeGroup.get('hours')?.value || '0');
       formData.append(`recipeTime.${section}.minutes`, timeGroup.get('minutes')?.value || '0');
@@ -410,18 +423,12 @@ export class CreateEditRecipeFormComponent implements OnInit {
 
     const formData = this.buildFormDataFormGroup(this.recipeForm.formGroup, this.selectedImage);
 
-    /*for (const pair of formData.entries()) {
-      console.log(`${pair[0]}:`, pair[1]);
-    }*/
-
     if(this.updateRecipe) {
-      console.log('CREEE UNE NOUVELLE RECETTE')
       this.recipesApiService.updateRecipe(this.recipeDataId, formData).subscribe({
         next: () => window.location.reload(),
         error: (err) => console.log('Err Front update recipe', err)
       });
     } else {
-      console.log('create')
       this.recipesApiService.createRecipe(formData).subscribe({
         next: () => window.location.reload(),
         error: (err) => console.log('Err Front create recipe', err)

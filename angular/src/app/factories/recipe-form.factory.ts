@@ -14,6 +14,7 @@ export class RecipeFormFactory {
       cuisineType: new FormControl<string>('', Validators.required),
       cookingType: new FormControl<string>('', Validators.required),
       servingNumber: new FormGroup({
+        id: new FormControl<number>(0),
         number: new FormControl<string>('', Validators.required),
         type: new FormControl<string>('', Validators.required),
       }),
@@ -21,16 +22,19 @@ export class RecipeFormFactory {
 
       recipeTime: new FormGroup({
         making: new FormGroup({
+          id: new FormControl<number>(0),
           type: new FormControl<string>('making'),
           hours: new FormControl<string>('', Validators.required),
           minutes: new FormControl<string>('', Validators.required),
         }),
         cooking: new FormGroup({
+          id: new FormControl<number>(0),
           type: new FormControl<string>('cooking'),
           hours: new FormControl<string>('0'),
           minutes: new FormControl<string>('0'),
         }),
         pause: new FormGroup({
+          id: new FormControl<number>(0),
           type: new FormControl<string>('pause'),
           hours: new FormControl<string>('0'),
           minutes: new FormControl<string>('0'),

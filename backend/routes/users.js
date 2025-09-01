@@ -54,12 +54,12 @@ exports.createUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
     const userId = req.params.id;
-    const { username, roleId, email, password } = req.body;
+    const { username, role, email, password } = req.body;
     let imageName = req?.file?.filename;
 
     console.log(req.body);
 
-    if(!username || !email || !password) {
+    if(!username || !email || !role) {
         return res.status(400).json({ error: "Le nom, le mail et le mot de passe sont requis" });
     }
 
@@ -74,11 +74,11 @@ exports.updateUser = async (req, res) => {
         });
     }
 
-    if(roleId) {
+    if(password) {
         const userSql = 'UPDATE User SET username = ?, roleId = ?, email = ?, password = ? WHERE id = ?';
         const pwdHash = await bcrypt.hash(password, 10);
 
-        const [result] = await db.query(userSql, [username, roleId, email, pwdHash, userId], (err, result) => {
+        const [result] = await db.query(userSql, [username, role, email, pwdHash, userId], (err, result) => {
             if (err) {
                 return res.status(500).json({ error: 'User update error :', err });
             } else {
@@ -88,10 +88,9 @@ exports.updateUser = async (req, res) => {
 
         return res.json({ message: 'User : ' + result });
     } else {
-        const userSql = 'UPDATE User SET username = ?, email = ?, password = ? WHERE id = ?';
-        const pwdHash = await bcrypt.hash(password, 10);
+        const userSql = 'UPDATE User SET username = ?, roleId = ?, email = ? WHERE id = ?';
 
-        const [result] = await db.query(userSql, [username, email, pwdHash, userId], (err, result) => {
+        const [result] = await db.query(userSql, [username, role, email, userId], (err, result) => {
             if (err) {
                 return res.status(500).json({ error: 'User update error :', err });
             } else {

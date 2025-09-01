@@ -11,19 +11,11 @@ import {HeaderProfileComponent} from '../../layout/header-profile/header-profile
 @Component({
   selector: 'app-profile-recipes-page',
   imports: [
-    RouterLink,
-    RouterLinkActive,
     MyfavoritesMyrecipesComponent,
-    ProfileIconComponent,
-    HeartIconComponent,
-    RecipeIconComponent,
-    AsyncPipe,
     HeaderProfileComponent
   ],
   templateUrl: './profile-recipes-page.component.html',
   styleUrl: './profile-recipes-page.component.scss'
 })
 export class ProfileRecipesPageComponent {
-  accountAccess: IsLoggedInService = inject(IsLoggedInService);
-  userLoggedIn = this.accountAccess.isLoggedIn();
 }

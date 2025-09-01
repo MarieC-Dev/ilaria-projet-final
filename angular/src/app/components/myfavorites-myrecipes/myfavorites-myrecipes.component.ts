@@ -31,8 +31,9 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
   isFavorites = input.required<boolean>();
   favoritesArray = input<RecipeList>([]);
   isRecipes = input.required<boolean>();
-  recipesArray = input<Array<any>>([]);
   showPopUp = signal(false);
+  userRecipes = signal<any[]>([]);
+  selectedRecipeIdToDelete = signal(-1);
 
   userId!: number;
   userData!: any[];
@@ -69,8 +70,15 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
     });
 
     this.recipeApi.getAllRecipes().pipe(
-      switchMap((recipe) => {
-        this.recipesListApi = recipe;
+      switchMap((allRecipe) => {
+        this.recipesListApi = allRecipe;
+        const userRecipeArray: any[] = [];
+        this.recipesListApi.map((recipe) => {
+          if(this.userId === recipe.authorId) {
+            userRecipeArray.push(recipe);
+          }
+        });
+        this.userRecipes.set(userRecipeArray);
         return this.commentApi.getAllComments();
       })
     ).subscribe((comment) => {
@@ -90,27 +98,15 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
     return favoriteRecipes.flat();
   }
 
-  getUserRecipes() {
-    const userRecipes: any = [];
-
-    this.recipesListApi.map((recipe) => {
-      if(this.userId === recipe.authorId) {
-        userRecipes.push(recipe);
-      }
-    });
-
-    return userRecipes;
-  }
-
   deleteUserRecipe(id: number): any {
-    this.recipeApi.deteteRecipe(id).subscribe({
-      next: (result) => {
-        const resultId = this.recipesListApi.findIndex((recipe) => recipe.id === id);
-        this.recipesListApi.splice(resultId, 1);
-        console.log('Front Recipe has been deleted', result)
-      },
-      error: (err) => console.log('Front delete recipe error : ', err)
-    })
+    return this.recipeApi.deteteRecipe(id).subscribe((result) => {
+      /*const resultId = this.recipesListApi.findIndex((recipe) => recipe.id === id);
+      this.userRecipes.splice(resultId, 1);*/
+      this.userRecipes.update(recipes =>
+        recipes.filter(recipe => recipe.id !== id)
+      );
+      console.log('Front Recipe has been deleted', result);
+    });
   }
 
   getRecipeComments(recipeId: number) {
@@ -123,8 +119,9 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
     return this.average.getRecipeAverage(recipeId, this.getRecipeComments(recipeId));
   }
 
-  showPopUpTrue() {
+  showPopUpTrue(id: number) {
     this.showPopUp.set(true);
+    this.selectedRecipeIdToDelete.set(id);
     return this.showPopUp();
   }
 

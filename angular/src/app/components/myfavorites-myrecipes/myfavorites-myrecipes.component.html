@@ -39,7 +39,7 @@
         </thead>
 
         <tbody>
-            @for (recipe of getUserRecipes(); track recipe.id) {
+            @for (recipe of userRecipes(); track recipe.id) {
                 <tr>
                     <td>{{ recipe.id }}</td>
                     <td class="myrecipeName">
@@ -59,14 +59,14 @@
                                 <app-modify-icon />
                             </a>
                         </button>
-                        <button type="button" class="deleteRecipe" (click)="showPopUpTrue()">
+                        <button type="button" class="deleteRecipe" (click)="showPopUpTrue(recipe.id)">
                             <app-delete-icon />
                         </button>
 
                         <app-pop-up
                             [isShow]="showPopUp()"
                             labelName="la recette"
-                            (deleteFunction)="deleteUserRecipe(recipe.id)"
+                            (deleteFunction)="deleteUserRecipe(selectedRecipeIdToDelete())"
                             (cancelFunction)="showPopUpFalse()"
                         />
                     </td>

@@ -3,7 +3,8 @@
 
 app-recipe-item {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .recipeItem {
@@ -141,3 +142,36 @@ app-recipe-item {
     }
 }
 
+.adminRecipesButtons {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem;
+    margin: 1rem 0;
+    background-color: $mediumGrey;
+    border-radius: .5rem .5rem 1rem 1rem;
+
+
+    button.adminEditRecipe {
+        padding: .5rem 1.5rem;
+        background-color: white;
+        border: 2px solid white;
+        border-radius: 2rem;
+
+        &:hover {
+            background-color: transparent;
+            color: white;
+        }
+    }
+
+    svg {
+        width: 32px;
+        height: 40px;
+        fill: white;
+
+        &:hover {
+            fill: $firstColor;
+        }
+    }
+}

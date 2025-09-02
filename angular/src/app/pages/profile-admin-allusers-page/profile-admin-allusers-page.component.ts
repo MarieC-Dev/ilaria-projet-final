@@ -24,7 +24,7 @@ export class ProfileAdminAllusersPageComponent implements OnInit {
   usersList = signal<any[]>([]);
   selectedUserIdToDelete = signal<number>(-1);
 
-  showPopUp = signal(false)
+  showPopUp = signal(false);
 
     constructor(
       private usersApi: UsersApiService,

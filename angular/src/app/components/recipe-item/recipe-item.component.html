@@ -34,3 +34,19 @@
     </div>
 </a>
 
+<div *ngIf="showRecipesAdmin" class="adminRecipesButtons">
+    <button [routerLink]="[id + '/' + slugify.slugifyString(name), 'modifier']"
+        class="adminEditRecipe"
+    >Modifier</button>
+    <button (click)=deleteRecipe()>
+        <app-delete-icon />
+    </button>
+
+    <app-pop-up
+        [isShow]="showPopUp"
+        labelName="la recette"
+        (deleteFunction)="deleteRecipe()"
+        (cancelFunction)="showPopUpFalse()"
+    />
+</div>
+

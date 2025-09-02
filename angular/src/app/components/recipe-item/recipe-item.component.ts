@@ -4,20 +4,23 @@ import { FavoriteApiService } from '../../services/favorite-api.service';
 import { RouterLink } from '@angular/router';
 import { CommentApiService } from '../../services/comment-api.service';
 import { RecipeAverageService } from '../../services/recipe-average.service';
-import { JsonPipe } from '@angular/common';
+import {JsonPipe, NgIf} from '@angular/common';
 import { HeartBorderIconComponent } from '../icons/heart-border-icon/heart-border-icon.component';
 import { IsLoggedInService } from '../../services/isLoggedIn.service';
 import { switchMap } from 'rxjs';
 import { SlugifyForRoutageService } from '../../services/slugify-for-routage.service';
+import {DeleteIconComponent} from '../icons/delete-icon/delete-icon.component';
+import {PopUpComponent} from '../pop-up/pop-up.component';
 
 @Component({
   selector: 'app-recipe-item',
   standalone: true,
-  imports: [HeartIconComponent, RouterLink, JsonPipe, HeartBorderIconComponent],
+  imports: [HeartIconComponent, RouterLink, JsonPipe, HeartBorderIconComponent, DeleteIconComponent, NgIf, PopUpComponent],
   templateUrl: './recipe-item.component.html',
   styleUrl: '../../../styles.scss'
 })
 export class RecipeItemComponent implements OnInit, OnChanges {
+  @Input() showRecipesAdmin: boolean = false;
   @Input() id!: number;
   @Input() picture!: string;
   @Input() name!: string;
@@ -27,8 +30,13 @@ export class RecipeItemComponent implements OnInit, OnChanges {
   @Input() recipeId!: number;
   @Input() userId!: number;
   @Input() isFavorite: boolean = false;
+  @Input() showPopUp: boolean = false;
+
   @Output() favoriteAdded = new EventEmitter<number>();
   @Output() favoriteDeleted = new EventEmitter<number>();
+
+  @Output() adminDeleteRecipe = new EventEmitter<any>();
+  @Output() adminShowPopUp = new EventEmitter<boolean>();
 
   localIsFavorite: boolean = false;
 
@@ -54,5 +62,18 @@ export class RecipeItemComponent implements OnInit, OnChanges {
   deleteFavorite() {
     this.favoriteDeleted.emit();
     this.localIsFavorite = true;
+  }
+
+  deleteRecipe() {
+    return this.adminDeleteRecipe.emit();
+  }
+
+  showPopUpBool() {
+    return this.adminShowPopUp.emit();
+  }
+
+  showPopUpFalse() {
+    this.showPopUp = false;
+    return this.showPopUp;
   }
 }

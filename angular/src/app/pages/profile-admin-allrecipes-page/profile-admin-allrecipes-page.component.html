@@ -6,61 +6,41 @@
     <section class="profileSection profileSection__adminAllRecipes">
         <h2>Toutes les recettes du site</h2>
 
-        <table class="myRecipesTable adminAllRecipesTable">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom de la recette</th>
-                <th>Difficulté</th>
-                <th>Temps total</th>
-                <th>Date de création</th>
-                <th class="userButtons"></th>
-            </tr>
-            </thead>
+        <div class="recipesContainer">
+            <div class="recipesList">
+                @for (recipe of getAllRecipes(); track $index) {
+                    <app-recipe-item
+                        [id]="recipe.id"
+                        [picture]="recipe.imageName"
+                        [name]="recipe.name"
+                        [average]="getRecipeAverage(recipe.id)"
+                        [numberOfVotes]="getNumberOfComments(recipe.id)"
+                        [authorName]="getUser()[$index].username"
+                        [recipeId]="recipe.id"
+                        [userId]="recipe.authorId"
+                        [isFavorite]="favoritesMap()[recipe.id] ?? false"
+                        (favoriteAdded)="addFavorite(recipe.id)"
+                        (favoriteDeleted)="deleteFavorite(recipe.id)"
+                        [showRecipesAdmin]="true"
+                        (adminDeleteRecipe)="deleteRecipe(selectedRecipeIdToDelete()!)"
+                        (adminShowPopUp)="showPopUp()"
+                        [showPopUp]="showPopUp()"
+                    />
 
-            <tbody>
-                <!--@for (user of usersList(); track user.id) {
-                    <tr>
-                        <td>{{ user.id }}</td>
-                        <td>
-                            {{ user.username }}
-                        </td>
-                        <td>
-                            {{ user.email }}
-                        </td>
-
-                        <td>
-                            @if (user.roleId === 3) {
-                                User
-                            } @else {
-                                Admin
-                            }
-                        </td>
-
-                        <td>{{ user.created }}</td>
-
-                        <td>
-                            <button
-                                type="button"
-                                class="btn-bg-darkGrey modifyRecipe"
-                                [routerLink]="user.id"
-                            >Modifier</button>
-                            <button type="button" class="deleteRecipe" (click)="showPopUpTrue()">
-                                <app-delete-icon />
-                            </button>
-
-                            <app-pop-up
-                                [isShow]="showPopUp()"
-                                labelName="l'utilisateur"
-                                (deleteFunction)="deleteUser(user.id)"
-                                (cancelFunction)="showPopUpFalse()"
-                            />
-                            &lt;!&ndash;(deleteFunction)="deleteUserRecipe(recipe.id)"
-                            (cancelFunction)="showPopUpFalse()"&ndash;&gt;
-                        </td>
-                    </tr>
-                }-->
-            </tbody>
-        </table>
+                    <!--<app-pop-up
+                        [isShow]="showPopUp"
+                        labelName="la recette"
+                        (deleteFunction)="deleteRecipe()"
+                        (cancelFunction)="showPopUpFalse()"
+                    />
+                    <app-pop-up
+                        [isShow]="showPopUp()"
+                        labelName="l'utilisateur"
+                        (deleteFunction)="deleteUser(selectedUserIdToDelete())"
+                        (cancelFunction)="showPopUpFalse()"
+                    />-->
+                }
+            </div>
+        </div>
     </section>
 </div>

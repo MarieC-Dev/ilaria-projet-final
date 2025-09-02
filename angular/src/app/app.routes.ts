@@ -66,7 +66,7 @@ export const routes: Routes = [
     data: { breadcrumb: 'Admin' },
     children: [
       {
-        path: 'mes-recettes/:recipeId/:slug/modifier',
+        path: 'recettes/:recipeId/:slug/modifier',
         component: EditRecipePageComponent,
         data: { breadcrumb: 'Mes recettes > :slug > Modifier' }
       },

@@ -27,6 +27,8 @@ exports.createRecipe = async (req, res) => {
 
     let imageName = req.file.filename;
 
+    console.log(req.body);
+
     const servingNumber = {
         number: req.body['servingNumber.number'],
         type: req.body['servingNumber.type'],
@@ -49,6 +51,18 @@ exports.createRecipe = async (req, res) => {
             minutes: req.body['recipeTime.cooking.minutes'],
         },
     };
+
+    const recipeTags = {
+        cookingTag: {
+            tag: req.body['tagsList.cookingTag.tag'],
+        },
+        cuisineTag: {
+            tag: req.body['tagsList.cuisineTag.tag'],
+        },
+        difficultyTag: {
+            tag: req.body['tagsList.difficultyTag.tag'],
+        },
+    }
 
     const result = [];
 
@@ -94,15 +108,15 @@ exports.createRecipe = async (req, res) => {
             recipeTime.cooking.type, Number(recipeTime.cooking.hours), Number(recipeTime.cooking.minutes), recipeDataId
         ];
 
-        const [recipeTimeMaking] = await db.query(
+        await db.query(
             'INSERT INTO TimeTable (type, hours, minutes, recipeId) VALUES (?, ?, ?, ?)',
             recipeTimeMakingQueries
         );
-        const [recipeTimePause] = await db.query(
+        await db.query(
             'INSERT INTO TimeTable (type, hours, minutes, recipeId) VALUES (?, ?, ?, ?)',
             recipeTimePauseQueries
         );
-        const [recipeTimeCooking] = await db.query(
+        await db.query(
             'INSERT INTO TimeTable (type, hours, minutes, recipeId) VALUES (?, ?, ?, ?)',
             recipeTimeCookingQueries
         );
@@ -155,7 +169,22 @@ exports.createRecipe = async (req, res) => {
         const stepsListId = stepsListResult.insertId;
         /* ===== */
 
-        /* 5. RESULT - creation new recipe */
+        /* 5. TAGS LIST */
+        await db.query(
+            'INSERT INTO TagList (tag, recipeId) VALUES (?, ?)',
+            [recipeTags.cookingTag.tag, recipeDataId]
+        );
+        await db.query(
+            'INSERT INTO TagList (tag, recipeId) VALUES (?, ?)',
+            [recipeTags.cuisineTag.tag, recipeDataId]
+        );
+        await db.query(
+            'INSERT INTO TagList (tag, recipeId) VALUES (?, ?)',
+            [recipeTags.difficultyTag.tag, recipeDataId]
+        );
+        /* ===== */
+
+        /* 6. RESULT - creation new recipe */
         return res.status(201).json({
             msg: 'The recipe has created !',
             servingNumberId,
@@ -203,6 +232,21 @@ exports.updateRecipe = async (req, res) => {
             minutes: req.body['recipeTime.cooking.minutes'],
         },
     };
+
+    const recipeTags = {
+        cookingTag: {
+            id: req.body['tagsList.cookingTag.id'],
+            tag: req.body['tagsList.cookingTag.tag'],
+        },
+        cuisineTag: {
+            id: req.body['tagsList.cuisineTag.id'],
+            tag: req.body['tagsList.cuisineTag.tag'],
+        },
+        difficultyTag: {
+            id: req.body['tagsList.difficultyTag.id'],
+            tag: req.body['tagsList.difficultyTag.tag'],
+        },
+    }
 
     const result = [];
 
@@ -312,7 +356,22 @@ exports.updateRecipe = async (req, res) => {
         const stepsListId = stepsListResult.insertId;
         /* ===== */
 
-        /* 5. RESULT - update new recipe */
+        /* 5. TAGS LIST */
+        await db.query(
+            'UPDATE TagList SET tag = ? WHERE id = ?',
+            [recipeTags.cookingTag.tag, recipeTags.cookingTag.id]
+        );
+        await db.query(
+            'UPDATE TagList SET tag = ? WHERE id = ?',
+            [recipeTags.cuisineTag.tag, recipeTags.cuisineTag.id]
+        );
+        await db.query(
+            'UPDATE TagList SET tag = ? WHERE id = ?',
+            [recipeTags.difficultyTag.tag, recipeTags.difficultyTag.id]
+        );
+        /* ===== */
+
+        /* 6. RESULT - creation new recipe */
         return res.status(201).json({
             msg: 'The recipe has updated !',
             recipeDataId,

@@ -43,7 +43,7 @@ export const CUISINE_TYPE = [
         title: 'Nord américaine'
     }, {
         id: index++,
-        value: 'north-american',
+        value: 'south-american',
         title: 'Sud américaine'
     }, {
         id: index++,
@@ -53,5 +53,5 @@ export const CUISINE_TYPE = [
         id: index++,
         value: 'australian',
         title: 'Australienne'
-    }, 
+    },
 ]

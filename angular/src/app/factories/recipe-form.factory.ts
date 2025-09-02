@@ -10,7 +10,6 @@ export class RecipeFormFactory {
       name: new FormControl<string>('', [Validators.required, Validators.minLength(4)]),
       description: new FormControl<string>(''),
       imageName: new FormControl<string>('', Validators.required),
-      imageData: new FormControl(),
       cuisineType: new FormControl<string>('', Validators.required),
       cookingType: new FormControl<string>('', Validators.required),
       servingNumber: new FormGroup({
@@ -53,6 +52,22 @@ export class RecipeFormFactory {
         stepName: new FormControl<string>(''),
       }),
       stepsList: new FormArray([], [Validators.required, Validators.minLength(1)]),
+
+      tagsList: new FormGroup({
+        cookingTag: new FormGroup({
+          id: new FormControl<number>(0),
+          tag: new FormControl<string>('')
+        }),
+        cuisineTag: new FormGroup({
+          id: new FormControl<number>(0),
+          tag: new FormControl<string>('')
+        }),
+        difficultyTag: new FormGroup({
+          id: new FormControl<number>(0),
+          tag: new FormControl<string>('')
+        }),
+      }),
+
       authorId: new FormControl<number>(0, Validators.required),
       created: new FormControl<string>(''),
     });

@@ -20,6 +20,7 @@ const { getAllIngredients, getAllIngredientsList, getAllSteps, getAllStepsList, 
 const { getAllServingNumber, getOneServingNumber } = require('./routes/serving-data');
 const { getAllRecipeTime, getOneRecipeTime } = require('./routes/recipe-time');
 const { getAllUserComments, createComment, getCommentsByRecipeId} = require("./routes/comments");
+const {getAllTags} = require("./routes/tags");
 
 app.use(cors({
   origin: 'http://localhost:4200',
@@ -128,6 +129,9 @@ app.get('/serving-number/:id', getOneServingNumber);
 // RECIPE TIME
 app.get('/recipe-time', getAllRecipeTime);
 app.get('/recipe-time/:id', getOneRecipeTime);
+
+// RECIPE TAGS
+app.get('/tags', getAllTags);
 
 sessionStore.onReady().then(() => {
   console.log('✅ MySQLStore ready');

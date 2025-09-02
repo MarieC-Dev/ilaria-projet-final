@@ -355,7 +355,19 @@ export class CreateEditRecipeFormComponent implements OnInit {
     }
   }
 
-  buildFormDataFormGroup(formGroup: FormGroup, file: File| any): FormData {
+  buildFormDataFormGroup(formGroup: FormGroup, file: File | any): FormData {
+    this.recipeForm.formGroup.get('tagsList')?.patchValue({
+      cookingTag: {
+        tag: this.recipeForm.formGroup.get('cookingType')?.value
+      },
+      cuisineTag: {
+        tag: this.recipeForm.formGroup.get('cuisineType')?.value,
+      },
+      difficultyTag: {
+        tag: this.recipeForm.formGroup.get('difficulty')?.value
+      }
+    });
+
     const formData = new FormData();
 
     formData.append('name', formGroup.get('name')?.value);
@@ -406,6 +418,16 @@ export class CreateEditRecipeFormComponent implements OnInit {
       formData.append(`stepsList[${i}][stepName]`, group.get('stepName')?.value);
     });
 
+    // tagsList
+    const tagsList = formGroup.get('tagsList') as FormGroup;
+    ['cookingTag', 'cuisineTag', 'difficultyTag'].forEach(tagName => {
+      const timeGroup = tagsList.get(tagName) as FormGroup;
+      if(this.updateRecipe) {
+        formData.append(`tagsList.${tagName}.id`, timeGroup.get('id')?.value);
+      }
+      formData.append(`tagsList.${tagName}.tag`, timeGroup.get('tag')?.value);
+    });
+
     return formData;
   }
 
@@ -429,9 +451,9 @@ export class CreateEditRecipeFormComponent implements OnInit {
         error: (err) => console.log('Err Front update recipe', err)
       });
     } else {
-      this.recipesApiService.createRecipe(formData).subscribe({
-        next: () => window.location.reload(),
-        error: (err) => console.log('Err Front create recipe', err)
+      console.log(this.recipeForm.formGroup.value);
+      this.recipesApiService.createRecipe(formData).subscribe((result) => {
+        console.log({result}); // window.location.reload()
       });
     }
   }

@@ -349,6 +349,7 @@
                     </li>
                 </ul>
             }
+            <p *ngIf="ingredientsList.length === 0">Aucune ingrédient renseigné pour cette recette (min. 2 requise)</p>
         </div>
 
         <p class="formControlError"
@@ -417,6 +418,7 @@
                     </li>
                 </ul>
             }
+            <p *ngIf="stepsList.length === 0">Aucune étape renseigné pour cette recette (min. 2 requise)</p>
         </div>
 
         <p class="formControlError" *ngIf="arrayInvalidControl.includes('stepsList')">Renseignez au moins 2 étapes de la recette</p>

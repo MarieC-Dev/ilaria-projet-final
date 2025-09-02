@@ -12,6 +12,7 @@ import { UsersApiService } from '../../../services/users-api.service';
 import { IsLoggedInService } from '../../../services/isLoggedIn.service';
 import {RecipeAverageService} from '../../../services/recipe-average.service';
 import {switchMap} from 'rxjs';
+import {TagsListService} from '../../../services/tags-list.service';
 
 @Component({
   selector: 'app-recipe-details',
@@ -42,6 +43,7 @@ export class RecipeDetailsComponent implements OnInit {
     private commentApi: CommentApiService,
     private recipeAverage: RecipeAverageService,
     private usersApi: UsersApiService,
+    private tagsApi: TagsListService,
     protected recipeDetailService: RecipeDetailsService,
 
     private isLoggedInApi: IsLoggedInService
@@ -72,6 +74,13 @@ export class RecipeDetailsComponent implements OnInit {
       });
     });
 
+    this.tagsApi.getAllTags().subscribe({
+      next: (result) => {
+        this.recipeTags = result.filter((tag: any) => tag.recipeId === this.recipeId);
+      },
+      error: (err) => console.log(err)
+    });
+
     this.commentApi.getCommentsByRecipeId(this.recipeId).subscribe((result) => {
       this.commentsList = result.rows;
     })
@@ -88,10 +97,63 @@ export class RecipeDetailsComponent implements OnInit {
         this.userConnected = result;
       },
       error: (err) => console.log(err)
-    })
+    });
   }
 
   getRecipeAverage() {
     return this.recipeAverage.getRecipeAverage(Number(this.recipeId), this.commentsList)
+  }
+
+  tagsTranslation(tag: string) {
+    switch(tag) {
+      // Difficulté
+      case 'easy':
+        return 'Facile';
+      case 'intermediate':
+        return 'Intermédiaire';
+      case 'difficult':
+        return 'Difficile';
+
+      // Type de cuisson
+      case 'hot-plate':
+        return 'Plaque chauffante';
+      case 'stove':
+        return 'Four';
+      case 'air-fryer':
+        return 'Air fryer';
+      case 'barbecue':
+        return 'Barbecue';
+      case 'no-cooking':
+        return 'Sans cuisson';
+
+      // Type de cuisine
+      case 'french':
+        return 'Française';
+      case 'italian':
+        return 'Italienne';
+      case 'spanish':
+        return 'Espagnole';
+      case 'asiatic':
+        return 'Asiatique';
+      case 'indian':
+        return 'Indienne';
+      case 'european':
+        return 'Européenne';
+      case 'north-african':
+        return 'Nord-africaine';
+      case 'african':
+        return 'Africaine';
+      case 'grecian':
+        return 'Grecque';
+      case 'north-american':
+        return 'Nord-américaine';
+      case 'russian':
+        return 'Russe';
+      case 'australian':
+        return 'Australienne';
+
+      default:
+        return '?';
+    }
   }
 }

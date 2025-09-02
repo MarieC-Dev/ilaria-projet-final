@@ -4,7 +4,7 @@
 .homeRecipesSection {
     display: grid;
     grid-template-columns: max-content 1fr max-content;
-    grid-template-rows: repeat(2, max-content);
+    grid-template-rows: 54px max-content;
     padding: 0 3rem;
     margin-bottom: 6rem;
 

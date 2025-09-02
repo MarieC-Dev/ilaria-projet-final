@@ -111,30 +111,17 @@ create index recipeId
 create index stepId
     on StepsList (stepId);
 
-create table Tag
-(
-    id  int auto_increment
-        primary key,
-    tag varchar(100) not null
-);
-
 create table TagList
 (
     id       int auto_increment
         primary key,
+    tag    varchar(255) not null,
     recipeId int not null,
-    tagId    int not null,
-    constraint taglist_ibfk_1
-        foreign key (recipeId) references recipesite.RecipeData (id),
-    constraint taglist_ibfk_2
-        foreign key (tagId) references recipesite.Tag (id)
+    foreign key (recipeId) references recipesite.RecipeData (id)
 );
 
 create index recipeId
     on TagList (recipeId);
-
-create index tagId
-    on TagList (tagId);
 
 create table TimeTable
 (

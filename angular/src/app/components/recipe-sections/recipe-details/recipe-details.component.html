@@ -42,7 +42,7 @@
             <ul class="tagList">
                 <li *ngIf="!recipeTags">Il n'y a pas de tags pour cette recette</li>
                 @for (tag of recipeTags; track tag.id) {
-                    <li class="tag"> {{ tag.name }}</li>
+                    <li class="tag">{{ tagsTranslation(tag.tag) }}</li>
                 }
             </ul>
         </div>
@@ -104,8 +104,8 @@
 
         <ul class="tagList">
             <li *ngIf="!recipeTags">Il n'y a pas de tags pour cette recette</li>
-            @for (tag of recipeTags; track tag.id) {
-                <li class="tag"> {{ tag.name }}</li>
+            @for (tag of recipeTags; track $index) {
+                <li class="tag">{{ tag.tag }}</li>
             }
         </ul>
     </div>

@@ -12,6 +12,7 @@ import {UsersApiService} from '../../services/users-api.service';
 import {CommentApiService} from '../../services/comment-api.service';
 import {switchMap} from 'rxjs';
 import {PopUpComponent} from '../pop-up/pop-up.component';
+import {SlugifyForRoutageService} from '../../services/slugify-for-routage.service';
 
 @Component({
   selector: 'app-myfavorites-myrecipes',
@@ -48,7 +49,8 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
     private favoriteApi: FavoriteApiService,
     private recipeApi: RecipesApiService,
     private commentApi: CommentApiService,
-    private userApi: UsersApiService) {
+    private userApi: UsersApiService,
+    protected slugify: SlugifyForRoutageService) {
   }
 
   ngOnInit(): void {

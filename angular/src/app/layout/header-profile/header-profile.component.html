@@ -1,7 +1,7 @@
 <div class="profileLinksList">
     <a
         class="btn-bg-darkGrey btn-bg-darkGrey__profile"
-        [routerLink]="'/profil/' + userLoggedIn.user.id + '/mes-infos'"
+        [routerLink]="'/profil/' + userLoggedIn.user.id + '/' + userLoggedIn.user.username + '/mes-infos'"
         routerLinkActive="btn-bg-darkGrey__profile--active"
         ariaCurrentWhenActive="page">
         <app-profile-icon />
@@ -9,7 +9,7 @@
     </a>
     <a
         class="btn-bg-darkGrey btn-bg-darkGrey__profile"
-        [routerLink]="'/profil/' + userLoggedIn.user.id + '/mes-favoris'"
+        [routerLink]="'/profil/' + userLoggedIn.user.id + '/' + userLoggedIn.user.username + '/mes-favoris'"
         routerLinkActive="btn-bg-darkGrey__profile--active"
         ariaCurrentWhenActive="page">
         <app-heart-icon />
@@ -17,7 +17,7 @@
     </a>
     <a
         class="btn-bg-darkGrey btn-bg-darkGrey__profile"
-        [routerLink]="'/profil/' + userLoggedIn.user.id + '/mes-recettes'"
+        [routerLink]="'/profil/' + userLoggedIn.user.id + '/' + userLoggedIn.user.username + '/mes-recettes'"
         routerLinkActive="btn-bg-darkGrey__profile--active"
         ariaCurrentWhenActive="page">
         <app-recipe-icon />

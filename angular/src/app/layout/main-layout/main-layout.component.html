@@ -19,7 +19,7 @@
             @if (userIsLogged | async) {
                 <a
                     class="btn-bg-red"
-                    [routerLink]="'/profil/' + userData.id + '/mes-infos'"
+                    [routerLink]="'/profil/' + userData.id + '/' + userData.username + '/mes-infos'"
                     routerLinkActive="active"
                     ariaCurrentWhenActive="page">Mon profil</a>
 
@@ -49,6 +49,19 @@
     </header>
 
     <main>
+        <nav aria-label="breadcrumb" class="breadcrumb">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item" *ngFor="let breadcrumb of breadcrumbs; let last = last">
+                    <ng-container *ngIf="!last">
+                        <a [routerLink]="breadcrumb.url">{{ breadcrumb.label }}</a>
+                    </ng-container>
+                    <ng-container *ngIf="last">
+                        <span>{{ breadcrumb.label }}</span>
+                    </ng-container>
+                </li>
+            </ul>
+        </nav>
+
         <router-outlet></router-outlet>
     </main>
 

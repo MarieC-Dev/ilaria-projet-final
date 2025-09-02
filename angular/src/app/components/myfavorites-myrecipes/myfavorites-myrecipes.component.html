@@ -55,7 +55,7 @@
                     </td>
                     <td class="myrecipeButtons">
                         <button type="button" class="modifyRecipe">
-                            <a [routerLink]="[recipe.id, 'modifier']">
+                            <a [routerLink]="[recipe.id + '/' + slugify.slugifyString(recipe.name), 'modifier']">
                                 <app-modify-icon />
                             </a>
                         </button>

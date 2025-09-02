@@ -1,13 +1,27 @@
 import {Component, OnInit, signal, ViewChild} from '@angular/core';
-import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+  RouterModule,
+  RouterOutlet
+} from '@angular/router';
 import { SocialNetworksComponent } from '../../components/social-networks/social-networks.component';
 import { commonSocial } from '../../lists/social-networks-list';
 import { BurgerMenuDirective } from '../../directives/burger-menu.directive';
 import { IsLoggedInService } from '../../services/isLoggedIn.service';
-import { AsyncPipe } from '@angular/common';
+import {AsyncPipe, CommonModule} from '@angular/common';
 import {UsersApiService} from '../../services/users-api.service';
 import {AuthStateService} from '../../services/auth-state.service';
-import {Observable} from 'rxjs';
+import {filter, Observable} from 'rxjs';
+import {SlugifyForRoutageService} from '../../services/slugify-for-routage.service';
+
+interface Breadcrumb {
+  label: string;
+  url: string;
+}
 
 @Component({
   selector: 'app-main-layout',
@@ -17,7 +31,8 @@ import {Observable} from 'rxjs';
     RouterLinkActive,
     SocialNetworksComponent,
     BurgerMenuDirective,
-    AsyncPipe
+    AsyncPipe,
+    CommonModule, RouterModule,
   ],
   templateUrl: './main-layout.component.html',
   styleUrl: '../../../styles.scss'
@@ -26,7 +41,8 @@ export class MainLayoutComponent implements OnInit {
   @ViewChild(BurgerMenuDirective) appBurgerMenu!: BurgerMenuDirective;
   socialNetworksList = signal(commonSocial);
   userIsLogged!: Observable<boolean>;
-  userData!: {id?: number, username?: string, email?: string, pwd?: string, roleId?: number};
+  userData!: {id?: number, username: string, email?: string, pwd?: string, roleId?: number};
+  breadcrumbs: Breadcrumb[] = [];
 
   index: number = 0;
   headerNav = [
@@ -48,7 +64,10 @@ export class MainLayoutComponent implements OnInit {
   constructor(
     private userApi: UsersApiService,
     private authState: AuthStateService,
-    private loggedIn: IsLoggedInService
+    private loggedIn: IsLoggedInService,
+    private router: Router,
+    private route: ActivatedRoute,
+    protected slugify: SlugifyForRoutageService
   ) { }
 
   ngOnInit(): void {
@@ -57,6 +76,43 @@ export class MainLayoutComponent implements OnInit {
     this.loggedIn.isLoggedIn().subscribe((res) => {
       this.userData = res.user;
     });
+
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.breadcrumbs = this.buildBreadcrumb(this.route.root);
+      });
+  }
+
+  private buildBreadcrumb(route: ActivatedRoute, url: string = '', breadcrumbs: Breadcrumb[] = []): Breadcrumb[] {
+    const children = route.children;
+
+    if (children.length === 0) return breadcrumbs;
+
+    for (const child of children) {
+      const routeURL = child.snapshot.url.map(segment => segment.path).join('/');
+
+      if (routeURL !== '') {
+        url += `/${routeURL}`;
+
+        // Remplace les :param par les vraies valeurs
+        let label = child.snapshot.data['breadcrumb'] || routeURL;
+
+        // Accès aux paramètres de la route
+        const routeParams = child.snapshot.params;
+
+        Object.keys(routeParams).forEach(paramKey => {
+          label = label.replace(`:${paramKey}`,
+          routeParams[paramKey].replace(/-/g, ' ').replace(/\b\w/g, (char: any) => char.toUpperCase()));
+        });
+
+        breadcrumbs.push({ label, url });
+      }
+
+      return this.buildBreadcrumb(child, url, breadcrumbs);
+    }
+
+    return breadcrumbs;
   }
 
   logout() {

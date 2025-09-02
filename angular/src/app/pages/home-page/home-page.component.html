@@ -22,6 +22,9 @@
                         [authorName]="getUser()[$index].username"
                         [recipeId]="recipe.id"
                         [userId]="recipe.authorId"
+                        [isFavorite]="favoritesMap()[recipe.id] ?? false"
+                        (favoriteAdded)="addFavorite(recipe.id)"
+                        (favoriteDeleted)="deleteFavorite(recipe.id)"
                     />
                 }
             </div>

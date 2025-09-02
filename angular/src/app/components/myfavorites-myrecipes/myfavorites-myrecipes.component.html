@@ -3,7 +3,7 @@
 
     <!-- @If FAVORITES : -->
     <div *ngIf="isFavorites()" class="myFavoritesDiv">
-        <p class="withoutFavorites" *ngIf="getUserFavorites.length === 0">
+        <p class="withoutFavorites" *ngIf="favoritesList.length === 0">
             Vous n'avez aucune recette dans vos favoris
         </p>
         <div class="myFavoritesItems">
@@ -17,6 +17,9 @@
                     [authorName]="username"
                     [recipeId]="recipe.id"
                     [userId]="recipe.authorId"
+                    [isFavorite]="favoritesMap()[recipe.id] ?? false"
+                    (favoriteAdded)="addFavorite(recipe.id)"
+                    (favoriteDeleted)="deleteFavorite(recipe.id)"
                 />
             }
         </div>

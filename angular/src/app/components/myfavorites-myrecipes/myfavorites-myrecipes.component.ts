@@ -1,5 +1,5 @@
 import { CommonModule, JsonPipe } from '@angular/common';
-import {Component, inject, input, OnInit, signal} from '@angular/core';
+import {Component, computed, inject, input, OnInit, signal} from '@angular/core';
 import { RecipeItemComponent } from '../recipe-item/recipe-item.component';
 import { RecipeAverageService } from '../../services/recipe-average.service';
 import { RecipeList } from '../../models/recipe.model';
@@ -13,6 +13,7 @@ import {CommentApiService} from '../../services/comment-api.service';
 import {switchMap} from 'rxjs';
 import {PopUpComponent} from '../pop-up/pop-up.component';
 import {SlugifyForRoutageService} from '../../services/slugify-for-routage.service';
+import {IsLoggedInService} from '../../services/isLoggedIn.service';
 
 @Component({
   selector: 'app-myfavorites-myrecipes',
@@ -43,6 +44,19 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
   recipesListApi: any[] = [];
   recipesComments!: any[];
   average = inject(RecipeAverageService);
+  userLoggedInData!: any;
+
+  favorites = signal<any[]>([]);
+
+  favoritesMap = computed(() => {
+    const map: { [recipeId: number]: boolean } = {};
+    this.favorites().forEach(fav => {
+      if (fav.userId === this.userLoggedInData?.id) {
+        map[fav.recipeId] = true;
+      }
+    });
+    return map;
+  });
 
   constructor(
     private route: ActivatedRoute,
@@ -50,11 +64,24 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
     private recipeApi: RecipesApiService,
     private commentApi: CommentApiService,
     private userApi: UsersApiService,
+    private userLoggedIn: IsLoggedInService,
     protected slugify: SlugifyForRoutageService) {
   }
 
   ngOnInit(): void {
     this.userId = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.userLoggedIn.isLoggedIn().pipe(
+      switchMap((res1) => {
+        this.userLoggedInData = res1.user;
+        return this.favoriteApi.getAllFavorites();
+      }),
+    ).subscribe({
+      next: (res3) => {
+        this.favorites.set(res3.rows);
+      },
+      error: (err) => console.log(err),
+    });
 
     this.userApi.getOneUser(this.userId).pipe(
       switchMap((user) => {
@@ -67,6 +94,16 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
       next: (result) => {
         const userFavorites = result.rows.filter((favorite: any) => favorite.userId === this.userId);
         this.favoritesList = userFavorites;
+
+        const favoriteRecipes: any[] = [];
+        const favoriteIds = this.favoritesList.filter((item) => item.userId === this.userId);
+
+        favoriteIds.map((fav) => {
+          const recipes = this.recipesListApi.filter((recipe) => recipe.id === fav.recipeId);
+          favoriteRecipes.push(recipes);
+        });
+        this.favoritesList = favoriteIds;
+        console.log(this.favoritesList);
       },
       error: (err) => console.log('get favotites list error ' + err)
     });
@@ -102,8 +139,6 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
 
   deleteUserRecipe(id: number): any {
     return this.recipeApi.deteteRecipe(id).subscribe((result) => {
-      /*const resultId = this.recipesListApi.findIndex((recipe) => recipe.id === id);
-      this.userRecipes.splice(resultId, 1);*/
       this.userRecipes.update(recipes =>
         recipes.filter(recipe => recipe.id !== id)
       );
@@ -130,6 +165,41 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
   showPopUpFalse() {
     this.showPopUp.set(false);
     return this.showPopUp();
+  }
+
+  addFavorite(recipeId: number): void {
+    const favoriteData = {
+      userId: this.userLoggedInData.id,
+      recipeId: recipeId
+    };
+
+    this.favoriteApi.addFavorite(favoriteData).subscribe({
+      next: (result) => {
+        this.favorites.update(current => [...current, result.rows]);
+      },
+      error: (err) => {
+        console.error('POST favorite error', err);
+      }
+    });
+  }
+
+  deleteFavorite(recipeId: number): void {
+    const fav = this.favorites().find(
+      (f) =>
+        f.userId === this.userLoggedInData.id &&
+        f.recipeId === recipeId
+    );
+
+    if (!fav) return;
+
+    this.favoriteApi.deleteFavorite(fav.id).subscribe({
+      next: () => {
+        this.favorites.update(current => current.filter(f => f.id !== fav.id));
+      },
+      error: (err) => {
+        console.error('DELETE favorite error', err);
+      }
+    });
   }
 
 }

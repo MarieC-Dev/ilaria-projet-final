@@ -8,7 +8,7 @@
     </button>
 </div>
 
-<a [routerLink]="'/recettes/' + id()">
+<a [routerLink]="'/recettes/' + id() + '/' + slugify.slugifyString(name())">
     <div class="recipeItem" [id]="id()">
         <div>
             <div class="wrapperImg">

@@ -60,7 +60,8 @@ export const routes: Routes = [
     canActivate: [pagesAccessGuard]
   },
 
-  { path: 'recettes/:id', component: RecipeDetailsPage },
+  { path: 'recettes/:id/:slug', component: RecipeDetailsPage },
+  /*{ path: 'recettes/:id', component: RecipeDetailsPage },*/
   { path: 'accueil', component: HomePageComponent },
   { path: 'recettes', component: RecipeDetailsPage },
   { path: 'connexion', component: SigninPageComponent },

@@ -8,6 +8,7 @@ import {JsonPipe} from '@angular/common';
 import {HeartBorderIconComponent} from '../icons/heart-border-icon/heart-border-icon.component';
 import {IsLoggedInService} from '../../services/isLoggedIn.service';
 import {switchMap} from 'rxjs';
+import {SlugifyForRoutageService} from '../../services/slugify-for-routage.service';
 
 @Component({
   selector: 'app-recipe-item',
@@ -18,7 +19,7 @@ import {switchMap} from 'rxjs';
 export class RecipeItemComponent implements OnInit {
   id = input<number>();
   picture = input<string>();
-  name = input<string>();
+  name = input<string>('');
   average = input<any>();
   numberOfVotes = input<number|undefined>();
   authorName = input<string>();
@@ -36,11 +37,24 @@ export class RecipeItemComponent implements OnInit {
     private commentsApi: CommentApiService,
     private favoriteApi: FavoriteApiService,
     private recipeAverage: RecipeAverageService,
-    private userLoggedIn: IsLoggedInService
+    private userLoggedIn: IsLoggedInService,
+    protected slugify: SlugifyForRoutageService
   ) { }
 
   ngOnInit(): void {
     this.userLoggedIn.isLoggedIn().pipe(
+      switchMap((res1) => {
+        this.userLoggedInData = res1.user;
+        return this.commentsApi.getCommentsByRecipeId(Number(this.recipeId()))
+      }),
+    ).subscribe((res2) => {
+      this.recipeComments = res2.rows;
+      this.noteAverage = this.recipeAverage.getRecipeAverage(
+        Number(this.recipeId()), res2.rows
+      );
+      this.numberOfNote = res2.rows.length;
+    });
+    /*this.userLoggedIn.isLoggedIn().pipe(
       switchMap((res1) => {
         this.userLoggedInData = res1.user;
         return this.commentsApi.getCommentsByRecipeId(Number(this.recipeId()))
@@ -64,7 +78,7 @@ export class RecipeItemComponent implements OnInit {
       );
 
       this.isFavorite.set(findUserFavorite);
-    })
+    });*/
   }
 
   addFavorite() {
@@ -73,7 +87,7 @@ export class RecipeItemComponent implements OnInit {
       recipeId: Number(this.recipeId())
     };
 
-    this.favoriteApi.addFavorite(favoriteData).subscribe({
+    /*this.favoriteApi.addFavorite(favoriteData).subscribe({
       next: (result) => {
         this.favorites = [...this.favorites, result.rows];
         this.isFavorite.set(true);
@@ -81,7 +95,7 @@ export class RecipeItemComponent implements OnInit {
       error: (err) => {
         console.log('POST favorite error', err);
       }
-    })
+    })*/
   }
 
   deleteFavorite() {

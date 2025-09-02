@@ -1,4 +1,4 @@
-import { Component, OnInit, computed, signal } from '@angular/core';
+import {Component, OnInit, computed, signal, inject} from '@angular/core';
 import { YouTubePlayer } from '@angular/youtube-player';
 
 import { RecipesFilterComponent } from '../../components/recipes-filter/recipes-filter.component';
@@ -36,7 +36,9 @@ import { SlugifyForRoutageService } from '../../services/slugify-for-routage.ser
 export class HomePageComponent implements OnInit {
   getAllRecipes: any[] = [];
   getAllUsers: any[] = [];
+  getAllComments!: any[];
   userLoggedInData!: any;
+  recipeAverage = inject(RecipeAverageService);
 
   favorites = signal<any[]>([]);
 
@@ -55,6 +57,7 @@ export class HomePageComponent implements OnInit {
     private userApi: UsersApiService,
     private favoriteApi: FavoriteApiService,
     private userLoggedIn: IsLoggedInService,
+    private commentApi: CommentApiService
   ) { }
 
   ngOnInit(): void {
@@ -81,6 +84,10 @@ export class HomePageComponent implements OnInit {
       },
       error: (err) => console.log(err),
     });
+
+    this.commentApi.getAllComments().subscribe((result) => {
+      this.getAllComments = result.rows;
+    })
   }
 
   getUser(): any[] {
@@ -122,5 +129,15 @@ export class HomePageComponent implements OnInit {
         console.error('DELETE favorite error', err);
       }
     });
+  }
+
+  getNumberOfComments(recipeId: number) {
+    const recipeComment = this.getAllComments.filter((comment) => comment.recipeId === recipeId)
+    return recipeComment.length
+  }
+
+  getRecipeAverage(recipeId: number) {
+    const recipeComment = this.getAllComments.filter((comment) => comment.recipeId === recipeId)
+    return this.recipeAverage.getRecipeAverage(recipeId, recipeComment);
   }
 }

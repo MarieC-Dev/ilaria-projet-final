@@ -12,8 +12,8 @@
                     [id]="recipe.id"
                     [picture]="recipe.imageName"
                     [name]="recipe.name"
-                    [average]="getAverage(recipe.id)"
-                    [numberOfVotes]="getRecipeComments(recipe.id).length"
+                    [average]="getRecipeAverage(recipe.id)"
+                    [numberOfVotes]="getNumberOfComments(recipe.id)"
                     [authorName]="username"
                     [recipeId]="recipe.id"
                     [userId]="recipe.authorId"
@@ -54,7 +54,7 @@
                         {{ recipe.created }}
                     </td>
                     <td class="myrecipeOpinion">
-                        {{ getAverage(recipe.id) }} ({{ getRecipeComments(recipe.id).length }} notes)
+                        {{ getRecipeAverage(recipe.id) }} ({{ getNumberOfComments(recipe.id) }} notes)
                     </td>
                     <td class="myrecipeButtons">
                         <button type="button" class="modifyRecipe">

@@ -30,8 +30,6 @@ export class RecipeItemComponent implements OnInit, OnChanges {
   @Output() favoriteAdded = new EventEmitter<number>();
   @Output() favoriteDeleted = new EventEmitter<number>();
 
-  noteAverage!: number;
-  numberOfNote!: number;
   localIsFavorite: boolean = false;
 
   constructor(

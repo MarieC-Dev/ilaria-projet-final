@@ -36,6 +36,7 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
   showPopUp = signal(false);
   userRecipes = signal<any[]>([]);
   selectedRecipeIdToDelete = signal(-1);
+  recipeAverage = inject(RecipeAverageService);
 
   userId!: number;
   userData!: any[];
@@ -45,6 +46,7 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
   recipesComments!: any[];
   average = inject(RecipeAverageService);
   userLoggedInData!: any;
+  getAllComments!: any[];
 
   favorites = signal<any[]>([]);
 
@@ -123,6 +125,10 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
     ).subscribe((comment) => {
       this.recipesComments = comment.rows;
     })
+
+    this.commentApi.getAllComments().subscribe((result) => {
+      this.getAllComments = result.rows;
+    })
   }
 
   getUserFavorites() {
@@ -144,16 +150,6 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
       );
       console.log('Front Recipe has been deleted', result);
     });
-  }
-
-  getRecipeComments(recipeId: number) {
-    const recipeComments = this.recipesComments.filter((comment) => comment.recipeId === recipeId);
-    return recipeComments;
-  }
-
-  getAverage(recipeId: number) {
-    const recipeComments = this.recipesComments.filter((comment) => comment.recipeId === recipeId);
-    return this.average.getRecipeAverage(recipeId, this.getRecipeComments(recipeId));
   }
 
   showPopUpTrue(id: number) {
@@ -200,6 +196,16 @@ export class MyfavoritesMyrecipesComponent implements OnInit {
         console.error('DELETE favorite error', err);
       }
     });
+  }
+
+  getNumberOfComments(recipeId: number) {
+    const recipeComment = this.getAllComments.filter((comment) => comment.recipeId === recipeId)
+    return recipeComment.length
+  }
+
+  getRecipeAverage(recipeId: number) {
+    const recipeComment = this.getAllComments.filter((comment) => comment.recipeId === recipeId)
+    return this.recipeAverage.getRecipeAverage(recipeId, recipeComment);
   }
 
 }

@@ -11,32 +11,57 @@
                         (click)="appBurgerMenu.closeMenu()">{{ item.name }}</a>
                 </li>
             }
+            <li class="headerMobile">
+                @if (userIsLogged | async) {
+                    <a
+                        class="btn-bg-red"
+                        [routerLink]="'/profil/' + userData.id + '/' + userData.username + '/mes-infos'"
+                        routerLinkActive="active"
+                        ariaCurrentWhenActive="page">Mon profil</a>
+
+                    <button type="button"
+                            class="btn-bg-darkGrey btn-bg-darkGrey__header"
+                            (click)="logout()">
+                        Déconnexion
+                    </button>
+                } @else {
+                    <a
+                        class="btn-bg-red"
+                        routerLink="/connexion"
+                        routerLinkActive="active"
+                        ariaCurrentWhenActive="page"
+                        appBurgerMenu
+                        (click)="appBurgerMenu.closeMenu()">Connexion</a>
+                }
+            </li>
         </ul>
 
         <img src="cook-it-logo.svg" alt="Logo de cook it">
 
         <div class="navigationRight">
-            @if (userIsLogged | async) {
-                <a
-                    class="btn-bg-red"
-                    [routerLink]="'/profil/' + userData.id + '/' + userData.username + '/mes-infos'"
-                    routerLinkActive="active"
-                    ariaCurrentWhenActive="page">Mon profil</a>
+            <div class="navigationRightBtns navigationRightBtns__mobile">
+                @if (userIsLogged | async) {
+                    <a
+                        class="btn-bg-red"
+                        [routerLink]="'/profil/' + userData.id + '/' + userData.username + '/mes-infos'"
+                        routerLinkActive="active"
+                        ariaCurrentWhenActive="page">Mon profil</a>
 
-                <button type="button"
-                        class="btn-bg-darkGrey btn-bg-darkGrey__header"
-                        (click)="logout()">
-                    Déconnexion
-                </button>
-            } @else {
-                <a
-                    class="btn-bg-red"
-                    routerLink="/connexion"
-                    routerLinkActive="active"
-                    ariaCurrentWhenActive="page"
-                    appBurgerMenu
-                    (click)="appBurgerMenu.closeMenu()">Connexion</a>
-            }
+                    <button type="button"
+                            class="btn-bg-darkGrey btn-bg-darkGrey__header"
+                            (click)="logout()">
+                        Déconnexion
+                    </button>
+                } @else {
+                    <a
+                        class="btn-bg-red"
+                        routerLink="/connexion"
+                        routerLinkActive="active"
+                        ariaCurrentWhenActive="page"
+                        appBurgerMenu
+                        (click)="appBurgerMenu.closeMenu()">Connexion</a>
+                }
+            </div>
 
             <button type="button"
                 class="burgerMenu"

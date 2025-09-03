@@ -34,27 +34,27 @@ export const routes: Routes = [
       {
         path: 'mes-recettes/:recipeId/:slug/modifier',
         component: EditRecipePageComponent,
-        data: { breadcrumb: 'Mes recettes > :slug > Modifier' }
+        data: { breadcrumb: 'Mes recettes > :slug > Modifier', title: 'Mes recettes > :slug > Modifier' }
       },
       {
         path: 'mes-recettes/creer',
         component: CreateRecipesComponent,
-        data: { breadcrumb: 'Mes recettes > Créer' }
+        data: { breadcrumb: 'Mes recettes > Créer', title: 'Mes recettes > Créer' }
       },
       {
         path: 'mes-recettes',
         component: ProfileRecipesPageComponent,
-        data: { breadcrumb: 'Mes recettes' }
+        data: { breadcrumb: 'Mes recettes', title: 'Mes recettes' }
       },
       {
         path: 'mes-favoris',
         component: ProfileFavoritesPageComponent,
-        data: { breadcrumb: 'Mes favoris' }
+        data: { breadcrumb: 'Mes favoris', title: 'Mes Favoris' }
       },
       {
         path: 'mes-infos',
         component: ProfilePageComponent,
-        data: { breadcrumb: 'Mes infos' }
+        data: { breadcrumb: 'Mes infos', title: 'Mes infos' }
       },
     ],
   },
@@ -68,42 +68,42 @@ export const routes: Routes = [
       {
         path: 'recettes/:recipeId/:slug/modifier',
         component: EditRecipePageComponent,
-        data: { breadcrumb: 'Mes recettes > :slug > Modifier' }
+        data: { breadcrumb: 'Mes recettes > :slug > Modifier', title: 'Mes recettes > :slug > Modifier' }
       },
       {
         path: 'mes-recettes/creer',
         component: CreateRecipesComponent,
-        data: { breadcrumb: 'Mes recettes > Créer' }
+        data: { breadcrumb: 'Mes recettes > Créer', title: 'Mes recettes > Créer' }
       },
       {
         path: 'utilisateurs/:userId/:slug',
         component: AdminEditUserPageComponent,
-        data: { breadcrumb: 'Tous les utilisateurs > :slug' }
+        data: { breadcrumb: 'Tous les utilisateurs > :slug', title: 'Tous les utilisateurs > :slug' }
       },
       {
         path: 'recettes',
         component: ProfileAdminAllrecipesPageComponent,
-        data: { breadcrumb: 'Toutes les recettes' }
+        data: { breadcrumb: 'Toutes les recettes', title: 'Toutes les recettes' }
       },
       {
         path: 'utilisateurs',
         component: ProfileAdminAllusersPageComponent,
-        data: { breadcrumb: 'Tous les utilisateurs' }
+        data: { breadcrumb: 'Tous les utilisateurs', title: 'Tous les utilisateurs' }
       },
       {
         path: 'mes-recettes',
         component: ProfileRecipesPageComponent,
-        data: { breadcrumb: 'Mes recettes' }
+        data: { breadcrumb: 'Mes recettes', title: 'Mes recettes' }
       },
       {
         path: 'mes-favoris',
         component: ProfileFavoritesPageComponent,
-        data: { breadcrumb: 'Mes favoris' }
+        data: { breadcrumb: 'Mes favoris', title: 'Mes Favoris' }
       },
       {
         path: 'mes-infos',
         component: ProfilePageComponent,
-        data: { breadcrumb: 'Mes infos' }
+        data: { breadcrumb: 'Mes infos', title: 'Mes infos' }
       },
     ],
   },
@@ -116,11 +116,11 @@ export const routes: Routes = [
         path: ':id/:slug/commentaire',
         component: RecipeCommentPageComponent,
         canActivate: [pagesAccessGuard],
-        data: { breadcrumb: ':slug > Commentaire' },
+        data: { breadcrumb: ':slug > Commentaire', title: ':slug - Écrire un commentaire' },
       }, {
         path: ':id/:slug',
         component: RecipeDetailsPage,
-        data: { breadcrumb: ':slug' },
+        data: { breadcrumb: ':slug', title: ':slug' },
       },
     ]
   },
@@ -128,14 +128,14 @@ export const routes: Routes = [
   {
     path: 'accueil',
     component: HomePageComponent,
-    data: { breadcrumb: 'Accueil' },
+    data: { breadcrumb: 'Accueil', title: 'Accueil' },
   },
-  { path: 'connexion', component: SigninPageComponent, data: { breadcrumb: 'Connexion' }  },
-  { path: 'inscription', component: SignupPageComponent, data: { breadcrumb: 'Inscription' }  },
-  { path: 'contact', component: ContactPageComponent, data: { breadcrumb: 'Contact' }  },
-  { path: 'rechercher', component: SearchPageComponent, data: { breadcrumb: 'Rechercher' }  },
-  { path: 'unauthorized', component: UnauthorizedComponent },
-  { path: '', redirectTo: 'accueil', pathMatch: 'full', data: { breadcrumb: 'Accueil' } },
+  { path: 'connexion', component: SigninPageComponent, data: { breadcrumb: 'Connexion', title: 'Connexion' }  },
+  { path: 'inscription', component: SignupPageComponent, data: { breadcrumb: 'Inscription', title: 'Inscription' }  },
+  { path: 'contact', component: ContactPageComponent, data: { breadcrumb: 'Contact', title: 'Contact' }  },
+  { path: 'rechercher', component: SearchPageComponent, data: { breadcrumb: 'Rechercher', title: 'Rechercher' }  },
+  { path: 'unauthorized', component: UnauthorizedComponent, data: { title: 'Accès refusé' } },
+  { path: '', redirectTo: 'accueil', pathMatch: 'full', data: { breadcrumb: 'Accueil', title: 'Accueil' } },
   { path: 'profil', component: NotFoundPageComponent },
   { path: '**', component: NotFoundPageComponent },
 ];

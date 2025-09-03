@@ -22,23 +22,11 @@
                         (favoriteAdded)="addFavorite(recipe.id)"
                         (favoriteDeleted)="deleteFavorite(recipe.id)"
                         [showRecipesAdmin]="true"
+                        (adminShowPopUp)="showPopUpTrue(recipe.id)"
+                        (adminShowPopUpFalse)="showPopUpFalse()"
                         (adminDeleteRecipe)="deleteRecipe(selectedRecipeIdToDelete()!)"
-                        (adminShowPopUp)="showPopUp()"
                         [showPopUp]="showPopUp()"
                     />
-
-                    <!--<app-pop-up
-                        [isShow]="showPopUp"
-                        labelName="la recette"
-                        (deleteFunction)="deleteRecipe()"
-                        (cancelFunction)="showPopUpFalse()"
-                    />
-                    <app-pop-up
-                        [isShow]="showPopUp()"
-                        labelName="l'utilisateur"
-                        (deleteFunction)="deleteUser(selectedUserIdToDelete())"
-                        (cancelFunction)="showPopUpFalse()"
-                    />-->
                 }
             </div>
         </div>

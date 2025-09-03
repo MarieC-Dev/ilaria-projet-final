@@ -37,6 +37,7 @@ export class RecipeItemComponent implements OnInit, OnChanges {
 
   @Output() adminDeleteRecipe = new EventEmitter<any>();
   @Output() adminShowPopUp = new EventEmitter<boolean>();
+  @Output() adminShowPopUpFalse = new EventEmitter<boolean>();
 
   localIsFavorite: boolean = false;
 
@@ -73,7 +74,8 @@ export class RecipeItemComponent implements OnInit, OnChanges {
   }
 
   showPopUpFalse() {
-    this.showPopUp = false;
-    return this.showPopUp;
+    return this.adminShowPopUpFalse.emit();
+    /*this.showPopUp = false;
+    return this.showPopUp;*/
   }
 }

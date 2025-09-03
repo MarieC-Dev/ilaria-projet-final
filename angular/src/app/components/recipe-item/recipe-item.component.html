@@ -38,7 +38,7 @@
     <button [routerLink]="[id + '/' + slugify.slugifyString(name), 'modifier']"
         class="adminEditRecipe"
     >Modifier</button>
-    <button (click)=deleteRecipe()>
+    <button (click)=showPopUpBool()>
         <app-delete-icon />
     </button>
 

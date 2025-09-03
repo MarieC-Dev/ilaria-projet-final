@@ -32,7 +32,7 @@ export class ProfileAdminAllrecipesPageComponent implements OnInit {
   recipeAverage = inject(RecipeAverageService);
 
   showPopUp = signal(false);
-  selectedRecipeIdToDelete = signal<number | null>(null);
+  selectedRecipeIdToDelete = signal<number>(-1);
 
   favorites = signal<any[]>([]);
 
@@ -125,7 +125,20 @@ export class ProfileAdminAllrecipesPageComponent implements OnInit {
     });
   }
 
+  showPopUpTrue(id: number) {
+    this.showPopUp.set(true);
+    this.selectedRecipeIdToDelete.set(id);
+    console.log(this.selectedRecipeIdToDelete())
+    return this.showPopUp();
+  }
+
+  showPopUpFalse() {
+    this.showPopUp.set(false);
+    return this.showPopUp;
+  }
+
   deleteRecipe(id: number): any {
+    console.log()
     return this.recipeApi.deteteRecipe(id).subscribe((result) => {
       this.getAllRecipes.update(recipes =>
         recipes.filter(recipe => recipe.id !== id)

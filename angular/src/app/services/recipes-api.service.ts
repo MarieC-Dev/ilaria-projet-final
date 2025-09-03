@@ -18,6 +18,10 @@ export class RecipesApiService {
     return this.http.get<any[]>(`${this.API_URL}/recipes/${id}`);
   }
 
+  searchRecipeByName(name: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.API_URL}/recipes?name=${encodeURIComponent(name)}`);
+  }
+
   createRecipe(recipe: any): Observable<any> {
     return this.http.post(`${this.API_URL}/recipes`, recipe).pipe(
       catchError((error) => {

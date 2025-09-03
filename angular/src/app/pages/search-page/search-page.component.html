@@ -1,28 +1,31 @@
 <div class="searchPage">
     <section class="searchSection">
-        <app-search-form selectId="sortRecipesSearch" />
+        <app-search-form
+            selectId="sortRecipesSearch"
+            (search)="onSearch($event)"
+        />
     </section>
 
+    <p *ngIf="error">{{ error }}</p>
+
     <section class="recipesListSearchSection">
-        <div class="recipesListSearch">
-            @for (recipe of recipesList(); track recipe.id;) {
+        <div class="recipesListSearch" *ngIf="getAllRecipes.length > 0">
+            @for (recipe of getAllRecipes; track $index) {
                 <app-recipe-item
                     [id]="recipe.id"
                     [picture]="recipe.imageName"
                     [name]="recipe.name"
-                    [numberOfVotes]="0"
-                    [authorName]="'totoEnTest'"
+                    [average]="getRecipeAverage(recipe.id)"
+                    [numberOfVotes]="getNumberOfComments(recipe.id)"
+                    [authorName]="getUser()[$index].username"
+                    [recipeId]="recipe.id"
+                    [userId]="recipe.authorId"
+                    [isFavorite]="favoritesMap()[recipe.id] ?? false"
+                    (favoriteAdded)="addFavorite(recipe.id)"
+                    (favoriteDeleted)="deleteFavorite(recipe.id)"
                 />
-                <!--
-                    [authorName]="recipe.authorId"
-                    [numberOfVotes]="recipe.opinions?.length"
-                -->
-
-                <!--[average]="getRecipeAverage(recipe.id)"-->
             }
         </div>
-
-        <app-page-slider />
     </section>
 
 </div>

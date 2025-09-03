@@ -2,22 +2,37 @@
 @use '../utils/mixins' as *;
 
 .searchPage {
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 3rem 0;
+    padding: 5rem 0;
+    background-color: $lightGrey;
 
     @media screen and (max-width: 767px) {
-        padding: 1.5rem 0 0 0;
+        padding: 3rem 1rem;
     }
 
     section {
-        width: $sectionWidth;
+        max-width: $sectionWidth;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 3rem;
+        background-color: white;
+        border-radius: 1.5rem;
 
         @media screen and (max-width: 767px) {
-            width: 100% !important;
-            padding: 1.5rem 1rem;
+            width: 100%;
+        }
+    }
+
+    section:not(section:last-child) {
+        margin-bottom: 2rem;
+    }
+
+    @media screen and (max-width: 767px) {
+        section:not(section:first-child) {
+            padding: 2rem 1rem;
         }
     }
 
@@ -32,15 +47,6 @@
                 margin: 0;
             }
 
-            label {
-                width: 100%;
-                margin-right: 6rem;
-
-                @media screen and (max-width: 767px) {
-                    margin: 0 0 1rem 0;
-                }
-            }
-
             select {
                 @include arrowsSelectStyle($firstColor, white);
             }
@@ -48,12 +54,29 @@
     }
 
     .recipesListSearchSection {
+        width: 100%;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        
+
         .recipesListSearch {
-            @include gridRecipes(1fr 1fr 1fr 1fr);
+            @include gridRecipes(1fr 1fr 1fr);
+
+            @media (max-width: 767px) {
+                flex-direction: column;
+            }
+
+            .recipeItem {
+                & > div {
+                    height: 220px;
+
+                    img {
+                        width: max-content;
+                        height: max-content;
+                        min-height: 220px;
+                        object-fit: cover;
+                    }
+                }
+            }
         }
     }
 }

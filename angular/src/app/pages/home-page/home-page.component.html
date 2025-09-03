@@ -7,12 +7,14 @@
     </section>
 
     <section class="homeRecipesSection">
-        <app-recipes-filter />
+        <app-recipes-filter (filtersChanged)="onFiltersChanged($event)" />
         <app-sort-by-select selectId="sortRecipes" />
 
         <div class="recipesContainer">
+            <p *ngIf="error">{{ error }}</p>
+
             <div class="recipesList">
-                @for (recipe of getAllRecipes; track $index) {
+                @for (recipe of filteredRecipes(); track $index) {
                     <app-recipe-item
                         [id]="recipe.id"
                         [picture]="recipe.imageName"

@@ -7,7 +7,7 @@
     </div>
 
     <div class="filtersList">
-        @for (filter of recipesFilter(); track filter.id) {
+        @for (filter of recipesFilter(); track filter.id; let i = $index) {
             <ul class="ulFilters" [id]="'filter' + filter.id">
                 <li appShowRecipesFilter [ulFiltersId]="'filter' + filter.id" buttonType="plus">
                     <h3>{{ filter.title }}</h3>
@@ -16,12 +16,19 @@
                         <span class="verticalLine"></span>
                     </button>
                 </li>
+
                 <li class="navFiltersListItem">
                     <ul>
                         @for (item of filter.items; track item.id) {
                             <li [id]="'filterItem' + item.id">
                                 <label [for]="item.value">
-                                    <input type="checkbox" [name]="item.value" [id]="item.value">
+                                    <input
+                                        type="checkbox"
+                                        [id]="item.value"
+                                        [name]="item.value"
+                                        [checked]="selectedFilters[getFilterKey(i)][0] === item.value"
+                                        (change)="onCheckboxChange(getFilterKey(i), item.value)"
+                                    />
                                     {{ item.title }}
                                 </label>
                             </li>

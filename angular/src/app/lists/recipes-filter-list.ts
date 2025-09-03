@@ -13,10 +13,6 @@ export const RECIPES_FILTER = [
         title: 'Difficultés',
         items: [
             {
-                id: 0,
-                title: 'Ne sais pas',
-                value: 'dont-know',
-            }, {
                 id: 1,
                 title: 'Facile',
                 value: 'easy',
@@ -28,7 +24,7 @@ export const RECIPES_FILTER = [
                 id: 3,
                 title: 'Difficile',
                 value: 'difficult',
-            }, 
+            },
         ]
     }, {
         id: index++,

@@ -10,7 +10,7 @@ import { SortBySelectComponent } from "../../components/sort-by-select/sort-by-s
 import { VideosSliderDirective } from '../../directives/videos-slider.directive';
 import { PlayIconComponent } from "../../components/icons/play-icon/play-icon.component";
 import { RecipesApiService } from '../../services/recipes-api.service';
-import { JsonPipe } from '@angular/common';
+import {JsonPipe, NgIf} from '@angular/common';
 import { UsersApiService } from '../../services/users-api.service';
 import { FavoriteApiService } from '../../services/favorite-api.service';
 import { switchMap } from 'rxjs';
@@ -28,7 +28,8 @@ import { SlugifyForRoutageService } from '../../services/slugify-for-routage.ser
     VideosSliderDirective,
     YouTubePlayer,
     PlayIconComponent,
-    JsonPipe
+    JsonPipe,
+    NgIf
   ],
   templateUrl: './home-page.component.html',
   styleUrl: '../../../styles.scss'
@@ -41,7 +42,6 @@ export class HomePageComponent implements OnInit {
   recipeAverage = inject(RecipeAverageService);
 
   favorites = signal<any[]>([]);
-
   favoritesMap = computed(() => {
     const map: { [recipeId: number]: boolean } = {};
     this.favorites().forEach(fav => {
@@ -51,6 +51,20 @@ export class HomePageComponent implements OnInit {
     });
     return map;
   });
+
+  filteredRecipes = signal<any[]>([]); // recettes à afficher après filtrage
+
+  filters = signal<{
+    cuisine: string[],
+    difficulty: string[],
+    cooking: string[]
+  }>({
+    cuisine: [],
+    difficulty: [],
+    cooking: []
+  });
+
+  error: string | null = null;
 
   constructor(
     private recipeApi: RecipesApiService,
@@ -64,6 +78,7 @@ export class HomePageComponent implements OnInit {
     this.recipeApi.getAllRecipes().subscribe({
       next: (result) => {
         this.getAllRecipes = result;
+        this.filteredRecipes.set(result);
       },
       error: (err) => console.log(err),
     });
@@ -139,5 +154,33 @@ export class HomePageComponent implements OnInit {
   getRecipeAverage(recipeId: number) {
     const recipeComment = this.getAllComments.filter((comment) => comment.recipeId === recipeId)
     return this.recipeAverage.getRecipeAverage(recipeId, recipeComment);
+  }
+
+  onFiltersChanged(filters: {
+    cuisine: string[],
+    difficulty: string[],
+    cooking: string[]
+  }) {
+    this.filters.set(filters);
+    this.applyFilters();
+  }
+
+  applyFilters() {
+    const filters = this.filters();
+    const filtered = this.getAllRecipes.filter(recipe => {
+      const matchesCuisine = filters.cuisine.length === 0 || filters.cuisine.includes(recipe.cuisineType);
+      const matchesDifficulty = filters.difficulty.length === 0 || filters.difficulty.includes(recipe.difficulty);
+      const matchesCooking = filters.cooking.length === 0 || filters.cooking.includes(recipe.cookingType);
+
+      return matchesCuisine && matchesDifficulty && matchesCooking;
+    });
+
+    this.filteredRecipes.set(filtered);
+
+    if (filtered.length === 0) {
+      this.error = 'Aucune recette ne correspond à vos filtres.';
+    } else {
+      this.error = null;
+    }
   }
 }

@@ -1,18 +1,20 @@
 <div class="favoriteButton">
     <button type="button"
             [class]="localIsFavorite ? 'addFavoriteBtn hide' : 'addFavoriteBtn show'"
+            [attr.aria-label]="'Ajoutez la recette ' + name + 'à vos favoris'"
             (click)="addFavorite()">
         <app-heart-border-icon />
     </button>
 
     <button type="button"
             [class]="localIsFavorite ? 'removeFavoriteBtn show' : 'removeFavoriteBtn hide'"
+            [attr.aria-label]="'Supprimer la recette ' + name + 'à vos favoris'"
             (click)="deleteFavorite()">
         <app-heart-icon />
     </button>
 </div>
 
-<a [routerLink]="'/recettes/' + id + '/' + slugify.slugifyString(name)">
+<a [routerLink]="'/recettes/' + id + '/' + slugify.slugifyString(name)" [attr.aria-label]="name">
     <div class="recipeItem" [id]="id">
         <div>
             <div class="wrapperImg">

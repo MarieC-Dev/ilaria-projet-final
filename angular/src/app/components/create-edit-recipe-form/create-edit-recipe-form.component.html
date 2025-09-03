@@ -6,7 +6,7 @@
     [formGroup]="recipeForm.formGroup" >
     <!-- Title -->
     <div class="formInputDiv" id="createRecipeTitleDiv">
-        <label for="createRecipeTitle">
+        <label for="createRecipeTitle" aria-label="Ajoutez un titre à votre recette">
             Titre de la recette : <span style="color: #EB4137">*</span>
         </label>
 
@@ -21,7 +21,7 @@
 
     <!-- Description -->
     <div class="formInputDiv" id="createRecipeDescriptionDiv">
-        <label for="createRecipeDescription">
+        <label for="createRecipeDescription" aria-label="Ajoutez une description à votre recette">
             Description :
         </label>
 
@@ -38,7 +38,7 @@
 
     <!-- Ajouter une image -->
     <div class="formInputDiv" id="createRecipeImgDiv">
-        <label for="recipe-image">
+        <label for="recipe-image" aria-label="Ajoutez une image à votre recette">
             Ajouter une image : <span style="color: #EB4137">*</span>
         </label>
 
@@ -50,12 +50,13 @@
                 <button
                     type="button"
                     class="btn-bg-darkGrey"
+                    aria-label="Bouton pour modifier l'image"
                     (click)="removeRecipeImage()">
                     Changer la photo
                 </button>
             } @else {
                 <div class="wrapperRecipeImage wrapperRecipeImage__icon">
-                   <img src="question.svg" alt="Aucune photo pour cette recette">
+                    <img src="question.svg" alt="Aucune photo pour cette recette" aria-label="Insérez votre nouvelle image">
                 </div>
 
                 <input type="file"
@@ -73,11 +74,15 @@
         inputId="cuisineTypeInputs"
         [required]="true">
         <select
+            aria-label="Sélectionnez le type de cuisine (exemple cuisine française)"
             id="selectCuisineType"
             formControlName="cuisineType">
             <option value="">---</option>
             @for (ct of cuisineTypeList(); track ct.id) {
-                <option [value]="ct.value">{{ ct.title }}</option>
+                <option
+                    [value]="ct.value"
+                    [attr.aria-label]="'Cuisine ' + ct.title"
+                >{{ ct.title }}</option>
             }
         </select>
         <p class="formControlError" *ngIf="arrayInvalidControl.includes('cuisineType')">Le type de cuisine est requis</p>
@@ -91,6 +96,7 @@
 
     <!-- Nombre de portions -->
     <app-multiple-inputs
+        aria-label="Indiquez le nombre de portions"
         labelTitle="Nombre de portions :"
         inputId="servingNumberInputs"
         [required]="true">
@@ -101,17 +107,18 @@
                            id="servingNumber"
                            name="servingNumber"
                            placeholder="Ex : 4"
+                           aria-label="Indiquez un chiffre"
                            formControlName="number" />
                 </label>
             </li>
             <li>
                 <label for="servingName">
-                    <select name="servingName" id="servingName" formControlName="type">
+                    <select name="servingName" id="servingName" formControlName="type" aria-label="Indiquez le type de portion">
                         <option value="">Type de portion</option>
-                        <option value="person">Personne(s)</option>
-                        <option value="piece">Parts(s)</option>
-                        <option value="liter">Litre(s)</option>
-                        <option value="cylinders">Vérine(s)</option>
+                        <option aria-label="Personne" value="person">Personne(s)</option>
+                        <option aria-label="Part" value="piece">Parts(s)</option>
+                        <option aria-label="Litre" value="liter">Litre(s)</option>
+                        <option aria-label="Vérine" value="cylinders">Vérine(s)</option>
                     </select>
                 </label>
             </li>
@@ -125,7 +132,7 @@
     <hr class="createRecipeLine">
 
     <!-- Temps de préparation, cuisson, pause -->
-    <div class="inputsTimesDiv" formGroupName="recipeTime">
+    <div class="inputsTimesDiv" formGroupName="recipeTime" aria-label="Indiquez le temps de préparation, le temps de cuisson et le temps de pause">
         <app-multiple-inputs
             labelTitle="Temps de préparation :"
             inputId="makingTimeInput"
@@ -135,6 +142,7 @@
                 <li>
                     <label for="makingTimeHours">
                         <input type="number"
+                               aria-label="Nombre d'heure de préparation"
                                id="makingTimeHours"
                                name="makingTimeHours"
                                placeholder="Ex : 2"
@@ -146,6 +154,7 @@
                 <li>
                     <label for="makingTimeMinutes">
                         <input type="number"
+                               aria-label="Nombre de minute de préparation"
                                id="makingTimeMinutes"
                                name="makingTimeMinutes"
                                placeholder="Ex : 00"
@@ -172,6 +181,7 @@
                 <li>
                     <label for="cookingTimeHours">
                         <input type="number"
+                               aria-label="Nombre d'heure de cuisson"
                                id="cookingTimeHours"
                                name="cookingTimeHours"
                                placeholder="Ex : 1"
@@ -183,6 +193,7 @@
                 <li>
                     <label for="cookingTimeMinutes">
                         <input type="number"
+                               aria-label="Nombre de minutes de cuisson"
                                id="cookingTimeMinutes"
                                name="cookingTimeMinutes"
                                placeholder="Ex : 30"
@@ -207,6 +218,7 @@
                 <li>
                     <label for="pauseTimeHours">
                         <input type="number"
+                               aria-label="Nombre d'heure de pause"
                                id="pauseTimeHours"
                                name="pauseTimeHours"
                                placeholder="Ex : 1"
@@ -218,6 +230,7 @@
                 <li>
                     <label for="pauseTimeMinutes">
                         <input type="number"
+                               aria-label="Nombre de minutes de pause"
                                id="pauseTimeMinutes"
                                name="pauseTimeMinutes"
                                placeholder="Ex : 30"
@@ -237,34 +250,35 @@
         labelTitle="Liste des ingrédients :"
         inputId="ingredientsListInputs"
         [required]="true">
-        <ul formGroupName="ingredientDetail">
+        <ul formGroupName="ingredientDetail" aria-label="Ajoutez des ingrédients (minimum 2)">
             <li>
                 <label for="numberIngredient">
                     <input type="number"
                            id="numberIngredient"
                            name="numberIngredient"
                            formControlName="quantity"
+                           aria-label="Ajoutez la quantité"
                            placeholder="100" />
                 </label>
             </li>
             <li>
-                <label for="ingredientUnity">
+                <label for="ingredientUnity" aria-label="Ajoutez l'unité'">
                     <select name="ingredientUnity" id="ingredientUnity" formControlName="unit">
                         <option value="">Unités</option>
-                        <option value="tablespoon">Cuillère à soupe</option>
-                        <option value="teaspoon">Cuillère à café</option>
-                        <option value="kilogram">Kilogrammes (kg)</option>
-                        <option value="gram">Grammes (g)</option>
-                        <option value="milligram">Milligrammes (mg)</option>
-                        <option value="liter">Litres (L)</option>
-                        <option value="milliliter">Millilitres (ml)</option>
-                        <option value="pot">Pot(s) de yaourt</option>
-                        <option value="pinch">Pincée</option>
-                        <option value="bottle">Bouteille</option>
-                        <option value="box">Boîte</option>
-                        <option value="piece">Morceaux</option>
+                        <option aria-label="Cuillère à soupe" value="tablespoon">Cuillère à soupe</option>
+                        <option aria-label="Cuillère à café" value="teaspoon">Cuillère à café</option>
+                        <option aria-label="Kilogrammes" value="kilogram">Kilogrammes (kg)</option>
+                        <option aria-label="Grammes" value="gram">Grammes (g)</option>
+                        <option aria-label="Milligrammes" value="milligram">Milligrammes (mg)</option>
+                        <option aria-label="Litres" value="liter">Litres (L)</option>
+                        <option aria-label="Millilitres" value="milliliter">Millilitres (ml)</option>
+                        <option aria-label="Pot(s) de yaourt<" value="pot">Pot(s) de yaourt</option>
+                        <option aria-label="Pincée" value="pinch">Pincée</option>
+                        <option aria-label="Bouteille" value="bottle">Bouteille</option>
+                        <option aria-label="Boîte" value="box">Boîte</option>
+                        <option aria-label="Morceaux" value="piece">Morceaux</option>
 
-                        <option value="other">Autre (présicez à côté)</option>
+                        <option aria-label="Autre (présicez à côté)" value="other">Autre (présicez à côté)</option>
                     </select>
                 </label>
             </li>
@@ -274,6 +288,7 @@
                            id="ingredientName"
                            name="ingredientName"
                            formControlName="ingredient"
+                           aria-label="Ajoutez le nom de l'ingrédient"
                            placeholder="Ex. : Chocolat en poudre"
                            (keydown.enter)="addDetails('ingredientDetail', ingredientsList, 'quantity', 'unit', 'ingredient')"
                     />
@@ -282,6 +297,7 @@
             <li>
                 <button type="button"
                         class="btn-bg-red stepsIngredientsBtn"
+                        aria-label="Bouton pour ajouter l'ingrédient à la liste"
                         (click)="addDetails('ingredientDetail', ingredientsList, 'quantity', 'unit', 'ingredient')">
                     +
                 </button>
@@ -365,12 +381,13 @@
         labelTitle="Étapes de la recette :"
         inputId="stepsListInputs"
         [required]="true">
-        <ul formGroupName="stepDetail">
+        <ul formGroupName="stepDetail"  aria-label="Ajoutez des étapes (minimum 2)">
             <li>
                 <label for="stepDescription">
                     <input type="text"
                            id="stepDescription"
                            name="stepDescription"
+                           aria-label="Ajoutez la description de l'étape"
                            placeholder="Ex. : Ajouter le beurre fondue à la préparation"
                            formControlName="stepName"
                            (keydown.enter)="addDetails('stepDetail', stepsList, 'id', 'stepName')" />
@@ -378,6 +395,7 @@
             </li>
             <li>
                 <button type="button"
+                        aria-label="Bouton pour ajouter l'étape à la liste"
                         class="btn-bg-red stepsIngredientsBtn"
                         (click)="addDetails('stepDetail', stepsList, 'stepName')">
                     +

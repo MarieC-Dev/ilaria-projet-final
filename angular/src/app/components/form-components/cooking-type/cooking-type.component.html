@@ -1,4 +1,5 @@
 <app-multiple-inputs
+    aria-label="Sélectionnez le type de cuisson"
     labelTitle="Type de cuisson :"
     inputId="cookingTypeInputs"
     [required]="true">
@@ -15,6 +16,7 @@
                         [name]="type.inputId"
                         [checked]="type.checked"
                         [value]="type.value"
+                        [attr.aria-label]="'Cuisine ' + type.title"
                     />
                 </label>
             </li>

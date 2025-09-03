@@ -2,11 +2,11 @@
     labelTitle="Difficulté :"
     inputId="difficultyInputs"
     [required]="true">
-    <select [formControlName]="controlName">
+    <select [formControlName]="controlName" aria-label="Indiquez la difficulté de la recette">
       <option value="">Niveau de difficulté</option>
-      <option value="easy">Facile</option>
-      <option value="intermediate">Moyen</option>
-      <option value="difficult">Difficile</option>
+      <option aria-label="Facile" value="easy">Facile</option>
+      <option aria-label="Moyen" value="intermediate">Moyen</option>
+      <option aria-label="Difficile" value="difficult">Difficile</option>
     </select>
 
     <p class="formControlError" *ngIf="ifInvalidControl.includes('difficulty')">Le nombre de portions est requis</p>

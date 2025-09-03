@@ -1,19 +1,19 @@
-<div class="homePage">
-    <section class="subHeader">
+<div class="homePage" aria-label="Page d'accueil">
+    <section class="subHeader" aria-label="Sous en tête de la page">
         <div class="topHomePage">
-            <h1>Bienvenue sur Cook It !</h1>
-            <h3>Choisissez une recette parmi des milliers</h3>
+            <h1 aria-label="Bienvenue sur Cook It !">Bienvenue sur Cook It !</h1>
+            <h3 aria-label="Choisissez une recette parmi des milliers">Choisissez une recette parmi des milliers</h3>
         </div>
     </section>
 
-    <section class="homeRecipesSection">
-        <app-recipes-filter (filtersChanged)="onFiltersChanged($event)" />
-        <app-sort-by-select selectId="sortRecipes" />
+    <section class="homeRecipesSection" aria-label="Section avec toutes les recettes du site">
+        <app-recipes-filter (filtersChanged)="onFiltersChanged($event)" aria-label="Section pour filter les recettes" />
+        <!--<app-sort-by-select selectId="sortRecipes" />-->
 
         <div class="recipesContainer">
             <p *ngIf="error">{{ error }}</p>
 
-            <div class="recipesList">
+            <div class="recipesList" aria-label="Liste des recettes">
                 @for (recipe of filteredRecipes(); track $index) {
                     <app-recipe-item
                         [id]="recipe.id"
@@ -34,7 +34,7 @@
 
     </section>
 
-    <section class="videosSection">
+    <section class="videosSection" aria-label="Section avec la dernière vidéo Youtube du site">
         <div class="videosTitle">
             <h2>Dernière vidéo</h2>
 
@@ -48,13 +48,4 @@
             <youtube-player videoId="4sm39CWrmns" />
         </div>
     </section>
-
-    <!--<section class="newsletterSection">
-        <h2>Soyez le premier informé des nouvelles recettes tendance et plus encore !</h2>
-
-        <form method="post">
-            <input type="text" name="newsletterEmail" email="newsletterEmail" placeholder="Adresse mail" required>
-            <button type="submit">Recevoir la newsletter</button>
-        </form>
-    </section>-->
 </div>

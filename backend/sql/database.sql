@@ -9,6 +9,14 @@ create table Comments
     created     varchar(255) not null
 );
 
+create table FavoritesList
+(
+    id       int auto_increment
+        primary key,
+    recipeId int not null,
+    userId   int not null
+);
+
 create table Ingredient
 (
     id         int auto_increment
@@ -115,13 +123,11 @@ create table TagList
 (
     id       int auto_increment
         primary key,
-    tag    varchar(255) not null,
-    recipeId int not null,
-    foreign key (recipeId) references recipesite.RecipeData (id)
+    tag      varchar(255) not null,
+    recipeId int          not null,
+    constraint taglist_ibfk_1
+        foreign key (recipeId) references recipesite.RecipeData (id)
 );
-
-create index recipeId
-    on TagList (recipeId);
 
 create table TimeTable
 (

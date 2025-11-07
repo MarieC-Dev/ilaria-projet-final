@@ -74,6 +74,7 @@ export class SignupPageComponent implements OnInit {
     const formData = this.buildFormDataFormGroup(this.userForm.formGroupCreate, this.selectedImage);
 
     this.usersApiService.createUser(formData).subscribe(() => {
+      console.log('Subscribe...')
       this.userForm.formGroupCreate.patchValue({
         imageName: '',
         username: '',

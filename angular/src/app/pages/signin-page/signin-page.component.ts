@@ -5,10 +5,11 @@ import {UserFormFactory} from '../../factories/user-form.factory';
 import {ReactiveFormsModule} from '@angular/forms';
 import {UsersApiService} from '../../services/users-api.service';
 import {AuthStateService} from '../../services/auth-state.service';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-signin-page',
-  imports: [SocialNetworksComponent, ReactiveFormsModule],
+  imports: [SocialNetworksComponent, ReactiveFormsModule, CommonModule],
   templateUrl: './signin-page.component.html',
   styleUrl: './signin-page.component.scss'
 })
@@ -29,7 +30,6 @@ export class SigninPageComponent implements OnInit {
   onSubmit() {
     this.usersApiService.login(this.userLogin.formGroupLogin.value).subscribe({
       next: (res) => {
-        console.log(res);
         this.loginError = false;
         this.authState.login(res.user);
       },

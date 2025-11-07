@@ -136,7 +136,7 @@ app.get('/tags', getAllTags);
 sessionStore.onReady().then(() => {
   console.log('✅ MySQLStore ready');
 }).catch(error => {
-  console.error('❌ MySQLStore error', error);
+  console.error('❌ MySQLStore error : ', error);
 });
 
 app.listen(PORT, () => {

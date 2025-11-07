@@ -2,17 +2,6 @@
     <div class="leftContainer">
         <h2>Connexion</h2>
 
-        <ul class="socialNetworks">
-            @for (social of socialNetworksList(); track $index) {
-                <app-social-networks
-                    [link]="social.href"
-                    [pathImg]="social.path"
-                    [altImg]="social.altImg" />
-            }
-        </ul>
-
-        <p>Ou utilisez votre adresse mail :</p>
-
         <form method="post" [formGroup]="userLogin.formGroupLogin" (ngSubmit)="onSubmit()">
             <!-- TODO put back in its place -->
             <div class="formInputDiv" id="div-signin-email">
